@@ -184,10 +184,15 @@ namespace WebCS
                     userRadLabel.Text =
                         "Center at: (" + (objectRect.X + objectRect.Width / 2).ToString() +
                         "; " + (objectRect.Y + objectRect.Height / 2).ToString()+ ")";
+                    
+                    if (loadWorkingFrameRadCheckBox.Checked)
+                    {
+                        newFrame = (Bitmap)frameClone.Clone();
+                    }
                    
                     using (Graphics g = Graphics.FromImage(newFrame))
                     {
-                        using (Pen pen = new Pen(Color.FromArgb(160, 255, 160), 3))
+                        using (Pen pen = new Pen(Color.FromArgb(160, 255, 160), 2))
                         {
                             g.DrawRectangle(pen, objectRect);
                         }
