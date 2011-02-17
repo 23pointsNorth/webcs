@@ -5,14 +5,15 @@ using System.Data;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Text;
+using System.Windows.Forms;
+using AForge;
 using AForge.Imaging;
 using AForge.Imaging.Filters;
+using AForge.Math;
 using AForge.Video;
 using AForge.Video.DirectShow;
+using Microsoft.Win32;
 using Telerik.WinControls.UI;
-using System.Windows.Forms;
-using AForge.Math;
-using AForge;
 
 namespace WebCS
 {
@@ -28,6 +29,35 @@ namespace WebCS
             avaliableWebcamsDropDownList.SelectedIndex = 0;
             LoadAvaliableWebcams();
             LoadMarkers();
+            LoadAtStartup();
+        }
+
+        RegistryKey regKeyApp = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+        string applicationName = "WebCS";
+
+        private void LoadAtStartup()
+        {
+            // Check to see the current state (running at startup or not)
+            if (regKeyApp.GetValue(applicationName) == null)
+            {
+                startupRadCheckBox.Checked = false; //not set to run at startup
+            }
+            else
+            {
+                startupRadCheckBox.Checked = true; //run at startup
+            }
+        }
+
+        private void startupRadCheckBox_ToggleStateChanged(object sender, StateChangedEventArgs args)
+        {
+            if (startupRadCheckBox.Checked)
+            {
+                regKeyApp.SetValue(applicationName, Application.ExecutablePath.ToString()); //add
+            }
+            else
+            {
+                regKeyApp.DeleteValue(applicationName, false); // remove from registry
+            }
         }
 
         private void LoadMarkers()
@@ -336,10 +366,6 @@ namespace WebCS
                 firstMarkerSample.Image=fSampleBitmap;
             }
         }
-
-
-
-
 
     }
 }
