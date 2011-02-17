@@ -127,6 +127,7 @@ namespace WebCS
         }
 
         Bitmap newFrame;
+        Bitmap frameClone;
         //public static readonly Grayscale BT709 = new Grayscale(0.2125, 0.7154, 0.0721);
         Color firstMarkerColor = Color.FromArgb(215, 50, 50);
 
@@ -139,32 +140,35 @@ namespace WebCS
             if (applyFilterRadCheckBox.Checked)
             {
                 Mean filer = new Mean();
-                filer.ApplyInPlace(newFrame);
+                BitmapData objectsData = newFrame.LockBits(
+                    new Rectangle(0, 0, newFrame.Width, newFrame.Height),
+                    ImageLockMode.ReadOnly, newFrame.PixelFormat);
+                filer.ApplyInPlace(objectsData);
+                newFrame.UnlockBits(objectsData);
             }
 
             if (trackingToggleButton.ToggleState.ToString().Equals("On"))
             {
+                frameClone = (Bitmap)newFrame.Clone();
+
                 // create filter
                 EuclideanColorFiltering filter = new EuclideanColorFiltering();
                 // set center color and radius
                 filter.CenterColor.Color = firstMarkerColor;
-                int range= int.Parse(firstMarkerRangeRadTextBox.Text);
-                range = Math.Max(0, range);
-                range = Math.Min(255, range);
-                firstMarkerRangeRadTextBox.Text = range.ToString();
-                filter.Radius = (short)range;
+                
+                filter.Radius = getRange();
                 // apply the filter
-                filter.ApplyInPlace(newFrame);
+                filter.ApplyInPlace(frameClone);
 
-                BitmapData objectsData = newFrame.LockBits(
-                    new Rectangle(0, 0, newFrame.Width, newFrame.Height),
-                    ImageLockMode.ReadOnly, newFrame.PixelFormat);
+                BitmapData objectsData = frameClone.LockBits(
+                    new Rectangle(0, 0, frameClone.Width, frameClone.Height),
+                    ImageLockMode.ReadOnly, frameClone.PixelFormat);
                 // grayscaling
                 //UnmanagedImage grayImage = new Grayscale.CommonAlgorithms.BT709.Apply(new UnmanagedImage(objectsData));
                 UnmanagedImage grayImage = new GrayscaleBT709().Apply(
                     new UnmanagedImage(objectsData));
                 // unlock image
-                newFrame.UnlockBits(objectsData);
+                frameClone.UnlockBits(objectsData);
 
                 BlobCounter blobCounter = new BlobCounter();
                 blobCounter.MinWidth = 5;
@@ -192,6 +196,15 @@ namespace WebCS
             }
 
             imageContainer.Image = newFrame;
+        }
+
+        private short getRange()
+        {
+            int range = int.Parse(firstMarkerRangeRadTextBox.Text);
+            range = Math.Max(0, range);
+            range = Math.Min(255, range);
+            firstMarkerRangeRadTextBox.Text = range.ToString();
+            return (short)range;
         }
 
         private void WebCSForm_FormClosing(object sender, System.Windows.Forms.FormClosingEventArgs e)
