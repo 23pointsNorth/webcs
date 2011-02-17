@@ -12,7 +12,6 @@ public class Mouse
     private const int deltaX = 75;
     private const int deltaY = 75;
     private const int acuracyInPixels = 1;
-    private bool isMouseDown = false;
 
     public Mouse(Point fisrtCoordinates, Point secondCoordinates)
     {
@@ -71,12 +70,12 @@ public class Mouse
             if (Math.Abs(mouse.X - pressure.X) < deltaX &&
                 Math.Abs(mouse.Y - pressure.Y) < deltaY)
             {
-                isMouseDown = true;
+                //isMouseDown = true;
                 doMouseClick(); 
             }
             else
             {
-                isMouseDown = false;
+                //isMouseDown = false;
             }
         }
     }
