@@ -173,10 +173,10 @@
             // 
             // firstMarkerRangeRadTextBox
             // 
-            this.firstMarkerRangeRadTextBox.Location = new System.Drawing.Point(123, 45);
+            this.firstMarkerRangeRadTextBox.Location = new System.Drawing.Point(118, 45);
             this.firstMarkerRangeRadTextBox.Name = "firstMarkerRangeRadTextBox";
             this.firstMarkerRangeRadTextBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.firstMarkerRangeRadTextBox.Size = new System.Drawing.Size(27, 20);
+            this.firstMarkerRangeRadTextBox.Size = new System.Drawing.Size(32, 20);
             this.firstMarkerRangeRadTextBox.TabIndex = 3;
             this.firstMarkerRangeRadTextBox.TabStop = false;
             this.firstMarkerRangeRadTextBox.Text = "20";
@@ -202,9 +202,9 @@
             // firstMarkerSample
             // 
             this.firstMarkerSample.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.firstMarkerSample.Location = new System.Drawing.Point(110, 21);
+            this.firstMarkerSample.Location = new System.Drawing.Point(91, 21);
             this.firstMarkerSample.Name = "firstMarkerSample";
-            this.firstMarkerSample.Size = new System.Drawing.Size(40, 20);
+            this.firstMarkerSample.Size = new System.Drawing.Size(59, 20);
             this.firstMarkerSample.TabIndex = 1;
             this.firstMarkerSample.TabStop = false;
             // 
@@ -263,6 +263,7 @@
             this.startupRadCheckBox.Size = new System.Drawing.Size(146, 18);
             this.startupRadCheckBox.TabIndex = 3;
             this.startupRadCheckBox.Text = "Start at computer startup";
+            this.startupRadCheckBox.ToggleStateChanged += new Telerik.WinControls.UI.StateChangedEventHandler(this.startupRadCheckBox_ToggleStateChanged);
             // 
             // SelectDesktopAreaButton
             // 
@@ -288,7 +289,7 @@
             // 
             // 
             this.SecondMarkerRadGroupBox.RootElement.Padding = new System.Windows.Forms.Padding(10, 20, 10, 10);
-            this.SecondMarkerRadGroupBox.Size = new System.Drawing.Size(339, 85);
+            this.SecondMarkerRadGroupBox.Size = new System.Drawing.Size(339, 81);
             this.SecondMarkerRadGroupBox.TabIndex = 4;
             this.SecondMarkerRadGroupBox.Text = "Second Marker";
             // 
