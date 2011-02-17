@@ -11,6 +11,8 @@ using AForge.Video;
 using AForge.Video.DirectShow;
 using Telerik.WinControls.UI;
 using System.Windows.Forms;
+using AForge.Math;
+using AForge;
 
 namespace WebCS
 {
@@ -49,6 +51,15 @@ namespace WebCS
             imageContainer.Image = emptyBitmap;
         }
 
+        private Bitmap drawRectangleOnBitmap(Bitmap image, Rectangle rect, Pen pen)
+        {
+            using (Graphics g = Graphics.FromImage(image))
+            {
+                g.DrawRectangle(pen, rect);
+            }
+            return image;
+        }
+
         private FilterInfoCollection videoCaptureDevices;
         public VideoCaptureDevice finalVideoSource;
 
@@ -61,7 +72,6 @@ namespace WebCS
             {
                 avaliableWebcamsDropDownList.Items.Add(videoCaptureDevice.Name);
             }
-            //avaliableWebcamsDropDownList.SelectedIndex = 0;
         }
 
         private void StopWebcam()
@@ -190,14 +200,17 @@ namespace WebCS
                         newFrame = (Bitmap)frameClone.Clone();
                     }
 
-                    using (Graphics g = Graphics.FromImage(newFrame))
-                    {
-                        using (Pen pen = new Pen(Color.FromArgb(160, 255, 160), 2))
-                        {
-                            g.DrawRectangle(pen, objectRect);
-                        }
-                    }
+                    newFrame = drawRectangleOnBitmap(
+                        newFrame, objectRect, new Pen(Color.FromArgb(160, 255, 160), 2));
                 }
+            }
+
+            if (firstMarkerChangeColor) // or secondMarkerColorChange
+            {
+                newFrame = drawRectangleOnBitmap(
+                    (Bitmap)newFrame.Clone(),
+                    firstMakrerRect,
+                    new Pen(Color.Red, 2));
             }
 
             imageContainer.Image = newFrame;
@@ -205,10 +218,18 @@ namespace WebCS
 
         private short getRange()
         {
-            int range = int.Parse(firstMarkerRangeRadTextBox.Text);
-            range = Math.Max(0, range);
-            range = Math.Min(255, range);
-            firstMarkerRangeRadTextBox.Text = range.ToString();
+            int range=0;
+            try
+            {
+                range = int.Parse(firstMarkerRangeRadTextBox.Text);
+                range = Math.Max(0, range);
+                range = Math.Min(255, range);
+                firstMarkerRangeRadTextBox.Text = range.ToString();
+            }
+            catch
+            {
+                firstMarkerRangeRadTextBox.Text = "0";
+            }
             return (short)range;
         }
 
@@ -221,32 +242,32 @@ namespace WebCS
         {
             if (args.ToggleState.ToString().Equals("On"))
             {
-                if (videoCaptureDevices.Count > 0 &&
-                   avaliableWebcamsDropDownList.SelectedIndex > 0)
-                {
-                    WebcamRadToggleButton.Text = "Stop Webcam";
-                    avaliableWebcamsDropDownList.Enabled = false;
+                WebcamRadToggleButton.Text = "Stop Webcam";
+                avaliableWebcamsDropDownList.Enabled = false;
+                firstMarkerChangeRadButton.Enabled = true;
 
-                    //stat selected webcam
-                    finalVideoSource = new VideoCaptureDevice(
-                        videoCaptureDevices[avaliableWebcamsDropDownList.SelectedIndex - 1].MonikerString);
-                    //-1 because [0] in avaliableWebcams = "Select Webcam"
-                    finalVideoSource.NewFrame += new NewFrameEventHandler(
-                        FinalVideoSource_NewFrame);
-                    finalVideoSource.DesiredFrameSize = new Size(
-                        Constants.DESIRED_FRAME_WIDTH, Constants.DESIRED_FRAME_HEIGHT);
-                    finalVideoSource.Start();
+                //stat selected webcam
+                finalVideoSource = new VideoCaptureDevice(
+                    videoCaptureDevices[avaliableWebcamsDropDownList.SelectedIndex - 1].MonikerString);
+                //-1 because [0] in avaliableWebcams = "Select Webcam"
+                finalVideoSource.NewFrame += new NewFrameEventHandler(
+                    FinalVideoSource_NewFrame);
+                finalVideoSource.DesiredFrameSize = new Size(
+                    Constants.DESIRED_FRAME_WIDTH, Constants.DESIRED_FRAME_HEIGHT);
+                finalVideoSource.Start();
 
-                    //place focus on next item;
-                    applyFilterRadCheckBox.Focus();
-                }
+                //place focus on next item;
+                applyFilterRadCheckBox.Focus();
             }
             else
             {
                 StopWebcam();
+
                 WebcamRadToggleButton.Text = "Start Webcam";
                 avaliableWebcamsDropDownList.Enabled = true;
                 avaliableWebcamsDropDownList_SelectedIndexChanged(null, null);
+
+                firstMarkerChangeRadButton.Enabled = false;
             }
         }
 
@@ -263,6 +284,60 @@ namespace WebCS
                 DrawOnEmptyFrame("Webcam \nnot selected.");
             }
         }
+
+        bool firstMarkerChangeColor = false;
+        Rectangle firstMakrerRect = new Rectangle(
+            Constants.IMAGE_WIDTH / 2 - 15,
+            Constants.IMAGE_HEIGHT / 2 - 15, 30, 30);
+
+        private void firstMarkerChangeRadButton_Click(object sender, EventArgs e)
+        {
+            if (!firstMarkerChangeColor)
+            {
+                loadWorkingFrameRadCheckBox.Checked = false;
+                firstMarkerChangeColor = true;
+            }
+            else
+            {
+                firstMarkerChangeColor = false;
+
+                //get rectangle info; crop first pixel - red line
+                Bitmap fSample = newFrame.Clone(firstMakrerRect, newFrame.PixelFormat);
+                new Mean().Apply(fSample);
+                
+                ImageStatistics statistics = new ImageStatistics(fSample);
+
+                Histogram histogramRed = statistics.RedWithoutBlack;
+                Histogram histogramGreen = statistics.GreenWithoutBlack;
+                Histogram histogramBlue = statistics.BlueWithoutBlack;
+
+                // get the values
+                int meanRed = (int)histogramRed.Mean;     // mean red value
+                int meanGreen = (int)histogramGreen.Mean;
+                int meanBlue = (int)histogramBlue.Mean;
+
+                firstMarkerColor = Color.FromArgb(meanRed, meanGreen, meanBlue);
+                //firstMarkerRangeRadTextBox.Text = 
+                //    ((histogramRed.GetRange(0.7).Min + 
+                //    histogramBlue.GetRange(0.7).Min + 
+                //    histogramGreen.GetRange(0.7).Min)/3).ToString();
+                // returns the range in [min,max];
+
+                Bitmap fSampleBitmap = new Bitmap(
+                    firstMarkerSample.Width,firstMarkerSample.Height);
+                using (Graphics g = Graphics.FromImage(fSampleBitmap))
+                {
+                    using (SolidBrush brush = new SolidBrush(firstMarkerColor))
+                    {
+                        g.FillRectangle(brush,0,0,firstMarkerSample.Width,firstMarkerSample.Height);
+                    }
+                }
+
+                firstMarkerSample.Image=fSampleBitmap;
+            }
+        }
+
+
 
 
 
