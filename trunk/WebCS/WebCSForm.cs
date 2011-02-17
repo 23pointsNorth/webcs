@@ -155,7 +155,7 @@ namespace WebCS
                 EuclideanColorFiltering filter = new EuclideanColorFiltering();
                 // set center color and radius
                 filter.CenterColor.Color = firstMarkerColor;
-                
+
                 filter.Radius = getRange();
                 // apply the filter
                 filter.ApplyInPlace(frameClone);
@@ -183,13 +183,13 @@ namespace WebCS
                     Rectangle objectRect = rects[0];
                     userRadLabel.Text =
                         "Center at: (" + (objectRect.X + objectRect.Width / 2).ToString() +
-                        "; " + (objectRect.Y + objectRect.Height / 2).ToString()+ ")";
-                    
+                        "; " + (objectRect.Y + objectRect.Height / 2).ToString() + ")";
+
                     if (loadWorkingFrameRadCheckBox.Checked)
                     {
                         newFrame = (Bitmap)frameClone.Clone();
                     }
-                   
+
                     using (Graphics g = Graphics.FromImage(newFrame))
                     {
                         using (Pen pen = new Pen(Color.FromArgb(160, 255, 160), 2))

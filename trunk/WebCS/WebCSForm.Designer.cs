@@ -85,6 +85,7 @@
             // 
             // imageContainer
             // 
+            this.imageContainer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.imageContainer.Location = new System.Drawing.Point(4, 3);
             this.imageContainer.Name = "imageContainer";
             this.imageContainer.Size = new System.Drawing.Size(352, 288);
@@ -230,9 +231,9 @@
             this.userRadLabel.AutoScroll = true;
             this.userRadLabel.Location = new System.Drawing.Point(168, 273);
             this.userRadLabel.Name = "userRadLabel";
-            this.userRadLabel.Size = new System.Drawing.Size(78, 18);
+            this.userRadLabel.Size = new System.Drawing.Size(190, 18);
             this.userRadLabel.TabIndex = 5;
-            this.userRadLabel.Text = "Options Menu";
+            this.userRadLabel.Text = "Options Menu                                   ";
             // 
             // avaliableWebcamsDropDownList
             // 
