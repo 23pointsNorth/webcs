@@ -14,6 +14,7 @@ using AForge.Video;
 using AForge.Video.DirectShow;
 using Microsoft.Win32;
 using Telerik.WinControls.UI;
+using Telerik.WinControls.Enumerations;
 
 namespace WebCS
 {
@@ -32,7 +33,8 @@ namespace WebCS
             LoadAtStartup();
         }
 
-        RegistryKey regKeyApp = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+        RegistryKey regKeyApp = Registry.CurrentUser.OpenSubKey(
+            "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
         string applicationName = "WebCS";
 
         private void LoadAtStartup()
@@ -135,7 +137,7 @@ namespace WebCS
 
         private void optionsToggleButton_ToggleStateChanged(object sender, StateChangedEventArgs args)
         {
-            if (args.ToggleState.ToString().Equals("On"))
+            if (args.ToggleState == ToggleState.On)
             {
                 optionsRadPanel.Show();
                 this.Size = new Size(
@@ -151,19 +153,19 @@ namespace WebCS
 
         private void trackingToggleButton_ToggleStateChanged(object sender, StateChangedEventArgs args)
         {
-            if (args.ToggleState.ToString().Equals("On"))
+            if (args.ToggleState == ToggleState.On)
             {
                 trackingToggleButton.Text = "Disable Tracking";
             }
             else
             {
-                trackingToggleButton.Text = "Activate Tracking";
+                trackingToggleButton.Text = "Enable Tracking";
             }
         }
 
         private void SelectDesktopAreaButton_Click(object sender, EventArgs e)
         {
-            userRadLabel.Refresh();
+
         }
 
         Bitmap newFrame;
@@ -187,7 +189,7 @@ namespace WebCS
                 newFrame.UnlockBits(objectsData);
             }
 
-            if (trackingToggleButton.ToggleState.ToString().Equals("On"))
+            if (trackingToggleButton.ToggleState == ToggleState.On)
             {
                 frameClone = (Bitmap)newFrame.Clone();
 
@@ -270,9 +272,9 @@ namespace WebCS
 
         private void WebcamRadToggleButton_ToggleStateChanged(object sender, StateChangedEventArgs args)
         {
-            if (args.ToggleState.ToString().Equals("On"))
+            if (args.ToggleState == ToggleState.On)
             {
-                WebcamRadToggleButton.Text = "Stop Webcam";
+                webcamRadToggleButton.Text = "Stop Webcam";
                 avaliableWebcamsDropDownList.Enabled = false;
                 firstMarkerChangeRadButton.Enabled = true;
 
@@ -293,7 +295,7 @@ namespace WebCS
             {
                 StopWebcam();
 
-                WebcamRadToggleButton.Text = "Start Webcam";
+                webcamRadToggleButton.Text = "Start Webcam";
                 avaliableWebcamsDropDownList.Enabled = true;
                 avaliableWebcamsDropDownList_SelectedIndexChanged(null, null);
 
@@ -305,12 +307,12 @@ namespace WebCS
         {
             if (avaliableWebcamsDropDownList.SelectedIndex != 0)
             {
-                WebcamRadToggleButton.Enabled = true;
+                webcamRadToggleButton.Enabled = true;
                 DrawOnEmptyFrame("Click to \nstart webcam.");
             }
             else
             {
-                WebcamRadToggleButton.Enabled = false;
+                webcamRadToggleButton.Enabled = false;
                 DrawOnEmptyFrame("Webcam \nnot selected.");
             }
         }
@@ -365,6 +367,41 @@ namespace WebCS
 
                 firstMarkerSample.Image=fSampleBitmap;
             }
+        }
+
+        private void systemTrayIcon_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            this.BringToFront();
+            this.Show();
+            this.WindowState = FormWindowState.Normal;
+        }
+
+        private void WebCSForm_Resize(object sender, EventArgs e)
+        {
+            if (FormWindowState.Minimized == WindowState)
+            {
+                this.Hide();
+            }
+        }
+
+        private void restoreToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            systemTrayIcon_MouseDoubleClick(null, null);
+        }
+
+        private void closeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            exitRadButton_Click(null, null);
+        }
+
+        private void startStopWebcamToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            webcamRadToggleButton.PerformClick();
+        }
+
+        private void disableToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            trackingToggleButton.PerformClick();
         }
 
     }
