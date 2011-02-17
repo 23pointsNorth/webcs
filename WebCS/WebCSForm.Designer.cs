@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.trackingToggleButton = new Telerik.WinControls.UI.RadToggleButton();
             this.imageContainer = new Telerik.QuickStart.WinControls.ImageContainer();
             this.exitRadButton = new Telerik.WinControls.UI.RadButton();
@@ -41,13 +42,20 @@
             this.firstMarkerRangeRadLabel = new Telerik.WinControls.UI.RadLabel();
             this.firstMarkerSample = new Telerik.QuickStart.WinControls.ImageContainer();
             this.firstMakrerColorLabel = new Telerik.WinControls.UI.RadLabel();
-            this.WebcamRadToggleButton = new Telerik.WinControls.UI.RadToggleButton();
+            this.webcamRadToggleButton = new Telerik.WinControls.UI.RadToggleButton();
             this.applyFilterRadCheckBox = new Telerik.WinControls.UI.RadCheckBox();
             this.userRadLabel = new Telerik.WinControls.UI.RadLabel();
             this.avaliableWebcamsDropDownList = new Telerik.WinControls.UI.RadDropDownList();
             this.startupRadCheckBox = new Telerik.WinControls.UI.RadCheckBox();
             this.SelectDesktopAreaButton = new Telerik.WinControls.UI.RadButton();
             this.SecondMarkerRadGroupBox = new Telerik.WinControls.UI.RadGroupBox();
+            this.systemTrayIcon = new System.Windows.Forms.NotifyIcon(this.components);
+            this.iconContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.trackingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.disableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.startStopWebcamToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.restoreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.trackingToggleButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageContainer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.exitRadButton)).BeginInit();
@@ -64,13 +72,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.firstMarkerRangeRadLabel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.firstMarkerSample)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.firstMakrerColorLabel)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.WebcamRadToggleButton)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.webcamRadToggleButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.applyFilterRadCheckBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.userRadLabel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.avaliableWebcamsDropDownList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.startupRadCheckBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SelectDesktopAreaButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SecondMarkerRadGroupBox)).BeginInit();
+            this.iconContextMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
             // 
@@ -80,7 +89,7 @@
             this.trackingToggleButton.Name = "trackingToggleButton";
             this.trackingToggleButton.Size = new System.Drawing.Size(100, 25);
             this.trackingToggleButton.TabIndex = 0;
-            this.trackingToggleButton.Text = "Activate Tracking";
+            this.trackingToggleButton.Text = "Enable Tracking";
             this.trackingToggleButton.ToggleStateChanged += new Telerik.WinControls.UI.StateChangedEventHandler(this.trackingToggleButton_ToggleStateChanged);
             // 
             // imageContainer
@@ -126,7 +135,7 @@
             // 
             this.optionsRadPanel.Controls.Add(this.loadWorkingFrameRadCheckBox);
             this.optionsRadPanel.Controls.Add(this.FirstMarkerRadGroupBox);
-            this.optionsRadPanel.Controls.Add(this.WebcamRadToggleButton);
+            this.optionsRadPanel.Controls.Add(this.webcamRadToggleButton);
             this.optionsRadPanel.Controls.Add(this.applyFilterRadCheckBox);
             this.optionsRadPanel.Controls.Add(this.userRadLabel);
             this.optionsRadPanel.Controls.Add(this.avaliableWebcamsDropDownList);
@@ -216,15 +225,15 @@
             this.firstMakrerColorLabel.TabIndex = 0;
             this.firstMakrerColorLabel.Text = "Marker Color";
             // 
-            // WebcamRadToggleButton
+            // webcamRadToggleButton
             // 
-            this.WebcamRadToggleButton.Enabled = false;
-            this.WebcamRadToggleButton.Location = new System.Drawing.Point(226, 5);
-            this.WebcamRadToggleButton.Name = "WebcamRadToggleButton";
-            this.WebcamRadToggleButton.Size = new System.Drawing.Size(125, 25);
-            this.WebcamRadToggleButton.TabIndex = 7;
-            this.WebcamRadToggleButton.Text = "Start Webcam";
-            this.WebcamRadToggleButton.ToggleStateChanged += new Telerik.WinControls.UI.StateChangedEventHandler(this.WebcamRadToggleButton_ToggleStateChanged);
+            this.webcamRadToggleButton.Enabled = false;
+            this.webcamRadToggleButton.Location = new System.Drawing.Point(226, 5);
+            this.webcamRadToggleButton.Name = "webcamRadToggleButton";
+            this.webcamRadToggleButton.Size = new System.Drawing.Size(125, 25);
+            this.webcamRadToggleButton.TabIndex = 7;
+            this.webcamRadToggleButton.Text = "Start Webcam";
+            this.webcamRadToggleButton.ToggleStateChanged += new Telerik.WinControls.UI.StateChangedEventHandler(this.WebcamRadToggleButton_ToggleStateChanged);
             // 
             // applyFilterRadCheckBox
             // 
@@ -293,6 +302,59 @@
             this.SecondMarkerRadGroupBox.TabIndex = 4;
             this.SecondMarkerRadGroupBox.Text = "Second Marker";
             // 
+            // systemTrayIcon
+            // 
+            this.systemTrayIcon.ContextMenuStrip = this.iconContextMenuStrip;
+            this.systemTrayIcon.Text = "systemTrayIcon";
+            this.systemTrayIcon.Visible = true;
+            this.systemTrayIcon.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.systemTrayIcon_MouseDoubleClick);
+            // 
+            // iconContextMenuStrip
+            // 
+            this.iconContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.trackingToolStripMenuItem,
+            this.restoreToolStripMenuItem,
+            this.closeToolStripMenuItem});
+            this.iconContextMenuStrip.Name = "iconContextMenuStrip";
+            this.iconContextMenuStrip.Size = new System.Drawing.Size(126, 70);
+            // 
+            // trackingToolStripMenuItem
+            // 
+            this.trackingToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.disableToolStripMenuItem,
+            this.startStopWebcamToolStripMenuItem});
+            this.trackingToolStripMenuItem.Name = "trackingToolStripMenuItem";
+            this.trackingToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.trackingToolStripMenuItem.Text = "Tracking";
+            // 
+            // disableToolStripMenuItem
+            // 
+            this.disableToolStripMenuItem.Name = "disableToolStripMenuItem";
+            this.disableToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.disableToolStripMenuItem.Text = "Enable/Disable";
+            this.disableToolStripMenuItem.Click += new System.EventHandler(this.disableToolStripMenuItem_Click);
+            // 
+            // startStopWebcamToolStripMenuItem
+            // 
+            this.startStopWebcamToolStripMenuItem.Name = "startStopWebcamToolStripMenuItem";
+            this.startStopWebcamToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.startStopWebcamToolStripMenuItem.Text = "Start/Stop Webcam";
+            this.startStopWebcamToolStripMenuItem.Click += new System.EventHandler(this.startStopWebcamToolStripMenuItem_Click);
+            // 
+            // restoreToolStripMenuItem
+            // 
+            this.restoreToolStripMenuItem.Name = "restoreToolStripMenuItem";
+            this.restoreToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.restoreToolStripMenuItem.Text = "Restore";
+            this.restoreToolStripMenuItem.Click += new System.EventHandler(this.restoreToolStripMenuItem_Click);
+            // 
+            // closeToolStripMenuItem
+            // 
+            this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
+            this.closeToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.closeToolStripMenuItem.Text = "Close";
+            this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
+            // 
             // WebCSForm
             // 
             this.AcceptButton = this.trackingToggleButton;
@@ -304,7 +366,6 @@
             this.Controls.Add(this.webcamRadPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.Name = "WebCSForm";
             // 
             // 
@@ -313,6 +374,7 @@
             this.Text = "WebCS";
             this.ThemeName = "Vista";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.WebCSForm_FormClosing);
+            this.Resize += new System.EventHandler(this.WebCSForm_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.trackingToggleButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageContainer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.exitRadButton)).EndInit();
@@ -331,13 +393,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.firstMarkerRangeRadLabel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.firstMarkerSample)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.firstMakrerColorLabel)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.WebcamRadToggleButton)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.webcamRadToggleButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.applyFilterRadCheckBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.userRadLabel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.avaliableWebcamsDropDownList)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.startupRadCheckBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.SelectDesktopAreaButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.SecondMarkerRadGroupBox)).EndInit();
+            this.iconContextMenuStrip.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
 
@@ -358,13 +421,20 @@
         private Telerik.WinControls.UI.RadButton SelectDesktopAreaButton;
         private Telerik.WinControls.UI.RadLabel userRadLabel;
         private Telerik.WinControls.UI.RadCheckBox applyFilterRadCheckBox;
-        private Telerik.WinControls.UI.RadToggleButton WebcamRadToggleButton;
+        private Telerik.WinControls.UI.RadToggleButton webcamRadToggleButton;
         private Telerik.QuickStart.WinControls.ImageContainer firstMarkerSample;
         private Telerik.WinControls.UI.RadLabel firstMakrerColorLabel;
         private Telerik.WinControls.UI.RadButton firstMarkerChangeRadButton;
         private Telerik.WinControls.UI.RadTextBox firstMarkerRangeRadTextBox;
         private Telerik.WinControls.UI.RadLabel firstMarkerRangeRadLabel;
         private Telerik.WinControls.UI.RadCheckBox loadWorkingFrameRadCheckBox;
+        private System.Windows.Forms.NotifyIcon systemTrayIcon;
+        private System.Windows.Forms.ContextMenuStrip iconContextMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem trackingToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem disableToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem restoreToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem closeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem startStopWebcamToolStripMenuItem;
     }
 }
 
