@@ -47,6 +47,7 @@
             this.startupRadCheckBox = new Telerik.WinControls.UI.RadCheckBox();
             this.SelectDesktopAreaButton = new Telerik.WinControls.UI.RadButton();
             this.SecondMarkerRadGroupBox = new Telerik.WinControls.UI.RadGroupBox();
+            this.loadWorkingFrameRadCheckBox = new Telerik.WinControls.UI.RadCheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.trackingToggleButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageContainer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.exitRadButton)).BeginInit();
@@ -69,6 +70,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.startupRadCheckBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SelectDesktopAreaButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SecondMarkerRadGroupBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.loadWorkingFrameRadCheckBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
             // 
@@ -121,6 +123,7 @@
             // 
             // optionsRadPanel
             // 
+            this.optionsRadPanel.Controls.Add(this.loadWorkingFrameRadCheckBox);
             this.optionsRadPanel.Controls.Add(this.FirstMarkerRadGroupBox);
             this.optionsRadPanel.Controls.Add(this.WebcamRadToggleButton);
             this.optionsRadPanel.Controls.Add(this.applyFilterRadCheckBox);
@@ -278,6 +281,14 @@
             this.SecondMarkerRadGroupBox.TabIndex = 4;
             this.SecondMarkerRadGroupBox.Text = "Second Marker";
             // 
+            // loadWorkingFrameRadCheckBox
+            // 
+            this.loadWorkingFrameRadCheckBox.Location = new System.Drawing.Point(231, 35);
+            this.loadWorkingFrameRadCheckBox.Name = "loadWorkingFrameRadCheckBox";
+            this.loadWorkingFrameRadCheckBox.Size = new System.Drawing.Size(120, 18);
+            this.loadWorkingFrameRadCheckBox.TabIndex = 8;
+            this.loadWorkingFrameRadCheckBox.Text = "Load working frame";
+            // 
             // WebCSForm
             // 
             this.AcceptButton = this.trackingToggleButton;
@@ -322,6 +333,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.startupRadCheckBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.SelectDesktopAreaButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.SecondMarkerRadGroupBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.loadWorkingFrameRadCheckBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
 
@@ -348,6 +360,7 @@
         private Telerik.WinControls.UI.RadButton firstMarkerChangeRadButton;
         private Telerik.WinControls.UI.RadTextBox firstMarkerRangeRadTextBox;
         private Telerik.WinControls.UI.RadLabel firstMarkerRangeRadLabel;
+        private Telerik.WinControls.UI.RadCheckBox loadWorkingFrameRadCheckBox;
     }
 }
 
