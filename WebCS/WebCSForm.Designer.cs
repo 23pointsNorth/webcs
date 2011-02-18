@@ -29,12 +29,16 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WebCSForm));
             this.trackingToggleButton = new Telerik.WinControls.UI.RadToggleButton();
             this.imageContainer = new Telerik.QuickStart.WinControls.ImageContainer();
             this.exitRadButton = new Telerik.WinControls.UI.RadButton();
             this.optionsToggleButton = new Telerik.WinControls.UI.RadToggleButton();
             this.webcamRadPanel = new Telerik.WinControls.UI.RadPanel();
             this.optionsRadPanel = new Telerik.WinControls.UI.RadPanel();
+            this.workingFrameRadGroupBox = new Telerik.WinControls.UI.RadGroupBox();
+            this.secondMarkerLoadRadRadioButton = new Telerik.WinControls.UI.RadRadioButton();
+            this.firstMarkerLoadRadRadioButton = new Telerik.WinControls.UI.RadRadioButton();
             this.FirstMarkerRadGroupBox = new Telerik.WinControls.UI.RadGroupBox();
             this.firstMarkerRangeRadTextBox = new Telerik.WinControls.UI.RadTextBox();
             this.firstMarkerChangeRadButton = new Telerik.WinControls.UI.RadButton();
@@ -60,9 +64,7 @@
             this.startStopWebcamToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.restoreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.secondMarkerLoadRadRadioButton = new Telerik.WinControls.UI.RadRadioButton();
-            this.radGroupBox1 = new Telerik.WinControls.UI.RadGroupBox();
-            this.firstMarkerLoadRadRadioButton = new Telerik.WinControls.UI.RadRadioButton();
+            this.noLoadRadRadioButton = new Telerik.WinControls.UI.RadRadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.trackingToggleButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageContainer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.exitRadButton)).BeginInit();
@@ -71,6 +73,10 @@
             this.webcamRadPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.optionsRadPanel)).BeginInit();
             this.optionsRadPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.workingFrameRadGroupBox)).BeginInit();
+            this.workingFrameRadGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.secondMarkerLoadRadRadioButton)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.firstMarkerLoadRadRadioButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.FirstMarkerRadGroupBox)).BeginInit();
             this.FirstMarkerRadGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.firstMarkerRangeRadTextBox)).BeginInit();
@@ -92,10 +98,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.secondMarkerSample)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.secondMarkerRangeRadLabel)).BeginInit();
             this.iconContextMenuStrip.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.secondMarkerLoadRadRadioButton)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radGroupBox1)).BeginInit();
-            this.radGroupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.firstMarkerLoadRadRadioButton)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.noLoadRadRadioButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
             // 
@@ -150,7 +153,7 @@
             // 
             // optionsRadPanel
             // 
-            this.optionsRadPanel.Controls.Add(this.radGroupBox1);
+            this.optionsRadPanel.Controls.Add(this.workingFrameRadGroupBox);
             this.optionsRadPanel.Controls.Add(this.FirstMarkerRadGroupBox);
             this.optionsRadPanel.Controls.Add(this.webcamRadToggleButton);
             this.optionsRadPanel.Controls.Add(this.applyFilterRadCheckBox);
@@ -164,6 +167,44 @@
             this.optionsRadPanel.Size = new System.Drawing.Size(362, 325);
             this.optionsRadPanel.TabIndex = 2;
             this.optionsRadPanel.Visible = false;
+            // 
+            // workingFrameRadGroupBox
+            // 
+            this.workingFrameRadGroupBox.Controls.Add(this.noLoadRadRadioButton);
+            this.workingFrameRadGroupBox.Controls.Add(this.secondMarkerLoadRadRadioButton);
+            this.workingFrameRadGroupBox.Controls.Add(this.firstMarkerLoadRadRadioButton);
+            this.workingFrameRadGroupBox.FooterImageIndex = -1;
+            this.workingFrameRadGroupBox.FooterImageKey = "";
+            this.workingFrameRadGroupBox.HeaderImageIndex = -1;
+            this.workingFrameRadGroupBox.HeaderImageKey = "";
+            this.workingFrameRadGroupBox.HeaderMargin = new System.Windows.Forms.Padding(0);
+            this.workingFrameRadGroupBox.HeaderText = "Working Frame";
+            this.workingFrameRadGroupBox.Location = new System.Drawing.Point(12, 212);
+            this.workingFrameRadGroupBox.Name = "workingFrameRadGroupBox";
+            this.workingFrameRadGroupBox.Padding = new System.Windows.Forms.Padding(10, 20, 10, 10);
+            // 
+            // 
+            // 
+            this.workingFrameRadGroupBox.RootElement.Padding = new System.Windows.Forms.Padding(10, 20, 10, 10);
+            this.workingFrameRadGroupBox.Size = new System.Drawing.Size(340, 57);
+            this.workingFrameRadGroupBox.TabIndex = 9;
+            this.workingFrameRadGroupBox.Text = "Working Frame";
+            // 
+            // secondMarkerLoadRadRadioButton
+            // 
+            this.secondMarkerLoadRadRadioButton.Location = new System.Drawing.Point(201, 16);
+            this.secondMarkerLoadRadRadioButton.Name = "secondMarkerLoadRadRadioButton";
+            this.secondMarkerLoadRadRadioButton.Size = new System.Drawing.Size(126, 18);
+            this.secondMarkerLoadRadRadioButton.TabIndex = 6;
+            this.secondMarkerLoadRadRadioButton.Text = "Load Second Marker";
+            // 
+            // firstMarkerLoadRadRadioButton
+            // 
+            this.firstMarkerLoadRadRadioButton.Location = new System.Drawing.Point(13, 16);
+            this.firstMarkerLoadRadRadioButton.Name = "firstMarkerLoadRadRadioButton";
+            this.firstMarkerLoadRadRadioButton.Size = new System.Drawing.Size(126, 18);
+            this.firstMarkerLoadRadRadioButton.TabIndex = 6;
+            this.firstMarkerLoadRadRadioButton.Text = "Load First Marker";
             // 
             // FirstMarkerRadGroupBox
             // 
@@ -185,7 +226,7 @@
             // 
             // 
             this.FirstMarkerRadGroupBox.RootElement.Padding = new System.Windows.Forms.Padding(10, 20, 10, 10);
-            this.FirstMarkerRadGroupBox.Size = new System.Drawing.Size(340, 80);
+            this.FirstMarkerRadGroupBox.Size = new System.Drawing.Size(340, 72);
             this.FirstMarkerRadGroupBox.TabIndex = 0;
             this.FirstMarkerRadGroupBox.Text = "First Marker";
             // 
@@ -202,7 +243,7 @@
             // firstMarkerChangeRadButton
             // 
             this.firstMarkerChangeRadButton.Enabled = false;
-            this.firstMarkerChangeRadButton.Location = new System.Drawing.Point(226, 47);
+            this.firstMarkerChangeRadButton.Location = new System.Drawing.Point(227, 40);
             this.firstMarkerChangeRadButton.Name = "firstMarkerChangeRadButton";
             this.firstMarkerChangeRadButton.Size = new System.Drawing.Size(100, 25);
             this.firstMarkerChangeRadButton.TabIndex = 4;
@@ -237,7 +278,7 @@
             // webcamRadToggleButton
             // 
             this.webcamRadToggleButton.Enabled = false;
-            this.webcamRadToggleButton.Location = new System.Drawing.Point(226, 3);
+            this.webcamRadToggleButton.Location = new System.Drawing.Point(227, 5);
             this.webcamRadToggleButton.Name = "webcamRadToggleButton";
             this.webcamRadToggleButton.Size = new System.Drawing.Size(125, 25);
             this.webcamRadToggleButton.TabIndex = 7;
@@ -260,9 +301,11 @@
             this.userRadLabel.AutoSize = false;
             this.userRadLabel.Location = new System.Drawing.Point(168, 273);
             this.userRadLabel.Name = "userRadLabel";
-            this.userRadLabel.Size = new System.Drawing.Size(182, 47);
+            this.userRadLabel.Size = new System.Drawing.Size(183, 47);
             this.userRadLabel.TabIndex = 5;
-            this.userRadLabel.Text = "Options Menu                                   ";
+            this.userRadLabel.Text = @"Options Menu                                                                     " +
+                "                                                                                " +
+                "                                  ";
             // 
             // avaliableWebcamsDropDownList
             // 
@@ -313,7 +356,7 @@
             // 
             // 
             this.SecondMarkerRadGroupBox.RootElement.Padding = new System.Windows.Forms.Padding(10, 20, 10, 10);
-            this.SecondMarkerRadGroupBox.Size = new System.Drawing.Size(340, 80);
+            this.SecondMarkerRadGroupBox.Size = new System.Drawing.Size(340, 72);
             this.SecondMarkerRadGroupBox.TabIndex = 4;
             this.SecondMarkerRadGroupBox.Text = "Second Marker";
             // 
@@ -338,7 +381,7 @@
             // secondMarkerChangeRadButton
             // 
             this.secondMarkerChangeRadButton.Enabled = false;
-            this.secondMarkerChangeRadButton.Location = new System.Drawing.Point(226, 47);
+            this.secondMarkerChangeRadButton.Location = new System.Drawing.Point(227, 40);
             this.secondMarkerChangeRadButton.Name = "secondMarkerChangeRadButton";
             this.secondMarkerChangeRadButton.Size = new System.Drawing.Size(100, 25);
             this.secondMarkerChangeRadButton.TabIndex = 9;
@@ -365,7 +408,8 @@
             // systemTrayIcon
             // 
             this.systemTrayIcon.ContextMenuStrip = this.iconContextMenuStrip;
-            this.systemTrayIcon.Text = "systemTrayIcon";
+            this.systemTrayIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("systemTrayIcon.Icon")));
+            this.systemTrayIcon.Text = "WebCS";
             this.systemTrayIcon.Visible = true;
             this.systemTrayIcon.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.systemTrayIcon_MouseDoubleClick);
             // 
@@ -415,46 +459,17 @@
             this.closeToolStripMenuItem.Text = "Close";
             this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
             // 
-            // secondMarkerLoadRadRadioButton
+            // noLoadRadRadioButton
             // 
-            this.secondMarkerLoadRadRadioButton.Location = new System.Drawing.Point(200, 23);
-            this.secondMarkerLoadRadRadioButton.Name = "secondMarkerLoadRadRadioButton";
-            this.secondMarkerLoadRadRadioButton.Size = new System.Drawing.Size(126, 18);
-            this.secondMarkerLoadRadRadioButton.TabIndex = 6;
-            this.secondMarkerLoadRadRadioButton.Text = "Load Second Marker";
-            // 
-            // radGroupBox1
-            // 
-            this.radGroupBox1.Controls.Add(this.secondMarkerLoadRadRadioButton);
-            this.radGroupBox1.Controls.Add(this.firstMarkerLoadRadRadioButton);
-            this.radGroupBox1.FooterImageIndex = -1;
-            this.radGroupBox1.FooterImageKey = "";
-            this.radGroupBox1.HeaderImageIndex = -1;
-            this.radGroupBox1.HeaderImageKey = "";
-            this.radGroupBox1.HeaderMargin = new System.Windows.Forms.Padding(0);
-            this.radGroupBox1.HeaderText = "Working Frame";
-            this.radGroupBox1.Location = new System.Drawing.Point(12, 220);
-            this.radGroupBox1.Name = "radGroupBox1";
-            this.radGroupBox1.Padding = new System.Windows.Forms.Padding(10, 20, 10, 10);
-            // 
-            // 
-            // 
-            this.radGroupBox1.RootElement.Padding = new System.Windows.Forms.Padding(10, 20, 10, 10);
-            this.radGroupBox1.Size = new System.Drawing.Size(339, 47);
-            this.radGroupBox1.TabIndex = 9;
-            this.radGroupBox1.Text = "Working Frame";
-            // 
-            // firstMarkerLoadRadRadioButton
-            // 
-            this.firstMarkerLoadRadRadioButton.Location = new System.Drawing.Point(13, 23);
-            this.firstMarkerLoadRadRadioButton.Name = "firstMarkerLoadRadRadioButton";
-            this.firstMarkerLoadRadRadioButton.Size = new System.Drawing.Size(126, 18);
-            this.firstMarkerLoadRadRadioButton.TabIndex = 6;
-            this.firstMarkerLoadRadRadioButton.Text = "Load First Marker";
+            this.noLoadRadRadioButton.Location = new System.Drawing.Point(13, 37);
+            this.noLoadRadRadioButton.Name = "noLoadRadRadioButton";
+            this.noLoadRadRadioButton.Size = new System.Drawing.Size(126, 18);
+            this.noLoadRadRadioButton.TabIndex = 7;
+            this.noLoadRadRadioButton.Text = "Normal Frames";
+            this.noLoadRadRadioButton.ToggleState = Telerik.WinControls.Enumerations.ToggleState.On;
             // 
             // WebCSForm
             // 
-            this.AcceptButton = this.trackingToggleButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.exitRadButton;
@@ -462,6 +477,7 @@
             this.Controls.Add(this.optionsRadPanel);
             this.Controls.Add(this.webcamRadPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "WebCSForm";
             // 
@@ -481,6 +497,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.optionsRadPanel)).EndInit();
             this.optionsRadPanel.ResumeLayout(false);
             this.optionsRadPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.workingFrameRadGroupBox)).EndInit();
+            this.workingFrameRadGroupBox.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.secondMarkerLoadRadRadioButton)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.firstMarkerLoadRadRadioButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.FirstMarkerRadGroupBox)).EndInit();
             this.FirstMarkerRadGroupBox.ResumeLayout(false);
             this.FirstMarkerRadGroupBox.PerformLayout();
@@ -504,10 +524,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.secondMarkerSample)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.secondMarkerRangeRadLabel)).EndInit();
             this.iconContextMenuStrip.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.secondMarkerLoadRadRadioButton)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radGroupBox1)).EndInit();
-            this.radGroupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.firstMarkerLoadRadRadioButton)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.noLoadRadRadioButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
 
@@ -547,8 +564,9 @@
         private Telerik.QuickStart.WinControls.ImageContainer secondMarkerSample;
         private Telerik.WinControls.UI.RadLabel secondMarkerRangeRadLabel;
         private Telerik.WinControls.UI.RadRadioButton secondMarkerLoadRadRadioButton;
-        private Telerik.WinControls.UI.RadGroupBox radGroupBox1;
+        private Telerik.WinControls.UI.RadGroupBox workingFrameRadGroupBox;
         private Telerik.WinControls.UI.RadRadioButton firstMarkerLoadRadRadioButton;
+        private Telerik.WinControls.UI.RadRadioButton noLoadRadRadioButton;
     }
 }
 
