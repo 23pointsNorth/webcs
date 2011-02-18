@@ -27,7 +27,6 @@ namespace WebCS
                 Constants.WEBCAM_ONLY_WIDTH, Constants.WEBCAM_ONLY_HEIGHT);
             DrawOnEmptyFrame("Webcam \nnot selected.");
             avaliableWebcamsDropDownList.Items.Add("Select Webcam");
-            avaliableWebcamsDropDownList.SelectedIndex = 0;
             LoadAvaliableWebcams();
             LoadMarkers();
             LoadAtStartup();
@@ -65,6 +64,11 @@ namespace WebCS
 
         private void LoadMarkers()
         {
+            firstMarkerColor = Settings.User.Default.firstMarkerColorUser;
+            secondMarkerColor = Settings.User.Default.secondMarkerColorUser;
+            firstMarkerRangeRadTextBox.Text = Settings.User.Default.firstMarkerRangeUser.ToString();
+            secondMarkerRangeRadTextBox.Text = Settings.User.Default.secondMarkerRangeUser.ToString();
+            
             firstMarkerSample.Image = RectangleShape.DrawFilledRectangle(
                 firstMarkerSample.Width, firstMarkerSample.Height, firstMarkerColor);
             secondMarkerSample.Image = RectangleShape.DrawFilledRectangle(
@@ -107,6 +111,7 @@ namespace WebCS
             {
                 avaliableWebcamsDropDownList.Items.Add(videoCaptureDevice.Name);
             }
+            avaliableWebcamsDropDownList.SelectedIndex = Settings.User.Default.loadWebcamIndex;
         }
 
         private void StopWebcam()
@@ -163,6 +168,7 @@ namespace WebCS
             else
             {
                 trackingToggleButton.Text = "Enable Tracking";
+                userRadLabel.ResetText();
             }
         }
 
@@ -276,13 +282,12 @@ namespace WebCS
             secondBlobCounter.FilterBlobs = true;
             secondBlobCounter.ObjectsOrder = ObjectsOrder.Size;
             secondBlobCounter.ProcessImage(secondGrayImage);
-            //blobCounter.ExtractBlobsImage(grayImage);
             Rectangle[] rects = secondBlobCounter.GetObjectsRectangles();
             if (rects.Length > 0)
             {
                 Rectangle secondMarkerObjRect = rects[0];
                 userRadLabel.Text +=
-                    "2nd center at: (" + (secondMarkerObjRect.X + secondMarkerObjRect.Width / 2).ToString() +
+                    "(" + (secondMarkerObjRect.X + secondMarkerObjRect.Width / 2).ToString() +
                     "; " + (secondMarkerObjRect.Y + secondMarkerObjRect.Height / 2).ToString() + ")";
 
                 if (secondMarkerLoadRadRadioButton.IsChecked)
@@ -309,8 +314,8 @@ namespace WebCS
             {
                 Rectangle firstMarkerObjRect = rects[0];
                 userRadLabel.Text =
-                    "1st center at: (" + (firstMarkerObjRect.X + firstMarkerObjRect.Width / 2).ToString() +
-                    "; " + (firstMarkerObjRect.Y + firstMarkerObjRect.Height / 2).ToString() + ")\n";
+                    "(" + (firstMarkerObjRect.X + firstMarkerObjRect.Width / 2).ToString() +
+                    "; " + (firstMarkerObjRect.Y + firstMarkerObjRect.Height / 2).ToString() + ") ";
 
                 if (firstMarkerLoadRadRadioButton.IsChecked)
                 {
@@ -361,7 +366,8 @@ namespace WebCS
         private void WebCSForm_FormClosing(object sender, System.Windows.Forms.FormClosingEventArgs e)
         {
             StopWebcam();
-            Icon.Dispose();
+            systemTrayIcon.Visible = false;
+            systemTrayIcon.Dispose();
         }
 
         bool isVideoRunning = false;
@@ -483,7 +489,7 @@ namespace WebCS
             CheckEnabledTracking();
         }
 
-        private void secondMarkerCgangeRadButton_Click(object sender, EventArgs e)
+        private void secondMarkerChangeRadButton_Click(object sender, EventArgs e)
         {
             if (!secondMarkerChangeColor)
             {
@@ -572,12 +578,37 @@ namespace WebCS
             trackingToggleButton.PerformClick();
         }
 
+        private void saveSettingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            saveOptionsRadButton.PerformClick();
+        }
+
         private void CheckEnabledTracking()
         {
             this.trackingToggleButton.Enabled = (
                 !firstMarkerColor.Equals(emptyColor) &&
                 !secondMarkerColor.Equals(emptyColor) &&
                 isVideoRunning);
+        }
+
+        private void saveOptionsRadButton_Click(object sender, EventArgs e)
+        {
+            Settings.User.Default.loadWebcamIndex = avaliableWebcamsDropDownList.SelectedIndex;
+            Settings.User.Default.firstMarkerColorUser = firstMarkerColor;
+            Settings.User.Default.firstMarkerRangeUser = getRange(1);
+            Settings.User.Default.secondMarkerColorUser = secondMarkerColor;
+            Settings.User.Default.secondMarkerRangeUser = getRange(2);
+            Settings.User.Default.Save();
+        }
+
+        private void cancelFirstMarkerRadButton_Click(object sender, EventArgs e)
+        {
+            firstMarkerChangeColor = false;
+        }
+
+        private void cancelSecondMarkerRadButton_Click(object sender, EventArgs e)
+        {
+            secondMarkerChangeColor = false;
         }
 
     }
