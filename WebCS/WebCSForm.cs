@@ -64,11 +64,20 @@ namespace WebCS
 
         private void LoadMarkers()
         {
-            firstMarkerColor = Settings.User.Default.firstMarkerColorUser;
-            secondMarkerColor = Settings.User.Default.secondMarkerColorUser;
-            firstMarkerRangeRadTextBox.Text = Settings.User.Default.firstMarkerRangeUser.ToString();
-            secondMarkerRangeRadTextBox.Text = Settings.User.Default.secondMarkerRangeUser.ToString();
-            
+            try
+            {
+                firstMarkerColor = Settings.User.Default.firstMarkerColorUser;
+                secondMarkerColor = Settings.User.Default.secondMarkerColorUser;
+                firstMarkerRangeRadTextBox.Text = Settings.User.Default.firstMarkerRangeUser.ToString();
+                secondMarkerRangeRadTextBox.Text = Settings.User.Default.secondMarkerRangeUser.ToString();
+            }
+            catch
+            {
+                firstMarkerColor = emptyColor;
+                secondMarkerColor = emptyColor;
+                firstMarkerRangeRadTextBox.Text = "20";
+                secondMarkerRangeRadTextBox.Text = "20";
+            }
             firstMarkerSample.Image = RectangleShape.DrawFilledRectangle(
                 firstMarkerSample.Width, firstMarkerSample.Height, firstMarkerColor);
             secondMarkerSample.Image = RectangleShape.DrawFilledRectangle(
@@ -111,7 +120,15 @@ namespace WebCS
             {
                 avaliableWebcamsDropDownList.Items.Add(videoCaptureDevice.Name);
             }
-            avaliableWebcamsDropDownList.SelectedIndex = Settings.User.Default.loadWebcamIndex;
+
+            try
+            {
+                avaliableWebcamsDropDownList.SelectedIndex = Settings.User.Default.loadWebcamIndex;
+            }
+            catch
+            {
+                avaliableWebcamsDropDownList.SelectedIndex = 0;
+            }
         }
 
         private void StopWebcam()
@@ -397,8 +414,10 @@ namespace WebCS
             else
             {
                 StopWebcam();
-                trackingToggleButton.PerformClick(); // stop tracking
-
+                if (trackingToggleButton.ToggleState == ToggleState.On)
+                {
+                    trackingToggleButton.PerformClick(); // stop tracking
+                }
                 isVideoRunning = finalVideoSource.IsRunning;
                 webcamRadToggleButton.Text = "Start Webcam";
                 avaliableWebcamsDropDownList.Enabled = true;

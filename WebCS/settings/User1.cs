@@ -1,4 +1,4 @@
-﻿namespace WebCS.settings {
+﻿namespace WebCS.Settings {
     
     
     // This class allows you to handle specific events on the settings class:
