@@ -11,6 +11,6 @@ public class Constants
     public const int WEBCAM_ONLY_WIDTH = 373;
     public const int WEBCAM_ONLY_HEIGHT = 363;
 
-    public const int OPTIONS_ADDED_WIDTH = 805;
+    public const int OPTIONS_ADDED_WIDTH = 740;
     public const int OPTIONS_ADDED_HEIGHT = 363;
 }
