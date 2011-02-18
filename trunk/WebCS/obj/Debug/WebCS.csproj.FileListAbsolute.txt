@@ -34,3 +34,6 @@ C:\Documents and Settings\vladi\My Documents\Visual Studio 2008\Projects\WebCS\W
 C:\Documents and Settings\vladi\My Documents\Visual Studio 2008\Projects\WebCS\WebCS\bin\Debug\AForge.Math.dll
 C:\Documents and Settings\vladi\My Documents\Visual Studio 2008\Projects\WebCS\WebCS\bin\Debug\QuickStart.dll
 C:\Documents and Settings\vladi\My Documents\Visual Studio 2008\Projects\WebCS\WebCS\bin\Debug\settings\Webcam.ico
+C:\Documents and Settings\vladi\My Documents\Visual Studio 2008\Projects\WebCS\WebCS\bin\Debug\settings\User1.Designer.cs
+C:\Documents and Settings\vladi\My Documents\Visual Studio 2008\Projects\WebCS\WebCS\bin\Debug\settings\User.settings
+C:\Documents and Settings\vladi\My Documents\Visual Studio 2008\Projects\WebCS\WebCS\bin\Debug\WebCS.exe.config
