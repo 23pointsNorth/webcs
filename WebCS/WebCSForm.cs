@@ -31,6 +31,7 @@ namespace WebCS
             LoadAvaliableWebcams();
             LoadMarkers();
             LoadAtStartup();
+            CheckEnabledTracking();
         }
 
         RegistryKey regKeyApp = Registry.CurrentUser.OpenSubKey(
@@ -66,6 +67,8 @@ namespace WebCS
         {
             firstMarkerSample.Image = RectangleShape.DrawFilledRectangle(
                 firstMarkerSample.Width, firstMarkerSample.Height, firstMarkerColor);
+            secondMarkerSample.Image = RectangleShape.DrawFilledRectangle(
+                secondMarkerSample.Width, secondMarkerSample.Height, secondMarkerColor);
         }
 
         private void DrawOnEmptyFrame(string text)
@@ -171,7 +174,9 @@ namespace WebCS
         Bitmap newFrame;
         Bitmap frameClone;
         //public static readonly Grayscale BT709 = new Grayscale(0.2125, 0.7154, 0.0721);
-        Color firstMarkerColor = Color.FromArgb(215, 50, 50);
+        static Color emptyColor = Color.FromArgb(0, 0, 0);
+        Color firstMarkerColor = emptyColor;
+        Color secondMarkerColor = emptyColor;
 
         private void FinalVideoSource_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
@@ -191,53 +196,56 @@ namespace WebCS
 
             if (trackingToggleButton.ToggleState == ToggleState.On)
             {
-                frameClone = (Bitmap)newFrame.Clone();
-
-                // create filter
-                EuclideanColorFiltering filter = new EuclideanColorFiltering();
-                // set center color and radius
-                filter.CenterColor.Color = firstMarkerColor;
-
-                filter.Radius = getRange();
-                // apply the filter
-                filter.ApplyInPlace(frameClone);
-
-                BitmapData objectsData = frameClone.LockBits(
+                //
+                //For First Marker
+                //
+                frameClone = (Bitmap)eventArgs.Frame.Clone();
+                BitmapData firstObjectsData = frameClone.LockBits(
                     new Rectangle(0, 0, frameClone.Width, frameClone.Height),
                     ImageLockMode.ReadOnly, frameClone.PixelFormat);
+
+                // create filter
+                EuclideanColorFiltering ffilter = new EuclideanColorFiltering();
+                // set center color and radius
+                ffilter.CenterColor.Color = firstMarkerColor;
+                ffilter.Radius = getRange(1);
+                // apply the filter
+                ffilter.ApplyInPlace(firstObjectsData);
+
                 // grayscaling
                 //UnmanagedImage grayImage = new Grayscale.CommonAlgorithms.BT709.Apply(new UnmanagedImage(objectsData));
-                UnmanagedImage grayImage = new GrayscaleBT709().Apply(
-                    new UnmanagedImage(objectsData));
+                UnmanagedImage firstGrayImage = new GrayscaleBT709().Apply(
+                    new UnmanagedImage(firstObjectsData));
                 // unlock image
-                frameClone.UnlockBits(objectsData);
+                frameClone.UnlockBits(firstObjectsData);
+                FirstMarkerBlob(firstGrayImage);
 
-                BlobCounter blobCounter = new BlobCounter();
-                blobCounter.MinWidth = 5;
-                blobCounter.MinHeight = 5;
-                blobCounter.FilterBlobs = true;
-                blobCounter.ObjectsOrder = ObjectsOrder.Size;
-                blobCounter.ProcessImage(grayImage);
-                //blobCounter.ExtractBlobsImage(grayImage);
-                Rectangle[] rects = blobCounter.GetObjectsRectangles();
-                if (rects.Length > 0)
-                {
-                    Rectangle objectRect = rects[0];
-                    userRadLabel.Text =
-                        "Center at: (" + (objectRect.X + objectRect.Width / 2).ToString() +
-                        "; " + (objectRect.Y + objectRect.Height / 2).ToString() + ")";
+                //
+                // For Second Marker
+                //
+                frameClone = (Bitmap)eventArgs.Frame.Clone();
+                BitmapData secondObjectsData = frameClone.LockBits(
+                    new Rectangle(0, 0, frameClone.Width, frameClone.Height),
+                    ImageLockMode.ReadOnly, frameClone.PixelFormat);
 
-                    if (loadWorkingFrameRadCheckBox.Checked)
-                    {
-                        newFrame = (Bitmap)frameClone.Clone();
-                    }
+                // create filter
+                EuclideanColorFiltering sfilter = new EuclideanColorFiltering();
+                // set center color and radius
+                sfilter.CenterColor.Color = secondMarkerColor;
+                sfilter.Radius = getRange(2);
+                // apply the filter
+                sfilter.ApplyInPlace(secondObjectsData);
 
-                    newFrame = drawRectangleOnBitmap(
-                        newFrame, objectRect, new Pen(Color.FromArgb(160, 255, 160), 2));
-                }
+                // grayscaling
+                UnmanagedImage secondGrayImage = new GrayscaleBT709().Apply(
+                    new UnmanagedImage(secondObjectsData));
+
+                // unlock image
+                frameClone.UnlockBits(secondObjectsData);
+                SecondMarkerBlob(secondGrayImage);
             }
 
-            if (firstMarkerChangeColor) // or secondMarkerColorChange
+            if (firstMarkerChangeColor)
             {
                 newFrame = drawRectangleOnBitmap(
                     (Bitmap)newFrame.Clone(),
@@ -245,24 +253,105 @@ namespace WebCS
                     new Pen(Color.Red, 2));
             }
 
+            if (secondMarkerChangeColor)
+            {
+                newFrame = drawRectangleOnBitmap(
+                    (Bitmap)newFrame.Clone(),
+                    secondMakrerRect,
+                    new Pen(Color.Blue, 2));
+            }
+
             imageContainer.Image = newFrame;
         }
 
-        private short getRange()
+        private void SecondMarkerBlob(UnmanagedImage secondGrayImage)
         {
-            int range=0;
-            try
+            BlobCounter secondBlobCounter = new BlobCounter();
+            secondBlobCounter.MinWidth = 5;
+            secondBlobCounter.MinHeight = 5;
+            secondBlobCounter.FilterBlobs = true;
+            secondBlobCounter.ObjectsOrder = ObjectsOrder.Size;
+            secondBlobCounter.ProcessImage(secondGrayImage);
+            //blobCounter.ExtractBlobsImage(grayImage);
+            Rectangle[] rects = secondBlobCounter.GetObjectsRectangles();
+            if (rects.Length > 0)
             {
-                range = int.Parse(firstMarkerRangeRadTextBox.Text);
-                range = Math.Max(0, range);
-                range = Math.Min(255, range);
-                firstMarkerRangeRadTextBox.Text = range.ToString();
+                Rectangle secondMarkerObjRect = rects[0];
+                userRadLabel.Text +=
+                    "\n2st marker center at: (" + (secondMarkerObjRect.X + secondMarkerObjRect.Width / 2).ToString() +
+                    "; " + (secondMarkerObjRect.Y + secondMarkerObjRect.Height / 2).ToString() + ")";
+
+                if (loadWorkingFrameRadCheckBox.Checked)
+                {
+                    newFrame = (Bitmap)frameClone.Clone();
+                }
+
+                newFrame = drawRectangleOnBitmap(
+                    newFrame, secondMarkerObjRect, new Pen(Color.LightGreen, 2));
             }
-            catch
+        }
+
+        private void FirstMarkerBlob(UnmanagedImage firstGrayImage)
+        {
+            BlobCounter firstBlobCounter = new BlobCounter();
+            firstBlobCounter.MinWidth = 5;
+            firstBlobCounter.MinHeight = 5;
+            firstBlobCounter.FilterBlobs = true;
+            firstBlobCounter.ObjectsOrder = ObjectsOrder.Size;
+            firstBlobCounter.ProcessImage(firstGrayImage);
+            //blobCounter.ExtractBlobsImage(grayImage);
+            Rectangle[] rects = firstBlobCounter.GetObjectsRectangles();
+            if (rects.Length > 0)
             {
-                firstMarkerRangeRadTextBox.Text = "0";
+                Rectangle firstMarkerObjRect = rects[0];
+                userRadLabel.Text =
+                    "1st marker center at: (" + (firstMarkerObjRect.X + firstMarkerObjRect.Width / 2).ToString() +
+                    "; " + (firstMarkerObjRect.Y + firstMarkerObjRect.Height / 2).ToString() + ")";
+
+                if (loadWorkingFrameRadCheckBox.Checked)
+                {
+                    newFrame = (Bitmap)frameClone.Clone();
+                }
+
+                newFrame = drawRectangleOnBitmap(
+                    newFrame, firstMarkerObjRect, new Pen(Color.DarkGreen, 2));
             }
-            return (short)range;
+        }
+
+        private short getRange(int marker)
+        {
+            int range = 0;
+            if (marker == 1)
+            {
+                try
+                {
+                    range = int.Parse(firstMarkerRangeRadTextBox.Text);
+                    range = Math.Max(0, range);
+                    range = Math.Min(255, range);
+                    firstMarkerRangeRadTextBox.Text = range.ToString();
+                }
+                catch
+                {
+                    firstMarkerRangeRadTextBox.Text = "0";
+                }
+                return (short)range;
+            }
+            else if (marker == 2)
+            {
+                try
+                {
+                    range = int.Parse(secondMarkerRangeRadTextBox.Text);
+                    range = Math.Max(0, range);
+                    range = Math.Min(255, range);
+                    secondMarkerRangeRadTextBox.Text = range.ToString();
+                }
+                catch
+                {
+                    secondMarkerRangeRadTextBox.Text = "0";
+                }
+                return (short)range;
+            }
+            else return (short)range;
         }
 
         private void WebCSForm_FormClosing(object sender, System.Windows.Forms.FormClosingEventArgs e)
@@ -270,6 +359,7 @@ namespace WebCS
             StopWebcam();
         }
 
+        bool isVideoRunning = false;
         private void WebcamRadToggleButton_ToggleStateChanged(object sender, StateChangedEventArgs args)
         {
             if (args.ToggleState == ToggleState.On)
@@ -277,6 +367,7 @@ namespace WebCS
                 webcamRadToggleButton.Text = "Stop Webcam";
                 avaliableWebcamsDropDownList.Enabled = false;
                 firstMarkerChangeRadButton.Enabled = true;
+                secondMarkerChangeRadButton.Enabled = true;
 
                 //stat selected webcam
                 finalVideoSource = new VideoCaptureDevice(
@@ -287,20 +378,25 @@ namespace WebCS
                 finalVideoSource.DesiredFrameSize = new Size(
                     Constants.DESIRED_FRAME_WIDTH, Constants.DESIRED_FRAME_HEIGHT);
                 finalVideoSource.Start();
-
+                isVideoRunning = finalVideoSource.IsRunning;
                 //place focus on next item;
                 applyFilterRadCheckBox.Focus();
             }
             else
             {
                 StopWebcam();
+                trackingToggleButton.PerformClick(); // stop tracking
 
+                isVideoRunning = finalVideoSource.IsRunning;
                 webcamRadToggleButton.Text = "Start Webcam";
                 avaliableWebcamsDropDownList.Enabled = true;
                 avaliableWebcamsDropDownList_SelectedIndexChanged(null, null);
 
                 firstMarkerChangeRadButton.Enabled = false;
+                secondMarkerChangeRadButton.Enabled = false;
             }
+
+            CheckEnabledTracking();
         }
 
         private void avaliableWebcamsDropDownList_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
@@ -319,8 +415,13 @@ namespace WebCS
 
         bool firstMarkerChangeColor = false;
         Rectangle firstMakrerRect = new Rectangle(
-            Constants.IMAGE_WIDTH / 2 - 15,
-            Constants.IMAGE_HEIGHT / 2 - 15, 30, 30);
+            Constants.IMAGE_WIDTH / 2 - 25,
+            Constants.IMAGE_HEIGHT / 2 - 25, 30, 30);
+
+        bool secondMarkerChangeColor = false;
+        Rectangle secondMakrerRect = new Rectangle(
+            Constants.IMAGE_WIDTH / 2 + 15,
+            Constants.IMAGE_HEIGHT / 2 + 15, 30, 30);
 
         private void firstMarkerChangeRadButton_Click(object sender, EventArgs e)
         {
@@ -334,7 +435,11 @@ namespace WebCS
                 firstMarkerChangeColor = false;
 
                 //get rectangle info; crop first pixel - red line
-                Bitmap fSample = newFrame.Clone(firstMakrerRect, newFrame.PixelFormat);
+                Bitmap fSample;
+                lock (newFrame)
+                {
+                    fSample = newFrame.Clone(firstMakrerRect, newFrame.PixelFormat);
+                }
                 new Mean().Apply(fSample);
                 
                 ImageStatistics statistics = new ImageStatistics(fSample);
@@ -367,6 +472,61 @@ namespace WebCS
 
                 firstMarkerSample.Image=fSampleBitmap;
             }
+
+            CheckEnabledTracking();
+        }
+
+        private void secondMarkerCgangeRadButton_Click(object sender, EventArgs e)
+        {
+            if (!secondMarkerChangeColor)
+            {
+                loadWorkingFrameRadCheckBox.Checked = false;
+                secondMarkerChangeColor = true;
+            }
+            else
+            {
+                secondMarkerChangeColor = false;
+
+                //get rectangle info; crop first pixel - red line
+                Bitmap sSample;
+                lock (newFrame)
+                {
+                    sSample = newFrame.Clone(secondMakrerRect, newFrame.PixelFormat);
+                }
+                new Mean().Apply(sSample);
+
+                ImageStatistics statistics = new ImageStatistics(sSample);
+
+                Histogram histogramRed = statistics.RedWithoutBlack;
+                Histogram histogramGreen = statistics.GreenWithoutBlack;
+                Histogram histogramBlue = statistics.BlueWithoutBlack;
+
+                // get the values
+                int meanRed = (int)histogramRed.Mean;     // mean red value
+                int meanGreen = (int)histogramGreen.Mean;
+                int meanBlue = (int)histogramBlue.Mean;
+
+                secondMarkerColor = Color.FromArgb(meanRed, meanGreen, meanBlue);
+                //MarkerRangeRadTextBox.Text = 
+                //    ((histogramRed.GetRange(0.7).Min + 
+                //    histogramBlue.GetRange(0.7).Min + 
+                //    histogramGreen.GetRange(0.7).Min)/3).ToString();
+                // returns the range in [min,max];
+
+                Bitmap sSampleBitmap = new Bitmap(
+                    secondMarkerSample.Width, secondMarkerSample.Height);
+                using (Graphics g = Graphics.FromImage(sSampleBitmap))
+                {
+                    using (SolidBrush brush = new SolidBrush(secondMarkerColor))
+                    {
+                        g.FillRectangle(brush, 0, 0, secondMarkerSample.Width, secondMarkerSample.Height);
+                    }
+                }
+
+                secondMarkerSample.Image = sSampleBitmap;
+            }
+
+            CheckEnabledTracking();
         }
 
         private void systemTrayIcon_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -402,6 +562,14 @@ namespace WebCS
         private void disableToolStripMenuItem_Click(object sender, EventArgs e)
         {
             trackingToggleButton.PerformClick();
+        }
+
+        private void CheckEnabledTracking()
+        {
+            this.trackingToggleButton.Enabled = (
+                !firstMarkerColor.Equals(emptyColor) &&
+                !secondMarkerColor.Equals(emptyColor) &&
+                isVideoRunning);
         }
 
     }

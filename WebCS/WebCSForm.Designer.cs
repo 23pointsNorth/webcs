@@ -56,6 +56,11 @@
             this.startStopWebcamToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.restoreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.secondMarkerRangeRadTextBox = new Telerik.WinControls.UI.RadTextBox();
+            this.secondMarkerChangeRadButton = new Telerik.WinControls.UI.RadButton();
+            this.secondMarkerRangeRadLabel = new Telerik.WinControls.UI.RadLabel();
+            this.secondMarkerSample = new Telerik.QuickStart.WinControls.ImageContainer();
+            this.secondMarkerColorLabel = new Telerik.WinControls.UI.RadLabel();
             ((System.ComponentModel.ISupportInitialize)(this.trackingToggleButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageContainer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.exitRadButton)).BeginInit();
@@ -79,12 +84,19 @@
             ((System.ComponentModel.ISupportInitialize)(this.startupRadCheckBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SelectDesktopAreaButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SecondMarkerRadGroupBox)).BeginInit();
+            this.SecondMarkerRadGroupBox.SuspendLayout();
             this.iconContextMenuStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.secondMarkerRangeRadTextBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.secondMarkerChangeRadButton)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.secondMarkerRangeRadLabel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.secondMarkerSample)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.secondMarkerColorLabel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
             // 
             // trackingToggleButton
             // 
+            this.trackingToggleButton.Enabled = false;
             this.trackingToggleButton.Location = new System.Drawing.Point(4, 297);
             this.trackingToggleButton.Name = "trackingToggleButton";
             this.trackingToggleButton.Size = new System.Drawing.Size(100, 25);
@@ -152,7 +164,7 @@
             // 
             this.loadWorkingFrameRadCheckBox.Location = new System.Drawing.Point(231, 35);
             this.loadWorkingFrameRadCheckBox.Name = "loadWorkingFrameRadCheckBox";
-            this.loadWorkingFrameRadCheckBox.Size = new System.Drawing.Size(120, 18);
+            this.loadWorkingFrameRadCheckBox.Size = new System.Drawing.Size(119, 16);
             this.loadWorkingFrameRadCheckBox.TabIndex = 8;
             this.loadWorkingFrameRadCheckBox.Text = "Load working frame";
             // 
@@ -176,7 +188,7 @@
             // 
             // 
             this.FirstMarkerRadGroupBox.RootElement.Padding = new System.Windows.Forms.Padding(10, 20, 10, 10);
-            this.FirstMarkerRadGroupBox.Size = new System.Drawing.Size(339, 79);
+            this.FirstMarkerRadGroupBox.Size = new System.Drawing.Size(340, 80);
             this.FirstMarkerRadGroupBox.TabIndex = 0;
             this.FirstMarkerRadGroupBox.Text = "First Marker";
             // 
@@ -185,7 +197,7 @@
             this.firstMarkerRangeRadTextBox.Location = new System.Drawing.Point(118, 45);
             this.firstMarkerRangeRadTextBox.Name = "firstMarkerRangeRadTextBox";
             this.firstMarkerRangeRadTextBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.firstMarkerRangeRadTextBox.Size = new System.Drawing.Size(32, 20);
+            this.firstMarkerRangeRadTextBox.Size = new System.Drawing.Size(32, 18);
             this.firstMarkerRangeRadTextBox.TabIndex = 3;
             this.firstMarkerRangeRadTextBox.TabStop = false;
             this.firstMarkerRangeRadTextBox.Text = "20";
@@ -204,7 +216,7 @@
             // 
             this.firstMarkerRangeRadLabel.Location = new System.Drawing.Point(13, 47);
             this.firstMarkerRangeRadLabel.Name = "firstMarkerRangeRadLabel";
-            this.firstMarkerRangeRadLabel.Size = new System.Drawing.Size(76, 18);
+            this.firstMarkerRangeRadLabel.Size = new System.Drawing.Size(78, 16);
             this.firstMarkerRangeRadLabel.TabIndex = 2;
             this.firstMarkerRangeRadLabel.Text = "Marker Range";
             // 
@@ -221,7 +233,7 @@
             // 
             this.firstMakrerColorLabel.Location = new System.Drawing.Point(13, 23);
             this.firstMakrerColorLabel.Name = "firstMakrerColorLabel";
-            this.firstMakrerColorLabel.Size = new System.Drawing.Size(72, 18);
+            this.firstMakrerColorLabel.Size = new System.Drawing.Size(72, 16);
             this.firstMakrerColorLabel.TabIndex = 0;
             this.firstMakrerColorLabel.Text = "Marker Color";
             // 
@@ -239,7 +251,7 @@
             // 
             this.applyFilterRadCheckBox.Location = new System.Drawing.Point(12, 35);
             this.applyFilterRadCheckBox.Name = "applyFilterRadCheckBox";
-            this.applyFilterRadCheckBox.Size = new System.Drawing.Size(197, 18);
+            this.applyFilterRadCheckBox.Size = new System.Drawing.Size(195, 16);
             this.applyFilterRadCheckBox.TabIndex = 6;
             this.applyFilterRadCheckBox.Text = "Apply mean filter on webcam video";
             this.applyFilterRadCheckBox.ToggleState = Telerik.WinControls.Enumerations.ToggleState.On;
@@ -248,9 +260,10 @@
             // 
             this.userRadLabel.AllowDrop = true;
             this.userRadLabel.AutoScroll = true;
+            this.userRadLabel.AutoSize = false;
             this.userRadLabel.Location = new System.Drawing.Point(168, 273);
             this.userRadLabel.Name = "userRadLabel";
-            this.userRadLabel.Size = new System.Drawing.Size(186, 18);
+            this.userRadLabel.Size = new System.Drawing.Size(182, 47);
             this.userRadLabel.TabIndex = 5;
             this.userRadLabel.Text = "Options Menu                                   ";
             // 
@@ -260,7 +273,7 @@
             this.avaliableWebcamsDropDownList.Location = new System.Drawing.Point(12, 9);
             this.avaliableWebcamsDropDownList.Name = "avaliableWebcamsDropDownList";
             this.avaliableWebcamsDropDownList.ShowImageInEditorArea = true;
-            this.avaliableWebcamsDropDownList.Size = new System.Drawing.Size(208, 21);
+            this.avaliableWebcamsDropDownList.Size = new System.Drawing.Size(208, 19);
             this.avaliableWebcamsDropDownList.TabIndex = 1;
             this.avaliableWebcamsDropDownList.Text = "Select Webcam";
             this.avaliableWebcamsDropDownList.SelectedIndexChanged += new Telerik.WinControls.UI.Data.PositionChangedEventHandler(this.avaliableWebcamsDropDownList_SelectedIndexChanged);
@@ -269,7 +282,7 @@
             // 
             this.startupRadCheckBox.Location = new System.Drawing.Point(12, 304);
             this.startupRadCheckBox.Name = "startupRadCheckBox";
-            this.startupRadCheckBox.Size = new System.Drawing.Size(146, 18);
+            this.startupRadCheckBox.Size = new System.Drawing.Size(144, 16);
             this.startupRadCheckBox.TabIndex = 3;
             this.startupRadCheckBox.Text = "Start at computer startup";
             this.startupRadCheckBox.ToggleStateChanged += new Telerik.WinControls.UI.StateChangedEventHandler(this.startupRadCheckBox_ToggleStateChanged);
@@ -285,20 +298,25 @@
             // 
             // SecondMarkerRadGroupBox
             // 
+            this.SecondMarkerRadGroupBox.Controls.Add(this.secondMarkerRangeRadTextBox);
+            this.SecondMarkerRadGroupBox.Controls.Add(this.secondMarkerColorLabel);
+            this.SecondMarkerRadGroupBox.Controls.Add(this.secondMarkerChangeRadButton);
+            this.SecondMarkerRadGroupBox.Controls.Add(this.secondMarkerSample);
+            this.SecondMarkerRadGroupBox.Controls.Add(this.secondMarkerRangeRadLabel);
             this.SecondMarkerRadGroupBox.FooterImageIndex = -1;
             this.SecondMarkerRadGroupBox.FooterImageKey = "";
             this.SecondMarkerRadGroupBox.HeaderImageIndex = -1;
             this.SecondMarkerRadGroupBox.HeaderImageKey = "";
             this.SecondMarkerRadGroupBox.HeaderMargin = new System.Windows.Forms.Padding(0);
             this.SecondMarkerRadGroupBox.HeaderText = "Second Marker";
-            this.SecondMarkerRadGroupBox.Location = new System.Drawing.Point(12, 144);
+            this.SecondMarkerRadGroupBox.Location = new System.Drawing.Point(12, 145);
             this.SecondMarkerRadGroupBox.Name = "SecondMarkerRadGroupBox";
             this.SecondMarkerRadGroupBox.Padding = new System.Windows.Forms.Padding(10, 20, 10, 10);
             // 
             // 
             // 
             this.SecondMarkerRadGroupBox.RootElement.Padding = new System.Windows.Forms.Padding(10, 20, 10, 10);
-            this.SecondMarkerRadGroupBox.Size = new System.Drawing.Size(339, 81);
+            this.SecondMarkerRadGroupBox.Size = new System.Drawing.Size(340, 80);
             this.SecondMarkerRadGroupBox.TabIndex = 4;
             this.SecondMarkerRadGroupBox.Text = "Second Marker";
             // 
@@ -330,14 +348,14 @@
             // disableToolStripMenuItem
             // 
             this.disableToolStripMenuItem.Name = "disableToolStripMenuItem";
-            this.disableToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
-            this.disableToolStripMenuItem.Text = "Enable/Disable";
+            this.disableToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
+            this.disableToolStripMenuItem.Text = "Enable/Disable Tracking";
             this.disableToolStripMenuItem.Click += new System.EventHandler(this.disableToolStripMenuItem_Click);
             // 
             // startStopWebcamToolStripMenuItem
             // 
             this.startStopWebcamToolStripMenuItem.Name = "startStopWebcamToolStripMenuItem";
-            this.startStopWebcamToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.startStopWebcamToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
             this.startStopWebcamToolStripMenuItem.Text = "Start/Stop Webcam";
             this.startStopWebcamToolStripMenuItem.Click += new System.EventHandler(this.startStopWebcamToolStripMenuItem_Click);
             // 
@@ -354,6 +372,51 @@
             this.closeToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.closeToolStripMenuItem.Text = "Close";
             this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
+            // 
+            // secondMarkerRangeRadTextBox
+            // 
+            this.secondMarkerRangeRadTextBox.Location = new System.Drawing.Point(118, 45);
+            this.secondMarkerRangeRadTextBox.Name = "secondMarkerRangeRadTextBox";
+            this.secondMarkerRangeRadTextBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.secondMarkerRangeRadTextBox.Size = new System.Drawing.Size(32, 18);
+            this.secondMarkerRangeRadTextBox.TabIndex = 8;
+            this.secondMarkerRangeRadTextBox.TabStop = false;
+            this.secondMarkerRangeRadTextBox.Text = "20";
+            // 
+            // secondMarkerChangeRadButton
+            // 
+            this.secondMarkerChangeRadButton.Enabled = false;
+            this.secondMarkerChangeRadButton.Location = new System.Drawing.Point(226, 47);
+            this.secondMarkerChangeRadButton.Name = "secondMarkerChangeRadButton";
+            this.secondMarkerChangeRadButton.Size = new System.Drawing.Size(100, 25);
+            this.secondMarkerChangeRadButton.TabIndex = 9;
+            this.secondMarkerChangeRadButton.Text = "Change Color";
+            this.secondMarkerChangeRadButton.Click += new System.EventHandler(this.secondMarkerCgangeRadButton_Click);
+            // 
+            // secondMarkerRangeRadLabel
+            // 
+            this.secondMarkerRangeRadLabel.Location = new System.Drawing.Point(13, 47);
+            this.secondMarkerRangeRadLabel.Name = "secondMarkerRangeRadLabel";
+            this.secondMarkerRangeRadLabel.Size = new System.Drawing.Size(78, 16);
+            this.secondMarkerRangeRadLabel.TabIndex = 7;
+            this.secondMarkerRangeRadLabel.Text = "Marker Range";
+            // 
+            // secondMarkerSample
+            // 
+            this.secondMarkerSample.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.secondMarkerSample.Location = new System.Drawing.Point(91, 21);
+            this.secondMarkerSample.Name = "secondMarkerSample";
+            this.secondMarkerSample.Size = new System.Drawing.Size(59, 20);
+            this.secondMarkerSample.TabIndex = 6;
+            this.secondMarkerSample.TabStop = false;
+            // 
+            // secondMarkerColorLabel
+            // 
+            this.secondMarkerColorLabel.Location = new System.Drawing.Point(13, 23);
+            this.secondMarkerColorLabel.Name = "secondMarkerColorLabel";
+            this.secondMarkerColorLabel.Size = new System.Drawing.Size(72, 16);
+            this.secondMarkerColorLabel.TabIndex = 5;
+            this.secondMarkerColorLabel.Text = "Marker Color";
             // 
             // WebCSForm
             // 
@@ -400,7 +463,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.startupRadCheckBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.SelectDesktopAreaButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.SecondMarkerRadGroupBox)).EndInit();
+            this.SecondMarkerRadGroupBox.ResumeLayout(false);
+            this.SecondMarkerRadGroupBox.PerformLayout();
             this.iconContextMenuStrip.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.secondMarkerRangeRadTextBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.secondMarkerChangeRadButton)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.secondMarkerRangeRadLabel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.secondMarkerSample)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.secondMarkerColorLabel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
 
@@ -435,6 +505,11 @@
         private System.Windows.Forms.ToolStripMenuItem restoreToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem closeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem startStopWebcamToolStripMenuItem;
+        private Telerik.WinControls.UI.RadTextBox secondMarkerRangeRadTextBox;
+        private Telerik.WinControls.UI.RadLabel secondMarkerColorLabel;
+        private Telerik.WinControls.UI.RadButton secondMarkerChangeRadButton;
+        private Telerik.QuickStart.WinControls.ImageContainer secondMarkerSample;
+        private Telerik.WinControls.UI.RadLabel secondMarkerRangeRadLabel;
     }
 }
 
