@@ -282,7 +282,7 @@ namespace WebCS
             {
                 Rectangle secondMarkerObjRect = rects[0];
                 userRadLabel.Text +=
-                    " 2nd center at: (" + (secondMarkerObjRect.X + secondMarkerObjRect.Width / 2).ToString() +
+                    "2nd center at: (" + (secondMarkerObjRect.X + secondMarkerObjRect.Width / 2).ToString() +
                     "; " + (secondMarkerObjRect.Y + secondMarkerObjRect.Height / 2).ToString() + ")";
 
                 if (secondMarkerLoadRadRadioButton.IsChecked)
@@ -310,7 +310,7 @@ namespace WebCS
                 Rectangle firstMarkerObjRect = rects[0];
                 userRadLabel.Text =
                     "1st center at: (" + (firstMarkerObjRect.X + firstMarkerObjRect.Width / 2).ToString() +
-                    "; " + (firstMarkerObjRect.Y + firstMarkerObjRect.Height / 2).ToString() + ")";
+                    "; " + (firstMarkerObjRect.Y + firstMarkerObjRect.Height / 2).ToString() + ")\n";
 
                 if (firstMarkerLoadRadRadioButton.IsChecked)
                 {
@@ -361,6 +361,7 @@ namespace WebCS
         private void WebCSForm_FormClosing(object sender, System.Windows.Forms.FormClosingEventArgs e)
         {
             StopWebcam();
+            Icon.Dispose();
         }
 
         bool isVideoRunning = false;
@@ -368,6 +369,7 @@ namespace WebCS
         {
             if (args.ToggleState == ToggleState.On)
             {
+                DrawOnEmptyFrame("Starting...");
                 webcamRadToggleButton.Text = "Stop Webcam";
                 avaliableWebcamsDropDownList.Enabled = false;
                 firstMarkerChangeRadButton.Enabled = true;
