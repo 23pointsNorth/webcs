@@ -172,7 +172,8 @@ namespace WebCS
         }
 
         Bitmap newFrame;
-        Bitmap frameClone;
+        Bitmap firstFrameClone;
+        Bitmap secondFrameClone;
         //public static readonly Grayscale BT709 = new Grayscale(0.2125, 0.7154, 0.0721);
         static Color emptyColor = Color.FromArgb(0, 0, 0);
         Color firstMarkerColor = emptyColor;
@@ -196,13 +197,16 @@ namespace WebCS
 
             if (trackingToggleButton.ToggleState == ToggleState.On)
             {
+                //make sure both clones contain starting bitmap
+                firstFrameClone = new Bitmap(newFrame);
+                secondFrameClone = new Bitmap(newFrame);
                 //
                 //For First Marker
                 //
-                frameClone = (Bitmap)eventArgs.Frame.Clone();
-                BitmapData firstObjectsData = frameClone.LockBits(
-                    new Rectangle(0, 0, frameClone.Width, frameClone.Height),
-                    ImageLockMode.ReadOnly, frameClone.PixelFormat);
+                //firstFrameClone = (Bitmap)eventArgs.Frame.Clone();
+                BitmapData firstObjectsData = firstFrameClone.LockBits(
+                    new Rectangle(0, 0, firstFrameClone.Width, firstFrameClone.Height),
+                    ImageLockMode.ReadOnly, firstFrameClone.PixelFormat);
 
                 // create filter
                 EuclideanColorFiltering ffilter = new EuclideanColorFiltering();
@@ -217,16 +221,16 @@ namespace WebCS
                 UnmanagedImage firstGrayImage = new GrayscaleBT709().Apply(
                     new UnmanagedImage(firstObjectsData));
                 // unlock image
-                frameClone.UnlockBits(firstObjectsData);
+                firstFrameClone.UnlockBits(firstObjectsData);
                 FirstMarkerBlob(firstGrayImage);
 
                 //
                 // For Second Marker
                 //
-                frameClone = (Bitmap)eventArgs.Frame.Clone();
-                BitmapData secondObjectsData = frameClone.LockBits(
-                    new Rectangle(0, 0, frameClone.Width, frameClone.Height),
-                    ImageLockMode.ReadOnly, frameClone.PixelFormat);
+                //secondFrameClone = (Bitmap)eventArgs.Frame.Clone();
+                BitmapData secondObjectsData = secondFrameClone.LockBits(
+                    new Rectangle(0, 0, secondFrameClone.Width, secondFrameClone.Height),
+                    ImageLockMode.ReadOnly, secondFrameClone.PixelFormat);
 
                 // create filter
                 EuclideanColorFiltering sfilter = new EuclideanColorFiltering();
@@ -241,7 +245,7 @@ namespace WebCS
                     new UnmanagedImage(secondObjectsData));
 
                 // unlock image
-                frameClone.UnlockBits(secondObjectsData);
+                secondFrameClone.UnlockBits(secondObjectsData);
                 SecondMarkerBlob(secondGrayImage);
             }
 
@@ -278,12 +282,12 @@ namespace WebCS
             {
                 Rectangle secondMarkerObjRect = rects[0];
                 userRadLabel.Text +=
-                    "\n2st marker center at: (" + (secondMarkerObjRect.X + secondMarkerObjRect.Width / 2).ToString() +
+                    " 2nd center at: (" + (secondMarkerObjRect.X + secondMarkerObjRect.Width / 2).ToString() +
                     "; " + (secondMarkerObjRect.Y + secondMarkerObjRect.Height / 2).ToString() + ")";
 
                 if (loadWorkingFrameRadCheckBox.Checked)
                 {
-                    newFrame = (Bitmap)frameClone.Clone();
+                    newFrame = (Bitmap)secondFrameClone.Clone();
                 }
 
                 newFrame = drawRectangleOnBitmap(
@@ -305,12 +309,12 @@ namespace WebCS
             {
                 Rectangle firstMarkerObjRect = rects[0];
                 userRadLabel.Text =
-                    "1st marker center at: (" + (firstMarkerObjRect.X + firstMarkerObjRect.Width / 2).ToString() +
+                    "1st center at: (" + (firstMarkerObjRect.X + firstMarkerObjRect.Width / 2).ToString() +
                     "; " + (firstMarkerObjRect.Y + firstMarkerObjRect.Height / 2).ToString() + ")";
 
                 if (loadWorkingFrameRadCheckBox.Checked)
                 {
-                    newFrame = (Bitmap)frameClone.Clone();
+                    newFrame = (Bitmap)firstFrameClone.Clone();
                 }
 
                 newFrame = drawRectangleOnBitmap(
