@@ -285,7 +285,7 @@ namespace WebCS
                     " 2nd center at: (" + (secondMarkerObjRect.X + secondMarkerObjRect.Width / 2).ToString() +
                     "; " + (secondMarkerObjRect.Y + secondMarkerObjRect.Height / 2).ToString() + ")";
 
-                if (loadWorkingFrameRadCheckBox.Checked)
+                if (secondMarkerLoadRadRadioButton.IsChecked)
                 {
                     newFrame = (Bitmap)secondFrameClone.Clone();
                 }
@@ -312,7 +312,7 @@ namespace WebCS
                     "1st center at: (" + (firstMarkerObjRect.X + firstMarkerObjRect.Width / 2).ToString() +
                     "; " + (firstMarkerObjRect.Y + firstMarkerObjRect.Height / 2).ToString() + ")";
 
-                if (loadWorkingFrameRadCheckBox.Checked)
+                if (firstMarkerLoadRadRadioButton.IsChecked)
                 {
                     newFrame = (Bitmap)firstFrameClone.Clone();
                 }
@@ -431,7 +431,8 @@ namespace WebCS
         {
             if (!firstMarkerChangeColor)
             {
-                loadWorkingFrameRadCheckBox.Checked = false;
+                firstMarkerLoadRadRadioButton.IsChecked = false;
+                secondMarkerLoadRadRadioButton.IsChecked = false;
                 firstMarkerChangeColor = true;
             }
             else
@@ -484,7 +485,8 @@ namespace WebCS
         {
             if (!secondMarkerChangeColor)
             {
-                loadWorkingFrameRadCheckBox.Checked = false;
+                firstMarkerLoadRadRadioButton.IsChecked = false;
+                secondMarkerLoadRadRadioButton.IsChecked = false;
                 secondMarkerChangeColor = true;
             }
             else
