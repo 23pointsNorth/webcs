@@ -115,7 +115,7 @@
             this.trackingToggleButton.Location = new System.Drawing.Point(4, 297);
             this.trackingToggleButton.Name = "trackingToggleButton";
             this.trackingToggleButton.Size = new System.Drawing.Size(100, 25);
-            this.trackingToggleButton.TabIndex = 0;
+            this.trackingToggleButton.TabIndex = 1;
             this.trackingToggleButton.Text = "Enable Tracking";
             this.trackingToggleButton.ToggleStateChanged += new Telerik.WinControls.UI.StateChangedEventHandler(this.trackingToggleButton_ToggleStateChanged);
             // 
@@ -134,7 +134,7 @@
             this.exitRadButton.Location = new System.Drawing.Point(251, 297);
             this.exitRadButton.Name = "exitRadButton";
             this.exitRadButton.Size = new System.Drawing.Size(105, 25);
-            this.exitRadButton.TabIndex = 2;
+            this.exitRadButton.TabIndex = 3;
             this.exitRadButton.Text = "Exit";
             this.exitRadButton.Click += new System.EventHandler(this.exitRadButton_Click);
             // 
@@ -143,7 +143,7 @@
             this.optionsToggleButton.Location = new System.Drawing.Point(124, 297);
             this.optionsToggleButton.Name = "optionsToggleButton";
             this.optionsToggleButton.Size = new System.Drawing.Size(105, 25);
-            this.optionsToggleButton.TabIndex = 1;
+            this.optionsToggleButton.TabIndex = 2;
             this.optionsToggleButton.Text = "Options";
             this.optionsToggleButton.ToggleStateChanged += new Telerik.WinControls.UI.StateChangedEventHandler(this.optionsToggleButton_ToggleStateChanged);
             // 
@@ -181,7 +181,7 @@
             this.saveOptionsRadButton.Location = new System.Drawing.Point(227, 273);
             this.saveOptionsRadButton.Name = "saveOptionsRadButton";
             this.saveOptionsRadButton.Size = new System.Drawing.Size(125, 25);
-            this.saveOptionsRadButton.TabIndex = 10;
+            this.saveOptionsRadButton.TabIndex = 17;
             this.saveOptionsRadButton.Text = "Save Options";
             this.saveOptionsRadButton.Click += new System.EventHandler(this.saveOptionsRadButton_Click);
             // 
@@ -204,7 +204,7 @@
             // 
             this.workingFrameRadGroupBox.RootElement.Padding = new System.Windows.Forms.Padding(10, 20, 10, 10);
             this.workingFrameRadGroupBox.Size = new System.Drawing.Size(340, 57);
-            this.workingFrameRadGroupBox.TabIndex = 9;
+            this.workingFrameRadGroupBox.TabIndex = 12;
             this.workingFrameRadGroupBox.Text = "Working Frame";
             // 
             // noLoadRadRadioButton
@@ -212,7 +212,7 @@
             this.noLoadRadRadioButton.Location = new System.Drawing.Point(13, 37);
             this.noLoadRadRadioButton.Name = "noLoadRadRadioButton";
             this.noLoadRadRadioButton.Size = new System.Drawing.Size(126, 18);
-            this.noLoadRadRadioButton.TabIndex = 7;
+            this.noLoadRadRadioButton.TabIndex = 15;
             this.noLoadRadRadioButton.Text = "Normal Frames";
             this.noLoadRadRadioButton.ToggleState = Telerik.WinControls.Enumerations.ToggleState.On;
             // 
@@ -221,7 +221,7 @@
             this.secondMarkerLoadRadRadioButton.Location = new System.Drawing.Point(201, 16);
             this.secondMarkerLoadRadRadioButton.Name = "secondMarkerLoadRadRadioButton";
             this.secondMarkerLoadRadRadioButton.Size = new System.Drawing.Size(126, 18);
-            this.secondMarkerLoadRadRadioButton.TabIndex = 6;
+            this.secondMarkerLoadRadRadioButton.TabIndex = 14;
             this.secondMarkerLoadRadRadioButton.Text = "Load Second Marker";
             // 
             // firstMarkerLoadRadRadioButton
@@ -229,7 +229,7 @@
             this.firstMarkerLoadRadRadioButton.Location = new System.Drawing.Point(13, 16);
             this.firstMarkerLoadRadRadioButton.Name = "firstMarkerLoadRadRadioButton";
             this.firstMarkerLoadRadRadioButton.Size = new System.Drawing.Size(126, 18);
-            this.firstMarkerLoadRadRadioButton.TabIndex = 6;
+            this.firstMarkerLoadRadRadioButton.TabIndex = 13;
             this.firstMarkerLoadRadRadioButton.Text = "Load First Marker";
             // 
             // FirstMarkerRadGroupBox
@@ -254,7 +254,7 @@
             // 
             this.FirstMarkerRadGroupBox.RootElement.Padding = new System.Windows.Forms.Padding(10, 20, 10, 10);
             this.FirstMarkerRadGroupBox.Size = new System.Drawing.Size(340, 72);
-            this.FirstMarkerRadGroupBox.TabIndex = 0;
+            this.FirstMarkerRadGroupBox.TabIndex = 4;
             this.FirstMarkerRadGroupBox.Text = "First Marker";
             // 
             // cancelFirstMarkerRadButton
@@ -262,7 +262,7 @@
             this.cancelFirstMarkerRadButton.Location = new System.Drawing.Point(227, 45);
             this.cancelFirstMarkerRadButton.Name = "cancelFirstMarkerRadButton";
             this.cancelFirstMarkerRadButton.Size = new System.Drawing.Size(100, 25);
-            this.cancelFirstMarkerRadButton.TabIndex = 5;
+            this.cancelFirstMarkerRadButton.TabIndex = 7;
             this.cancelFirstMarkerRadButton.Text = "Cancel";
             this.cancelFirstMarkerRadButton.Click += new System.EventHandler(this.cancelFirstMarkerRadButton_Click);
             // 
@@ -272,8 +272,7 @@
             this.firstMarkerRangeRadTextBox.Name = "firstMarkerRangeRadTextBox";
             this.firstMarkerRangeRadTextBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.firstMarkerRangeRadTextBox.Size = new System.Drawing.Size(32, 20);
-            this.firstMarkerRangeRadTextBox.TabIndex = 3;
-            this.firstMarkerRangeRadTextBox.TabStop = false;
+            this.firstMarkerRangeRadTextBox.TabIndex = 5;
             this.firstMarkerRangeRadTextBox.Text = "20";
             // 
             // firstMarkerChangeRadButton
@@ -282,7 +281,7 @@
             this.firstMarkerChangeRadButton.Location = new System.Drawing.Point(227, 16);
             this.firstMarkerChangeRadButton.Name = "firstMarkerChangeRadButton";
             this.firstMarkerChangeRadButton.Size = new System.Drawing.Size(100, 25);
-            this.firstMarkerChangeRadButton.TabIndex = 4;
+            this.firstMarkerChangeRadButton.TabIndex = 6;
             this.firstMarkerChangeRadButton.Text = "Change Color";
             this.firstMarkerChangeRadButton.Click += new System.EventHandler(this.firstMarkerChangeRadButton_Click);
             // 
@@ -317,7 +316,7 @@
             this.webcamRadToggleButton.Location = new System.Drawing.Point(227, 5);
             this.webcamRadToggleButton.Name = "webcamRadToggleButton";
             this.webcamRadToggleButton.Size = new System.Drawing.Size(125, 25);
-            this.webcamRadToggleButton.TabIndex = 7;
+            this.webcamRadToggleButton.TabIndex = 2;
             this.webcamRadToggleButton.Text = "Start Webcam";
             this.webcamRadToggleButton.ToggleStateChanged += new Telerik.WinControls.UI.StateChangedEventHandler(this.WebcamRadToggleButton_ToggleStateChanged);
             // 
@@ -326,7 +325,7 @@
             this.applyFilterRadCheckBox.Location = new System.Drawing.Point(12, 32);
             this.applyFilterRadCheckBox.Name = "applyFilterRadCheckBox";
             this.applyFilterRadCheckBox.Size = new System.Drawing.Size(197, 18);
-            this.applyFilterRadCheckBox.TabIndex = 6;
+            this.applyFilterRadCheckBox.TabIndex = 3;
             this.applyFilterRadCheckBox.Text = "Apply mean filter on webcam video";
             this.applyFilterRadCheckBox.ToggleState = Telerik.WinControls.Enumerations.ToggleState.On;
             // 
@@ -356,7 +355,7 @@
             this.startupRadCheckBox.Location = new System.Drawing.Point(12, 304);
             this.startupRadCheckBox.Name = "startupRadCheckBox";
             this.startupRadCheckBox.Size = new System.Drawing.Size(146, 18);
-            this.startupRadCheckBox.TabIndex = 3;
+            this.startupRadCheckBox.TabIndex = 18;
             this.startupRadCheckBox.Text = "Start at computer startup";
             this.startupRadCheckBox.ToggleStateChanged += new Telerik.WinControls.UI.StateChangedEventHandler(this.startupRadCheckBox_ToggleStateChanged);
             // 
@@ -365,7 +364,7 @@
             this.SelectDesktopAreaButton.Location = new System.Drawing.Point(12, 273);
             this.SelectDesktopAreaButton.Name = "SelectDesktopAreaButton";
             this.SelectDesktopAreaButton.Size = new System.Drawing.Size(150, 25);
-            this.SelectDesktopAreaButton.TabIndex = 2;
+            this.SelectDesktopAreaButton.TabIndex = 16;
             this.SelectDesktopAreaButton.Text = "Select Desktop Area";
             this.SelectDesktopAreaButton.Click += new System.EventHandler(this.SelectDesktopAreaButton_Click);
             // 
@@ -391,7 +390,7 @@
             // 
             this.SecondMarkerRadGroupBox.RootElement.Padding = new System.Windows.Forms.Padding(10, 20, 10, 10);
             this.SecondMarkerRadGroupBox.Size = new System.Drawing.Size(340, 72);
-            this.SecondMarkerRadGroupBox.TabIndex = 4;
+            this.SecondMarkerRadGroupBox.TabIndex = 8;
             this.SecondMarkerRadGroupBox.Text = "Second Marker";
             // 
             // cancelSecondMarkerRadButton
@@ -399,7 +398,7 @@
             this.cancelSecondMarkerRadButton.Location = new System.Drawing.Point(227, 45);
             this.cancelSecondMarkerRadButton.Name = "cancelSecondMarkerRadButton";
             this.cancelSecondMarkerRadButton.Size = new System.Drawing.Size(100, 25);
-            this.cancelSecondMarkerRadButton.TabIndex = 6;
+            this.cancelSecondMarkerRadButton.TabIndex = 11;
             this.cancelSecondMarkerRadButton.Text = "Cancel";
             this.cancelSecondMarkerRadButton.Click += new System.EventHandler(this.cancelSecondMarkerRadButton_Click);
             // 
@@ -409,8 +408,7 @@
             this.secondMarkerRangeRadTextBox.Name = "secondMarkerRangeRadTextBox";
             this.secondMarkerRangeRadTextBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.secondMarkerRangeRadTextBox.Size = new System.Drawing.Size(32, 20);
-            this.secondMarkerRangeRadTextBox.TabIndex = 8;
-            this.secondMarkerRangeRadTextBox.TabStop = false;
+            this.secondMarkerRangeRadTextBox.TabIndex = 9;
             this.secondMarkerRangeRadTextBox.Text = "20";
             // 
             // secondMarkerColorLabel
@@ -427,7 +425,7 @@
             this.secondMarkerChangeRadButton.Location = new System.Drawing.Point(227, 16);
             this.secondMarkerChangeRadButton.Name = "secondMarkerChangeRadButton";
             this.secondMarkerChangeRadButton.Size = new System.Drawing.Size(100, 25);
-            this.secondMarkerChangeRadButton.TabIndex = 9;
+            this.secondMarkerChangeRadButton.TabIndex = 10;
             this.secondMarkerChangeRadButton.Text = "Change Color";
             this.secondMarkerChangeRadButton.Click += new System.EventHandler(this.secondMarkerChangeRadButton_Click);
             // 
