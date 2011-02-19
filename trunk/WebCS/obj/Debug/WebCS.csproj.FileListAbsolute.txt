@@ -42,3 +42,9 @@ C:\Documents and Settings\vladi\My Documents\Visual Studio 2008\Projects\WebCS\W
 C:\Documents and Settings\vladi\My Documents\Visual Studio 2008\Projects\WebCS\WebCS\bin\Debug\Telerik.WinControls.Scheduler.dll
 C:\Documents and Settings\vladi\My Documents\Visual Studio 2008\Projects\WebCS\WebCS\obj\Debug\WebCS.exe.manifest
 C:\Documents and Settings\vladi\My Documents\Visual Studio 2008\Projects\WebCS\WebCS\obj\Debug\WebCS.application
+C:\Documents and Settings\vladi\My Documents\Visual Studio 2008\Projects\WebCS\WebCS\bin\Debug\Telerik.WinControls.Docking.dll
+C:\Documents and Settings\vladi\My Documents\Visual Studio 2008\Projects\WebCS\WebCS\bin\Debug\Telerik.WinControls.GridView.dll
+C:\Documents and Settings\vladi\My Documents\Visual Studio 2008\Projects\WebCS\WebCS\bin\Debug\Telerik.WinControls.RadDock.dll
+C:\Documents and Settings\vladi\My Documents\Visual Studio 2008\Projects\WebCS\WebCS\bin\Debug\Telerik.WinControls.RadMarkupEditor.dll
+C:\Documents and Settings\vladi\My Documents\Visual Studio 2008\Projects\WebCS\WebCS\bin\Debug\Telerik.WinControls.UI.Design.dll
+C:\Documents and Settings\vladi\My Documents\Visual Studio 2008\Projects\WebCS\WebCS\bin\Debug\TelerikCommon.dll
