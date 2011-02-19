@@ -3580,6 +3580,9 @@
         AOADAADAAwAAwAMAAMADAADgBwAA4AcAAPAPAAD4HwAA//8AADIwNzA5Nw==
 </value>
   </data>
+  <metadata name="vistaTheme.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>308, 6</value>
+  </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>34</value>
   </metadata>

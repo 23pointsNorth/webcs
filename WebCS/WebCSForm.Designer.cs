@@ -69,6 +69,7 @@
             this.restoreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.vistaTheme = new Telerik.WinControls.Themes.VistaTheme();
             ((System.ComponentModel.ISupportInitialize)(this.trackingToggleButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageContainer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.exitRadButton)).BeginInit();
@@ -117,6 +118,7 @@
             this.trackingToggleButton.Size = new System.Drawing.Size(100, 25);
             this.trackingToggleButton.TabIndex = 1;
             this.trackingToggleButton.Text = "Enable Tracking";
+            this.trackingToggleButton.ThemeName = "Vista";
             this.trackingToggleButton.ToggleStateChanged += new Telerik.WinControls.UI.StateChangedEventHandler(this.trackingToggleButton_ToggleStateChanged);
             // 
             // imageContainer
@@ -136,6 +138,7 @@
             this.exitRadButton.Size = new System.Drawing.Size(105, 25);
             this.exitRadButton.TabIndex = 3;
             this.exitRadButton.Text = "Exit";
+            this.exitRadButton.ThemeName = "Vista";
             this.exitRadButton.Click += new System.EventHandler(this.exitRadButton_Click);
             // 
             // optionsToggleButton
@@ -145,6 +148,7 @@
             this.optionsToggleButton.Size = new System.Drawing.Size(105, 25);
             this.optionsToggleButton.TabIndex = 2;
             this.optionsToggleButton.Text = "Options";
+            this.optionsToggleButton.ThemeName = "Vista";
             this.optionsToggleButton.ToggleStateChanged += new Telerik.WinControls.UI.StateChangedEventHandler(this.optionsToggleButton_ToggleStateChanged);
             // 
             // webcamRadPanel
@@ -157,6 +161,7 @@
             this.webcamRadPanel.Name = "webcamRadPanel";
             this.webcamRadPanel.Size = new System.Drawing.Size(360, 325);
             this.webcamRadPanel.TabIndex = 1;
+            this.webcamRadPanel.ThemeName = "Vista";
             // 
             // optionsRadPanel
             // 
@@ -174,6 +179,7 @@
             this.optionsRadPanel.Name = "optionsRadPanel";
             this.optionsRadPanel.Size = new System.Drawing.Size(362, 325);
             this.optionsRadPanel.TabIndex = 2;
+            this.optionsRadPanel.ThemeName = "Vista";
             this.optionsRadPanel.Visible = false;
             // 
             // saveOptionsRadButton
@@ -183,6 +189,7 @@
             this.saveOptionsRadButton.Size = new System.Drawing.Size(125, 25);
             this.saveOptionsRadButton.TabIndex = 17;
             this.saveOptionsRadButton.Text = "Save Options";
+            this.saveOptionsRadButton.ThemeName = "Vista";
             this.saveOptionsRadButton.Click += new System.EventHandler(this.saveOptionsRadButton_Click);
             // 
             // workingFrameRadGroupBox
@@ -206,6 +213,7 @@
             this.workingFrameRadGroupBox.Size = new System.Drawing.Size(340, 57);
             this.workingFrameRadGroupBox.TabIndex = 12;
             this.workingFrameRadGroupBox.Text = "Working Frame";
+            this.workingFrameRadGroupBox.ThemeName = "Vista";
             // 
             // noLoadRadRadioButton
             // 
@@ -214,6 +222,7 @@
             this.noLoadRadRadioButton.Size = new System.Drawing.Size(126, 18);
             this.noLoadRadRadioButton.TabIndex = 15;
             this.noLoadRadRadioButton.Text = "Normal Frames";
+            this.noLoadRadRadioButton.ThemeName = "Vista";
             this.noLoadRadRadioButton.ToggleState = Telerik.WinControls.Enumerations.ToggleState.On;
             // 
             // secondMarkerLoadRadRadioButton
@@ -223,6 +232,7 @@
             this.secondMarkerLoadRadRadioButton.Size = new System.Drawing.Size(126, 18);
             this.secondMarkerLoadRadRadioButton.TabIndex = 14;
             this.secondMarkerLoadRadRadioButton.Text = "Load Second Marker";
+            this.secondMarkerLoadRadRadioButton.ThemeName = "Vista";
             // 
             // firstMarkerLoadRadRadioButton
             // 
@@ -231,6 +241,7 @@
             this.firstMarkerLoadRadRadioButton.Size = new System.Drawing.Size(126, 18);
             this.firstMarkerLoadRadRadioButton.TabIndex = 13;
             this.firstMarkerLoadRadRadioButton.Text = "Load First Marker";
+            this.firstMarkerLoadRadRadioButton.ThemeName = "Vista";
             // 
             // FirstMarkerRadGroupBox
             // 
@@ -256,6 +267,7 @@
             this.FirstMarkerRadGroupBox.Size = new System.Drawing.Size(340, 72);
             this.FirstMarkerRadGroupBox.TabIndex = 4;
             this.FirstMarkerRadGroupBox.Text = "First Marker";
+            this.FirstMarkerRadGroupBox.ThemeName = "Vista";
             // 
             // cancelFirstMarkerRadButton
             // 
@@ -264,6 +276,7 @@
             this.cancelFirstMarkerRadButton.Size = new System.Drawing.Size(100, 25);
             this.cancelFirstMarkerRadButton.TabIndex = 7;
             this.cancelFirstMarkerRadButton.Text = "Cancel";
+            this.cancelFirstMarkerRadButton.ThemeName = "Vista";
             this.cancelFirstMarkerRadButton.Click += new System.EventHandler(this.cancelFirstMarkerRadButton_Click);
             // 
             // firstMarkerRangeRadTextBox
@@ -273,7 +286,9 @@
             this.firstMarkerRangeRadTextBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.firstMarkerRangeRadTextBox.Size = new System.Drawing.Size(32, 20);
             this.firstMarkerRangeRadTextBox.TabIndex = 5;
+            this.firstMarkerRangeRadTextBox.TabStop = false;
             this.firstMarkerRangeRadTextBox.Text = "20";
+            this.firstMarkerRangeRadTextBox.ThemeName = "Vista";
             // 
             // firstMarkerChangeRadButton
             // 
@@ -283,15 +298,17 @@
             this.firstMarkerChangeRadButton.Size = new System.Drawing.Size(100, 25);
             this.firstMarkerChangeRadButton.TabIndex = 6;
             this.firstMarkerChangeRadButton.Text = "Change Color";
+            this.firstMarkerChangeRadButton.ThemeName = "Vista";
             this.firstMarkerChangeRadButton.Click += new System.EventHandler(this.firstMarkerChangeRadButton_Click);
             // 
             // firstMarkerRangeRadLabel
             // 
             this.firstMarkerRangeRadLabel.Location = new System.Drawing.Point(13, 47);
             this.firstMarkerRangeRadLabel.Name = "firstMarkerRangeRadLabel";
-            this.firstMarkerRangeRadLabel.Size = new System.Drawing.Size(76, 18);
+            this.firstMarkerRangeRadLabel.Size = new System.Drawing.Size(78, 16);
             this.firstMarkerRangeRadLabel.TabIndex = 2;
             this.firstMarkerRangeRadLabel.Text = "Marker Range";
+            this.firstMarkerRangeRadLabel.ThemeName = "ControlDefault";
             // 
             // firstMarkerSample
             // 
@@ -306,9 +323,10 @@
             // 
             this.firstMakrerColorLabel.Location = new System.Drawing.Point(13, 23);
             this.firstMakrerColorLabel.Name = "firstMakrerColorLabel";
-            this.firstMakrerColorLabel.Size = new System.Drawing.Size(72, 18);
+            this.firstMakrerColorLabel.Size = new System.Drawing.Size(72, 16);
             this.firstMakrerColorLabel.TabIndex = 0;
             this.firstMakrerColorLabel.Text = "Marker Color";
+            this.firstMakrerColorLabel.ThemeName = "ControlDefault";
             // 
             // webcamRadToggleButton
             // 
@@ -318,15 +336,17 @@
             this.webcamRadToggleButton.Size = new System.Drawing.Size(125, 25);
             this.webcamRadToggleButton.TabIndex = 2;
             this.webcamRadToggleButton.Text = "Start Webcam";
+            this.webcamRadToggleButton.ThemeName = "Vista";
             this.webcamRadToggleButton.ToggleStateChanged += new Telerik.WinControls.UI.StateChangedEventHandler(this.WebcamRadToggleButton_ToggleStateChanged);
             // 
             // applyFilterRadCheckBox
             // 
             this.applyFilterRadCheckBox.Location = new System.Drawing.Point(12, 32);
             this.applyFilterRadCheckBox.Name = "applyFilterRadCheckBox";
-            this.applyFilterRadCheckBox.Size = new System.Drawing.Size(197, 18);
+            this.applyFilterRadCheckBox.Size = new System.Drawing.Size(195, 16);
             this.applyFilterRadCheckBox.TabIndex = 3;
             this.applyFilterRadCheckBox.Text = "Apply mean filter on webcam video";
+            this.applyFilterRadCheckBox.ThemeName = "Vista";
             this.applyFilterRadCheckBox.ToggleState = Telerik.WinControls.Enumerations.ToggleState.On;
             // 
             // userRadLabel
@@ -335,9 +355,10 @@
             this.userRadLabel.AutoScroll = true;
             this.userRadLabel.Location = new System.Drawing.Point(169, 304);
             this.userRadLabel.Name = "userRadLabel";
-            this.userRadLabel.Size = new System.Drawing.Size(183, 18);
+            this.userRadLabel.Size = new System.Drawing.Size(179, 16);
             this.userRadLabel.TabIndex = 5;
             this.userRadLabel.Text = "Options Menu                                  ";
+            this.userRadLabel.ThemeName = "ControlDefault";
             // 
             // avaliableWebcamsDropDownList
             // 
@@ -348,15 +369,17 @@
             this.avaliableWebcamsDropDownList.Size = new System.Drawing.Size(208, 21);
             this.avaliableWebcamsDropDownList.TabIndex = 1;
             this.avaliableWebcamsDropDownList.Text = "Select Webcam";
+            this.avaliableWebcamsDropDownList.ThemeName = "Vista";
             this.avaliableWebcamsDropDownList.SelectedIndexChanged += new Telerik.WinControls.UI.Data.PositionChangedEventHandler(this.avaliableWebcamsDropDownList_SelectedIndexChanged);
             // 
             // startupRadCheckBox
             // 
             this.startupRadCheckBox.Location = new System.Drawing.Point(12, 304);
             this.startupRadCheckBox.Name = "startupRadCheckBox";
-            this.startupRadCheckBox.Size = new System.Drawing.Size(146, 18);
+            this.startupRadCheckBox.Size = new System.Drawing.Size(144, 16);
             this.startupRadCheckBox.TabIndex = 18;
             this.startupRadCheckBox.Text = "Start at computer startup";
+            this.startupRadCheckBox.ThemeName = "Vista";
             this.startupRadCheckBox.ToggleStateChanged += new Telerik.WinControls.UI.StateChangedEventHandler(this.startupRadCheckBox_ToggleStateChanged);
             // 
             // SelectDesktopAreaButton
@@ -366,6 +389,7 @@
             this.SelectDesktopAreaButton.Size = new System.Drawing.Size(150, 25);
             this.SelectDesktopAreaButton.TabIndex = 16;
             this.SelectDesktopAreaButton.Text = "Select Desktop Area";
+            this.SelectDesktopAreaButton.ThemeName = "Vista";
             this.SelectDesktopAreaButton.Click += new System.EventHandler(this.SelectDesktopAreaButton_Click);
             // 
             // SecondMarkerRadGroupBox
@@ -392,6 +416,7 @@
             this.SecondMarkerRadGroupBox.Size = new System.Drawing.Size(340, 72);
             this.SecondMarkerRadGroupBox.TabIndex = 8;
             this.SecondMarkerRadGroupBox.Text = "Second Marker";
+            this.SecondMarkerRadGroupBox.ThemeName = "Vista";
             // 
             // cancelSecondMarkerRadButton
             // 
@@ -400,6 +425,7 @@
             this.cancelSecondMarkerRadButton.Size = new System.Drawing.Size(100, 25);
             this.cancelSecondMarkerRadButton.TabIndex = 11;
             this.cancelSecondMarkerRadButton.Text = "Cancel";
+            this.cancelSecondMarkerRadButton.ThemeName = "Vista";
             this.cancelSecondMarkerRadButton.Click += new System.EventHandler(this.cancelSecondMarkerRadButton_Click);
             // 
             // secondMarkerRangeRadTextBox
@@ -409,15 +435,18 @@
             this.secondMarkerRangeRadTextBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.secondMarkerRangeRadTextBox.Size = new System.Drawing.Size(32, 20);
             this.secondMarkerRangeRadTextBox.TabIndex = 9;
+            this.secondMarkerRangeRadTextBox.TabStop = false;
             this.secondMarkerRangeRadTextBox.Text = "20";
+            this.secondMarkerRangeRadTextBox.ThemeName = "Vista";
             // 
             // secondMarkerColorLabel
             // 
             this.secondMarkerColorLabel.Location = new System.Drawing.Point(13, 23);
             this.secondMarkerColorLabel.Name = "secondMarkerColorLabel";
-            this.secondMarkerColorLabel.Size = new System.Drawing.Size(72, 18);
+            this.secondMarkerColorLabel.Size = new System.Drawing.Size(72, 16);
             this.secondMarkerColorLabel.TabIndex = 5;
             this.secondMarkerColorLabel.Text = "Marker Color";
+            this.secondMarkerColorLabel.ThemeName = "ControlDefault";
             // 
             // secondMarkerChangeRadButton
             // 
@@ -427,6 +456,7 @@
             this.secondMarkerChangeRadButton.Size = new System.Drawing.Size(100, 25);
             this.secondMarkerChangeRadButton.TabIndex = 10;
             this.secondMarkerChangeRadButton.Text = "Change Color";
+            this.secondMarkerChangeRadButton.ThemeName = "Vista";
             this.secondMarkerChangeRadButton.Click += new System.EventHandler(this.secondMarkerChangeRadButton_Click);
             // 
             // secondMarkerSample
@@ -442,9 +472,10 @@
             // 
             this.secondMarkerRangeRadLabel.Location = new System.Drawing.Point(13, 47);
             this.secondMarkerRangeRadLabel.Name = "secondMarkerRangeRadLabel";
-            this.secondMarkerRangeRadLabel.Size = new System.Drawing.Size(76, 18);
+            this.secondMarkerRangeRadLabel.Size = new System.Drawing.Size(78, 16);
             this.secondMarkerRangeRadLabel.TabIndex = 7;
             this.secondMarkerRangeRadLabel.Text = "Marker Range";
+            this.secondMarkerRangeRadLabel.ThemeName = "ControlDefault";
             // 
             // systemTrayIcon
             // 
@@ -614,6 +645,7 @@
         private System.Windows.Forms.ToolStripMenuItem saveSettingsToolStripMenuItem;
         private Telerik.WinControls.UI.RadButton cancelFirstMarkerRadButton;
         private Telerik.WinControls.UI.RadButton cancelSecondMarkerRadButton;
+        private Telerik.WinControls.Themes.VistaTheme vistaTheme;
     }
 }
 
