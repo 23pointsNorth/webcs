@@ -15,6 +15,7 @@ using AForge.Video.DirectShow;
 using Microsoft.Win32;
 using Telerik.WinControls.UI;
 using Telerik.WinControls.Enumerations;
+using WebCS.Properties;
 
 namespace WebCS
 {
@@ -27,6 +28,7 @@ namespace WebCS
                 Constants.WEBCAM_ONLY_WIDTH, Constants.WEBCAM_ONLY_HEIGHT);
             DrawOnEmptyFrame("Webcam \nnot selected.");
             avaliableWebcamsDropDownList.Items.Add("Select Webcam");
+            applyFilterRadCheckBox.Checked = User.Default.applyMeanFilter;
             LoadAvaliableWebcams();
             LoadMarkers();
             LoadAtStartup();
@@ -66,10 +68,10 @@ namespace WebCS
         {
             try
             {
-                firstMarkerColor = Settings.User.Default.firstMarkerColorUser;
-                secondMarkerColor = Settings.User.Default.secondMarkerColorUser;
-                firstMarkerRangeRadTextBox.Text = Settings.User.Default.firstMarkerRangeUser.ToString();
-                secondMarkerRangeRadTextBox.Text = Settings.User.Default.secondMarkerRangeUser.ToString();
+                firstMarkerColor = User.Default.firstMarkerColorUser;
+                secondMarkerColor = User.Default.secondMarkerColorUser;
+                firstMarkerRangeRadTextBox.Text = User.Default.firstMarkerRangeUser.ToString();
+                secondMarkerRangeRadTextBox.Text = User.Default.secondMarkerRangeUser.ToString();
             }
             catch
             {
@@ -123,7 +125,7 @@ namespace WebCS
 
             try
             {
-                avaliableWebcamsDropDownList.SelectedIndex = Settings.User.Default.loadWebcamIndex;
+                avaliableWebcamsDropDownList.SelectedIndex = User.Default.loadWebcamIndex;
             }
             catch
             {
@@ -569,12 +571,13 @@ namespace WebCS
 
         private void saveOptionsRadButton_Click(object sender, EventArgs e)
         {
-            Settings.User.Default.loadWebcamIndex = avaliableWebcamsDropDownList.SelectedIndex;
-            Settings.User.Default.firstMarkerColorUser = firstMarkerColor;
-            Settings.User.Default.firstMarkerRangeUser = getRange(1);
-            Settings.User.Default.secondMarkerColorUser = secondMarkerColor;
-            Settings.User.Default.secondMarkerRangeUser = getRange(2);
-            Settings.User.Default.Save();
+            User.Default.loadWebcamIndex = avaliableWebcamsDropDownList.SelectedIndex;
+            User.Default.firstMarkerColorUser = firstMarkerColor;
+            User.Default.firstMarkerRangeUser = getRange(1);
+            User.Default.secondMarkerColorUser = secondMarkerColor;
+            User.Default.secondMarkerRangeUser = getRange(2);
+            User.Default.applyMeanFilter = applyFilterRadCheckBox.Checked;
+            User.Default.Save();
         }
 
         private void cancelFirstMarkerRadButton_Click(object sender, EventArgs e)

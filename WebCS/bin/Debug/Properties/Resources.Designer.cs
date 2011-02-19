@@ -59,5 +59,12 @@ namespace WebCS.Properties {
                 resourceCulture = value;
             }
         }
+        
+        internal static System.Drawing.Icon Webcam {
+            get {
+                object obj = ResourceManager.GetObject("Webcam", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
     }
 }
