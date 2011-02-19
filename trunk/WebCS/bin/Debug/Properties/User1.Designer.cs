@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WebCS.Settings {
+namespace WebCS.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
@@ -80,6 +80,18 @@ namespace WebCS.Settings {
             }
             set {
                 this["secondMarkerRangeUser"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool applyMeanFilter {
+            get {
+                return ((bool)(this["applyMeanFilter"]));
+            }
+            set {
+                this["applyMeanFilter"] = value;
             }
         }
     }

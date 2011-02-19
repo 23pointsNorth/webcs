@@ -1,5 +1,5 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="WebCS.settings" GeneratedClassName="User">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="WebCS.Properties" GeneratedClassName="User">
   <Profiles />
   <Settings>
     <Setting Name="loadWebcamIndex" Type="System.Int32" Scope="User">
@@ -16,6 +16,9 @@
     </Setting>
     <Setting Name="secondMarkerRangeUser" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">20</Value>
+    </Setting>
+    <Setting Name="applyMeanFilter" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
     </Setting>
   </Settings>
 </SettingsFile>
