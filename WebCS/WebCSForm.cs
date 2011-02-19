@@ -226,10 +226,10 @@ namespace WebCS
                 firstFrameClone = new Bitmap(newFrame);
                 secondFrameClone = new Bitmap(newFrame);
                 CalculateMarker(
-                    firstFrameClone, firstMarkerColor, Color.LawnGreen, 1, 
+                    firstFrameClone, firstMarkerColor, Color.Green, 1, 
                     firstMarkerLoadRadRadioButton.IsChecked, out firstMarkerRect);
                 CalculateMarker(
-                    secondFrameClone, secondMarkerColor, Color.Green, 2, 
+                    secondFrameClone, secondMarkerColor, Color.Blue, 2, 
                     secondMarkerLoadRadRadioButton.IsChecked, out secondMarkerRect);
             }
 
@@ -238,7 +238,7 @@ namespace WebCS
                 newFrame = drawRectangleOnBitmap(
                     (Bitmap)newFrame.Clone(),
                     firstMarkerGetColorRect,
-                    new Pen(Color.Red, 2));
+                    new Pen(Color.LightGreen, 2));
             }
 
             if (secondMarkerChangeColor)
@@ -246,7 +246,7 @@ namespace WebCS
                 newFrame = drawRectangleOnBitmap(
                     (Bitmap)newFrame.Clone(),
                     secondMarkerGetColorRect,
-                    new Pen(Color.Blue, 2));
+                    new Pen(Color.LightBlue, 2));
             }
 
             imageContainer.Image = newFrame;
