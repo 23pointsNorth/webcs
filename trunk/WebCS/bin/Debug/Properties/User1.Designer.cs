@@ -25,13 +25,13 @@ namespace WebCS.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public int loadWebcamIndex {
+        [global::System.Configuration.DefaultSettingValueAttribute("Select Webcam")]
+        public string loadWebcamName {
             get {
-                return ((int)(this["loadWebcamIndex"]));
+                return ((string)(this["loadWebcamName"]));
             }
             set {
-                this["loadWebcamIndex"] = value;
+                this["loadWebcamName"] = value;
             }
         }
         

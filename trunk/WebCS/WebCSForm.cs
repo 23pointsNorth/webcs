@@ -125,7 +125,8 @@ namespace WebCS
 
             try
             {
-                avaliableWebcamsDropDownList.SelectedIndex = User.Default.loadWebcamIndex;
+                avaliableWebcamsDropDownList.SelectedText = User.Default.loadWebcamName;
+                avaliableWebcamsDropDownList_SelectedIndexChanged(null, null);
             }
             catch
             {
@@ -583,7 +584,7 @@ namespace WebCS
 
         private void saveOptionsRadButton_Click(object sender, EventArgs e)
         {
-            User.Default.loadWebcamIndex = avaliableWebcamsDropDownList.SelectedIndex;
+            User.Default.loadWebcamName = avaliableWebcamsDropDownList.SelectedText;
             User.Default.firstMarkerColorUser = firstMarkerColor;
             User.Default.firstMarkerRangeUser = getRange(1);
             User.Default.secondMarkerColorUser = secondMarkerColor;

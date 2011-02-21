@@ -2,8 +2,8 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="WebCS.Properties" GeneratedClassName="User">
   <Profiles />
   <Settings>
-    <Setting Name="loadWebcamIndex" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
+    <Setting Name="loadWebcamName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Select Webcam</Value>
     </Setting>
     <Setting Name="firstMarkerColorUser" Type="System.Drawing.Color" Scope="User">
       <Value Profile="(Default)">Black</Value>
