@@ -342,7 +342,6 @@ namespace WebCS
         private void WebCSForm_FormClosing(object sender, System.Windows.Forms.FormClosingEventArgs e)
         {
             StopWebcam();
-            systemTrayIcon.Visible = false;
             systemTrayIcon.Dispose();
         }
 
@@ -532,6 +531,7 @@ namespace WebCS
             this.BringToFront();
             this.Show();
             this.WindowState = FormWindowState.Normal;
+            systemTrayIcon.Visible = false;
         }
 
         private void WebCSForm_Resize(object sender, EventArgs e)
@@ -539,6 +539,7 @@ namespace WebCS
             if (FormWindowState.Minimized == WindowState)
             {
                 this.Hide();
+                systemTrayIcon.Visible = true;
             }
         }
 
@@ -549,6 +550,8 @@ namespace WebCS
 
         private void closeToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            systemTrayIcon.Visible = false;
+            systemTrayIcon.Dispose();
             exitRadButton_Click(null, null);
         }
 
