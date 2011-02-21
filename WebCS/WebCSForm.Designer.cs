@@ -117,7 +117,7 @@
             this.trackingToggleButton.Name = "trackingToggleButton";
             this.trackingToggleButton.Size = new System.Drawing.Size(100, 25);
             this.trackingToggleButton.TabIndex = 1;
-            this.trackingToggleButton.Text = "Enable Tracking";
+            this.trackingToggleButton.Text = "Enable &Tracking";
             this.trackingToggleButton.ThemeName = "Vista";
             this.trackingToggleButton.ToggleStateChanged += new Telerik.WinControls.UI.StateChangedEventHandler(this.trackingToggleButton_ToggleStateChanged);
             // 
@@ -147,7 +147,7 @@
             this.optionsToggleButton.Name = "optionsToggleButton";
             this.optionsToggleButton.Size = new System.Drawing.Size(105, 25);
             this.optionsToggleButton.TabIndex = 2;
-            this.optionsToggleButton.Text = "Options";
+            this.optionsToggleButton.Text = "&Options";
             this.optionsToggleButton.ThemeName = "Vista";
             this.optionsToggleButton.ToggleStateChanged += new Telerik.WinControls.UI.StateChangedEventHandler(this.optionsToggleButton_ToggleStateChanged);
             // 
@@ -188,7 +188,7 @@
             this.saveOptionsRadButton.Name = "saveOptionsRadButton";
             this.saveOptionsRadButton.Size = new System.Drawing.Size(125, 25);
             this.saveOptionsRadButton.TabIndex = 17;
-            this.saveOptionsRadButton.Text = "Save Options";
+            this.saveOptionsRadButton.Text = "&Save Options";
             this.saveOptionsRadButton.ThemeName = "Vista";
             this.saveOptionsRadButton.Click += new System.EventHandler(this.saveOptionsRadButton_Click);
             // 
@@ -275,7 +275,7 @@
             this.cancelFirstMarkerRadButton.Name = "cancelFirstMarkerRadButton";
             this.cancelFirstMarkerRadButton.Size = new System.Drawing.Size(100, 25);
             this.cancelFirstMarkerRadButton.TabIndex = 7;
-            this.cancelFirstMarkerRadButton.Text = "Cancel";
+            this.cancelFirstMarkerRadButton.Text = "&Cancel";
             this.cancelFirstMarkerRadButton.ThemeName = "Vista";
             this.cancelFirstMarkerRadButton.Click += new System.EventHandler(this.cancelFirstMarkerRadButton_Click);
             // 
@@ -335,7 +335,7 @@
             this.webcamRadToggleButton.Name = "webcamRadToggleButton";
             this.webcamRadToggleButton.Size = new System.Drawing.Size(125, 25);
             this.webcamRadToggleButton.TabIndex = 2;
-            this.webcamRadToggleButton.Text = "Start Webcam";
+            this.webcamRadToggleButton.Text = "Start &Webcam";
             this.webcamRadToggleButton.ThemeName = "Vista";
             this.webcamRadToggleButton.ToggleStateChanged += new Telerik.WinControls.UI.StateChangedEventHandler(this.WebcamRadToggleButton_ToggleStateChanged);
             // 
@@ -368,6 +368,7 @@
             this.avaliableWebcamsDropDownList.ShowImageInEditorArea = true;
             this.avaliableWebcamsDropDownList.Size = new System.Drawing.Size(208, 21);
             this.avaliableWebcamsDropDownList.TabIndex = 1;
+            this.avaliableWebcamsDropDownList.Tag = "";
             this.avaliableWebcamsDropDownList.Text = "Select Webcam";
             this.avaliableWebcamsDropDownList.ThemeName = "Vista";
             this.avaliableWebcamsDropDownList.SelectedIndexChanged += new Telerik.WinControls.UI.Data.PositionChangedEventHandler(this.avaliableWebcamsDropDownList_SelectedIndexChanged);
@@ -388,7 +389,7 @@
             this.SelectDesktopAreaButton.Name = "SelectDesktopAreaButton";
             this.SelectDesktopAreaButton.Size = new System.Drawing.Size(150, 25);
             this.SelectDesktopAreaButton.TabIndex = 16;
-            this.SelectDesktopAreaButton.Text = "Select Desktop Area";
+            this.SelectDesktopAreaButton.Text = "Select &Desktop Area";
             this.SelectDesktopAreaButton.ThemeName = "Vista";
             this.SelectDesktopAreaButton.Click += new System.EventHandler(this.SelectDesktopAreaButton_Click);
             // 
@@ -424,7 +425,7 @@
             this.cancelSecondMarkerRadButton.Name = "cancelSecondMarkerRadButton";
             this.cancelSecondMarkerRadButton.Size = new System.Drawing.Size(100, 25);
             this.cancelSecondMarkerRadButton.TabIndex = 11;
-            this.cancelSecondMarkerRadButton.Text = "Cancel";
+            this.cancelSecondMarkerRadButton.Text = "&Cancel";
             this.cancelSecondMarkerRadButton.ThemeName = "Vista";
             this.cancelSecondMarkerRadButton.Click += new System.EventHandler(this.cancelSecondMarkerRadButton_Click);
             // 
