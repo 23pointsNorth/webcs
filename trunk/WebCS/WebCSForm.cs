@@ -383,6 +383,9 @@ namespace WebCS
 
                 firstMarkerChangeRadButton.Enabled = false;
                 secondMarkerChangeRadButton.Enabled = false;
+
+                firstMarkerChangeColor = false;
+                secondMarkerChangeColor = false;
             }
 
             CheckEnabledTracking();
