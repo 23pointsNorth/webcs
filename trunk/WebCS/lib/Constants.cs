@@ -1,5 +1,4 @@
-﻿using System.Drawing;
-
+﻿
 public static class Constants
 {
     public const int IMAGE_WIDTH = 352;
@@ -15,4 +14,8 @@ public static class Constants
     public const int OPTIONS_ADDED_HEIGHT = 358;
 
     public const int DESIRED_FRAME_RATE = 15;
+
+    //public static readonly Size MIN_BLOB_SIZE = new Size(10,10);
+    public const int MIN_BLOB_HEIGHT = 10;
+    public const int MIN_BLOB_WIDTH = 10;
 }
