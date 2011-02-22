@@ -118,9 +118,21 @@ namespace WebCS
             //find all avaliable webcams
             videoCaptureDevices = new FilterInfoCollection(
                 FilterCategory.VideoInputDevice);
+            if (videoCaptureDevices.Count > 0)
+            {
+                webcamsMenuStrip.Enabled = true;
+            }
+            else
+            { 
+                webcamsMenuStrip.Items.Add("No webcams");
+                webcamsMenuStrip.Enabled = false;
+            }
+
+
             foreach (FilterInfo videoCaptureDevice in videoCaptureDevices)
             {
                 avaliableWebcamsDropDownList.Items.Add(videoCaptureDevice.Name);
+                webcamsMenuStrip.Items.Add(videoCaptureDevice.Name.ToString());
             }
 
             try
@@ -628,6 +640,14 @@ namespace WebCS
         private void cancelSecondMarkerRadButton_Click(object sender, EventArgs e)
         {
             secondMarkerChangeColor = false;
+        }
+
+        private void webcamsMenuStrip_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            //MessageBox.Show("Item Clicked " + e.ClickedItem.ToString());
+            avaliableWebcamsDropDownList.SelectedText = e.ClickedItem.ToString();
+            avaliableWebcamsDropDownList_SelectedIndexChanged(null, null);
+            webcamRadToggleButton.PerformClick();
         }
 
     }
