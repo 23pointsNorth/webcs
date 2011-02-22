@@ -259,6 +259,7 @@ namespace WebCS
 
         private void CalculateMarker(Bitmap frame, Color markerColor, Color rectangleColor, int rangeNum, bool loadWorkingFrame, out Rectangle markerRect)
         {
+            markerRect = new Rectangle(new Point(0, 0), frame.Size);
             BitmapData ObjectsData = frame.LockBits(
                     new Rectangle(0, 0, frame.Width, frame.Height),
                     ImageLockMode.ReadOnly, frame.PixelFormat);
@@ -269,42 +270,64 @@ namespace WebCS
             filter.Radius = getRange(rangeNum);
             filter.ApplyInPlace(ObjectsData);
 
-            //// grayscaling
-            ////UnmanagedImage grayImage = new Grayscale.CommonAlgorithms.BT709.Apply(new UnmanagedImage(objectsData));
-            //UnmanagedImage grayImage = new GrayscaleBT709().Apply(
-            //    new UnmanagedImage(ObjectsData));
-            //// unlock image
-
-            BlobCounter blobCounter = new BlobCounter();
-            blobCounter.MinWidth = 5;
-            blobCounter.MinHeight = 5;
-            blobCounter.FilterBlobs = true;
-            blobCounter.ObjectsOrder = ObjectsOrder.Size;
-            blobCounter.ProcessImage(ObjectsData);
-
-            //blobCounter.ExtractBlobsImage(grayImage);
-            Rectangle[] rects = blobCounter.GetObjectsRectangles();
-            if (rects.Length > 0)
+            try
             {
-                markerRect = rects[0];
+                ExtractBiggestBlob biggestBlob = new ExtractBiggestBlob();
+                Size blobSize = biggestBlob.Apply(ObjectsData).Size; // returns a bitmap - need only size
+                if (blobSize.Height < Constants.MIN_BLOB_HEIGHT &&
+                    blobSize.Width < Constants.MIN_BLOB_WIDTH)
+                {
+                    throw new ArgumentException("Blob too small.");
+                }
+                markerRect = new Rectangle(
+                    new Point (biggestBlob.BlobPosition.X, biggestBlob.BlobPosition.Y), 
+                    blobSize);
                 userRadLabel.Text =
                     "(" + (markerRect.X + markerRect.Width / 2).ToString() +
                     "; " + (markerRect.Y + markerRect.Height / 2).ToString() + ") ";
-
                 if (loadWorkingFrame)
                 {
                     newFrame = (Bitmap)frame.Clone();
-                    //generates cross-thread exceptions
-                    //newFrame = new Bitmap(frame.Width, frame.Height, ObjectsData.Stride, frame.PixelFormat,ObjectsData.Scan0);
                 }
-
                 newFrame = drawRectangleOnBitmap(
                     newFrame, markerRect, new Pen(rectangleColor, 2));
             }
-            else
+            catch (ArgumentException)
             {
-                markerRect = new Rectangle(new Point(0, 0), frame.Size);
+                //no blob found. stay on last known position
             }
+
+            //normal blob-ing
+            //BlobCounter blobCounter = new BlobCounter();
+            //blobCounter.MinWidth = 5;
+            //blobCounter.MinHeight = 5;
+            //blobCounter.FilterBlobs = true;
+            //blobCounter.ObjectsOrder = ObjectsOrder.Size;
+            //blobCounter.ProcessImage(ObjectsData);
+
+            ////blobCounter.ExtractBlobsImage(grayImage);
+            //Rectangle[] rects = blobCounter.GetObjectsRectangles();
+            //if (rects.Length > 0)
+            //{
+            //    markerRect = rects[0];
+            //    userRadLabel.Text =
+            //        "(" + (markerRect.X + markerRect.Width / 2).ToString() +
+            //        "; " + (markerRect.Y + markerRect.Height / 2).ToString() + ") ";
+
+            //    if (loadWorkingFrame)
+            //    {
+            //        newFrame = (Bitmap)frame.Clone();
+            //        //generates cross-thread exceptions
+            //        //newFrame = new Bitmap(frame.Width, frame.Height, ObjectsData.Stride, frame.PixelFormat,ObjectsData.Scan0);
+            //    }
+
+            //    newFrame = drawRectangleOnBitmap(
+            //        newFrame, markerRect, new Pen(rectangleColor, 2));
+            //}
+            //else
+            //{
+            //    markerRect = new Rectangle(new Point(0, 0), frame.Size);
+            //}
 
             frame.UnlockBits(ObjectsData);
         }
