@@ -13,4 +13,6 @@ public static class Constants
 
     public const int OPTIONS_ADDED_WIDTH = 740;
     public const int OPTIONS_ADDED_HEIGHT = 358;
+
+    public const int DESIRED_FRAME_RATE = 15;
 }

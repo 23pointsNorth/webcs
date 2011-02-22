@@ -126,7 +126,9 @@ namespace WebCS
             try
             {
                 avaliableWebcamsDropDownList.SelectedText = User.Default.loadWebcamName;
-                avaliableWebcamsDropDownList_SelectedIndexChanged(null, null);
+                //MessageBox.Show(
+                //    avaliableWebcamsDropDownList.Items.IndexOf(
+                //    new RadListDataItem(User.Default.loadWebcamName)).ToString());
             }
             catch
             {
@@ -212,13 +214,13 @@ namespace WebCS
             //update image 
             newFrame = (Bitmap)eventArgs.Frame.Clone();
             newFrame = ResizeBitmap(newFrame, Constants.IMAGE_WIDTH, Constants.IMAGE_HEIGHT);
-
+            
             if (applyFilterRadCheckBox.Checked)
             {
-                Mean filer = new Mean();
                 BitmapData objectsData = newFrame.LockBits(
                     new Rectangle(0, 0, newFrame.Width, newFrame.Height),
                     ImageLockMode.ReadOnly, newFrame.PixelFormat);
+                Mean filer = new Mean();
                 filer.ApplyInPlace(objectsData);
                 newFrame.UnlockBits(objectsData);
             }
@@ -261,26 +263,25 @@ namespace WebCS
                     new Rectangle(0, 0, frame.Width, frame.Height),
                     ImageLockMode.ReadOnly, frame.PixelFormat);
 
-            // create filter
             EuclideanColorFiltering filter = new EuclideanColorFiltering();
             // set center color and radius
             filter.CenterColor.Color = markerColor;
             filter.Radius = getRange(rangeNum);
-            // apply the filter
             filter.ApplyInPlace(ObjectsData);
 
-            // grayscaling
-            //UnmanagedImage grayImage = new Grayscale.CommonAlgorithms.BT709.Apply(new UnmanagedImage(objectsData));
-            UnmanagedImage grayImage = new GrayscaleBT709().Apply(
-                new UnmanagedImage(ObjectsData));
-            // unlock image
-            frame.UnlockBits(ObjectsData);
+            //// grayscaling
+            ////UnmanagedImage grayImage = new Grayscale.CommonAlgorithms.BT709.Apply(new UnmanagedImage(objectsData));
+            //UnmanagedImage grayImage = new GrayscaleBT709().Apply(
+            //    new UnmanagedImage(ObjectsData));
+            //// unlock image
+
             BlobCounter blobCounter = new BlobCounter();
             blobCounter.MinWidth = 5;
             blobCounter.MinHeight = 5;
             blobCounter.FilterBlobs = true;
             blobCounter.ObjectsOrder = ObjectsOrder.Size;
-            blobCounter.ProcessImage(grayImage);
+            blobCounter.ProcessImage(ObjectsData);
+
             //blobCounter.ExtractBlobsImage(grayImage);
             Rectangle[] rects = blobCounter.GetObjectsRectangles();
             if (rects.Length > 0)
@@ -293,6 +294,8 @@ namespace WebCS
                 if (loadWorkingFrame)
                 {
                     newFrame = (Bitmap)frame.Clone();
+                    //generates cross-thread exceptions
+                    //newFrame = new Bitmap(frame.Width, frame.Height, ObjectsData.Stride, frame.PixelFormat,ObjectsData.Scan0);
                 }
 
                 newFrame = drawRectangleOnBitmap(
@@ -302,6 +305,8 @@ namespace WebCS
             {
                 markerRect = new Rectangle(new Point(0, 0), frame.Size);
             }
+
+            frame.UnlockBits(ObjectsData);
         }
 
         private short getRange(int marker)
@@ -365,10 +370,9 @@ namespace WebCS
                     FinalVideoSource_NewFrame);
                 finalVideoSource.DesiredFrameSize = new Size(
                     Constants.DESIRED_FRAME_WIDTH, Constants.DESIRED_FRAME_HEIGHT);
+                finalVideoSource.DesiredFrameRate = Constants.DESIRED_FRAME_RATE;
                 finalVideoSource.Start();
                 isVideoRunning = finalVideoSource.IsRunning;
-                //place focus on next item;
-                applyFilterRadCheckBox.Focus();
             }
             else
             {
