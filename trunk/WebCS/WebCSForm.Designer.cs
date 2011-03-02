@@ -66,12 +66,13 @@
             this.trackingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.disableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.startStopWebcamToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.WebcamsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.webcamsMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.restoreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vistaTheme = new Telerik.WinControls.Themes.VistaTheme();
-            this.webcamsMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.WebcamsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.timeOut = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.trackingToggleButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.exitRadButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.optionsToggleButton)).BeginInit();
@@ -493,7 +494,7 @@
             this.saveSettingsToolStripMenuItem,
             this.closeToolStripMenuItem});
             this.iconContextMenuStrip.Name = "iconContextMenuStrip";
-            this.iconContextMenuStrip.Size = new System.Drawing.Size(159, 136);
+            this.iconContextMenuStrip.Size = new System.Drawing.Size(159, 114);
             // 
             // trackingToolStripMenuItem
             // 
@@ -518,6 +519,21 @@
             this.startStopWebcamToolStripMenuItem.Text = "Start/Stop Webcam";
             this.startStopWebcamToolStripMenuItem.Click += new System.EventHandler(this.startStopWebcamToolStripMenuItem_Click);
             // 
+            // WebcamsToolStripMenuItem
+            // 
+            this.WebcamsToolStripMenuItem.DropDown = this.webcamsMenuStrip;
+            this.WebcamsToolStripMenuItem.Name = "WebcamsToolStripMenuItem";
+            this.WebcamsToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.WebcamsToolStripMenuItem.Text = "Select Webcam";
+            // 
+            // webcamsMenuStrip
+            // 
+            this.webcamsMenuStrip.Enabled = false;
+            this.webcamsMenuStrip.Name = "webcamsMenuStrip";
+            this.webcamsMenuStrip.OwnerItem = this.WebcamsToolStripMenuItem;
+            this.webcamsMenuStrip.Size = new System.Drawing.Size(61, 4);
+            this.webcamsMenuStrip.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.webcamsMenuStrip_ItemClicked);
+            // 
             // restoreToolStripMenuItem
             // 
             this.restoreToolStripMenuItem.Name = "restoreToolStripMenuItem";
@@ -539,19 +555,10 @@
             this.closeToolStripMenuItem.Text = "Close";
             this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
             // 
-            // webcamsMenuStrip
+            // timeOut
             // 
-            this.webcamsMenuStrip.Enabled = false;
-            this.webcamsMenuStrip.Name = "webcamsMenuStrip";
-            this.webcamsMenuStrip.Size = new System.Drawing.Size(61, 4);
-            this.webcamsMenuStrip.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.webcamsMenuStrip_ItemClicked);
-            // 
-            // WebcamsToolStripMenuItem
-            // 
-            this.WebcamsToolStripMenuItem.DropDown = this.webcamsMenuStrip;
-            this.WebcamsToolStripMenuItem.Name = "WebcamsToolStripMenuItem";
-            this.WebcamsToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
-            this.WebcamsToolStripMenuItem.Text = "Select Webcam";
+            this.timeOut.Interval = 1000;
+            this.timeOut.Tick += new System.EventHandler(this.timeOut_Tick);
             // 
             // WebCSForm
             // 
@@ -662,6 +669,7 @@
         private System.Windows.Forms.PictureBox secondMarkerSample;
         private System.Windows.Forms.ContextMenuStrip webcamsMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem WebcamsToolStripMenuItem;
+        private System.Windows.Forms.Timer timeOut;
     }
 }
 

@@ -392,6 +392,8 @@ namespace WebCS
         {
             if (args.ToggleState == ToggleState.On)
             {
+                timeOut.Enabled = true;
+                timeOut.Start();
                 DrawOnEmptyFrame("Starting...");
                 webcamRadToggleButton.Text = "Stop &Webcam";
                 avaliableWebcamsDropDownList.Enabled = false;
@@ -428,7 +430,8 @@ namespace WebCS
                 firstMarkerChangeColor = false;
                 secondMarkerChangeColor = false;
             }
-
+            timeOut.Stop();
+            timeOut.Enabled = false;
             CheckEnabledTracking();
         }
 
@@ -642,6 +645,14 @@ namespace WebCS
             avaliableWebcamsDropDownList.SelectedText = e.ClickedItem.ToString();
             avaliableWebcamsDropDownList_SelectedIndexChanged(null, null);
             webcamRadToggleButton.PerformClick();
+        }
+
+        private void timeOut_Tick(object sender, EventArgs e)
+        {
+            //if not webcam is started after timer ticks, the webcam canot be loaded;
+            webcamRadToggleButton.PerformClick();
+            timeOut.Enabled = false;
+            DrawOnEmptyFrame("Unable to \nload webcam.\nPlease, try another.");
         }
 
     }

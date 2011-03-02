@@ -9,8 +9,8 @@ public class Mouse
 {
     Point mouse;
     Point pressure;
-    private const int deltaX = 75;
-    private const int deltaY = 75;
+    private const int deltaX = 50;
+    private const int deltaY = 50;
     private const int acuracyInPixels = 1;
 
     public Mouse(Point fisrtCoordinates, Point secondCoordinates)
