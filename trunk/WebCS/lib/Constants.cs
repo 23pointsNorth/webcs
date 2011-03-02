@@ -6,14 +6,13 @@ public static class Constants
 
     public const int DESIRED_FRAME_WIDTH = 352;
     public const int DESIRED_FRAME_HEIGHT = 288;
+    public const int DESIRED_FRAME_RATE = 15;
 
     public const int WEBCAM_ONLY_WIDTH = 373;
     public const int WEBCAM_ONLY_HEIGHT = 358;
 
     public const int OPTIONS_ADDED_WIDTH = 740;
     public const int OPTIONS_ADDED_HEIGHT = 358;
-
-    public const int DESIRED_FRAME_RATE = 15;
 
     //public static readonly Size MIN_BLOB_SIZE = new Size(10,10);
     public const int MIN_BLOB_HEIGHT = 10;

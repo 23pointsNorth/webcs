@@ -15,13 +15,26 @@ public class Mouse
 
     public Mouse(Point fisrtCoordinates, Point secondCoordinates)
     {
-        mouse = fisrtCoordinates;
-        pressure = secondCoordinates;
+        SetNewPosition(fisrtCoordinates, secondCoordinates);
     }
 
     public Mouse(Bitmap frame, Marker firstMarker, Marker secondMarker)
     {
         CalculateNewPosition(frame,firstMarker,secondMarker);
+    }
+
+    public void SetNewPosition(Point fisrtCoordinates, Point secondCoordinates)
+    {
+        mouse = fisrtCoordinates;
+        pressure = secondCoordinates;
+    }
+
+    public void SetNewPosition(Rectangle firstMarker, Rectangle secondMarker)
+    {
+        mouse = new Point(
+            firstMarker.X + firstMarker.Width / 2, firstMarker.Y + firstMarker.Height / 2);
+        pressure = new Point(
+            secondMarker.X + secondMarker.Width / 2, secondMarker.Y + secondMarker.Height / 2);
     }
 
     public void CalculateNewPosition(Bitmap frame, Marker firstMarker, Marker secondMarker)
@@ -60,12 +73,11 @@ public class Mouse
 
     }
 
-    public void MoveMouse()
+    public void MoveMouseAndClick()
     {
         if (mouse.X >= 0 && mouse.Y >= 0)
         {
-            Point newPostion = newPostionInScreenPixels();
-            Cursor.Position = new Point (newPostion.X,newPostion.Y);
+            Cursor.Position = newPostionInScreenPixels();
 
             if (Math.Abs(mouse.X - pressure.X) < deltaX &&
                 Math.Abs(mouse.Y - pressure.Y) < deltaY)

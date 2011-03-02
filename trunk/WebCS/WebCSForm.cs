@@ -218,6 +218,7 @@ namespace WebCS
         Color secondMarkerColor = emptyColor;
         Rectangle firstMarkerRect;
         Rectangle secondMarkerRect;
+        Mouse softwareCursor = new Mouse(Cursor.Position,new Point(0,0));
 
         private void FinalVideoSource_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
@@ -246,6 +247,8 @@ namespace WebCS
                 CalculateMarker(
                     secondFrameClone, secondMarkerColor, Color.Blue, 2, 
                     secondMarkerLoadRadRadioButton.IsChecked, out secondMarkerRect);
+                softwareCursor.SetNewPosition(firstMarkerRect, secondMarkerRect);
+                softwareCursor.MoveMouseAndClick();
             }
 
             if (firstMarkerChangeColor)
