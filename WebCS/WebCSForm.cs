@@ -128,7 +128,6 @@ namespace WebCS
                 webcamsMenuStrip.Enabled = false;
             }
 
-
             foreach (FilterInfo videoCaptureDevice in videoCaptureDevices)
             {
                 avaliableWebcamsDropDownList.Items.Add(videoCaptureDevice.Name);
@@ -197,24 +196,23 @@ namespace WebCS
         {
             if (args.ToggleState == ToggleState.On)
             {
-                trackingToggleButton.Text = "Disable Tracking";
+                trackingToggleButton.Text = "Disable &Tracking";
             }
             else
             {
-                trackingToggleButton.Text = "Enable Tracking";
+                trackingToggleButton.Text = "Enable &Tracking";
                 userRadLabel.ResetText();
             }
         }
 
         private void SelectDesktopAreaButton_Click(object sender, EventArgs e)
         {
-
+            //select the new boundries of the desktop, so that the whole screen can be accessed
         }
 
         Bitmap newFrame;
         Bitmap firstFrameClone;
         Bitmap secondFrameClone;
-        //public static readonly Grayscale BT709 = new Grayscale(0.2125, 0.7154, 0.0721);
         static Color emptyColor = Color.FromArgb(0, 0, 0);
         Color firstMarkerColor = emptyColor;
         Color secondMarkerColor = emptyColor;
@@ -392,7 +390,7 @@ namespace WebCS
             if (args.ToggleState == ToggleState.On)
             {
                 DrawOnEmptyFrame("Starting...");
-                webcamRadToggleButton.Text = "Stop Webcam";
+                webcamRadToggleButton.Text = "Stop &Webcam";
                 avaliableWebcamsDropDownList.Enabled = false;
                 firstMarkerChangeRadButton.Enabled = true;
                 secondMarkerChangeRadButton.Enabled = true;
@@ -417,7 +415,7 @@ namespace WebCS
                     trackingToggleButton.PerformClick(); // stop tracking
                 }
                 isVideoRunning = finalVideoSource.IsRunning;
-                webcamRadToggleButton.Text = "Start Webcam";
+                webcamRadToggleButton.Text = "Start &Webcam";
                 avaliableWebcamsDropDownList.Enabled = true;
                 avaliableWebcamsDropDownList_SelectedIndexChanged(null, null);
 
@@ -504,7 +502,6 @@ namespace WebCS
                             g.FillRectangle(brush, 0, 0, firstMarkerSample.Width, firstMarkerSample.Height);
                         }
                     }
-
                     firstMarkerSample.Image = fSampleBitmap;
                 }
             }
@@ -546,11 +543,6 @@ namespace WebCS
                     int meanBlue = (int)histogramBlue.Mean;
 
                     secondMarkerColor = Color.FromArgb(meanRed, meanGreen, meanBlue);
-                    //MarkerRangeRadTextBox.Text = 
-                    //    ((histogramRed.GetRange(0.7).Min + 
-                    //    histogramBlue.GetRange(0.7).Min + 
-                    //    histogramGreen.GetRange(0.7).Min)/3).ToString();
-                    // returns the range in [min,max];
 
                     Bitmap sSampleBitmap = new Bitmap(
                         secondMarkerSample.Width, secondMarkerSample.Height);
@@ -561,7 +553,6 @@ namespace WebCS
                             g.FillRectangle(brush, 0, 0, secondMarkerSample.Width, secondMarkerSample.Height);
                         }
                     }
-
                     secondMarkerSample.Image = sSampleBitmap;
                 }
             }
