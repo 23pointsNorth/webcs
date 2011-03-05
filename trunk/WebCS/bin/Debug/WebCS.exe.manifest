@@ -160,14 +160,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="WebCS.exe" size="459776">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="WebCS.exe" size="454656">
       <assemblyIdentity name="WebCS" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>0WhFl2NtOTlApgjhDWNidvFlSo0=</dsig:DigestValue>
+        <dsig:DigestValue>22Ah9b9ZwT+SXPKlvVTiITyxb0U=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

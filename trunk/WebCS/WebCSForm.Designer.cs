@@ -557,7 +557,7 @@
             // 
             // timeOut
             // 
-            this.timeOut.Interval = 3000;
+            this.timeOut.Interval = 5000;
             this.timeOut.Tick += new System.EventHandler(this.timeOut_Tick);
             // 
             // WebCSForm

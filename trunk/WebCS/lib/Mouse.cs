@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using BitmapProcessing;
 
 public class Mouse
 {
@@ -12,15 +10,16 @@ public class Mouse
     private const int deltaX = 50;
     private const int deltaY = 50;
     private const int acuracyInPixels = 1;
+    Rectangle desktopAreaBoundries;
+
+    public Rectangle DesktopArea
+    {
+        set { desktopAreaBoundries = value; }
+    }
 
     public Mouse(Point fisrtCoordinates, Point secondCoordinates)
     {
         SetNewPosition(fisrtCoordinates, secondCoordinates);
-    }
-
-    public Mouse(Bitmap frame, Marker firstMarker, Marker secondMarker)
-    {
-        CalculateNewPosition(frame,firstMarker,secondMarker);
     }
 
     public void SetNewPosition(Point fisrtCoordinates, Point secondCoordinates)
@@ -29,48 +28,18 @@ public class Mouse
         pressure = secondCoordinates;
     }
 
-    public void SetNewPosition(Rectangle firstMarker, Rectangle secondMarker, Rectangle desktopArea)
+    public void SetNewPosition(Rectangle firstMarker, Rectangle secondMarker)
     {
-        mouse = new Point(
+        Point uncheckedMouse = new Point(
             firstMarker.X + firstMarker.Width / 2, firstMarker.Y + firstMarker.Height / 2);
-        pressure = new Point(
+        Point uncheckedPressure = new Point(
             secondMarker.X + secondMarker.Width / 2, secondMarker.Y + secondMarker.Height / 2);
-    }
-
-    public void CalculateNewPosition(Bitmap frame, Marker firstMarker, Marker secondMarker)
-    {
-        List<Marker.Pixel> foundPixelsFirst = new List<Marker.Pixel>();
-        List<Marker.Pixel> foundPixelsSecond = new List<Marker.Pixel>();
-
-        FastBitmap frameLocked = new FastBitmap(frame);
-        frameLocked.LockImage();
-
-        int frameWidth = frame.Width;
-        int frameHeight = frame.Height;
-
-        for (int x = 0; x < frameWidth; x += acuracyInPixels)
-        {
-            for (int y = 0; y < frameHeight; y += acuracyInPixels)
-            {
-                Color currentPixel = frameLocked.GetPixel(x, y);
-                if (firstMarker.AreColoursEqual(currentPixel))
-                {
-                    foundPixelsFirst.Add(new Marker.Pixel(
-                        new Point(x, y), currentPixel));
-                }
-                if (secondMarker.AreColoursEqual(currentPixel))
-                {
-                    foundPixelsSecond.Add(new Marker.Pixel(
-                        new Point(x, y), currentPixel));
-                }
-            }
-        }
-
-        frameLocked.UnlockImage();
-
-        mouse = firstMarker.CalculatePosition(foundPixelsFirst);
-        pressure = secondMarker.CalculatePosition(foundPixelsSecond);
-
+        mouse = new Point(
+            Math.Min(desktopAreaBoundries.X+desktopAreaBoundries.Width,Math.Max(uncheckedMouse.X,desktopAreaBoundries.X)),
+            Math.Min(desktopAreaBoundries.Y+desktopAreaBoundries.Height,Math.Max(uncheckedMouse.Y,desktopAreaBoundries.Y)));
+        pressure = new Point(
+            Math.Min(desktopAreaBoundries.X + desktopAreaBoundries.Width, Math.Max(uncheckedPressure.X, desktopAreaBoundries.X)),
+            Math.Min(desktopAreaBoundries.Y + desktopAreaBoundries.Height, Math.Max(uncheckedPressure.Y, desktopAreaBoundries.Y)));
     }
 
     public void MoveMouseAndClick()
@@ -94,9 +63,11 @@ public class Mouse
 
     private Point newPostionInScreenPixels()
     {
-        int screenX = (int)(Cursor.Clip.Width * 1.0 / Constants.IMAGE_WIDTH * mouse.X);
-        int screenY = (int)(Cursor.Clip.Height * 1.0 / Constants.IMAGE_HEIGHT * mouse.Y);
-        
+        //int screenX = (int)(Cursor.Clip.Width * 1.0 / Constants.IMAGE_WIDTH * mouse.X);
+        //int screenY = (int)(Cursor.Clip.Height * 1.0 / Constants.IMAGE_HEIGHT * mouse.Y);
+        int screenX = (int)(Cursor.Clip.Width * 1.0 / desktopAreaBoundries.Width) * (mouse.X - desktopAreaBoundries.X);
+        int screenY = (int)(Cursor.Clip.Height * 1.0 / desktopAreaBoundries.Height) * (mouse.Y - desktopAreaBoundries.Y);
+       
         return new Point(screenX, screenY);
     }
 
