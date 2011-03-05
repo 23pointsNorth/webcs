@@ -20,5 +20,11 @@
     <Setting Name="applyMeanFilter" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="desktopAreaBoundriesRectangle" Type="System.Drawing.Rectangle" Scope="User">
+      <Value Profile="(Default)">20, 20, 312, 248</Value>
+    </Setting>
+    <Setting Name="areDesktopAreaBoundriesVisible" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

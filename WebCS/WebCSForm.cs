@@ -29,6 +29,8 @@ namespace WebCS
             DrawOnEmptyFrame("Webcam \nnot selected.");
             avaliableWebcamsDropDownList.Items.Add("Select Webcam");
             applyFilterRadCheckBox.Checked = User.Default.applyMeanFilter;
+            desktopBoundries = User.Default.desktopAreaBoundriesRectangle;
+            areDesktopBounriesVisible = User.Default.areDesktopAreaBoundriesVisible;
             LoadAvaliableWebcams();
             LoadMarkers();
             LoadAtStartup();
@@ -209,14 +211,10 @@ namespace WebCS
 
         private void SelectDesktopAreaButton_Click(object sender, EventArgs e)
         {
-
             //select the new boundries of the desktop, so that the whole screen can be accessed
-            if (!areDesktopBounriesVisible)
-            {
-                this.imageContainer.MouseDown += new System.Windows.Forms.MouseEventHandler(this.imageContainer_MouseDown);
-                areDesktopBounriesVisible = true;
-            }
-
+            this.imageContainer.MouseDown += new System.Windows.Forms.MouseEventHandler(this.imageContainer_MouseDown);
+            areDesktopBounriesVisible = true;
+ 
             firstClick = new Point(-1, -1);
             secondClick = new Point(-1, -1);
         }
@@ -644,6 +642,8 @@ namespace WebCS
             User.Default.secondMarkerColorUser = secondMarkerColor;
             User.Default.secondMarkerRangeUser = getRange(2);
             User.Default.applyMeanFilter = applyFilterRadCheckBox.Checked;
+            User.Default.desktopAreaBoundriesRectangle = desktopBoundries;
+            User.Default.areDesktopAreaBoundriesVisible = areDesktopBounriesVisible;
             User.Default.Save();
         }
 
@@ -696,7 +696,6 @@ namespace WebCS
                         Math.Min(firstClick.Y,secondClick.Y), 
                         Math.Abs(firstClick.X - secondClick.X), 
                         Math.Abs(firstClick.Y - secondClick.Y));
-                    MessageBox.Show("DEsktop are done"+desktopBoundries.ToString());
                     areDesktopBounriesVisible = true;
                     this.imageContainer.MouseDown -= 
                         new System.Windows.Forms.MouseEventHandler(this.imageContainer_MouseDown);

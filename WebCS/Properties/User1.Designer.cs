@@ -94,5 +94,29 @@ namespace WebCS.Properties {
                 this["applyMeanFilter"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("20, 20, 312, 248")]
+        public global::System.Drawing.Rectangle desktopAreaBoundriesRectangle {
+            get {
+                return ((global::System.Drawing.Rectangle)(this["desktopAreaBoundriesRectangle"]));
+            }
+            set {
+                this["desktopAreaBoundriesRectangle"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool areDesktopAreaBoundriesVisible {
+            get {
+                return ((bool)(this["areDesktopAreaBoundriesVisible"]));
+            }
+            set {
+                this["areDesktopAreaBoundriesVisible"] = value;
+            }
+        }
     }
 }
