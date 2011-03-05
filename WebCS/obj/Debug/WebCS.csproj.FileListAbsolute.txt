@@ -39,3 +39,4 @@ C:\Documents and Settings\vladi\My Documents\Visual Studio 2008\Projects\WebCS\W
 C:\Documents and Settings\vladi\My Documents\Visual Studio 2008\Projects\WebCS\WebCS\bin\Debug\Telerik.WinControls.dll
 C:\Documents and Settings\vladi\My Documents\Visual Studio 2008\Projects\WebCS\WebCS\bin\Debug\Telerik.WinControls.Themes.Vista.dll
 C:\Documents and Settings\vladi\My Documents\Visual Studio 2008\Projects\WebCS\WebCS\bin\Debug\Telerik.WinControls.UI.dll
+C:\Documents and Settings\vladi\My Documents\Visual Studio 2008\Projects\WebCS\WebCS\bin\Debug\TelerikCommon.dll

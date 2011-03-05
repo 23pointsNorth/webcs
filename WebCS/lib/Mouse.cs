@@ -29,7 +29,7 @@ public class Mouse
         pressure = secondCoordinates;
     }
 
-    public void SetNewPosition(Rectangle firstMarker, Rectangle secondMarker)
+    public void SetNewPosition(Rectangle firstMarker, Rectangle secondMarker, Rectangle desktopArea)
     {
         mouse = new Point(
             firstMarker.X + firstMarker.Width / 2, firstMarker.Y + firstMarker.Height / 2);

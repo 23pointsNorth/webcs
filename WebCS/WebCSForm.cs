@@ -205,9 +205,20 @@ namespace WebCS
             }
         }
 
+        bool areDesktopBounriesVisible = false;
+
         private void SelectDesktopAreaButton_Click(object sender, EventArgs e)
         {
+
             //select the new boundries of the desktop, so that the whole screen can be accessed
+            if (!areDesktopBounriesVisible)
+            {
+                this.imageContainer.MouseDown += new System.Windows.Forms.MouseEventHandler(this.imageContainer_MouseDown);
+                areDesktopBounriesVisible = true;
+            }
+
+            firstClick = new Point(-1, -1);
+            secondClick = new Point(-1, -1);
         }
 
         Bitmap newFrame;
@@ -247,7 +258,7 @@ namespace WebCS
                 CalculateMarker(
                     secondFrameClone, secondMarkerColor, Color.Blue, 2, 
                     secondMarkerLoadRadRadioButton.IsChecked, out secondMarkerRect);
-                softwareCursor.SetNewPosition(firstMarkerRect, secondMarkerRect);
+                softwareCursor.SetNewPosition(firstMarkerRect, secondMarkerRect, desktopBoundries);
                 softwareCursor.MoveMouseAndClick();
             }
 
@@ -266,7 +277,13 @@ namespace WebCS
                     secondMarkerGetColorRect,
                     new Pen(Color.LightBlue, 2));
             }
-
+            if (areDesktopBounriesVisible)
+            {
+                newFrame = drawRectangleOnBitmap(
+                    (Bitmap)newFrame.Clone(),
+                    desktopBoundries,
+                    new Pen(Color.Gray, 2));
+            }
             imageContainer.Image = newFrame;
         }
 
@@ -429,9 +446,10 @@ namespace WebCS
 
                 firstMarkerChangeColor = false;
                 secondMarkerChangeColor = false;
+
+                timeOut.Stop();
+                timeOut.Enabled = false;
             }
-            timeOut.Stop();
-            timeOut.Enabled = false;
             CheckEnabledTracking();
         }
 
@@ -649,11 +667,41 @@ namespace WebCS
 
         private void timeOut_Tick(object sender, EventArgs e)
         {
-            //if not webcam is started after timer ticks, the webcam canot be loaded;
-            webcamRadToggleButton.PerformClick();
-            timeOut.Enabled = false;
-            DrawOnEmptyFrame("Unable to \nload webcam.\nPlease, try another.");
+            //if no webcam is started after timer ticks, the webcam canot be loaded;
+            if (finalVideoSource.FramesReceived <= 0)
+            {
+                webcamRadToggleButton.PerformClick();
+                timeOut.Enabled = false;
+                DrawOnEmptyFrame("Unable to \nload webcam.\nPlease, try another.");
+            }
         }
 
+        Point firstClick = new Point(-1, -1);
+        Point secondClick = new Point(-1, -1);
+        Rectangle desktopBoundries;
+
+        private void imageContainer_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (firstClick == new Point(-1, -1))
+            {
+                firstClick = e.Location;
+            }
+            else
+            {
+                if (secondClick == new Point(-1, -1))
+                {
+                    secondClick = e.Location;
+                    desktopBoundries = new Rectangle(
+                        Math.Min(firstClick.X,secondClick.X), 
+                        Math.Min(firstClick.Y,secondClick.Y), 
+                        Math.Abs(firstClick.X - secondClick.X), 
+                        Math.Abs(firstClick.Y - secondClick.Y));
+                    MessageBox.Show("DEsktop are done"+desktopBoundries.ToString());
+                    areDesktopBounriesVisible = true;
+                    this.imageContainer.MouseDown -= 
+                        new System.Windows.Forms.MouseEventHandler(this.imageContainer_MouseDown);
+                }
+            }
+        }
     }
 }
