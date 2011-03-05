@@ -10,9 +10,7 @@ C:\Documents and Settings\vladi\My Documents\Visual Studio 2008\Projects\WebCS\W
 C:\Documents and Settings\vladi\My Documents\Visual Studio 2008\Projects\WebCS\WebCS\bin\Debug\AForge.Video.dll
 C:\Documents and Settings\vladi\My Documents\Visual Studio 2008\Projects\WebCS\WebCS\bin\Debug\lib\Constants.cs
 C:\Documents and Settings\vladi\My Documents\Visual Studio 2008\Projects\WebCS\WebCS\bin\Debug\lib\FastBitmap.cs
-C:\Documents and Settings\vladi\My Documents\Visual Studio 2008\Projects\WebCS\WebCS\bin\Debug\lib\Marker.cs
 C:\Documents and Settings\vladi\My Documents\Visual Studio 2008\Projects\WebCS\WebCS\bin\Debug\lib\Mouse.cs
-C:\Documents and Settings\vladi\My Documents\Visual Studio 2008\Projects\WebCS\WebCS\bin\Debug\lib\RectangleShape.cs
 F:\C# Projects\WebCS\WebCS\obj\Debug\WebCS.exe
 F:\C# Projects\WebCS\WebCS\obj\Debug\WebCS.pdb
 F:\C# Projects\WebCS\WebCS\obj\Debug\ResolveAssemblyReference.cache

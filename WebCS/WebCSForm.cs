@@ -31,6 +31,7 @@ namespace WebCS
             applyFilterRadCheckBox.Checked = User.Default.applyMeanFilter;
             desktopBoundries = User.Default.desktopAreaBoundriesRectangle;
             areDesktopBounriesVisible = User.Default.areDesktopAreaBoundriesVisible;
+            softwareCursor.DesktopArea = desktopBoundries;
             LoadAvaliableWebcams();
             LoadMarkers();
             LoadAtStartup();
@@ -82,10 +83,22 @@ namespace WebCS
                 firstMarkerRangeRadTextBox.Text = "20";
                 secondMarkerRangeRadTextBox.Text = "20";
             }
-            firstMarkerSample.Image = RectangleShape.DrawFilledRectangle(
+            firstMarkerSample.Image = DrawFilledRectangle(
                 firstMarkerSample.Width, firstMarkerSample.Height, firstMarkerColor);
-            secondMarkerSample.Image = RectangleShape.DrawFilledRectangle(
+            secondMarkerSample.Image = DrawFilledRectangle(
                 secondMarkerSample.Width, secondMarkerSample.Height, secondMarkerColor);
+        }
+
+        public static Bitmap DrawFilledRectangle(int width, int height, Color fillColour)
+        {
+            Bitmap filledBitmap = new Bitmap(width, height);
+
+            using (Graphics graphicsOnImage = Graphics.FromImage(filledBitmap))
+            using (SolidBrush brush = new SolidBrush(fillColour))
+            {
+                graphicsOnImage.FillRectangle(brush, 0, 0, width, height);
+            }
+            return filledBitmap;
         }
 
         private void DrawOnEmptyFrame(string text)
@@ -227,7 +240,7 @@ namespace WebCS
         Color secondMarkerColor = emptyColor;
         Rectangle firstMarkerRect;
         Rectangle secondMarkerRect;
-        Mouse softwareCursor = new Mouse(Cursor.Position,new Point(0,0));
+        Mouse softwareCursor = new Mouse(Cursor.Position, new Point(0, 0));
 
         private void FinalVideoSource_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
@@ -256,7 +269,7 @@ namespace WebCS
                 CalculateMarker(
                     secondFrameClone, secondMarkerColor, Color.Blue, 2, 
                     secondMarkerLoadRadRadioButton.IsChecked, out secondMarkerRect);
-                softwareCursor.SetNewPosition(firstMarkerRect, secondMarkerRect, desktopBoundries);
+                softwareCursor.SetNewPosition(firstMarkerRect, secondMarkerRect);
                 softwareCursor.MoveMouseAndClick();
             }
 
