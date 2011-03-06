@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.Text;
 using System.Windows.Forms;
-using AForge;
 using AForge.Imaging;
 using AForge.Imaging.Filters;
 using AForge.Math;
@@ -152,9 +147,6 @@ namespace WebCS
             try
             {
                 avaliableWebcamsDropDownList.SelectedText = User.Default.loadWebcamName;
-                //MessageBox.Show(
-                //    avaliableWebcamsDropDownList.Items.IndexOf(
-                //    new RadListDataItem(User.Default.loadWebcamName)).ToString());
             }
             catch
             {
@@ -263,6 +255,7 @@ namespace WebCS
                 //make sure both clones contain starting bitmap
                 firstFrameClone = new Bitmap(newFrame);
                 secondFrameClone = new Bitmap(newFrame);
+                //find marker positions
                 CalculateMarker(
                     firstFrameClone, firstMarkerColor, Color.Green, 1, 
                     firstMarkerLoadRadRadioButton.IsChecked, out firstMarkerRect);
@@ -288,6 +281,9 @@ namespace WebCS
                     secondMarkerGetColorRect,
                     new Pen(Color.LightBlue, 2));
             }
+
+            newFrame.RotateFlip(RotateFlipType.Rotate180FlipY); //miror image
+
             if (areDesktopBounriesVisible)
             {
                 newFrame = drawRectangleOnBitmap(
@@ -295,7 +291,8 @@ namespace WebCS
                     desktopBoundries,
                     new Pen(Color.Gray, 2));
             }
-            imageContainer.Image = newFrame;
+
+            imageContainer.Image = newFrame;    //update image to container
         }
 
         private void CalculateMarker(Bitmap frame, Color markerColor, Color rectangleColor, int rangeNum, bool loadWorkingFrame, out Rectangle markerRect)
@@ -337,38 +334,6 @@ namespace WebCS
             {
                 //no blob found. stay on last known position
             }
-
-            //normal blob-ing
-            //BlobCounter blobCounter = new BlobCounter();
-            //blobCounter.MinWidth = 5;
-            //blobCounter.MinHeight = 5;
-            //blobCounter.FilterBlobs = true;
-            //blobCounter.ObjectsOrder = ObjectsOrder.Size;
-            //blobCounter.ProcessImage(ObjectsData);
-
-            ////blobCounter.ExtractBlobsImage(grayImage);
-            //Rectangle[] rects = blobCounter.GetObjectsRectangles();
-            //if (rects.Length > 0)
-            //{
-            //    markerRect = rects[0];
-            //    userRadLabel.Text =
-            //        "(" + (markerRect.X + markerRect.Width / 2).ToString() +
-            //        "; " + (markerRect.Y + markerRect.Height / 2).ToString() + ") ";
-
-            //    if (loadWorkingFrame)
-            //    {
-            //        newFrame = (Bitmap)frame.Clone();
-            //        //generates cross-thread exceptions
-            //        //newFrame = new Bitmap(frame.Width, frame.Height, ObjectsData.Stride, frame.PixelFormat,ObjectsData.Scan0);
-            //    }
-
-            //    newFrame = drawRectangleOnBitmap(
-            //        newFrame, markerRect, new Pen(rectangleColor, 2));
-            //}
-            //else
-            //{
-            //    markerRect = new Rectangle(new Point(0, 0), frame.Size);
-            //}
 
             frame.UnlockBits(ObjectsData);
         }
@@ -522,11 +487,6 @@ namespace WebCS
                     int meanBlue = (int)histogramBlue.Mean;
 
                     firstMarkerColor = Color.FromArgb(meanRed, meanGreen, meanBlue);
-                    //firstMarkerRangeRadTextBox.Text = 
-                    //    ((histogramRed.GetRange(0.7).Min + 
-                    //    histogramBlue.GetRange(0.7).Min + 
-                    //    histogramGreen.GetRange(0.7).Min)/3).ToString();
-                    // returns the range in [min,max];
 
                     Bitmap fSampleBitmap = new Bitmap(
                         firstMarkerSample.Width, firstMarkerSample.Height);
@@ -672,7 +632,6 @@ namespace WebCS
 
         private void webcamsMenuStrip_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
-            //MessageBox.Show("Item Clicked " + e.ClickedItem.ToString());
             avaliableWebcamsDropDownList.SelectedText = e.ClickedItem.ToString();
             avaliableWebcamsDropDownList_SelectedIndexChanged(null, null);
             webcamRadToggleButton.PerformClick();
