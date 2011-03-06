@@ -6,7 +6,7 @@ public static class Constants
 
     public const int DESIRED_FRAME_WIDTH = 352;
     public const int DESIRED_FRAME_HEIGHT = 288;
-    public const int DESIRED_FRAME_RATE = 15;
+    public const int DESIRED_FRAME_RATE = 25;
 
     public const int WEBCAM_ONLY_WIDTH = 373;
     public const int WEBCAM_ONLY_HEIGHT = 358;

@@ -569,7 +569,7 @@
             this.Controls.Add(this.optionsRadPanel);
             this.Controls.Add(this.webcamRadPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("systemTrayIcon.Icon")));
             this.MaximizeBox = false;
             this.Name = "WebCSForm";
             // 
