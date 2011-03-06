@@ -239,7 +239,9 @@ namespace WebCS
             //update image 
             newFrame = (Bitmap)eventArgs.Frame.Clone();
             newFrame = ResizeBitmap(newFrame, Constants.IMAGE_WIDTH, Constants.IMAGE_HEIGHT);
-            
+
+            newFrame.RotateFlip(RotateFlipType.Rotate180FlipY); //miror image
+
             if (applyFilterRadCheckBox.Checked)
             {
                 BitmapData objectsData = newFrame.LockBits(
@@ -282,8 +284,6 @@ namespace WebCS
                     new Pen(Color.LightBlue, 2));
             }
 
-            newFrame.RotateFlip(RotateFlipType.Rotate180FlipY); //miror image
-
             if (areDesktopBounriesVisible)
             {
                 newFrame = drawRectangleOnBitmap(
@@ -320,9 +320,6 @@ namespace WebCS
                 markerRect = new Rectangle(
                     new Point (biggestBlob.BlobPosition.X, biggestBlob.BlobPosition.Y), 
                     blobSize);
-                userRadLabel.Text =
-                    "(" + (markerRect.X + markerRect.Width / 2).ToString() +
-                    "; " + (markerRect.Y + markerRect.Height / 2).ToString() + ") ";
                 if (loadWorkingFrame)
                 {
                     newFrame = (Bitmap)frame.Clone();
