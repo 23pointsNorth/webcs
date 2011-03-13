@@ -213,15 +213,20 @@ namespace WebCS
         }
 
         bool areDesktopBounriesVisible = false;
+        bool changeFirstClick = false;
+        bool changeSecondClick = false;
 
         private void SelectDesktopAreaButton_Click(object sender, EventArgs e)
         {
             //select the new boundries of the desktop, so that the whole screen can be accessed
             this.imageContainer.MouseDown += new System.Windows.Forms.MouseEventHandler(this.imageContainer_MouseDown);
             areDesktopBounriesVisible = true;
- 
-            firstClick = new Point(-1, -1);
-            secondClick = new Point(-1, -1);
+
+            changeFirstClick = true;
+            changeSecondClick = true;
+
+            //firstClick = new Point(-1, -1);
+            //secondClick = new Point(-1, -1);
         }
 
         Bitmap newFrame;
@@ -651,15 +656,17 @@ namespace WebCS
 
         private void imageContainer_MouseDown(object sender, MouseEventArgs e)
         {
-            if (firstClick == new Point(-1, -1))
+            if (changeFirstClick)
             {
                 firstClick = e.Location;
+                changeFirstClick = false;
             }
             else
             {
-                if (secondClick == new Point(-1, -1))
+                if (changeSecondClick)
                 {
                     secondClick = e.Location;
+                    changeSecondClick = false;
                     desktopBoundries = new Rectangle(
                         Math.Min(firstClick.X,secondClick.X), 
                         Math.Min(firstClick.Y,secondClick.Y), 

@@ -7,8 +7,8 @@ public class Mouse
 {
     Point mouse;
     Point pressure;
-    private const int deltaX = 50;
-    private const int deltaY = 50;
+    private const int deltaX = 75;
+    private const int deltaY = 75;
     private const int acuracyInPixels = 1;
     Rectangle desktopAreaBoundries;
 
@@ -63,8 +63,6 @@ public class Mouse
 
     private Point newPostionInScreenPixels()
     {
-        //int screenX = (int)(Cursor.Clip.Width * 1.0 / Constants.IMAGE_WIDTH * mouse.X);
-        //int screenY = (int)(Cursor.Clip.Height * 1.0 / Constants.IMAGE_HEIGHT * mouse.Y);
         int screenX = (int)(Cursor.Clip.Width * 1.0 / desktopAreaBoundries.Width) * (mouse.X - desktopAreaBoundries.X);
         int screenY = (int)(Cursor.Clip.Height * 1.0 / desktopAreaBoundries.Height) * (mouse.Y - desktopAreaBoundries.Y);
        
