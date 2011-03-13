@@ -297,7 +297,10 @@ namespace WebCS
                     new Pen(Color.Gray, 2));
             }
 
-            imageContainer.Image = newFrame;    //update image to container
+            if (showFrames)
+            {
+                imageContainer.Image = newFrame;    //update image to container
+            }
         }
 
         private void CalculateMarker(Bitmap frame, Color markerColor, Color rectangleColor, int rangeNum, bool loadWorkingFrame, out Rectangle markerRect)
@@ -676,6 +679,21 @@ namespace WebCS
                     this.imageContainer.MouseDown -= 
                         new System.Windows.Forms.MouseEventHandler(this.imageContainer_MouseDown);
                 }
+            }
+        }
+
+        bool showFrames = true;
+
+        private void noFramesRadRadioButton_ToggleStateChanged(object sender, StateChangedEventArgs args)
+        {
+            if (noFramesRadRadioButton.IsChecked)
+            {
+                DrawOnEmptyFrame("No Frames\nmode.");
+                showFrames = false;
+            }
+            else
+            {
+                showFrames = true;
             }
         }
     }
