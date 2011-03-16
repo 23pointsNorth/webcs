@@ -282,35 +282,40 @@ namespace WebCS
                     }
                 }
             }
-
-            if (firstMarkerChangeColor)
+            try
             {
-                newFrame = drawRectangleOnBitmap(
-                    (Bitmap)newFrame.Clone(),
-                    firstMarkerGetColorRect,
-                    new Pen(Color.LightGreen, 2));
-            }
+                if (firstMarkerChangeColor)
+                {
+                    newFrame = drawRectangleOnBitmap(
+                        (Bitmap)newFrame.Clone(),
+                        firstMarkerGetColorRect,
+                        new Pen(Color.LightGreen, 2));
+                }
 
-            if (secondMarkerChangeColor)
-            {
-                newFrame = drawRectangleOnBitmap(
-                    (Bitmap)newFrame.Clone(),
-                    secondMarkerGetColorRect,
-                    new Pen(Color.LightBlue, 2));
-            }
+                if (secondMarkerChangeColor)
+                {
+                    newFrame = drawRectangleOnBitmap(
+                        (Bitmap)newFrame.Clone(),
+                        secondMarkerGetColorRect,
+                        new Pen(Color.LightBlue, 2));
+                }
 
-            if (areDesktopBounriesVisible)
-            {
-                newFrame = drawRectangleOnBitmap(
-                    (Bitmap)newFrame.Clone(),
-                    desktopBoundries,
-                    new Pen(Color.Gray, 2));
+                if (areDesktopBounriesVisible)
+                {
+                    newFrame = drawRectangleOnBitmap(
+                        (Bitmap)newFrame.Clone(),
+                        desktopBoundries,
+                        new Pen(Color.Gray, 2));
+                }
             }
-
-            if (showFrames)
+            finally
             {
-                imageContainer.Image = newFrame;    //update image to container
+                if (showFrames)
+                {
+                    imageContainer.Image = newFrame;    //update image to container
+                }
             }
+            
         }
 
         static Rectangle wholeDesktopArea = new Rectangle(0,0, Constants.IMAGE_WIDTH, Constants.IMAGE_HEIGHT);
@@ -327,7 +332,7 @@ namespace WebCS
             filter.CenterColor.Color = markerColor;
             filter.Radius = getRange(rangeNum);
             filter.ApplyInPlace(ObjectsData);
-
+            
             try
             {
                 ExtractBiggestBlob biggestBlob = new ExtractBiggestBlob();
@@ -476,8 +481,7 @@ namespace WebCS
         {
             if (!firstMarkerChangeColor)
             {
-                firstMarkerLoadRadRadioButton.IsChecked = false;
-                secondMarkerLoadRadRadioButton.IsChecked = false;
+                noLoadRadRadioButton.IsChecked = true;
                 firstMarkerChangeColor = true;
             }
             else
@@ -527,8 +531,7 @@ namespace WebCS
         {
             if (!secondMarkerChangeColor)
             {
-                firstMarkerLoadRadRadioButton.IsChecked = false;
-                secondMarkerLoadRadRadioButton.IsChecked = false;
+                noLoadRadRadioButton.IsChecked = true;
                 secondMarkerChangeColor = true;
             }
             else
