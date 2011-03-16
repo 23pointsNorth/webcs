@@ -118,5 +118,17 @@ namespace WebCS.Properties {
                 this["areDesktopAreaBoundriesVisible"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool isMouseEnabled {
+            get {
+                return ((bool)(this["isMouseEnabled"]));
+            }
+            set {
+                this["isMouseEnabled"] = value;
+            }
+        }
     }
 }

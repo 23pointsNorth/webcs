@@ -40,14 +40,14 @@ public class Mouse
         pressure = new Point(
             Math.Min(desktopAreaBoundries.X + desktopAreaBoundries.Width, Math.Max(uncheckedPressure.X, desktopAreaBoundries.X)),
             Math.Min(desktopAreaBoundries.Y + desktopAreaBoundries.Height, Math.Max(uncheckedPressure.Y, desktopAreaBoundries.Y)));
+
+        Cursor.Position = newPostionInScreenPixels();
     }
 
-    public void MoveMouseAndClick()
+    public void Click()
     {
         if (mouse.X >= 0 && mouse.Y >= 0)
         {
-            Cursor.Position = newPostionInScreenPixels();
-
             if (Math.Abs(mouse.X - pressure.X) < deltaX &&
                 Math.Abs(mouse.Y - pressure.Y) < deltaY)
             {

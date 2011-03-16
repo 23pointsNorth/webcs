@@ -27,6 +27,7 @@ namespace WebCS
             desktopBoundries = User.Default.desktopAreaBoundriesRectangle;
             areDesktopBounriesVisible = User.Default.areDesktopAreaBoundriesVisible;
             softwareCursor.DesktopArea = desktopBoundries;
+            enableMouseRadCheckBox.Checked = User.Default.isMouseEnabled;
             LoadAvaliableWebcams();
             LoadMarkers();
             LoadAtStartup();
@@ -238,6 +239,8 @@ namespace WebCS
         Rectangle firstMarkerRect;
         Rectangle secondMarkerRect;
         Mouse softwareCursor = new Mouse(Cursor.Position, new Point(0, 0));
+        bool foundFirstMarker = false;
+        bool foundSecondMarker = false;
 
         private void FinalVideoSource_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
@@ -265,12 +268,19 @@ namespace WebCS
                 //find marker positions
                 CalculateMarker(
                     firstFrameClone, firstMarkerColor, Color.Green, 1, 
-                    firstMarkerLoadRadRadioButton.IsChecked, out firstMarkerRect);
+                    firstMarkerLoadRadRadioButton.IsChecked, out firstMarkerRect, out foundFirstMarker);
                 CalculateMarker(
                     secondFrameClone, secondMarkerColor, Color.Blue, 2, 
-                    secondMarkerLoadRadRadioButton.IsChecked, out secondMarkerRect);
-                softwareCursor.SetNewPosition(firstMarkerRect, secondMarkerRect);
-                softwareCursor.MoveMouseAndClick();
+                    secondMarkerLoadRadRadioButton.IsChecked, out secondMarkerRect, out foundSecondMarker);
+                if (foundFirstMarker)
+                {
+                    softwareCursor.SetNewPosition(firstMarkerRect, secondMarkerRect);
+
+                    if (isMouseEnabled && !secondMarkerRect.Equals(wholeDesktopArea) && foundSecondMarker)
+                    {
+                        softwareCursor.Click();
+                    }
+                }
             }
 
             if (firstMarkerChangeColor)
@@ -303,9 +313,11 @@ namespace WebCS
             }
         }
 
-        private void CalculateMarker(Bitmap frame, Color markerColor, Color rectangleColor, int rangeNum, bool loadWorkingFrame, out Rectangle markerRect)
+        static Rectangle wholeDesktopArea = new Rectangle(0,0, Constants.IMAGE_WIDTH, Constants.IMAGE_HEIGHT);
+
+        private void CalculateMarker(Bitmap frame, Color markerColor, Color rectangleColor, int rangeNum, bool loadWorkingFrame, out Rectangle markerRect, out bool found)
         {
-            markerRect = new Rectangle(new Point(0, 0), frame.Size);
+            markerRect = wholeDesktopArea;
             BitmapData ObjectsData = frame.LockBits(
                     new Rectangle(0, 0, frame.Width, frame.Height),
                     ImageLockMode.ReadOnly, frame.PixelFormat);
@@ -325,6 +337,7 @@ namespace WebCS
                 {
                     throw new ArgumentException("Blob too small.");
                 }
+                found = true;
                 markerRect = new Rectangle(
                     new Point (biggestBlob.BlobPosition.X, biggestBlob.BlobPosition.Y), 
                     blobSize);
@@ -338,6 +351,7 @@ namespace WebCS
             catch (ArgumentException)
             {
                 //no blob found. stay on last known position
+                found = false;
             }
 
             frame.UnlockBits(ObjectsData);
@@ -622,6 +636,7 @@ namespace WebCS
             User.Default.applyMeanFilter = applyFilterRadCheckBox.Checked;
             User.Default.desktopAreaBoundriesRectangle = desktopBoundries;
             User.Default.areDesktopAreaBoundriesVisible = areDesktopBounriesVisible;
+            User.Default.isMouseEnabled = isMouseEnabled;
             User.Default.Save();
         }
 
@@ -695,6 +710,12 @@ namespace WebCS
             {
                 showFrames = true;
             }
+        }
+
+        bool isMouseEnabled = false;
+        private void enableMouseRadCheckBox_ToggleStateChanged(object sender, StateChangedEventArgs args)
+        {
+            isMouseEnabled = enableMouseRadCheckBox.Checked;
         }
     }
 }
