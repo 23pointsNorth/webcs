@@ -486,41 +486,48 @@ namespace WebCS
             }
             else
             {
-                if (finalVideoSource.FramesReceived>0) // if not running - no frame - no color
+                if (finalVideoSource.FramesReceived > 0) // if not running - no frame - no color
                 {
-                    firstMarkerChangeColor = false;
-
-                    //get rectangle info; crop first pixel - red line
-                    Bitmap fSample;
-                    lock (newFrame)
+                    try
                     {
-                        fSample = newFrame.Clone(firstMarkerGetColorRect, newFrame.PixelFormat);
-                    }
-                    new Mean().Apply(fSample);
+                        firstMarkerChangeColor = false;
 
-                    ImageStatistics statistics = new ImageStatistics(fSample);
-
-                    Histogram histogramRed = statistics.RedWithoutBlack;
-                    Histogram histogramGreen = statistics.GreenWithoutBlack;
-                    Histogram histogramBlue = statistics.BlueWithoutBlack;
-
-                    // get the values
-                    int meanRed = (int)histogramRed.Mean;     // mean red value
-                    int meanGreen = (int)histogramGreen.Mean;
-                    int meanBlue = (int)histogramBlue.Mean;
-
-                    firstMarkerColor = Color.FromArgb(meanRed, meanGreen, meanBlue);
-
-                    Bitmap fSampleBitmap = new Bitmap(
-                        firstMarkerSample.Width, firstMarkerSample.Height);
-                    using (Graphics g = Graphics.FromImage(fSampleBitmap))
-                    {
-                        using (SolidBrush brush = new SolidBrush(firstMarkerColor))
+                        //get rectangle info; crop first pixel - red line
+                        Bitmap fSample;
+                        lock (newFrame)
                         {
-                            g.FillRectangle(brush, 0, 0, firstMarkerSample.Width, firstMarkerSample.Height);
+                            fSample = newFrame.Clone(firstMarkerGetColorRect, newFrame.PixelFormat);
                         }
+                        new Mean().Apply(fSample);
+
+                        ImageStatistics statistics = new ImageStatistics(fSample);
+
+                        Histogram histogramRed = statistics.RedWithoutBlack;
+                        Histogram histogramGreen = statistics.GreenWithoutBlack;
+                        Histogram histogramBlue = statistics.BlueWithoutBlack;
+
+                        // get the values
+                        int meanRed = (int)histogramRed.Mean;     // mean red value
+                        int meanGreen = (int)histogramGreen.Mean;
+                        int meanBlue = (int)histogramBlue.Mean;
+
+                        firstMarkerColor = Color.FromArgb(meanRed, meanGreen, meanBlue);
+
+                        Bitmap fSampleBitmap = new Bitmap(
+                            firstMarkerSample.Width, firstMarkerSample.Height);
+                        using (Graphics g = Graphics.FromImage(fSampleBitmap))
+                        {
+                            using (SolidBrush brush = new SolidBrush(firstMarkerColor))
+                            {
+                                g.FillRectangle(brush, 0, 0, firstMarkerSample.Width, firstMarkerSample.Height);
+                            }
+                        }
+                        firstMarkerSample.Image = fSampleBitmap;
                     }
-                    firstMarkerSample.Image = fSampleBitmap;
+                    catch
+                    {
+                        firstMarkerChangeRadButton.PerformClick();
+                    }
                 }
             }
 
@@ -536,41 +543,48 @@ namespace WebCS
             }
             else
             {
-                if (finalVideoSource.FramesReceived>0)
+                if (finalVideoSource.FramesReceived > 0)
                 {
-                    secondMarkerChangeColor = false;
-
-                    //get rectangle info; crop first pixel - red line
-                    Bitmap sSample;
-                    lock (newFrame)
+                    try
                     {
-                        sSample = newFrame.Clone(secondMarkerGetColorRect, newFrame.PixelFormat);
-                    }
-                    new Mean().Apply(sSample);
+                        secondMarkerChangeColor = false;
 
-                    ImageStatistics statistics = new ImageStatistics(sSample);
-
-                    Histogram histogramRed = statistics.RedWithoutBlack;
-                    Histogram histogramGreen = statistics.GreenWithoutBlack;
-                    Histogram histogramBlue = statistics.BlueWithoutBlack;
-
-                    // get the values
-                    int meanRed = (int)histogramRed.Mean;     // mean red value
-                    int meanGreen = (int)histogramGreen.Mean;
-                    int meanBlue = (int)histogramBlue.Mean;
-
-                    secondMarkerColor = Color.FromArgb(meanRed, meanGreen, meanBlue);
-
-                    Bitmap sSampleBitmap = new Bitmap(
-                        secondMarkerSample.Width, secondMarkerSample.Height);
-                    using (Graphics g = Graphics.FromImage(sSampleBitmap))
-                    {
-                        using (SolidBrush brush = new SolidBrush(secondMarkerColor))
+                        //get rectangle info; crop first pixel - red line
+                        Bitmap sSample;
+                        lock (newFrame)
                         {
-                            g.FillRectangle(brush, 0, 0, secondMarkerSample.Width, secondMarkerSample.Height);
+                            sSample = newFrame.Clone(secondMarkerGetColorRect, newFrame.PixelFormat);
                         }
+                        new Mean().Apply(sSample);
+
+                        ImageStatistics statistics = new ImageStatistics(sSample);
+
+                        Histogram histogramRed = statistics.RedWithoutBlack;
+                        Histogram histogramGreen = statistics.GreenWithoutBlack;
+                        Histogram histogramBlue = statistics.BlueWithoutBlack;
+
+                        // get the values
+                        int meanRed = (int)histogramRed.Mean;     // mean red value
+                        int meanGreen = (int)histogramGreen.Mean;
+                        int meanBlue = (int)histogramBlue.Mean;
+
+                        secondMarkerColor = Color.FromArgb(meanRed, meanGreen, meanBlue);
+
+                        Bitmap sSampleBitmap = new Bitmap(
+                            secondMarkerSample.Width, secondMarkerSample.Height);
+                        using (Graphics g = Graphics.FromImage(sSampleBitmap))
+                        {
+                            using (SolidBrush brush = new SolidBrush(secondMarkerColor))
+                            {
+                                g.FillRectangle(brush, 0, 0, secondMarkerSample.Width, secondMarkerSample.Height);
+                            }
+                        }
+                        secondMarkerSample.Image = sSampleBitmap;
                     }
-                    secondMarkerSample.Image = sSampleBitmap;
+                    catch
+                    {
+                        secondMarkerChangeRadButton.PerformClick();
+                    }
                 }
             }
 
