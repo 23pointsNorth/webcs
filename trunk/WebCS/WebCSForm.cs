@@ -71,6 +71,8 @@ namespace WebCS
                 secondMarkerColor = User.Default.secondMarkerColorUser;
                 firstMarkerRangeRadTextBox.Text = User.Default.firstMarkerRangeUser.ToString();
                 secondMarkerRangeRadTextBox.Text = User.Default.secondMarkerRangeUser.ToString();
+                firstMarkerRange = User.Default.firstMarkerRangeUser;
+                secondMarkerRange = User.Default.secondMarkerRangeUser;
             }
             catch
             {
@@ -78,6 +80,8 @@ namespace WebCS
                 secondMarkerColor = emptyColor;
                 firstMarkerRangeRadTextBox.Text = "20";
                 secondMarkerRangeRadTextBox.Text = "20";
+                firstMarkerRange = 20;
+                secondMarkerRange = 20;
             }
             firstMarkerSample.Image = DrawFilledRectangle(
                 firstMarkerSample.Width, firstMarkerSample.Height, firstMarkerColor);
@@ -342,7 +346,6 @@ namespace WebCS
                 {
                     throw new ArgumentException("Blob too small.");
                 }
-                found = true;
                 markerRect = new Rectangle(
                     new Point (biggestBlob.BlobPosition.X, biggestBlob.BlobPosition.Y), 
                     blobSize);
@@ -350,6 +353,7 @@ namespace WebCS
                 {
                     newFrame = (Bitmap)frame.Clone();
                 }
+                found = true;
                 newFrame = drawRectangleOnBitmap(
                     newFrame, markerRect, new Pen(rectangleColor, 2));
             }
