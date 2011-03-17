@@ -267,10 +267,10 @@ namespace WebCS
                 secondFrameClone = new Bitmap(newFrame);
                 //find marker positions
                 CalculateMarker(
-                    firstFrameClone, firstMarkerColor, Color.Green, 1, 
+                    firstFrameClone, firstMarkerColor, Color.Green, firstMarkerRange, 
                     firstMarkerLoadRadRadioButton.IsChecked, out firstMarkerRect, out foundFirstMarker);
                 CalculateMarker(
-                    secondFrameClone, secondMarkerColor, Color.Blue, 2, 
+                    secondFrameClone, secondMarkerColor, Color.Blue, secondMarkerRange, 
                     secondMarkerLoadRadRadioButton.IsChecked, out secondMarkerRect, out foundSecondMarker);
                 if (foundFirstMarker)
                 {
@@ -320,7 +320,7 @@ namespace WebCS
 
         static Rectangle wholeDesktopArea = new Rectangle(0,0, Constants.IMAGE_WIDTH, Constants.IMAGE_HEIGHT);
 
-        private void CalculateMarker(Bitmap frame, Color markerColor, Color rectangleColor, int rangeNum, bool loadWorkingFrame, out Rectangle markerRect, out bool found)
+        private void CalculateMarker(Bitmap frame, Color markerColor, Color rectangleColor, int colorRange, bool loadWorkingFrame, out Rectangle markerRect, out bool found)
         {
             markerRect = wholeDesktopArea;
             BitmapData ObjectsData = frame.LockBits(
@@ -330,7 +330,7 @@ namespace WebCS
             EuclideanColorFiltering filter = new EuclideanColorFiltering();
             // set center color and radius
             filter.CenterColor.Color = markerColor;
-            filter.Radius = getRange(rangeNum);
+            filter.Radius = (short)colorRange;
             filter.ApplyInPlace(ObjectsData);
             
             try
@@ -360,42 +360,6 @@ namespace WebCS
             }
 
             frame.UnlockBits(ObjectsData);
-        }
-
-        private short getRange(int marker)
-        {
-            int range = 0;
-            if (marker == 1)
-            {
-                try
-                {
-                    range = int.Parse(firstMarkerRangeRadTextBox.Text);
-                    range = Math.Max(0, range);
-                    range = Math.Min(255, range);
-                    firstMarkerRangeRadTextBox.Text = range.ToString();
-                }
-                catch
-                {
-                    firstMarkerRangeRadTextBox.Text = "0";
-                }
-                return (short)range;
-            }
-            else if (marker == 2)
-            {
-                try
-                {
-                    range = int.Parse(secondMarkerRangeRadTextBox.Text);
-                    range = Math.Max(0, range);
-                    range = Math.Min(255, range);
-                    secondMarkerRangeRadTextBox.Text = range.ToString();
-                }
-                catch
-                {
-                    secondMarkerRangeRadTextBox.Text = "0";
-                }
-                return (short)range;
-            }
-            else return (short)range;
         }
 
         private void WebCSForm_FormClosing(object sender, System.Windows.Forms.FormClosingEventArgs e)
@@ -647,9 +611,9 @@ namespace WebCS
         {
             User.Default.loadWebcamName = avaliableWebcamsDropDownList.SelectedText;
             User.Default.firstMarkerColorUser = firstMarkerColor;
-            User.Default.firstMarkerRangeUser = getRange(1);
+            User.Default.firstMarkerRangeUser = firstMarkerRange;
             User.Default.secondMarkerColorUser = secondMarkerColor;
-            User.Default.secondMarkerRangeUser = getRange(2);
+            User.Default.secondMarkerRangeUser = secondMarkerRange;
             User.Default.applyMeanFilter = applyFilterRadCheckBox.Checked;
             User.Default.desktopAreaBoundriesRectangle = desktopBoundries;
             User.Default.areDesktopAreaBoundriesVisible = areDesktopBounriesVisible;
@@ -734,5 +698,41 @@ namespace WebCS
         {
             isMouseEnabled = enableMouseRadCheckBox.Checked;
         }
+
+        int firstMarkerRange;
+        int secondMarkerRange;
+
+        private void firstMarkerRangeRadTextBox_TextChanged(object sender, EventArgs e)
+        {
+            int range = int.Parse(firstMarkerRangeRadTextBox.Text);
+            if (range > 255)
+            {
+                range = 255;
+                firstMarkerRangeRadTextBox.Text = range.ToString();
+            }
+            else if (range < 0)
+            {
+                range = 0;
+                firstMarkerRangeRadTextBox.Text = range.ToString();
+            }
+            firstMarkerRange = range;
+        }
+
+        private void secondMarkerRangeRadTextBox_TextChanged(object sender, EventArgs e)
+        {
+            int range = int.Parse(secondMarkerRangeRadTextBox.Text);
+            if (range > 255)
+            {
+                range = 255;
+                secondMarkerRangeRadTextBox.Text = range.ToString();
+            }
+            else if (range < 0)
+            {
+                range = 0;
+                secondMarkerRangeRadTextBox.Text = range.ToString();
+            }
+            secondMarkerRange = range;
+        }
+
     }
 }
