@@ -708,7 +708,16 @@ namespace WebCS
 
         private void firstMarkerRangeRadTextBox_TextChanged(object sender, EventArgs e)
         {
-            int range = int.Parse(firstMarkerRangeRadTextBox.Text);
+            int range;
+            try
+            {
+                range = int.Parse(firstMarkerRangeRadTextBox.Text);
+            }
+            catch (FormatException)
+            {
+                range = 0;
+            }
+
             if (range > 255)
             {
                 range = 255;
@@ -724,7 +733,16 @@ namespace WebCS
 
         private void secondMarkerRangeRadTextBox_TextChanged(object sender, EventArgs e)
         {
-            int range = int.Parse(secondMarkerRangeRadTextBox.Text);
+            int range;
+            try
+            {
+                range = int.Parse(secondMarkerRangeRadTextBox.Text);
+            }
+            catch (FormatException)
+            {
+                range = 0;
+            }
+
             if (range > 255)
             {
                 range = 255;
@@ -736,6 +754,7 @@ namespace WebCS
                 secondMarkerRangeRadTextBox.Text = range.ToString();
             }
             secondMarkerRange = range;
+
         }
 
     }
