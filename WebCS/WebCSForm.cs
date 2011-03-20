@@ -28,6 +28,7 @@ namespace WebCS
             areDesktopBounriesVisible = User.Default.areDesktopAreaBoundriesVisible;
             softwareCursor.DesktopArea = desktopBoundries;
             enableMouseRadCheckBox.Checked = User.Default.isMouseEnabled;
+            centerLineRadCheckBox.Checked = User.Default.showCenterLine;
             LoadAvaliableWebcams();
             LoadMarkers();
             LoadAtStartup();
@@ -168,9 +169,9 @@ namespace WebCS
                     finalVideoSource.Stop();
                 }
             }
-            catch (NullReferenceException e1)
+            catch (NullReferenceException e)
             {
-                userRadLabel.Text = "Video not started. " + e1.Message;
+                userRadLabel.Text = "Video not started. " + e.Message;
             }
         }
 
@@ -229,9 +230,6 @@ namespace WebCS
 
             changeFirstClick = true;
             changeSecondClick = true;
-
-            //firstClick = new Point(-1, -1);
-            //secondClick = new Point(-1, -1);
         }
 
         Bitmap newFrame;
