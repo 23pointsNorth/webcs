@@ -23,6 +23,8 @@ namespace WebCS
                 Constants.WEBCAM_ONLY_WIDTH, Constants.WEBCAM_ONLY_HEIGHT);
             DrawOnEmptyFrame("Webcam \nnot selected.");
             avaliableWebcamsDropDownList.Items.Add("Select Webcam");
+
+            //loading the saved user settings
             applyFilterRadCheckBox.Checked = User.Default.applyMedianFilter;
             desktopBoundries = User.Default.desktopAreaBoundriesRectangle;
             areDesktopBounriesVisible = User.Default.areDesktopAreaBoundriesVisible;
@@ -79,6 +81,7 @@ namespace WebCS
             }
             catch
             {
+                //default 
                 firstMarkerColor = emptyColor;
                 secondMarkerColor = emptyColor;
                 firstMarkerRangeRadTextBox.Text = "20";
@@ -139,12 +142,14 @@ namespace WebCS
             }
             else
             { 
+                //show that there are not webcams
                 webcamsMenuStrip.Items.Add("No webcams");
                 webcamsMenuStrip.Enabled = false;
             }
 
             foreach (FilterInfo videoCaptureDevice in videoCaptureDevices)
             {
+                //add all webcams to the drop down list
                 avaliableWebcamsDropDownList.Items.Add(videoCaptureDevice.Name);
                 webcamsMenuStrip.Items.Add(videoCaptureDevice.Name.ToString());
             }
@@ -186,6 +191,7 @@ namespace WebCS
         }
         private void optionsToggleButton_ToggleStateChanged(object sender, StateChangedEventArgs args)
         {
+            //Resize control corresponding to the case 
             if (args.ToggleState == ToggleState.On)
             {
                 optionsRadPanel.Show();
@@ -240,12 +246,14 @@ namespace WebCS
 
         private void FinalVideoSource_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
+            //When a new frame is recieved, all the alogrithms should be run
             //update image 
             newFrame = (Bitmap)eventArgs.Frame.Clone();
             newFrame = ResizeBitmap(newFrame, Constants.IMAGE_WIDTH, Constants.IMAGE_HEIGHT);
 
             newFrame.RotateFlip(RotateFlipType.Rotate180FlipY); //miror image
 
+            //should the median fileter be applied
             if (applyFilterRadCheckBox.Checked)
             {
                 BitmapData objectsData = newFrame.LockBits(
@@ -256,11 +264,13 @@ namespace WebCS
                 newFrame.UnlockBits(objectsData);
             }
 
+            //is tracking enabled?
             if (trackingToggleButton.ToggleState == ToggleState.On)
             {
                 //make sure both clones contain starting bitmap
                 firstFrameClone = new Bitmap(newFrame);
                 secondFrameClone = new Bitmap(newFrame);
+
                 //find marker positions
                 CalculateMarker(
                     firstFrameClone, firstMarkerColor, Color.Green, firstMarkerRange, 
@@ -268,18 +278,22 @@ namespace WebCS
                 CalculateMarker(
                     secondFrameClone, secondMarkerColor, Color.Blue, secondMarkerRange, 
                     secondMarkerLoadRadRadioButton.IsChecked, out secondMarkerRect, out foundSecondMarker);
+                
                 if (foundFirstMarker)
                 {
+                    //when the position of the marker is known, the curson can be moved, otherwise do nothing
                     softwareCursor.SetNewPosition(firstMarkerRect, secondMarkerRect);
 
                     if (isMouseEnabled && !secondMarkerRect.Equals(wholeDesktopArea) && foundSecondMarker)
                     {
+                        //You only click when the mouse is enabled and when both markers are found
                         softwareCursor.Click();
                     }
                 }
             }
             try
             {
+                //under-the-hood options
                 if (firstMarkerChangeColor)
                 {
                     newFrame = drawRectangleOnBitmap(
@@ -304,6 +318,7 @@ namespace WebCS
                         new Pen(Color.Gray, 2));
                 }
 
+                //drawing a line connecting the centers of both markers
                 if (connectCenters && foundFirstMarker && foundSecondMarker && 
                     (trackingToggleButton.ToggleState == ToggleState.On))
                 {
@@ -792,6 +807,5 @@ namespace WebCS
             softwareCursor.DeltaPosition = delta;
             proximityClick = delta;
         }
-
     }
 }
