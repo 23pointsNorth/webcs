@@ -70,7 +70,6 @@ public class Mouse
         {
             isMouseDown = true;
             doLeftDown();
-            //doMouseClick(); 
         }
         else
         {
