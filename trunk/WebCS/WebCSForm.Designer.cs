@@ -75,6 +75,7 @@
             this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vistaTheme = new Telerik.WinControls.Themes.VistaTheme();
             this.timeOut = new System.Windows.Forms.Timer(this.components);
+            this.centerLineRadCheckBox = new Telerik.WinControls.UI.RadCheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.trackingToggleButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.exitRadButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.optionsToggleButton)).BeginInit();
@@ -114,13 +115,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.secondMarkerChangeRadButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.secondMarkerRangeRadLabel)).BeginInit();
             this.iconContextMenuStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.centerLineRadCheckBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
             // 
             // trackingToggleButton
             // 
             this.trackingToggleButton.Enabled = false;
-            this.trackingToggleButton.Location = new System.Drawing.Point(4, 297);
+            this.trackingToggleButton.Location = new System.Drawing.Point(4, 328);
             this.trackingToggleButton.Name = "trackingToggleButton";
             // 
             // 
@@ -135,7 +137,7 @@
             // exitRadButton
             // 
             this.exitRadButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.exitRadButton.Location = new System.Drawing.Point(251, 297);
+            this.exitRadButton.Location = new System.Drawing.Point(251, 328);
             this.exitRadButton.Name = "exitRadButton";
             this.exitRadButton.Size = new System.Drawing.Size(105, 25);
             this.exitRadButton.TabIndex = 3;
@@ -145,7 +147,7 @@
             // 
             // optionsToggleButton
             // 
-            this.optionsToggleButton.Location = new System.Drawing.Point(124, 297);
+            this.optionsToggleButton.Location = new System.Drawing.Point(124, 328);
             this.optionsToggleButton.Name = "optionsToggleButton";
             this.optionsToggleButton.Size = new System.Drawing.Size(105, 25);
             this.optionsToggleButton.TabIndex = 2;
@@ -157,11 +159,13 @@
             // 
             this.webcamRadPanel.Controls.Add(this.imageContainer);
             this.webcamRadPanel.Controls.Add(this.trackingToggleButton);
+            this.webcamRadPanel.Controls.Add(this.webcamRadToggleButton);
             this.webcamRadPanel.Controls.Add(this.optionsToggleButton);
+            this.webcamRadPanel.Controls.Add(this.avaliableWebcamsDropDownList);
             this.webcamRadPanel.Controls.Add(this.exitRadButton);
             this.webcamRadPanel.Location = new System.Drawing.Point(3, 3);
             this.webcamRadPanel.Name = "webcamRadPanel";
-            this.webcamRadPanel.Size = new System.Drawing.Size(360, 325);
+            this.webcamRadPanel.Size = new System.Drawing.Size(360, 356);
             this.webcamRadPanel.TabIndex = 1;
             this.webcamRadPanel.ThemeName = "Vista";
             // 
@@ -176,27 +180,26 @@
             // 
             // optionsRadPanel
             // 
+            this.optionsRadPanel.Controls.Add(this.centerLineRadCheckBox);
             this.optionsRadPanel.Controls.Add(this.enableMouseRadCheckBox);
             this.optionsRadPanel.Controls.Add(this.saveOptionsRadButton);
             this.optionsRadPanel.Controls.Add(this.workingFrameRadGroupBox);
             this.optionsRadPanel.Controls.Add(this.FirstMarkerRadGroupBox);
-            this.optionsRadPanel.Controls.Add(this.webcamRadToggleButton);
             this.optionsRadPanel.Controls.Add(this.applyFilterRadCheckBox);
             this.optionsRadPanel.Controls.Add(this.userRadLabel);
-            this.optionsRadPanel.Controls.Add(this.avaliableWebcamsDropDownList);
             this.optionsRadPanel.Controls.Add(this.startupRadCheckBox);
             this.optionsRadPanel.Controls.Add(this.SelectDesktopAreaButton);
             this.optionsRadPanel.Controls.Add(this.SecondMarkerRadGroupBox);
             this.optionsRadPanel.Location = new System.Drawing.Point(369, 3);
             this.optionsRadPanel.Name = "optionsRadPanel";
-            this.optionsRadPanel.Size = new System.Drawing.Size(362, 325);
+            this.optionsRadPanel.Size = new System.Drawing.Size(362, 356);
             this.optionsRadPanel.TabIndex = 2;
             this.optionsRadPanel.ThemeName = "Vista";
             this.optionsRadPanel.Visible = false;
             // 
             // enableMouseRadCheckBox
             // 
-            this.enableMouseRadCheckBox.Location = new System.Drawing.Point(12, 32);
+            this.enableMouseRadCheckBox.Location = new System.Drawing.Point(12, 3);
             this.enableMouseRadCheckBox.Name = "enableMouseRadCheckBox";
             this.enableMouseRadCheckBox.Size = new System.Drawing.Size(93, 16);
             this.enableMouseRadCheckBox.TabIndex = 3;
@@ -206,7 +209,7 @@
             // 
             // saveOptionsRadButton
             // 
-            this.saveOptionsRadButton.Location = new System.Drawing.Point(227, 273);
+            this.saveOptionsRadButton.Location = new System.Drawing.Point(227, 284);
             this.saveOptionsRadButton.Name = "saveOptionsRadButton";
             this.saveOptionsRadButton.Size = new System.Drawing.Size(125, 25);
             this.saveOptionsRadButton.TabIndex = 19;
@@ -226,7 +229,7 @@
             this.workingFrameRadGroupBox.HeaderImageKey = "";
             this.workingFrameRadGroupBox.HeaderMargin = new System.Windows.Forms.Padding(0);
             this.workingFrameRadGroupBox.HeaderText = "Working Frame";
-            this.workingFrameRadGroupBox.Location = new System.Drawing.Point(12, 212);
+            this.workingFrameRadGroupBox.Location = new System.Drawing.Point(12, 221);
             this.workingFrameRadGroupBox.Name = "workingFrameRadGroupBox";
             this.workingFrameRadGroupBox.Padding = new System.Windows.Forms.Padding(10, 20, 10, 10);
             // 
@@ -290,7 +293,7 @@
             this.FirstMarkerRadGroupBox.HeaderImageKey = "";
             this.FirstMarkerRadGroupBox.HeaderMargin = new System.Windows.Forms.Padding(0);
             this.FirstMarkerRadGroupBox.HeaderText = "First Marker";
-            this.FirstMarkerRadGroupBox.Location = new System.Drawing.Point(12, 56);
+            this.FirstMarkerRadGroupBox.Location = new System.Drawing.Point(12, 65);
             this.FirstMarkerRadGroupBox.Name = "FirstMarkerRadGroupBox";
             this.FirstMarkerRadGroupBox.Padding = new System.Windows.Forms.Padding(10, 20, 10, 10);
             // 
@@ -368,21 +371,21 @@
             // webcamRadToggleButton
             // 
             this.webcamRadToggleButton.Enabled = false;
-            this.webcamRadToggleButton.Location = new System.Drawing.Point(227, 5);
+            this.webcamRadToggleButton.Location = new System.Drawing.Point(251, 297);
             this.webcamRadToggleButton.Name = "webcamRadToggleButton";
             // 
             // 
             // 
             this.webcamRadToggleButton.RootElement.Enabled = false;
-            this.webcamRadToggleButton.Size = new System.Drawing.Size(125, 25);
-            this.webcamRadToggleButton.TabIndex = 2;
+            this.webcamRadToggleButton.Size = new System.Drawing.Size(105, 25);
+            this.webcamRadToggleButton.TabIndex = 1;
             this.webcamRadToggleButton.Text = "Start &Webcam";
             this.webcamRadToggleButton.ThemeName = "Vista";
             this.webcamRadToggleButton.ToggleStateChanged += new Telerik.WinControls.UI.StateChangedEventHandler(this.WebcamRadToggleButton_ToggleStateChanged);
             // 
             // applyFilterRadCheckBox
             // 
-            this.applyFilterRadCheckBox.Location = new System.Drawing.Point(156, 32);
+            this.applyFilterRadCheckBox.Location = new System.Drawing.Point(12, 25);
             this.applyFilterRadCheckBox.Name = "applyFilterRadCheckBox";
             this.applyFilterRadCheckBox.Size = new System.Drawing.Size(195, 16);
             this.applyFilterRadCheckBox.TabIndex = 4;
@@ -393,7 +396,7 @@
             // 
             this.userRadLabel.AllowDrop = true;
             this.userRadLabel.AutoScroll = true;
-            this.userRadLabel.Location = new System.Drawing.Point(169, 304);
+            this.userRadLabel.Location = new System.Drawing.Point(12, 337);
             this.userRadLabel.Name = "userRadLabel";
             this.userRadLabel.Size = new System.Drawing.Size(179, 16);
             this.userRadLabel.TabIndex = 5;
@@ -403,11 +406,11 @@
             // avaliableWebcamsDropDownList
             // 
             this.avaliableWebcamsDropDownList.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.avaliableWebcamsDropDownList.Location = new System.Drawing.Point(12, 5);
+            this.avaliableWebcamsDropDownList.Location = new System.Drawing.Point(4, 297);
             this.avaliableWebcamsDropDownList.Name = "avaliableWebcamsDropDownList";
             this.avaliableWebcamsDropDownList.ShowImageInEditorArea = true;
-            this.avaliableWebcamsDropDownList.Size = new System.Drawing.Size(208, 21);
-            this.avaliableWebcamsDropDownList.TabIndex = 1;
+            this.avaliableWebcamsDropDownList.Size = new System.Drawing.Size(225, 21);
+            this.avaliableWebcamsDropDownList.TabIndex = 2;
             this.avaliableWebcamsDropDownList.Tag = "";
             this.avaliableWebcamsDropDownList.Text = "Select Webcam";
             this.avaliableWebcamsDropDownList.ThemeName = "Vista";
@@ -415,7 +418,7 @@
             // 
             // startupRadCheckBox
             // 
-            this.startupRadCheckBox.Location = new System.Drawing.Point(12, 304);
+            this.startupRadCheckBox.Location = new System.Drawing.Point(12, 315);
             this.startupRadCheckBox.Name = "startupRadCheckBox";
             this.startupRadCheckBox.Size = new System.Drawing.Size(144, 16);
             this.startupRadCheckBox.TabIndex = 20;
@@ -425,7 +428,7 @@
             // 
             // SelectDesktopAreaButton
             // 
-            this.SelectDesktopAreaButton.Location = new System.Drawing.Point(12, 273);
+            this.SelectDesktopAreaButton.Location = new System.Drawing.Point(12, 284);
             this.SelectDesktopAreaButton.Name = "SelectDesktopAreaButton";
             this.SelectDesktopAreaButton.Size = new System.Drawing.Size(150, 25);
             this.SelectDesktopAreaButton.TabIndex = 18;
@@ -447,7 +450,7 @@
             this.SecondMarkerRadGroupBox.HeaderImageKey = "";
             this.SecondMarkerRadGroupBox.HeaderMargin = new System.Windows.Forms.Padding(0);
             this.SecondMarkerRadGroupBox.HeaderText = "Second Marker";
-            this.SecondMarkerRadGroupBox.Location = new System.Drawing.Point(12, 134);
+            this.SecondMarkerRadGroupBox.Location = new System.Drawing.Point(12, 143);
             this.SecondMarkerRadGroupBox.Name = "SecondMarkerRadGroupBox";
             this.SecondMarkerRadGroupBox.Padding = new System.Windows.Forms.Padding(10, 20, 10, 10);
             // 
@@ -604,16 +607,26 @@
             this.timeOut.Interval = 15000;
             this.timeOut.Tick += new System.EventHandler(this.timeOut_Tick);
             // 
+            // centerLineRadCheckBox
+            // 
+            this.centerLineRadCheckBox.Location = new System.Drawing.Point(12, 47);
+            this.centerLineRadCheckBox.Name = "centerLineRadCheckBox";
+            this.centerLineRadCheckBox.Size = new System.Drawing.Size(162, 16);
+            this.centerLineRadCheckBox.TabIndex = 21;
+            this.centerLineRadCheckBox.Text = "Show center connecting line";
+            this.centerLineRadCheckBox.ThemeName = "Vista";
+            this.centerLineRadCheckBox.ToggleState = Telerik.WinControls.Enumerations.ToggleState.On;
+            // 
             // WebCSForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("systemTrayIcon.Icon")));
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.exitRadButton;
-            this.ClientSize = new System.Drawing.Size(732, 328);
+            this.ClientSize = new System.Drawing.Size(732, 359);
             this.Controls.Add(this.optionsRadPanel);
             this.Controls.Add(this.webcamRadPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "WebCSForm";
             // 
@@ -629,6 +642,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.optionsToggleButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.webcamRadPanel)).EndInit();
             this.webcamRadPanel.ResumeLayout(false);
+            this.webcamRadPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imageContainer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.optionsRadPanel)).EndInit();
             this.optionsRadPanel.ResumeLayout(false);
@@ -666,6 +680,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.secondMarkerChangeRadButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.secondMarkerRangeRadLabel)).EndInit();
             this.iconContextMenuStrip.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.centerLineRadCheckBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
 
@@ -718,6 +733,7 @@
         private System.Windows.Forms.Timer timeOut;
         private Telerik.WinControls.UI.RadRadioButton noFramesRadRadioButton;
         private Telerik.WinControls.UI.RadCheckBox enableMouseRadCheckBox;
+        private Telerik.WinControls.UI.RadCheckBox centerLineRadCheckBox;
     }
 }
 

@@ -130,5 +130,17 @@ namespace WebCS.Properties {
                 this["isMouseEnabled"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool showCenterLine {
+            get {
+                return ((bool)(this["showCenterLine"]));
+            }
+            set {
+                this["showCenterLine"] = value;
+            }
+        }
     }
 }
