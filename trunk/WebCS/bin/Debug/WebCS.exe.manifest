@@ -161,14 +161,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="WebCS.exe" size="664064">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="WebCS.exe" size="666624">
       <assemblyIdentity name="WebCS" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>3vWaCUB0th5BfKXjDUmA2/qOiUM=</dsig:DigestValue>
+        <dsig:DigestValue>IYZyDkNIGTzejKx+ogXzSO2yViU=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -181,13 +181,13 @@
       <dsig:DigestValue>0N948W6lgPR4ebc8V0HOcJfXd9g=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="WebCS.exe.config" size="3629">
+  <file name="WebCS.exe.config" size="3754">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>5FcNwOH6IKQvdACXzfTt7YQx+Po=</dsig:DigestValue>
+      <dsig:DigestValue>NIWxuBI4N6IFuscX74p6a8sJIrE=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>

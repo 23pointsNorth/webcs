@@ -76,6 +76,8 @@
             this.vistaTheme = new Telerik.WinControls.Themes.VistaTheme();
             this.timeOut = new System.Windows.Forms.Timer(this.components);
             this.centerLineRadCheckBox = new Telerik.WinControls.UI.RadCheckBox();
+            this.deltaPositionRadLabel = new Telerik.WinControls.UI.RadLabel();
+            this.deltaPositionRadTextBox = new Telerik.WinControls.UI.RadTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.trackingToggleButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.exitRadButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.optionsToggleButton)).BeginInit();
@@ -116,6 +118,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.secondMarkerRangeRadLabel)).BeginInit();
             this.iconContextMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.centerLineRadCheckBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deltaPositionRadLabel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deltaPositionRadTextBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
             // 
@@ -180,6 +184,8 @@
             // 
             // optionsRadPanel
             // 
+            this.optionsRadPanel.Controls.Add(this.deltaPositionRadTextBox);
+            this.optionsRadPanel.Controls.Add(this.deltaPositionRadLabel);
             this.optionsRadPanel.Controls.Add(this.centerLineRadCheckBox);
             this.optionsRadPanel.Controls.Add(this.enableMouseRadCheckBox);
             this.optionsRadPanel.Controls.Add(this.saveOptionsRadButton);
@@ -616,6 +622,28 @@
             this.centerLineRadCheckBox.Text = "Show center connecting line";
             this.centerLineRadCheckBox.ThemeName = "Vista";
             this.centerLineRadCheckBox.ToggleState = Telerik.WinControls.Enumerations.ToggleState.On;
+            this.centerLineRadCheckBox.ToggleStateChanged += new Telerik.WinControls.UI.StateChangedEventHandler(this.centerLineRadCheckBox_ToggleStateChanged);
+            // 
+            // deltaPositionRadLabel
+            // 
+            this.deltaPositionRadLabel.AutoSize = false;
+            this.deltaPositionRadLabel.Location = new System.Drawing.Point(239, 9);
+            this.deltaPositionRadLabel.Name = "deltaPositionRadLabel";
+            this.deltaPositionRadLabel.Size = new System.Drawing.Size(85, 32);
+            this.deltaPositionRadLabel.TabIndex = 22;
+            this.deltaPositionRadLabel.Text = "Choose clicking proximity:";
+            // 
+            // deltaPositionRadTextBox
+            // 
+            this.deltaPositionRadTextBox.Location = new System.Drawing.Point(292, 47);
+            this.deltaPositionRadTextBox.Name = "deltaPositionRadTextBox";
+            this.deltaPositionRadTextBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.deltaPositionRadTextBox.Size = new System.Drawing.Size(32, 20);
+            this.deltaPositionRadTextBox.TabIndex = 8;
+            this.deltaPositionRadTextBox.TabStop = false;
+            this.deltaPositionRadTextBox.Text = "50";
+            this.deltaPositionRadTextBox.ThemeName = "Vista";
+            this.deltaPositionRadTextBox.TextChanged += new System.EventHandler(this.deltaPositionRadTextBox_TextChanged);
             // 
             // WebCSForm
             // 
@@ -681,6 +709,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.secondMarkerRangeRadLabel)).EndInit();
             this.iconContextMenuStrip.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.centerLineRadCheckBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deltaPositionRadLabel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deltaPositionRadTextBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
 
@@ -734,6 +764,8 @@
         private Telerik.WinControls.UI.RadRadioButton noFramesRadRadioButton;
         private Telerik.WinControls.UI.RadCheckBox enableMouseRadCheckBox;
         private Telerik.WinControls.UI.RadCheckBox centerLineRadCheckBox;
+        private Telerik.WinControls.UI.RadTextBox deltaPositionRadTextBox;
+        private Telerik.WinControls.UI.RadLabel deltaPositionRadLabel;
     }
 }
 

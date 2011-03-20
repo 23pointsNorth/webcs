@@ -142,5 +142,17 @@ namespace WebCS.Properties {
                 this["showCenterLine"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("50")]
+        public int proximityClick {
+            get {
+                return ((int)(this["proximityClick"]));
+            }
+            set {
+                this["proximityClick"] = value;
+            }
+        }
     }
 }

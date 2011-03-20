@@ -7,25 +7,39 @@ public class Mouse
 {
     Point mouse;
     Point pressure;
-    private const int deltaX = 75;
-    private const int deltaY = 75;
+    private int deltaPosition;
     private const int acuracyInPixels = 1;
     Rectangle desktopAreaBoundries;
 
-    public Rectangle DesktopArea
+    public int DeltaPosition
     {
-        set { desktopAreaBoundries = value; }
+        set { this.deltaPosition = value; }
+    }
+    public Point MousePoint
+    {
+        get { return mouse; }
     }
 
-    public Mouse(Point fisrtCoordinates, Point secondCoordinates)
+    public Point PressurePoint
+    {
+        get { return pressure; }
+    }
+
+    public Rectangle DesktopArea
+    {
+        set { this.desktopAreaBoundries = value; }
+    }
+
+    public Mouse(Point fisrtCoordinates, Point secondCoordinates, int positionDifference)
     {
         SetNewPosition(fisrtCoordinates, secondCoordinates);
+        this.deltaPosition = positionDifference;
     }
 
     public void SetNewPosition(Point fisrtCoordinates, Point secondCoordinates)
     {
-        mouse = fisrtCoordinates;
-        pressure = secondCoordinates;
+        this.mouse = fisrtCoordinates;
+        this.pressure = secondCoordinates;
     }
 
     public void SetNewPosition(Rectangle firstMarker, Rectangle secondMarker)
@@ -34,10 +48,10 @@ public class Mouse
             firstMarker.X + firstMarker.Width / 2, firstMarker.Y + firstMarker.Height / 2);
         Point uncheckedPressure = new Point(
             secondMarker.X + secondMarker.Width / 2, secondMarker.Y + secondMarker.Height / 2);
-        mouse = new Point(
+        this.mouse = new Point(
             Math.Min(desktopAreaBoundries.X+desktopAreaBoundries.Width,Math.Max(uncheckedMouse.X,desktopAreaBoundries.X)),
             Math.Min(desktopAreaBoundries.Y+desktopAreaBoundries.Height,Math.Max(uncheckedMouse.Y,desktopAreaBoundries.Y)));
-        pressure = new Point(
+        this.pressure = new Point(
             Math.Min(desktopAreaBoundries.X + desktopAreaBoundries.Width, Math.Max(uncheckedPressure.X, desktopAreaBoundries.X)),
             Math.Min(desktopAreaBoundries.Y + desktopAreaBoundries.Height, Math.Max(uncheckedPressure.Y, desktopAreaBoundries.Y)));
 
@@ -48,8 +62,8 @@ public class Mouse
     {
         if (mouse.X >= 0 && mouse.Y >= 0)
         {
-            if (Math.Abs(mouse.X - pressure.X) < deltaX &&
-                Math.Abs(mouse.Y - pressure.Y) < deltaY)
+            if (Math.Abs(mouse.X - pressure.X) < deltaPosition &&
+                Math.Abs(mouse.Y - pressure.Y) < deltaPosition)
             {
                 //isMouseDown = true;
                 doMouseClick(); 
