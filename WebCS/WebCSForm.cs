@@ -29,6 +29,9 @@ namespace WebCS
             softwareCursor.DesktopArea = desktopBoundries;
             enableMouseRadCheckBox.Checked = User.Default.isMouseEnabled;
             centerLineRadCheckBox.Checked = User.Default.showCenterLine;
+            connectCenters = User.Default.showCenterLine;
+            proximityClick = User.Default.proximityClick;
+
             LoadAvaliableWebcams();
             LoadMarkers();
             LoadAtStartup();
@@ -51,7 +54,6 @@ namespace WebCS
                 startupRadCheckBox.Checked = true; //run at startup
             }
         }
-
         private void startupRadCheckBox_ToggleStateChanged(object sender, StateChangedEventArgs args)
         {
             if (startupRadCheckBox.Checked)
@@ -63,7 +65,6 @@ namespace WebCS
                 regKeyApp.DeleteValue(applicationName, false); // remove from registry
             }
         }
-
         private void LoadMarkers()
         {
             try
@@ -89,7 +90,6 @@ namespace WebCS
             secondMarkerSample.Image = DrawFilledRectangle(
                 secondMarkerSample.Width, secondMarkerSample.Height, secondMarkerColor);
         }
-
         public static Bitmap DrawFilledRectangle(int width, int height, Color fillColour)
         {
             Bitmap filledBitmap = new Bitmap(width, height);
@@ -101,7 +101,6 @@ namespace WebCS
             }
             return filledBitmap;
         }
-
         private void DrawOnEmptyFrame(string text)
         {
             Bitmap emptyBitmap = new Bitmap(Constants.IMAGE_WIDTH, Constants.IMAGE_HEIGHT);
@@ -116,7 +115,6 @@ namespace WebCS
             }
             imageContainer.Image = emptyBitmap;
         }
-
         private Bitmap drawRectangleOnBitmap(Bitmap image, Rectangle rect, Pen pen)
         {
             using (Graphics g = Graphics.FromImage(image))
@@ -159,7 +157,6 @@ namespace WebCS
                 avaliableWebcamsDropDownList.SelectedIndex = 0;
             }
         }
-
         private void StopWebcam()
         {
             try
@@ -174,7 +171,6 @@ namespace WebCS
                 userRadLabel.Text = "Video not started. " + e.Message;
             }
         }
-
         public Bitmap ResizeBitmap(Bitmap toResize, int newWidth, int newHeight)
         {
             Bitmap result = new Bitmap(newWidth, newHeight);
@@ -182,13 +178,11 @@ namespace WebCS
                 graphic.DrawImage(toResize, 0, 0, newWidth, newHeight);
             return result;
         }
-
         private void exitRadButton_Click(object sender, EventArgs e)
         {
             StopWebcam();
             Environment.Exit(1);
         }
-
         private void optionsToggleButton_ToggleStateChanged(object sender, StateChangedEventArgs args)
         {
             if (args.ToggleState == ToggleState.On)
@@ -204,7 +198,6 @@ namespace WebCS
                     Constants.WEBCAM_ONLY_WIDTH, Constants.WEBCAM_ONLY_HEIGHT);
             }
         }
-
         private void trackingToggleButton_ToggleStateChanged(object sender, StateChangedEventArgs args)
         {
             if (args.ToggleState == ToggleState.On)
@@ -240,7 +233,7 @@ namespace WebCS
         Color secondMarkerColor = emptyColor;
         Rectangle firstMarkerRect;
         Rectangle secondMarkerRect;
-        Mouse softwareCursor = new Mouse(Cursor.Position, new Point(0, 0));
+        Mouse softwareCursor = new Mouse(Cursor.Position, new Point(0, 0), 0);
         bool foundFirstMarker = false;
         bool foundSecondMarker = false;
 
@@ -309,6 +302,29 @@ namespace WebCS
                         desktopBoundries,
                         new Pen(Color.Gray, 2));
                 }
+
+                if (connectCenters && foundFirstMarker && foundSecondMarker && 
+                    (trackingToggleButton.ToggleState == ToggleState.On))
+                {
+                    Color drawColor = Color.Red;
+                    Point firstCenter = new Point(
+                    firstMarkerRect.X + firstMarkerRect.Width / 2, firstMarkerRect.Y + firstMarkerRect.Height / 2);
+                    Point secondCenter = new Point(
+                    secondMarkerRect.X + secondMarkerRect.Width / 2, secondMarkerRect.Y + secondMarkerRect.Height / 2);
+                    double diff = Math.Sqrt(
+                        Math.Pow((firstCenter.X - secondCenter.X), 2) +
+                        Math.Pow((firstCenter.Y - secondCenter.Y), 2));
+                    PointF lineCenter = new Point(
+                        (firstCenter.X + secondCenter.X) / 2,
+                        (firstCenter.Y + secondCenter.Y) / 2);
+
+                    using (Graphics g = Graphics.FromImage(newFrame))
+                    {
+                        g.DrawLine(new Pen(drawColor, 2), firstCenter, secondCenter);
+                        g.DrawString(((int)diff).ToString(), new Font("Arial", 10), 
+                            new SolidBrush(drawColor), lineCenter);
+                    }
+                }
             }
             finally
             {
@@ -321,7 +337,6 @@ namespace WebCS
         }
 
         static Rectangle wholeDesktopArea = new Rectangle(0,0, Constants.IMAGE_WIDTH, Constants.IMAGE_HEIGHT);
-
         private void CalculateMarker(Bitmap frame, Color markerColor, Color rectangleColor, int colorRange, bool loadWorkingFrame, out Rectangle markerRect, out bool found)
         {
             markerRect = wholeDesktopArea;
@@ -418,7 +433,6 @@ namespace WebCS
             }
             CheckEnabledTracking();
         }
-
         private void avaliableWebcamsDropDownList_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
         {
             if (avaliableWebcamsDropDownList.SelectedIndex != 0)
@@ -499,7 +513,6 @@ namespace WebCS
 
             CheckEnabledTracking();
         }
-
         private void secondMarkerChangeRadButton_Click(object sender, EventArgs e)
         {
             if (!secondMarkerChangeColor)
@@ -556,7 +569,6 @@ namespace WebCS
 
             CheckEnabledTracking();
         }
-
         private void systemTrayIcon_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             this.BringToFront();
@@ -564,7 +576,6 @@ namespace WebCS
             this.WindowState = FormWindowState.Normal;
             systemTrayIcon.Visible = false;
         }
-
         private void WebCSForm_Resize(object sender, EventArgs e)
         {
             if (FormWindowState.Minimized == WindowState)
@@ -573,34 +584,28 @@ namespace WebCS
                 systemTrayIcon.Visible = true;
             }
         }
-
         private void restoreToolStripMenuItem_Click(object sender, EventArgs e)
         {
             systemTrayIcon_MouseDoubleClick(null, null);
         }
-
         private void closeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             systemTrayIcon.Visible = false;
             systemTrayIcon.Dispose();
             exitRadButton_Click(null, null);
         }
-
         private void startStopWebcamToolStripMenuItem_Click(object sender, EventArgs e)
         {
             webcamRadToggleButton.PerformClick();
         }
-
         private void disableToolStripMenuItem_Click(object sender, EventArgs e)
         {
             trackingToggleButton.PerformClick();
         }
-
         private void saveSettingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             saveOptionsRadButton.PerformClick();
         }
-
         private void CheckEnabledTracking()
         {
             this.trackingToggleButton.Enabled = (
@@ -608,7 +613,6 @@ namespace WebCS
                 !secondMarkerColor.Equals(emptyColor) &&
                 isVideoRunning);
         }
-
         private void saveOptionsRadButton_Click(object sender, EventArgs e)
         {
             User.Default.loadWebcamName = avaliableWebcamsDropDownList.SelectedText;
@@ -620,26 +624,24 @@ namespace WebCS
             User.Default.desktopAreaBoundriesRectangle = desktopBoundries;
             User.Default.areDesktopAreaBoundriesVisible = areDesktopBounriesVisible;
             User.Default.isMouseEnabled = isMouseEnabled;
+            User.Default.showCenterLine = connectCenters;
+            User.Default.proximityClick = proximityClick;
             User.Default.Save();
         }
-
         private void cancelFirstMarkerRadButton_Click(object sender, EventArgs e)
         {
             firstMarkerChangeColor = false;
         }
-
         private void cancelSecondMarkerRadButton_Click(object sender, EventArgs e)
         {
             secondMarkerChangeColor = false;
         }
-
         private void webcamsMenuStrip_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
             avaliableWebcamsDropDownList.SelectedText = e.ClickedItem.ToString();
             avaliableWebcamsDropDownList_SelectedIndexChanged(null, null);
             webcamRadToggleButton.PerformClick();
         }
-
         private void timeOut_Tick(object sender, EventArgs e)
         {
             //if no webcam is started after timer ticks, the webcam canot be loaded;
@@ -681,7 +683,6 @@ namespace WebCS
         }
 
         bool showFrames = true;
-
         private void noFramesRadRadioButton_ToggleStateChanged(object sender, StateChangedEventArgs args)
         {
             if (noFramesRadRadioButton.IsChecked)
@@ -729,7 +730,6 @@ namespace WebCS
             }
             firstMarkerRange = range;
         }
-
         private void secondMarkerRangeRadTextBox_TextChanged(object sender, EventArgs e)
         {
             int range;
@@ -755,6 +755,40 @@ namespace WebCS
             }
             secondMarkerRange = range;
 
+        }
+
+        bool connectCenters;
+        private void centerLineRadCheckBox_ToggleStateChanged(object sender, StateChangedEventArgs args)
+        {
+            connectCenters = centerLineRadCheckBox.Checked;
+        }
+
+        int proximityClick;
+        private void deltaPositionRadTextBox_TextChanged(object sender, EventArgs e)
+        {
+            int delta;
+            try
+            {
+                delta = int.Parse(deltaPositionRadTextBox.Text);
+            }
+            catch (FormatException)
+            {
+                delta = 0;
+                deltaPositionRadTextBox.Text = "0";
+            }
+
+            if (delta > Constants.DESIRED_FRAME_WIDTH)
+            {
+                delta = Constants.DESIRED_FRAME_WIDTH;
+                deltaPositionRadTextBox.Text = delta.ToString();
+            }
+            else if (delta < 0)
+            {
+                delta = 0;
+                deltaPositionRadTextBox.Text = delta.ToString();
+            }
+            softwareCursor.DeltaPosition = delta;
+            proximityClick = delta;
         }
 
     }
