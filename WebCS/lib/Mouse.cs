@@ -8,9 +8,13 @@ public class Mouse
     Point mouse;
     Point pressure;
     private int deltaPosition;
-    private const int acuracyInPixels = 1;
     Rectangle desktopAreaBoundries;
+    bool isMouseDown=false;
 
+    public bool IsMouseDown
+    {
+        get { return isMouseDown; }
+    }
     public int DeltaPosition
     {
         set { this.deltaPosition = value; }
@@ -19,12 +23,10 @@ public class Mouse
     {
         get { return mouse; }
     }
-
     public Point PressurePoint
     {
         get { return pressure; }
     }
-
     public Rectangle DesktopArea
     {
         set { this.desktopAreaBoundries = value; }
@@ -60,18 +62,19 @@ public class Mouse
 
     public void Click()
     {
-        if (mouse.X >= 0 && mouse.Y >= 0)
+        int proximity = (int)Math.Sqrt(
+                    Math.Pow(Math.Abs(mouse.X - pressure.X), 2) +
+                    Math.Pow(Math.Abs(mouse.Y - pressure.Y), 2));
+
+        if (proximity < deltaPosition)
         {
-            if (Math.Abs(mouse.X - pressure.X) < deltaPosition &&
-                Math.Abs(mouse.Y - pressure.Y) < deltaPosition)
-            {
-                //isMouseDown = true;
-                doMouseClick(); 
-            }
-            else
-            {
-                //isMouseDown = false;
-            }
+            isMouseDown = true;
+            doMouseClick(); 
+        }
+        else
+        {
+            isMouseDown = false;
+
         }
     }
 
