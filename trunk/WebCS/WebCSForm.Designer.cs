@@ -393,9 +393,9 @@
             // 
             this.applyFilterRadCheckBox.Location = new System.Drawing.Point(12, 25);
             this.applyFilterRadCheckBox.Name = "applyFilterRadCheckBox";
-            this.applyFilterRadCheckBox.Size = new System.Drawing.Size(195, 16);
+            this.applyFilterRadCheckBox.Size = new System.Drawing.Size(204, 16);
             this.applyFilterRadCheckBox.TabIndex = 4;
-            this.applyFilterRadCheckBox.Text = "Apply mean filter on webcam video";
+            this.applyFilterRadCheckBox.Text = "Apply median filter on webcam video";
             this.applyFilterRadCheckBox.ThemeName = "Vista";
             // 
             // userRadLabel
