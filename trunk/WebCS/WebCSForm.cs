@@ -31,6 +31,7 @@ namespace WebCS
             centerLineRadCheckBox.Checked = User.Default.showCenterLine;
             connectCenters = User.Default.showCenterLine;
             proximityClick = User.Default.proximityClick;
+            softwareCursor.DeltaPosition = proximityClick;
 
             LoadAvaliableWebcams();
             LoadMarkers();
@@ -306,14 +307,14 @@ namespace WebCS
                 if (connectCenters && foundFirstMarker && foundSecondMarker && 
                     (trackingToggleButton.ToggleState == ToggleState.On))
                 {
-                    Color drawColor = Color.Red;
+                    Color drawColor = (softwareCursor.IsMouseDown)?Color.Firebrick:Color.ForestGreen;
                     Point firstCenter = new Point(
                     firstMarkerRect.X + firstMarkerRect.Width / 2, firstMarkerRect.Y + firstMarkerRect.Height / 2);
                     Point secondCenter = new Point(
                     secondMarkerRect.X + secondMarkerRect.Width / 2, secondMarkerRect.Y + secondMarkerRect.Height / 2);
-                    double diff = Math.Sqrt(
-                        Math.Pow((firstCenter.X - secondCenter.X), 2) +
-                        Math.Pow((firstCenter.Y - secondCenter.Y), 2));
+                    int diff = (int)Math.Sqrt(
+                        Math.Pow(Math.Abs(firstCenter.X - secondCenter.X), 2) +
+                        Math.Pow(Math.Abs(firstCenter.Y - secondCenter.Y), 2));
                     PointF lineCenter = new Point(
                         (firstCenter.X + secondCenter.X) / 2,
                         (firstCenter.Y + secondCenter.Y) / 2);
@@ -321,7 +322,7 @@ namespace WebCS
                     using (Graphics g = Graphics.FromImage(newFrame))
                     {
                         g.DrawLine(new Pen(drawColor, 2), firstCenter, secondCenter);
-                        g.DrawString(((int)diff).ToString(), new Font("Arial", 10), 
+                        g.DrawString(diff.ToString(), new Font("Arial", 10), 
                             new SolidBrush(drawColor), lineCenter);
                     }
                 }
