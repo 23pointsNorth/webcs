@@ -716,6 +716,7 @@ namespace WebCS
             catch (FormatException)
             {
                 range = 0;
+                firstMarkerRangeRadTextBox.Text = "0";
             }
 
             if (range > 255)
@@ -741,6 +742,7 @@ namespace WebCS
             catch (FormatException)
             {
                 range = 0;
+                secondMarkerRangeRadTextBox.Text = "0";
             }
 
             if (range > 255)
