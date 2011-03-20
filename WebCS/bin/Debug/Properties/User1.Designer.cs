@@ -86,12 +86,12 @@ namespace WebCS.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool applyMeanFilter {
+        public bool applyMedianFilter {
             get {
-                return ((bool)(this["applyMeanFilter"]));
+                return ((bool)(this["applyMedianFilter"]));
             }
             set {
-                this["applyMeanFilter"] = value;
+                this["applyMedianFilter"] = value;
             }
         }
         

@@ -168,7 +168,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>CXfV4AG0QltUXghNBVFowPsFtPo=</dsig:DigestValue>
+        <dsig:DigestValue>IVeFVFLMJCf+jBD2beEMNj2dOSQ=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -181,13 +181,13 @@
       <dsig:DigestValue>0N948W6lgPR4ebc8V0HOcJfXd9g=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="WebCS.exe.config" size="3754">
+  <file name="WebCS.exe.config" size="3756">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>NIWxuBI4N6IFuscX74p6a8sJIrE=</dsig:DigestValue>
+      <dsig:DigestValue>1oTUWtOw4tTZmrQwnSMRdirPd2I=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>

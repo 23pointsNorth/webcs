@@ -650,12 +650,12 @@ namespace WebCS
             {
                 webcamRadToggleButton.PerformClick();
                 timeOut.Enabled = false;
-                DrawOnEmptyFrame("Unable to \nload webcam.\nPlease, try another.");
+                DrawOnEmptyFrame("Unable to \nload webcam.\nPlease, try again.");
             }
         }
 
-        Point firstClick = new Point(-1, -1);
-        Point secondClick = new Point(-1, -1);
+        Point firstClick;
+        Point secondClick;
         Rectangle desktopBoundries;
 
         private void imageContainer_MouseDown(object sender, MouseEventArgs e)
@@ -677,6 +677,7 @@ namespace WebCS
                         Math.Abs(firstClick.X - secondClick.X), 
                         Math.Abs(firstClick.Y - secondClick.Y));
                     areDesktopBounriesVisible = true;
+                    softwareCursor.DesktopArea = desktopBoundries;
                     this.imageContainer.MouseDown -= 
                         new System.Windows.Forms.MouseEventHandler(this.imageContainer_MouseDown);
                 }
