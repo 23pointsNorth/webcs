@@ -69,12 +69,13 @@ public class Mouse
         if (proximity < deltaPosition)
         {
             isMouseDown = true;
-            doMouseClick(); 
+            doLeftDown();
+            //doMouseClick(); 
         }
         else
         {
             isMouseDown = false;
-
+            doLeftUp();
         }
     }
 
@@ -94,17 +95,20 @@ public class Mouse
     private const int MOUSEEVENTF_RIGHTDOWN = 0x08;
     private const int MOUSEEVENTF_RIGHTUP = 0x10;
 
-    private void doMouseClickOnTarget(Point position)
-    {
-        mouse_event(
-            MOUSEEVENTF_LEFTDOWN | MOUSEEVENTF_LEFTUP,
-            position.X, position.Y, 0, 0);
-    }
-
     private void doMouseClick()
     {
         mouse_event(
             MOUSEEVENTF_LEFTDOWN | MOUSEEVENTF_LEFTUP,
             Cursor.Position.X, Cursor.Position.Y, 0, 0);
+    }
+
+    private void doLeftDown()
+    {
+        mouse_event(MOUSEEVENTF_LEFTDOWN, Cursor.Position.X, Cursor.Position.Y, 0, 0);
+    }
+
+    private void doLeftUp()
+    {
+        mouse_event(MOUSEEVENTF_LEFTUP, Cursor.Position.X, Cursor.Position.Y, 0, 0);
     }
 }
