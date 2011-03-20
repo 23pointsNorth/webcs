@@ -17,7 +17,7 @@
     <Setting Name="secondMarkerRangeUser" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">20</Value>
     </Setting>
-    <Setting Name="applyMeanFilter" Type="System.Boolean" Scope="User">
+    <Setting Name="applyMedianFilter" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="desktopAreaBoundriesRectangle" Type="System.Drawing.Rectangle" Scope="User">
