@@ -23,7 +23,7 @@ namespace WebCS
                 Constants.WEBCAM_ONLY_WIDTH, Constants.WEBCAM_ONLY_HEIGHT);
             DrawOnEmptyFrame("Webcam \nnot selected.");
             avaliableWebcamsDropDownList.Items.Add("Select Webcam");
-            applyFilterRadCheckBox.Checked = User.Default.applyMeanFilter;
+            applyFilterRadCheckBox.Checked = User.Default.applyMedianFilter;
             desktopBoundries = User.Default.desktopAreaBoundriesRectangle;
             areDesktopBounriesVisible = User.Default.areDesktopAreaBoundriesVisible;
             softwareCursor.DesktopArea = desktopBoundries;
@@ -251,7 +251,7 @@ namespace WebCS
                 BitmapData objectsData = newFrame.LockBits(
                     new Rectangle(0, 0, newFrame.Width, newFrame.Height),
                     ImageLockMode.ReadOnly, newFrame.PixelFormat);
-                Mean filer = new Mean();
+                Median filer = new Median();
                 filer.ApplyInPlace(objectsData);
                 newFrame.UnlockBits(objectsData);
             }
@@ -621,7 +621,7 @@ namespace WebCS
             User.Default.firstMarkerRangeUser = firstMarkerRange;
             User.Default.secondMarkerColorUser = secondMarkerColor;
             User.Default.secondMarkerRangeUser = secondMarkerRange;
-            User.Default.applyMeanFilter = applyFilterRadCheckBox.Checked;
+            User.Default.applyMedianFilter = applyFilterRadCheckBox.Checked;
             User.Default.desktopAreaBoundriesRectangle = desktopBoundries;
             User.Default.areDesktopAreaBoundriesVisible = areDesktopBounriesVisible;
             User.Default.isMouseEnabled = isMouseEnabled;
