@@ -205,16 +205,19 @@ namespace WebCS
                     Constants.WEBCAM_ONLY_WIDTH, Constants.WEBCAM_ONLY_HEIGHT);
             }
         }
+
+        bool isTrackingEnabled = false;
         private void trackingToggleButton_ToggleStateChanged(object sender, StateChangedEventArgs args)
         {
             if (args.ToggleState == ToggleState.On)
             {
                 trackingToggleButton.Text = "Disable &Tracking";
+                isTrackingEnabled = true;
             }
             else
             {
                 trackingToggleButton.Text = "Enable &Tracking";
-                userRadLabel.ResetText();
+                isTrackingEnabled = false;
             }
         }
 
@@ -265,7 +268,7 @@ namespace WebCS
             }
 
             //is tracking enabled?
-            if (trackingToggleButton.ToggleState == ToggleState.On)
+            if (isTrackingEnabled)
             {
                 //make sure both clones contain starting bitmap
                 firstFrameClone = new Bitmap(newFrame);
