@@ -417,17 +417,23 @@ namespace WebCS
                 firstMarkerChangeRadButton.Enabled = true;
                 secondMarkerChangeRadButton.Enabled = true;
 
-                //stat selected webcam
-                finalVideoSource = new VideoCaptureDevice(
-                    videoCaptureDevices[avaliableWebcamsDropDownList.SelectedIndex - 1].MonikerString);
-                //-1 because [0] in avaliableWebcams = "Select Webcam"
-                finalVideoSource.NewFrame += new NewFrameEventHandler(
-                    FinalVideoSource_NewFrame);
-                finalVideoSource.DesiredFrameSize = new Size(
-                    Constants.DESIRED_FRAME_WIDTH, Constants.DESIRED_FRAME_HEIGHT);
-                finalVideoSource.DesiredFrameRate = Constants.DESIRED_FRAME_RATE;
-                finalVideoSource.Start();
-                isVideoRunning = finalVideoSource.IsRunning;
+                try
+                {
+                    //stat selected webcam
+                    finalVideoSource = new VideoCaptureDevice(
+                        videoCaptureDevices[avaliableWebcamsDropDownList.SelectedIndex - 1].MonikerString);
+                    //-1 because [0] in avaliableWebcams = "Select Webcam"
+                    finalVideoSource.NewFrame += new NewFrameEventHandler(
+                        FinalVideoSource_NewFrame);
+                    finalVideoSource.DesiredFrameSize = new Size(
+                        Constants.DESIRED_FRAME_WIDTH, Constants.DESIRED_FRAME_HEIGHT);
+                    finalVideoSource.DesiredFrameRate = Constants.DESIRED_FRAME_RATE;
+                    finalVideoSource.Start();
+                }
+                finally
+                {
+                    isVideoRunning = finalVideoSource.IsRunning;
+                }
             }
             else
             {
@@ -454,7 +460,7 @@ namespace WebCS
         }
         private void avaliableWebcamsDropDownList_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
         {
-            if (avaliableWebcamsDropDownList.SelectedIndex != 0)
+            if (avaliableWebcamsDropDownList.SelectedIndex > 0)
             {
                 webcamRadToggleButton.Enabled = true;
                 DrawOnEmptyFrame("Click to \nstart webcam.");
@@ -712,6 +718,7 @@ namespace WebCS
             }
             else
             {
+                DrawOnEmptyFrame("Webcam \nnot selected.");
                 showFrames = true;
             }
         }
