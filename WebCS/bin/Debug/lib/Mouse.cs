@@ -9,7 +9,7 @@ public class Mouse
     Point pressure;
     private int deltaPosition;
     Rectangle desktopAreaBoundries;
-    bool isMouseDown=false;
+    bool isMouseDown = false;
 
     public bool IsMouseDown
     {
@@ -51,8 +51,8 @@ public class Mouse
         Point uncheckedPressure = new Point(
             secondMarker.X + secondMarker.Width / 2, secondMarker.Y + secondMarker.Height / 2);
         this.mouse = new Point(
-            Math.Min(desktopAreaBoundries.X+desktopAreaBoundries.Width,Math.Max(uncheckedMouse.X,desktopAreaBoundries.X)),
-            Math.Min(desktopAreaBoundries.Y+desktopAreaBoundries.Height,Math.Max(uncheckedMouse.Y,desktopAreaBoundries.Y)));
+            Math.Min(desktopAreaBoundries.X + desktopAreaBoundries.Width, Math.Max(uncheckedMouse.X, desktopAreaBoundries.X)),
+            Math.Min(desktopAreaBoundries.Y + desktopAreaBoundries.Height, Math.Max(uncheckedMouse.Y, desktopAreaBoundries.Y)));
         this.pressure = new Point(
             Math.Min(desktopAreaBoundries.X + desktopAreaBoundries.Width, Math.Max(uncheckedPressure.X, desktopAreaBoundries.X)),
             Math.Min(desktopAreaBoundries.Y + desktopAreaBoundries.Height, Math.Max(uncheckedPressure.Y, desktopAreaBoundries.Y)));
