@@ -8,9 +8,6 @@ C:\Documents and Settings\vladi\My Documents\Visual Studio 2008\Projects\WebCS\W
 C:\Documents and Settings\vladi\My Documents\Visual Studio 2008\Projects\WebCS\WebCS\obj\Debug\WebCS.pdb
 C:\Documents and Settings\vladi\My Documents\Visual Studio 2008\Projects\WebCS\WebCS\bin\Debug\AForge.Video.DirectShow.dll
 C:\Documents and Settings\vladi\My Documents\Visual Studio 2008\Projects\WebCS\WebCS\bin\Debug\AForge.Video.dll
-C:\Documents and Settings\vladi\My Documents\Visual Studio 2008\Projects\WebCS\WebCS\bin\Debug\lib\Constants.cs
-C:\Documents and Settings\vladi\My Documents\Visual Studio 2008\Projects\WebCS\WebCS\bin\Debug\lib\FastBitmap.cs
-C:\Documents and Settings\vladi\My Documents\Visual Studio 2008\Projects\WebCS\WebCS\bin\Debug\lib\Mouse.cs
 F:\C# Projects\WebCS\WebCS\obj\Debug\WebCS.exe
 F:\C# Projects\WebCS\WebCS\obj\Debug\WebCS.pdb
 F:\C# Projects\WebCS\WebCS\obj\Debug\ResolveAssemblyReference.cache
@@ -27,9 +24,6 @@ F:\C# Projects\WebCS\WebCS\bin\Debug\WebCS.pdb
 C:\Documents and Settings\vladi\My Documents\Visual Studio 2008\Projects\WebCS\WebCS\bin\Debug\AForge.dll
 C:\Documents and Settings\vladi\My Documents\Visual Studio 2008\Projects\WebCS\WebCS\bin\Debug\AForge.Imaging.dll
 C:\Documents and Settings\vladi\My Documents\Visual Studio 2008\Projects\WebCS\WebCS\bin\Debug\AForge.Math.dll
-C:\Documents and Settings\vladi\My Documents\Visual Studio 2008\Projects\WebCS\WebCS\bin\Debug\Properties\Webcam.ico
-C:\Documents and Settings\vladi\My Documents\Visual Studio 2008\Projects\WebCS\WebCS\bin\Debug\Properties\User1.Designer.cs
-C:\Documents and Settings\vladi\My Documents\Visual Studio 2008\Projects\WebCS\WebCS\bin\Debug\Properties\User.settings
 C:\Documents and Settings\vladi\My Documents\Visual Studio 2008\Projects\WebCS\WebCS\bin\Debug\WebCS.exe.manifest
 C:\Documents and Settings\vladi\My Documents\Visual Studio 2008\Projects\WebCS\WebCS\bin\Debug\WebCS.application
 C:\Documents and Settings\vladi\My Documents\Visual Studio 2008\Projects\WebCS\WebCS\obj\Debug\WebCS.exe.manifest
