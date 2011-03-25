@@ -154,5 +154,17 @@ namespace WebCS.Properties {
                 this["proximityClick"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool applyMeanFilter {
+            get {
+                return ((bool)(this["applyMeanFilter"]));
+            }
+            set {
+                this["applyMeanFilter"] = value;
+            }
+        }
     }
 }
