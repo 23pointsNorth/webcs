@@ -25,7 +25,10 @@ namespace WebCS
             avaliableWebcamsDropDownList.Items.Add("Select Webcam");
 
             //loading the saved user settings
-            applyFilterRadCheckBox.Checked = User.Default.applyMedianFilter;
+            applyMedianFilterRadCheckBox.Checked = User.Default.applyMedianFilter;
+            applyMedianFilter = applyMedianFilterRadCheckBox.Checked;
+            applyMeanFilterRadCheckBox.Checked = User.Default.applyMeanFilter;
+            applyMeanFilter = applyMeanFilterRadCheckBox.Checked;
             desktopBoundries = User.Default.desktopAreaBoundriesRectangle;
             areDesktopBounriesVisible = User.Default.areDesktopAreaBoundriesVisible;
             softwareCursor.DesktopArea = desktopBoundries;
@@ -78,6 +81,7 @@ namespace WebCS
                 secondMarkerRangeRadTextBox.Text = User.Default.secondMarkerRangeUser.ToString();
                 firstMarkerRange = User.Default.firstMarkerRangeUser;
                 secondMarkerRange = User.Default.secondMarkerRangeUser;
+
             }
             catch
             {
@@ -246,6 +250,8 @@ namespace WebCS
         Mouse softwareCursor = new Mouse(Cursor.Position, new Point(0, 0), 0);
         bool foundFirstMarker = false;
         bool foundSecondMarker = false;
+        bool applyMedianFilter = false;
+        bool applyMeanFilter = false;
 
         private void FinalVideoSource_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
@@ -256,14 +262,24 @@ namespace WebCS
 
             newFrame.RotateFlip(RotateFlipType.Rotate180FlipY); //miror image
 
-            //should the median fileter be applied
-            if (applyFilterRadCheckBox.Checked)
+            //what  fileter should be applied
+            FiltersSequence filters = new FiltersSequence();
+            if (applyMedianFilter)
+            {
+                filters.Add(new Median());
+            }
+
+            if (applyMeanFilter)
+            {
+                filters.Add(new Mean());
+            }
+
+            if (filters.Count > 0)
             {
                 BitmapData objectsData = newFrame.LockBits(
                     new Rectangle(0, 0, newFrame.Width, newFrame.Height),
                     ImageLockMode.ReadOnly, newFrame.PixelFormat);
-                Median filer = new Median();
-                filer.ApplyInPlace(objectsData);
+                filters.Apply(objectsData);
                 newFrame.UnlockBits(objectsData);
             }
 
@@ -645,7 +661,8 @@ namespace WebCS
             User.Default.firstMarkerRangeUser = firstMarkerRange;
             User.Default.secondMarkerColorUser = secondMarkerColor;
             User.Default.secondMarkerRangeUser = secondMarkerRange;
-            User.Default.applyMedianFilter = applyFilterRadCheckBox.Checked;
+            User.Default.applyMedianFilter = applyMedianFilter;
+            User.Default.applyMeanFilter = applyMeanFilter;
             User.Default.desktopAreaBoundriesRectangle = desktopBoundries;
             User.Default.areDesktopAreaBoundriesVisible = areDesktopBounriesVisible;
             User.Default.isMouseEnabled = isMouseEnabled;
@@ -816,6 +833,16 @@ namespace WebCS
             }
             softwareCursor.DeltaPosition = delta;
             proximityClick = delta;
+        }
+
+        private void applyMedianFilterRadCheckBox_ToggleStateChanged(object sender, StateChangedEventArgs args)
+        {
+            applyMedianFilter = applyMedianFilterRadCheckBox.Checked;
+        }
+
+        private void applyMeanFilterRadCheckBox_ToggleStateChanged(object sender, StateChangedEventArgs args)
+        {
+            applyMeanFilter = applyMeanFilterRadCheckBox.Checked;
         }
     }
 }

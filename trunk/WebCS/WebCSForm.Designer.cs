@@ -55,7 +55,7 @@
             this.firstMarkerChangeRadButton = new Telerik.WinControls.UI.RadButton();
             this.firstMarkerRangeRadLabel = new Telerik.WinControls.UI.RadLabel();
             this.firstMakrerColorLabel = new Telerik.WinControls.UI.RadLabel();
-            this.applyFilterRadCheckBox = new Telerik.WinControls.UI.RadCheckBox();
+            this.applyMedianFilterRadCheckBox = new Telerik.WinControls.UI.RadCheckBox();
             this.userRadLabel = new Telerik.WinControls.UI.RadLabel();
             this.startupRadCheckBox = new Telerik.WinControls.UI.RadCheckBox();
             this.SelectDesktopAreaButton = new Telerik.WinControls.UI.RadButton();
@@ -78,6 +78,7 @@
             this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vistaTheme = new Telerik.WinControls.Themes.VistaTheme();
             this.timeOut = new System.Windows.Forms.Timer(this.components);
+            this.applyMeanFilterRadCheckBox = new Telerik.WinControls.UI.RadCheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.trackingToggleButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.exitRadButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.optionsToggleButton)).BeginInit();
@@ -107,7 +108,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.firstMarkerChangeRadButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.firstMarkerRangeRadLabel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.firstMakrerColorLabel)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.applyFilterRadCheckBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.applyMedianFilterRadCheckBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.userRadLabel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.startupRadCheckBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SelectDesktopAreaButton)).BeginInit();
@@ -120,6 +121,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.secondMarkerChangeRadButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.secondMarkerRangeRadLabel)).BeginInit();
             this.iconContextMenuStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.applyMeanFilterRadCheckBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
             // 
@@ -212,6 +214,7 @@
             // 
             // optionsRadPanel
             // 
+            this.optionsRadPanel.Controls.Add(this.applyMeanFilterRadCheckBox);
             this.optionsRadPanel.Controls.Add(this.deltaPositionRadTextBox);
             this.optionsRadPanel.Controls.Add(this.deltaPositionRadLabel);
             this.optionsRadPanel.Controls.Add(this.centerLineRadCheckBox);
@@ -219,7 +222,7 @@
             this.optionsRadPanel.Controls.Add(this.saveOptionsRadButton);
             this.optionsRadPanel.Controls.Add(this.workingFrameRadGroupBox);
             this.optionsRadPanel.Controls.Add(this.FirstMarkerRadGroupBox);
-            this.optionsRadPanel.Controls.Add(this.applyFilterRadCheckBox);
+            this.optionsRadPanel.Controls.Add(this.applyMedianFilterRadCheckBox);
             this.optionsRadPanel.Controls.Add(this.userRadLabel);
             this.optionsRadPanel.Controls.Add(this.startupRadCheckBox);
             this.optionsRadPanel.Controls.Add(this.SelectDesktopAreaButton);
@@ -233,7 +236,7 @@
             // 
             // deltaPositionRadTextBox
             // 
-            this.deltaPositionRadTextBox.Location = new System.Drawing.Point(292, 47);
+            this.deltaPositionRadTextBox.Location = new System.Drawing.Point(292, 63);
             this.deltaPositionRadTextBox.Name = "deltaPositionRadTextBox";
             this.deltaPositionRadTextBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.deltaPositionRadTextBox.Size = new System.Drawing.Size(32, 20);
@@ -246,7 +249,7 @@
             // deltaPositionRadLabel
             // 
             this.deltaPositionRadLabel.AutoSize = false;
-            this.deltaPositionRadLabel.Location = new System.Drawing.Point(239, 9);
+            this.deltaPositionRadLabel.Location = new System.Drawing.Point(239, 25);
             this.deltaPositionRadLabel.Name = "deltaPositionRadLabel";
             this.deltaPositionRadLabel.Size = new System.Drawing.Size(85, 32);
             this.deltaPositionRadLabel.TabIndex = 22;
@@ -254,7 +257,7 @@
             // 
             // centerLineRadCheckBox
             // 
-            this.centerLineRadCheckBox.Location = new System.Drawing.Point(12, 47);
+            this.centerLineRadCheckBox.Location = new System.Drawing.Point(12, 69);
             this.centerLineRadCheckBox.Name = "centerLineRadCheckBox";
             this.centerLineRadCheckBox.Size = new System.Drawing.Size(162, 16);
             this.centerLineRadCheckBox.TabIndex = 4;
@@ -275,7 +278,7 @@
             // 
             // saveOptionsRadButton
             // 
-            this.saveOptionsRadButton.Location = new System.Drawing.Point(227, 284);
+            this.saveOptionsRadButton.Location = new System.Drawing.Point(227, 306);
             this.saveOptionsRadButton.Name = "saveOptionsRadButton";
             this.saveOptionsRadButton.Size = new System.Drawing.Size(125, 25);
             this.saveOptionsRadButton.TabIndex = 16;
@@ -295,7 +298,7 @@
             this.workingFrameRadGroupBox.HeaderImageKey = "";
             this.workingFrameRadGroupBox.HeaderMargin = new System.Windows.Forms.Padding(0);
             this.workingFrameRadGroupBox.HeaderText = "Working Frame";
-            this.workingFrameRadGroupBox.Location = new System.Drawing.Point(12, 221);
+            this.workingFrameRadGroupBox.Location = new System.Drawing.Point(12, 243);
             this.workingFrameRadGroupBox.Name = "workingFrameRadGroupBox";
             this.workingFrameRadGroupBox.Padding = new System.Windows.Forms.Padding(10, 20, 10, 10);
             // 
@@ -359,7 +362,7 @@
             this.FirstMarkerRadGroupBox.HeaderImageKey = "";
             this.FirstMarkerRadGroupBox.HeaderMargin = new System.Windows.Forms.Padding(0);
             this.FirstMarkerRadGroupBox.HeaderText = "First Marker";
-            this.FirstMarkerRadGroupBox.Location = new System.Drawing.Point(12, 65);
+            this.FirstMarkerRadGroupBox.Location = new System.Drawing.Point(12, 87);
             this.FirstMarkerRadGroupBox.Name = "FirstMarkerRadGroupBox";
             this.FirstMarkerRadGroupBox.Padding = new System.Windows.Forms.Padding(10, 20, 10, 10);
             // 
@@ -434,20 +437,21 @@
             this.firstMakrerColorLabel.Text = "Marker Color";
             this.firstMakrerColorLabel.ThemeName = "ControlDefault";
             // 
-            // applyFilterRadCheckBox
+            // applyMedianFilterRadCheckBox
             // 
-            this.applyFilterRadCheckBox.Location = new System.Drawing.Point(12, 25);
-            this.applyFilterRadCheckBox.Name = "applyFilterRadCheckBox";
-            this.applyFilterRadCheckBox.Size = new System.Drawing.Size(204, 16);
-            this.applyFilterRadCheckBox.TabIndex = 3;
-            this.applyFilterRadCheckBox.Text = "Apply median filter on webcam video";
-            this.applyFilterRadCheckBox.ThemeName = "Vista";
+            this.applyMedianFilterRadCheckBox.Location = new System.Drawing.Point(12, 25);
+            this.applyMedianFilterRadCheckBox.Name = "applyMedianFilterRadCheckBox";
+            this.applyMedianFilterRadCheckBox.Size = new System.Drawing.Size(204, 16);
+            this.applyMedianFilterRadCheckBox.TabIndex = 3;
+            this.applyMedianFilterRadCheckBox.Text = "Apply median filter on webcam video";
+            this.applyMedianFilterRadCheckBox.ThemeName = "Vista";
+            this.applyMedianFilterRadCheckBox.ToggleStateChanged += new Telerik.WinControls.UI.StateChangedEventHandler(this.applyMedianFilterRadCheckBox_ToggleStateChanged);
             // 
             // userRadLabel
             // 
             this.userRadLabel.AllowDrop = true;
             this.userRadLabel.AutoScroll = true;
-            this.userRadLabel.Location = new System.Drawing.Point(12, 337);
+            this.userRadLabel.Location = new System.Drawing.Point(173, 337);
             this.userRadLabel.Name = "userRadLabel";
             this.userRadLabel.Size = new System.Drawing.Size(179, 16);
             this.userRadLabel.TabIndex = 5;
@@ -456,7 +460,7 @@
             // 
             // startupRadCheckBox
             // 
-            this.startupRadCheckBox.Location = new System.Drawing.Point(12, 315);
+            this.startupRadCheckBox.Location = new System.Drawing.Point(12, 337);
             this.startupRadCheckBox.Name = "startupRadCheckBox";
             this.startupRadCheckBox.Size = new System.Drawing.Size(144, 16);
             this.startupRadCheckBox.TabIndex = 17;
@@ -466,7 +470,7 @@
             // 
             // SelectDesktopAreaButton
             // 
-            this.SelectDesktopAreaButton.Location = new System.Drawing.Point(12, 284);
+            this.SelectDesktopAreaButton.Location = new System.Drawing.Point(12, 306);
             this.SelectDesktopAreaButton.Name = "SelectDesktopAreaButton";
             this.SelectDesktopAreaButton.Size = new System.Drawing.Size(150, 25);
             this.SelectDesktopAreaButton.TabIndex = 15;
@@ -488,7 +492,7 @@
             this.SecondMarkerRadGroupBox.HeaderImageKey = "";
             this.SecondMarkerRadGroupBox.HeaderMargin = new System.Windows.Forms.Padding(0);
             this.SecondMarkerRadGroupBox.HeaderText = "Second Marker";
-            this.SecondMarkerRadGroupBox.Location = new System.Drawing.Point(12, 143);
+            this.SecondMarkerRadGroupBox.Location = new System.Drawing.Point(12, 165);
             this.SecondMarkerRadGroupBox.Name = "SecondMarkerRadGroupBox";
             this.SecondMarkerRadGroupBox.Padding = new System.Windows.Forms.Padding(10, 20, 10, 10);
             // 
@@ -645,6 +649,16 @@
             this.timeOut.Interval = 15000;
             this.timeOut.Tick += new System.EventHandler(this.timeOut_Tick);
             // 
+            // applyMeanFilterRadCheckBox
+            // 
+            this.applyMeanFilterRadCheckBox.Location = new System.Drawing.Point(12, 47);
+            this.applyMeanFilterRadCheckBox.Name = "applyMeanFilterRadCheckBox";
+            this.applyMeanFilterRadCheckBox.Size = new System.Drawing.Size(195, 16);
+            this.applyMeanFilterRadCheckBox.TabIndex = 4;
+            this.applyMeanFilterRadCheckBox.Text = "Apply mean filter on webcam video";
+            this.applyMeanFilterRadCheckBox.ThemeName = "Vista";
+            this.applyMeanFilterRadCheckBox.ToggleStateChanged += new Telerik.WinControls.UI.StateChangedEventHandler(this.applyMeanFilterRadCheckBox_ToggleStateChanged);
+            // 
             // WebCSForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -697,7 +711,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.firstMarkerChangeRadButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.firstMarkerRangeRadLabel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.firstMakrerColorLabel)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.applyFilterRadCheckBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.applyMedianFilterRadCheckBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.userRadLabel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.startupRadCheckBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.SelectDesktopAreaButton)).EndInit();
@@ -711,6 +725,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.secondMarkerChangeRadButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.secondMarkerRangeRadLabel)).EndInit();
             this.iconContextMenuStrip.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.applyMeanFilterRadCheckBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
 
@@ -729,7 +744,7 @@
         private Telerik.WinControls.UI.RadCheckBox startupRadCheckBox;
         private Telerik.WinControls.UI.RadButton SelectDesktopAreaButton;
         private Telerik.WinControls.UI.RadLabel userRadLabel;
-        private Telerik.WinControls.UI.RadCheckBox applyFilterRadCheckBox;
+        private Telerik.WinControls.UI.RadCheckBox applyMedianFilterRadCheckBox;
         private Telerik.WinControls.UI.RadToggleButton webcamRadToggleButton;
         private Telerik.WinControls.UI.RadLabel firstMakrerColorLabel;
         private Telerik.WinControls.UI.RadButton firstMarkerChangeRadButton;
@@ -766,6 +781,7 @@
         private Telerik.WinControls.UI.RadCheckBox centerLineRadCheckBox;
         private Telerik.WinControls.UI.RadTextBox deltaPositionRadTextBox;
         private Telerik.WinControls.UI.RadLabel deltaPositionRadLabel;
+        private Telerik.WinControls.UI.RadCheckBox applyMeanFilterRadCheckBox;
     }
 }
 
