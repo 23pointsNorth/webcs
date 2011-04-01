@@ -109,8 +109,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BitmapDraw.cs" />
     <Compile Include="Constants.cs">
     </Compile>
+    <Compile Include="Marker.cs" />
     <Compile Include="Mouse.cs">
     </Compile>
     <Compile Include="Properties\User1.Designer.cs">

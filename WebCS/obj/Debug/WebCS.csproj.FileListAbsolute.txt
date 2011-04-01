@@ -1,9 +1,7 @@
 C:\Documents and Settings\vladi\My Documents\Visual Studio 2008\Projects\WebCS\WebCS\obj\Debug\ResolveAssemblyReference.cache
-C:\Documents and Settings\vladi\My Documents\Visual Studio 2008\Projects\WebCS\WebCS\obj\Debug\WebCS.Properties.Resources.resources
 C:\Documents and Settings\vladi\My Documents\Visual Studio 2008\Projects\WebCS\WebCS\obj\Debug\WebCS.csproj.GenerateResource.Cache
 C:\Documents and Settings\vladi\My Documents\Visual Studio 2008\Projects\WebCS\WebCS\bin\Debug\WebCS.exe
 C:\Documents and Settings\vladi\My Documents\Visual Studio 2008\Projects\WebCS\WebCS\bin\Debug\WebCS.pdb
-C:\Documents and Settings\vladi\My Documents\Visual Studio 2008\Projects\WebCS\WebCS\obj\Debug\WebCS.WebCSForm.resources
 C:\Documents and Settings\vladi\My Documents\Visual Studio 2008\Projects\WebCS\WebCS\obj\Debug\WebCS.exe
 C:\Documents and Settings\vladi\My Documents\Visual Studio 2008\Projects\WebCS\WebCS\obj\Debug\WebCS.pdb
 C:\Documents and Settings\vladi\My Documents\Visual Studio 2008\Projects\WebCS\WebCS\bin\Debug\AForge.Video.DirectShow.dll
@@ -61,3 +59,5 @@ C:\Documents and Settings\Ученик\My Documents\Visual Studio 2008\Projects\
 C:\Documents and Settings\Ученик\My Documents\Visual Studio 2008\Projects\webcs\WebCS\obj\Debug\WebCS.csproj.GenerateResource.Cache
 C:\Documents and Settings\Ученик\My Documents\Visual Studio 2008\Projects\webcs\WebCS\obj\Debug\WebCS.exe.manifest
 C:\Documents and Settings\Ученик\My Documents\Visual Studio 2008\Projects\webcs\WebCS\obj\Debug\WebCS.application
+C:\Documents and Settings\vladi\My Documents\Visual Studio 2008\Projects\WebCS\WebCS\obj\Debug\WebCS.WebCSForm.resources
+C:\Documents and Settings\vladi\My Documents\Visual Studio 2008\Projects\WebCS\WebCS\obj\Debug\WebCS.Properties.Resources.resources

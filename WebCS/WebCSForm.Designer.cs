@@ -38,6 +38,7 @@
             this.webcamRadToggleButton = new Telerik.WinControls.UI.RadToggleButton();
             this.avaliableWebcamsDropDownList = new Telerik.WinControls.UI.RadDropDownList();
             this.optionsRadPanel = new Telerik.WinControls.UI.RadPanel();
+            this.applyMeanFilterRadCheckBox = new Telerik.WinControls.UI.RadCheckBox();
             this.deltaPositionRadTextBox = new Telerik.WinControls.UI.RadTextBox();
             this.deltaPositionRadLabel = new Telerik.WinControls.UI.RadLabel();
             this.centerLineRadCheckBox = new Telerik.WinControls.UI.RadCheckBox();
@@ -78,7 +79,6 @@
             this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vistaTheme = new Telerik.WinControls.Themes.VistaTheme();
             this.timeOut = new System.Windows.Forms.Timer(this.components);
-            this.applyMeanFilterRadCheckBox = new Telerik.WinControls.UI.RadCheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.trackingToggleButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.exitRadButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.optionsToggleButton)).BeginInit();
@@ -89,6 +89,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.avaliableWebcamsDropDownList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.optionsRadPanel)).BeginInit();
             this.optionsRadPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.applyMeanFilterRadCheckBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.deltaPositionRadTextBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.deltaPositionRadLabel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.centerLineRadCheckBox)).BeginInit();
@@ -121,7 +122,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.secondMarkerChangeRadButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.secondMarkerRangeRadLabel)).BeginInit();
             this.iconContextMenuStrip.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.applyMeanFilterRadCheckBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
             // 
@@ -233,6 +233,16 @@
             this.optionsRadPanel.TabIndex = 2;
             this.optionsRadPanel.ThemeName = "Vista";
             this.optionsRadPanel.Visible = false;
+            // 
+            // applyMeanFilterRadCheckBox
+            // 
+            this.applyMeanFilterRadCheckBox.Location = new System.Drawing.Point(12, 47);
+            this.applyMeanFilterRadCheckBox.Name = "applyMeanFilterRadCheckBox";
+            this.applyMeanFilterRadCheckBox.Size = new System.Drawing.Size(195, 16);
+            this.applyMeanFilterRadCheckBox.TabIndex = 4;
+            this.applyMeanFilterRadCheckBox.Text = "Apply mean filter on webcam video";
+            this.applyMeanFilterRadCheckBox.ThemeName = "Vista";
+            this.applyMeanFilterRadCheckBox.ToggleStateChanged += new Telerik.WinControls.UI.StateChangedEventHandler(this.applyMeanFilterRadCheckBox_ToggleStateChanged);
             // 
             // deltaPositionRadTextBox
             // 
@@ -451,11 +461,11 @@
             // 
             this.userRadLabel.AllowDrop = true;
             this.userRadLabel.AutoScroll = true;
-            this.userRadLabel.Location = new System.Drawing.Point(173, 337);
+            this.userRadLabel.Location = new System.Drawing.Point(227, 337);
             this.userRadLabel.Name = "userRadLabel";
-            this.userRadLabel.Size = new System.Drawing.Size(179, 16);
+            this.userRadLabel.Size = new System.Drawing.Size(77, 16);
             this.userRadLabel.TabIndex = 5;
-            this.userRadLabel.Text = "Options Menu                                  ";
+            this.userRadLabel.Text = "Options Menu";
             this.userRadLabel.ThemeName = "ControlDefault";
             // 
             // startupRadCheckBox
@@ -649,16 +659,6 @@
             this.timeOut.Interval = 15000;
             this.timeOut.Tick += new System.EventHandler(this.timeOut_Tick);
             // 
-            // applyMeanFilterRadCheckBox
-            // 
-            this.applyMeanFilterRadCheckBox.Location = new System.Drawing.Point(12, 47);
-            this.applyMeanFilterRadCheckBox.Name = "applyMeanFilterRadCheckBox";
-            this.applyMeanFilterRadCheckBox.Size = new System.Drawing.Size(195, 16);
-            this.applyMeanFilterRadCheckBox.TabIndex = 4;
-            this.applyMeanFilterRadCheckBox.Text = "Apply mean filter on webcam video";
-            this.applyMeanFilterRadCheckBox.ThemeName = "Vista";
-            this.applyMeanFilterRadCheckBox.ToggleStateChanged += new Telerik.WinControls.UI.StateChangedEventHandler(this.applyMeanFilterRadCheckBox_ToggleStateChanged);
-            // 
             // WebCSForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -691,6 +691,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.optionsRadPanel)).EndInit();
             this.optionsRadPanel.ResumeLayout(false);
             this.optionsRadPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.applyMeanFilterRadCheckBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.deltaPositionRadTextBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.deltaPositionRadLabel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.centerLineRadCheckBox)).EndInit();
@@ -725,7 +726,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.secondMarkerChangeRadButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.secondMarkerRangeRadLabel)).EndInit();
             this.iconContextMenuStrip.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.applyMeanFilterRadCheckBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
 
