@@ -42,7 +42,7 @@
             this.deltaPositionRadTextBox = new Telerik.WinControls.UI.RadTextBox();
             this.deltaPositionRadLabel = new Telerik.WinControls.UI.RadLabel();
             this.centerLineRadCheckBox = new Telerik.WinControls.UI.RadCheckBox();
-            this.enableMouseRadCheckBox = new Telerik.WinControls.UI.RadCheckBox();
+            this.enableClickingRadCheckBox = new Telerik.WinControls.UI.RadCheckBox();
             this.saveOptionsRadButton = new Telerik.WinControls.UI.RadButton();
             this.workingFrameRadGroupBox = new Telerik.WinControls.UI.RadGroupBox();
             this.noFramesRadRadioButton = new Telerik.WinControls.UI.RadRadioButton();
@@ -93,7 +93,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.deltaPositionRadTextBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.deltaPositionRadLabel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.centerLineRadCheckBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.enableMouseRadCheckBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.enableClickingRadCheckBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.saveOptionsRadButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.workingFrameRadGroupBox)).BeginInit();
             this.workingFrameRadGroupBox.SuspendLayout();
@@ -218,7 +218,7 @@
             this.optionsRadPanel.Controls.Add(this.deltaPositionRadTextBox);
             this.optionsRadPanel.Controls.Add(this.deltaPositionRadLabel);
             this.optionsRadPanel.Controls.Add(this.centerLineRadCheckBox);
-            this.optionsRadPanel.Controls.Add(this.enableMouseRadCheckBox);
+            this.optionsRadPanel.Controls.Add(this.enableClickingRadCheckBox);
             this.optionsRadPanel.Controls.Add(this.saveOptionsRadButton);
             this.optionsRadPanel.Controls.Add(this.workingFrameRadGroupBox);
             this.optionsRadPanel.Controls.Add(this.FirstMarkerRadGroupBox);
@@ -276,15 +276,15 @@
             this.centerLineRadCheckBox.ToggleState = Telerik.WinControls.Enumerations.ToggleState.On;
             this.centerLineRadCheckBox.ToggleStateChanged += new Telerik.WinControls.UI.StateChangedEventHandler(this.centerLineRadCheckBox_ToggleStateChanged);
             // 
-            // enableMouseRadCheckBox
+            // enableClickingRadCheckBox
             // 
-            this.enableMouseRadCheckBox.Location = new System.Drawing.Point(12, 3);
-            this.enableMouseRadCheckBox.Name = "enableMouseRadCheckBox";
-            this.enableMouseRadCheckBox.Size = new System.Drawing.Size(93, 16);
-            this.enableMouseRadCheckBox.TabIndex = 1;
-            this.enableMouseRadCheckBox.Text = "Enable Mouse";
-            this.enableMouseRadCheckBox.ThemeName = "Vista";
-            this.enableMouseRadCheckBox.ToggleStateChanged += new Telerik.WinControls.UI.StateChangedEventHandler(this.enableMouseRadCheckBox_ToggleStateChanged);
+            this.enableClickingRadCheckBox.Location = new System.Drawing.Point(12, 3);
+            this.enableClickingRadCheckBox.Name = "enableClickingRadCheckBox";
+            this.enableClickingRadCheckBox.Size = new System.Drawing.Size(98, 16);
+            this.enableClickingRadCheckBox.TabIndex = 1;
+            this.enableClickingRadCheckBox.Text = "Enable Clicking";
+            this.enableClickingRadCheckBox.ThemeName = "Vista";
+            this.enableClickingRadCheckBox.ToggleStateChanged += new Telerik.WinControls.UI.StateChangedEventHandler(this.enableClickingRadCheckBox_ToggleStateChanged);
             // 
             // saveOptionsRadButton
             // 
@@ -695,7 +695,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.deltaPositionRadTextBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.deltaPositionRadLabel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.centerLineRadCheckBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.enableMouseRadCheckBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.enableClickingRadCheckBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.saveOptionsRadButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.workingFrameRadGroupBox)).EndInit();
             this.workingFrameRadGroupBox.ResumeLayout(false);
@@ -777,7 +777,7 @@
         private System.Windows.Forms.ToolStripMenuItem WebcamsToolStripMenuItem;
         private System.Windows.Forms.Timer timeOut;
         private Telerik.WinControls.UI.RadRadioButton noFramesRadRadioButton;
-        private Telerik.WinControls.UI.RadCheckBox enableMouseRadCheckBox;
+        private Telerik.WinControls.UI.RadCheckBox enableClickingRadCheckBox;
         private Telerik.WinControls.UI.RadCheckBox centerLineRadCheckBox;
         private Telerik.WinControls.UI.RadTextBox deltaPositionRadTextBox;
         private Telerik.WinControls.UI.RadLabel deltaPositionRadLabel;
