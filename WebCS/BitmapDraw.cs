@@ -56,6 +56,22 @@ namespace WebCS
             return image;
         }
 
+
+        public static Bitmap Rectangle(Bitmap image, Rectangle[] rect, Color[] color)
+        {
+            if (rect.Length == color.Length)
+            {
+                using (Graphics g = Graphics.FromImage(image))
+                {
+                    for (int i = 0; i < rect.Length; i++)
+                    {
+                        g.DrawRectangle(new Pen(color[i], 2), rect[i]);
+                    }
+                }
+            }
+            return image;
+        }
+
         public static Bitmap Resize(Bitmap toResize, int newWidth, int newHeight)
         {
             Bitmap result = new Bitmap(newWidth, newHeight);

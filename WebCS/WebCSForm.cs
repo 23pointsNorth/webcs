@@ -11,6 +11,7 @@ using Microsoft.Win32;
 using Telerik.WinControls.UI;
 using Telerik.WinControls.Enumerations;
 using WebCS.Properties;
+using System.Collections.Generic;
 
 namespace WebCS
 {
@@ -270,34 +271,34 @@ namespace WebCS
                 newFrame.UnlockBits(objectsData);
             }
 
+            List<Rectangle> rectList = new List<Rectangle>();
+            List<Color> colorList = new List<Color>();
             if (isTrackingEnabled)
             {
                 //make sure both clones contain starting bitmap
                 firstFrameClone = new Bitmap(newFrame);
                 secondFrameClone = new Bitmap(newFrame);
 
-                //find marker positions
-                //CalculateMarker(
-                //    firstFrameClone, firstMarker.Color, Color.Green, firstMarker.Range, 
-                //    firstMarkerLoadRadRadioButton.IsChecked, firstMarker.Rect, firstMarker.IsFound);
-                //CalculateMarker(
-                //    secondFrameClone, secondMarker.Color, Color.Blue, secondMarker.Range, 
-                //    secondMarkerLoadRadRadioButton.IsChecked, secondMarker.Rect, secondMarker.IsFound);
-
                 Bitmap leftOversFM = firstMarker.CalculateMarker(firstFrameClone);
                 Bitmap leftOversSM = secondMarker.CalculateMarker(secondFrameClone);
 
                 if (firstMarker.IsFound)
                 {
+                    //add rect
+                    rectList.Add(firstMarker.Rect);
+                    colorList.Add(firstMarker.FoundMarkerRectC);
                     if (firstMarkerLoadRadRadioButton.IsChecked)
                     {
                         newFrame = leftOversFM;
                     }
-                    //add rect
-                    newFrame = BitmapDraw.Rectangle(
-                        (Bitmap)newFrame.Clone(), 
-                        firstMarker.Rect, 
-                        new Pen(firstMarker.FoundMarkerRectC, 2));
+
+                    //when the position of the marker is known, the curson can be moved, otherwise do nothing
+                    softwareCursor.SetNewPosition(firstMarker.Rect, secondMarker.Rect);
+                    if (isClickingEnabled && !secondMarker.Rect.Equals(Marker.wholeDesktopArea) && secondMarker.IsFound)
+                    {
+                        //You only click when the mouse is enabled and when both markers are found
+                        softwareCursor.Click();
+                    }
                 }
                 if (secondMarker.IsFound)
                 {
@@ -306,23 +307,8 @@ namespace WebCS
                         newFrame = leftOversSM;
                     }
                     //add rect
-                    newFrame = BitmapDraw.Rectangle(
-                        (Bitmap)newFrame.Clone(), 
-                        secondMarker.Rect, 
-                        new Pen(secondMarker.FoundMarkerRectC, 2));
-                }
-
-                if (firstMarker.IsFound)
-                {
-
-                    //when the position of the marker is known, the curson can be moved, otherwise do nothing
-                    softwareCursor.SetNewPosition(firstMarker.Rect, secondMarker.Rect);
-
-                    if (isClickingEnabled && !secondMarker.Rect.Equals(Marker.wholeDesktopArea) && secondMarker.IsFound)
-                    {
-                        //You only click when the mouse is enabled and when both markers are found
-                        softwareCursor.Click();
-                    }
+                    rectList.Add(secondMarker.Rect);
+                    colorList.Add(secondMarker.FoundMarkerRectC);
                 }
             }
             try
@@ -330,27 +316,22 @@ namespace WebCS
                 //under-the-hood options
                 if (firstMarker.IsColorChange)
                 {
-                    newFrame = BitmapDraw.Rectangle(
-                        (Bitmap)newFrame.Clone(),
-                        firstMarker.GetColorRect,
-                        new Pen(Color.LightGreen, 2));
+                    rectList.Add(firstMarker.GetColorRect);
+                    colorList.Add(firstMarker.ChangeColorRectC);
                 }
 
                 if (secondMarker.IsColorChange)
                 {
-                    newFrame = BitmapDraw.Rectangle(
-                        (Bitmap)newFrame.Clone(),
-                        secondMarker.GetColorRect,
-                        new Pen(Color.LightBlue, 2));
+                    rectList.Add(secondMarker.GetColorRect);
+                    colorList.Add(secondMarker.ChangeColorRectC);
                 }
 
                 if (areDesktopBounriesVisible)
                 {
-                    newFrame = BitmapDraw.Rectangle(
-                        (Bitmap)newFrame.Clone(),
-                        desktopBoundries,
-                        new Pen(Color.Gray, 2));
+                    rectList.Add(desktopBoundries);
+                    colorList.Add(Color.Gray);
                 }
+                BitmapDraw.Rectangle(newFrame, rectList.ToArray(), colorList.ToArray());
 
                 //drawing a line connecting the centers of both markers
                 if (connectCenters && firstMarker.IsFound && secondMarker.IsFound && 
