@@ -90,11 +90,10 @@ namespace WebCS
         }
 
 
-        static Rectangle wholeDesktopArea = new Rectangle(0, 0, Constants.IMAGE_WIDTH, Constants.IMAGE_HEIGHT);
-        public Bitmap CalculateMarker(Bitmap frame, bool loadWorkingFrame)
+        public static Rectangle wholeDesktopArea = new Rectangle(0, 0, Constants.IMAGE_WIDTH, Constants.IMAGE_HEIGHT);
+        public Bitmap CalculateMarker(Bitmap frame)
         {
             this.Rect = wholeDesktopArea;
-            Bitmap uneditedFrame = new Bitmap(frame);
             BitmapData ObjectsData = frame.LockBits(
                     new Rectangle(0, 0, frame.Width, frame.Height),
                     ImageLockMode.ReadOnly, frame.PixelFormat);
@@ -125,12 +124,8 @@ namespace WebCS
                 this.IsFound = false;
             }
             frame.UnlockBits(ObjectsData);
-            if (loadWorkingFrame)
-            {
-                MessageBox.Show("Load Working Frame");
-                uneditedFrame = (Bitmap)frame.Clone();
-            }
-            return uneditedFrame;
+
+            return frame;
         }
     }
 }

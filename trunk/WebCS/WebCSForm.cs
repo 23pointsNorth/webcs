@@ -32,7 +32,7 @@ namespace WebCS
             desktopBoundries = User.Default.desktopAreaBoundriesRectangle;
             areDesktopBounriesVisible = User.Default.areDesktopAreaBoundriesVisible;
             softwareCursor.DesktopArea = desktopBoundries;
-            enableMouseRadCheckBox.Checked = User.Default.isMouseEnabled;
+            enableClickingRadCheckBox.Checked = User.Default.isMouseEnabled;
             centerLineRadCheckBox.Checked = User.Default.showCenterLine;
             connectCenters = User.Default.showCenterLine;
             proximityClick = User.Default.proximityClick;
@@ -284,13 +284,16 @@ namespace WebCS
                 //    secondFrameClone, secondMarker.Color, Color.Blue, secondMarker.Range, 
                 //    secondMarkerLoadRadRadioButton.IsChecked, secondMarker.Rect, secondMarker.IsFound);
 
-                newFrame = firstMarker.CalculateMarker(
-                    firstFrameClone, firstMarkerLoadRadRadioButton.IsChecked);
-                newFrame = secondMarker.CalculateMarker(
-                    secondFrameClone, secondMarkerLoadRadRadioButton.IsChecked);
+                Bitmap leftOversFM = firstMarker.CalculateMarker(firstFrameClone);
+                Bitmap leftOversSM = secondMarker.CalculateMarker(secondFrameClone);
 
                 if (firstMarker.IsFound)
                 {
+                    if (firstMarkerLoadRadRadioButton.IsChecked)
+                    {
+                        newFrame = leftOversFM;
+                    }
+                    //add rect
                     newFrame = BitmapDraw.Rectangle(
                         (Bitmap)newFrame.Clone(), 
                         firstMarker.Rect, 
@@ -298,6 +301,11 @@ namespace WebCS
                 }
                 if (secondMarker.IsFound)
                 {
+                    if (secondMarkerLoadRadRadioButton.IsChecked)
+                    {
+                        newFrame = leftOversSM;
+                    }
+                    //add rect
                     newFrame = BitmapDraw.Rectangle(
                         (Bitmap)newFrame.Clone(), 
                         secondMarker.Rect, 
@@ -310,7 +318,7 @@ namespace WebCS
                     //when the position of the marker is known, the curson can be moved, otherwise do nothing
                     softwareCursor.SetNewPosition(firstMarker.Rect, secondMarker.Rect);
 
-                    if (isMouseEnabled && !secondMarker.Rect.Equals(wholeDesktopArea) && secondMarker.IsFound)
+                    if (isClickingEnabled && !secondMarker.Rect.Equals(Marker.wholeDesktopArea) && secondMarker.IsFound)
                     {
                         //You only click when the mouse is enabled and when both markers are found
                         softwareCursor.Click();
@@ -348,7 +356,6 @@ namespace WebCS
                 if (connectCenters && firstMarker.IsFound && secondMarker.IsFound && 
                     (trackingToggleButton.ToggleState == ToggleState.On))
                 {
-                    Color drawColor = (softwareCursor.IsMouseDown)?Color.Firebrick:Color.ForestGreen;
                     Point firstCenter = new Point(
                     firstMarker.Rect.X + firstMarker.Rect.Width / 2, firstMarker.Rect.Y + firstMarker.Rect.Height / 2);
                     Point secondCenter = new Point(
@@ -356,6 +363,8 @@ namespace WebCS
                     int diff = (int)Math.Sqrt(
                         Math.Pow(Math.Abs(firstCenter.X - secondCenter.X), 2) +
                         Math.Pow(Math.Abs(firstCenter.Y - secondCenter.Y), 2));
+                    Color drawColor = (diff < proximityClick) ? Color.Firebrick : Color.DarkGreen;
+                    
                     PointF lineCenter = new Point(
                         (firstCenter.X + secondCenter.X) / 2,
                         (firstCenter.Y + secondCenter.Y) / 2);
@@ -376,49 +385,6 @@ namespace WebCS
                 }
             }
             
-        }
-
-        static Rectangle wholeDesktopArea = new Rectangle(0,0, Constants.IMAGE_WIDTH, Constants.IMAGE_HEIGHT);
-        private void CalculateMarker(Bitmap frame, Color markerColor, Color rectangleColor, int colorRange, bool loadWorkingFrame, Rectangle markerRect, bool found)
-        {
-            markerRect = wholeDesktopArea;
-            BitmapData ObjectsData = frame.LockBits(
-                    new Rectangle(0, 0, frame.Width, frame.Height),
-                    ImageLockMode.ReadOnly, frame.PixelFormat);
-
-            EuclideanColorFiltering filter = new EuclideanColorFiltering();
-            // set center color and radius
-            filter.CenterColor.Color = markerColor;
-            filter.Radius = (short)colorRange;
-            filter.ApplyInPlace(ObjectsData);
-            
-            try
-            {
-                ExtractBiggestBlob biggestBlob = new ExtractBiggestBlob();
-                Size blobSize = biggestBlob.Apply(ObjectsData).Size; // returns a bitmap - need only size
-                if (blobSize.Height < Constants.MIN_BLOB_HEIGHT &&
-                    blobSize.Width < Constants.MIN_BLOB_WIDTH)
-                {
-                    throw new ArgumentException("Blob too small.");
-                }
-                markerRect = new Rectangle(
-                    new Point (biggestBlob.BlobPosition.X, biggestBlob.BlobPosition.Y), 
-                    blobSize);
-                if (loadWorkingFrame)
-                {
-                    newFrame = (Bitmap)frame.Clone();
-                }
-                found = true;
-                newFrame = BitmapDraw.Rectangle(
-                    newFrame, markerRect, new Pen(rectangleColor, 2));
-            }
-            catch (ArgumentException)
-            {
-                //no blob found. stay on last known position
-                found = false;
-            }
-
-            frame.UnlockBits(ObjectsData);
         }
 
         private void WebCSForm_FormClosing(object sender, System.Windows.Forms.FormClosingEventArgs e)
@@ -609,7 +575,7 @@ namespace WebCS
             User.Default.applyMeanFilter = applyMeanFilter;
             User.Default.desktopAreaBoundriesRectangle = desktopBoundries;
             User.Default.areDesktopAreaBoundriesVisible = areDesktopBounriesVisible;
-            User.Default.isMouseEnabled = isMouseEnabled;
+            User.Default.isMouseEnabled = isClickingEnabled;
             User.Default.showCenterLine = connectCenters;
             User.Default.proximityClick = proximityClick;
             User.Default.Save();
@@ -684,10 +650,10 @@ namespace WebCS
             }
         }
 
-        bool isMouseEnabled = false;
-        private void enableMouseRadCheckBox_ToggleStateChanged(object sender, StateChangedEventArgs args)
+        bool isClickingEnabled = false;
+        private void enableClickingRadCheckBox_ToggleStateChanged(object sender, StateChangedEventArgs args)
         {
-            isMouseEnabled = enableMouseRadCheckBox.Checked;
+            isClickingEnabled = enableClickingRadCheckBox.Checked;
         }
 
         private void firstMarkerRangeRadTextBox_TextChanged(object sender, EventArgs e)
