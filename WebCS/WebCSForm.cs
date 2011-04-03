@@ -271,22 +271,17 @@ namespace WebCS
                 newFrame.UnlockBits(objectsData);
             }
 
-            List<Rectangle> rectList = new List<Rectangle>();
-            List<Color> colorList = new List<Color>();
+            Dictionary<Rectangle, Color> rectDictionary = new Dictionary<Rectangle, Color>();
             if (isTrackingEnabled)
             {
-                //make sure both clones contain starting bitmap
-                firstFrameClone = new Bitmap(newFrame);
-                secondFrameClone = new Bitmap(newFrame);
-
-                Bitmap leftOversFM = firstMarker.CalculateMarker(firstFrameClone);
-                Bitmap leftOversSM = secondMarker.CalculateMarker(secondFrameClone);
+                //make sure both methods contain starting bitmap
+                Bitmap leftOversFM = firstMarker.CalculateMarker(new Bitmap(newFrame));
+                Bitmap leftOversSM = secondMarker.CalculateMarker(new Bitmap(newFrame));
 
                 if (firstMarker.IsFound)
                 {
                     //add rect
-                    rectList.Add(firstMarker.Rect);
-                    colorList.Add(firstMarker.FoundMarkerRectC);
+                    rectDictionary.Add(firstMarker.Rect, firstMarker.FoundMarkerRectC);
                     if (firstMarkerLoadRadRadioButton.IsChecked)
                     {
                         newFrame = leftOversFM;
@@ -307,8 +302,7 @@ namespace WebCS
                         newFrame = leftOversSM;
                     }
                     //add rect
-                    rectList.Add(secondMarker.Rect);
-                    colorList.Add(secondMarker.FoundMarkerRectC);
+                    rectDictionary.Add(secondMarker.Rect, secondMarker.FoundMarkerRectC);
                 }
             }
             try
@@ -316,23 +310,20 @@ namespace WebCS
                 //under-the-hood options
                 if (firstMarker.IsColorChange)
                 {
-                    rectList.Add(firstMarker.GetColorRect);
-                    colorList.Add(firstMarker.ChangeColorRectC);
+                    rectDictionary.Add(firstMarker.GetColorRect, firstMarker.ChangeColorRectC);
                 }
 
                 if (secondMarker.IsColorChange)
                 {
-                    rectList.Add(secondMarker.GetColorRect);
-                    colorList.Add(secondMarker.ChangeColorRectC);
+                    rectDictionary.Add(secondMarker.GetColorRect, secondMarker.ChangeColorRectC);
                 }
 
                 if (areDesktopBounriesVisible)
                 {
-                    rectList.Add(desktopBoundries);
-                    colorList.Add(Color.Gray);
+                    rectDictionary.Add(desktopBoundries, Color.Gray);
                 }
-                BitmapDraw.Rectangle(newFrame, rectList.ToArray(), colorList.ToArray());
 
+                BitmapDraw.Rectangle(newFrame, rectDictionary);
                 //drawing a line connecting the centers of both markers
                 if (connectCenters && firstMarker.IsFound && secondMarker.IsFound && 
                     (trackingToggleButton.ToggleState == ToggleState.On))
