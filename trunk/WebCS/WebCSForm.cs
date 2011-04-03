@@ -104,14 +104,14 @@ namespace WebCS
             {
                 //default 
                 firstMarker = new Marker(
-                    emptyColor,
+                    Marker.emptyColor,
                     20,
                     false, Color.Green, false, new Rectangle(
                         Constants.IMAGE_WIDTH / 2 - 25,
                         Constants.IMAGE_HEIGHT / 2 - 25, 30, 30),
                     Color.LightBlue);
                 secondMarker = new Marker(
-                    emptyColor,
+                    Marker.emptyColor,
                     20,
                     false, Color.Blue, false, new Rectangle(
                         Constants.IMAGE_WIDTH / 2 + 15,
@@ -235,9 +235,6 @@ namespace WebCS
         }
 
         Bitmap newFrame;
-        Bitmap firstFrameClone;
-        Bitmap secondFrameClone;
-        static Color emptyColor = Color.FromArgb(0, 0, 0);
         Mouse softwareCursor = new Mouse(Cursor.Position, new Point(0, 0), 0);
         bool applyMedianFilter = false;
         bool applyMeanFilter = false;
@@ -309,58 +306,51 @@ namespace WebCS
                     rectDictionary.Add(secondMarker.Rect, secondMarker.FoundMarkerRectC);
                 }
             }
-            try
+            //under-the-hood options
+            if (firstMarker.IsColorChange)
             {
-                //under-the-hood options
-                if (firstMarker.IsColorChange)
-                {
-                    rectDictionary.Add(firstMarker.GetColorRect, firstMarker.ChangeColorRectC);
-                }
+                rectDictionary.Add(firstMarker.GetColorRect, firstMarker.ChangeColorRectC);
+            }
 
-                if (secondMarker.IsColorChange)
-                {
-                    rectDictionary.Add(secondMarker.GetColorRect, secondMarker.ChangeColorRectC);
-                }
+            if (secondMarker.IsColorChange)
+            {
+                rectDictionary.Add(secondMarker.GetColorRect, secondMarker.ChangeColorRectC);
+            }
 
-                if (areDesktopBounriesVisible)
-                {
-                    rectDictionary.Add(desktopBoundries, Color.Gray);
-                }
+            if (areDesktopBounriesVisible)
+            {
+                rectDictionary.Add(desktopBoundries, Color.Gray);
+            }
 
-                BitmapDraw.Rectangle(newFrame, rectDictionary);
-                //drawing a line connecting the centers of both markers
-                if (connectCenters && firstMarker.IsFound && secondMarker.IsFound && 
-                    (trackingToggleButton.ToggleState == ToggleState.On))
-                {
-                    Point firstCenter = new Point(
-                    firstMarker.Rect.X + firstMarker.Rect.Width / 2, firstMarker.Rect.Y + firstMarker.Rect.Height / 2);
-                    Point secondCenter = new Point(
-                    secondMarker.Rect.X + secondMarker.Rect.Width / 2, secondMarker.Rect.Y + secondMarker.Rect.Height / 2);
-                    int diff = (int)Math.Sqrt(
-                        Math.Pow(Math.Abs(firstCenter.X - secondCenter.X), 2) +
-                        Math.Pow(Math.Abs(firstCenter.Y - secondCenter.Y), 2));
-                    Color drawColor = (diff < proximityClick) ? Color.Firebrick : Color.DarkGreen;
-                    
-                    PointF lineCenter = new Point(
-                        (firstCenter.X + secondCenter.X) / 2,
-                        (firstCenter.Y + secondCenter.Y) / 2);
+            BitmapDraw.Rectangle(newFrame, rectDictionary);
+            //drawing a line connecting the centers of both markers
+            if (connectCenters && firstMarker.IsFound && secondMarker.IsFound && 
+                (trackingToggleButton.ToggleState == ToggleState.On))
+            {
+                Point firstCenter = new Point(
+                firstMarker.Rect.X + firstMarker.Rect.Width / 2, firstMarker.Rect.Y + firstMarker.Rect.Height / 2);
+                Point secondCenter = new Point(
+                secondMarker.Rect.X + secondMarker.Rect.Width / 2, secondMarker.Rect.Y + secondMarker.Rect.Height / 2);
+                int diff = (int)Math.Sqrt(
+                    Math.Pow(Math.Abs(firstCenter.X - secondCenter.X), 2) +
+                    Math.Pow(Math.Abs(firstCenter.Y - secondCenter.Y), 2));
+                Color drawColor = (diff < proximityClick) ? Color.Firebrick : Color.DarkGreen;
+                
+                PointF lineCenter = new Point(
+                    (firstCenter.X + secondCenter.X) / 2,
+                    (firstCenter.Y + secondCenter.Y) / 2);
 
-                    using (Graphics g = Graphics.FromImage(newFrame))
-                    {
-                        g.DrawLine(new Pen(drawColor, 2), firstCenter, secondCenter);
-                        g.DrawString(diff.ToString(), new Font("Arial", 10), 
-                            new SolidBrush(drawColor), lineCenter);
-                    }
+                using (Graphics g = Graphics.FromImage(newFrame))
+                {
+                    g.DrawLine(new Pen(drawColor, 2), firstCenter, secondCenter);
+                    g.DrawString(diff.ToString(), new Font("Arial", 10), 
+                        new SolidBrush(drawColor), lineCenter);
                 }
             }
-            finally
+            if (showFrames)
             {
-                if (showFrames)
-                {
-                    imageContainer.Image = newFrame;    //update image to container
-                }
+                imageContainer.Image = newFrame;    //update image to container
             }
-            
         }
 
         private void WebCSForm_FormClosing(object sender, System.Windows.Forms.FormClosingEventArgs e)
@@ -536,8 +526,8 @@ namespace WebCS
         private void CheckEnabledTracking()
         {
             this.trackingToggleButton.Enabled = (
-                !firstMarker.Color.Equals(emptyColor) &&
-                !secondMarker.Color.Equals(emptyColor) &&
+                !firstMarker.Color.Equals(Marker.emptyColor) &&
+                !secondMarker.Color.Equals(Marker.emptyColor) &&
                 isVideoRunning);
         }
         private void saveOptionsRadButton_Click(object sender, EventArgs e)

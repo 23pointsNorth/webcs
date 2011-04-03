@@ -19,6 +19,7 @@ namespace WebCS
         Color foundMarkerRectC;
         Color changeColorRectC;
 
+        public static Color emptyColor = Color.FromArgb(0, 0, 0);
 
         public Color Color { get; set; }
         public int Range { get; set; }
