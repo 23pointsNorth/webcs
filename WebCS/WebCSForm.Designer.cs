@@ -38,6 +38,7 @@
             this.webcamRadToggleButton = new Telerik.WinControls.UI.RadToggleButton();
             this.avaliableWebcamsDropDownList = new Telerik.WinControls.UI.RadDropDownList();
             this.optionsRadPanel = new Telerik.WinControls.UI.RadPanel();
+            this.enableMovingRadCheckBox = new Telerik.WinControls.UI.RadCheckBox();
             this.applyMeanFilterRadCheckBox = new Telerik.WinControls.UI.RadCheckBox();
             this.deltaPositionRadTextBox = new Telerik.WinControls.UI.RadTextBox();
             this.deltaPositionRadLabel = new Telerik.WinControls.UI.RadLabel();
@@ -89,6 +90,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.avaliableWebcamsDropDownList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.optionsRadPanel)).BeginInit();
             this.optionsRadPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.enableMovingRadCheckBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.applyMeanFilterRadCheckBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.deltaPositionRadTextBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.deltaPositionRadLabel)).BeginInit();
@@ -214,6 +216,7 @@
             // 
             // optionsRadPanel
             // 
+            this.optionsRadPanel.Controls.Add(this.enableMovingRadCheckBox);
             this.optionsRadPanel.Controls.Add(this.applyMeanFilterRadCheckBox);
             this.optionsRadPanel.Controls.Add(this.deltaPositionRadTextBox);
             this.optionsRadPanel.Controls.Add(this.deltaPositionRadLabel);
@@ -234,13 +237,23 @@
             this.optionsRadPanel.ThemeName = "Vista";
             this.optionsRadPanel.Visible = false;
             // 
+            // enableMovingRadCheckBox
+            // 
+            this.enableMovingRadCheckBox.Location = new System.Drawing.Point(12, 6);
+            this.enableMovingRadCheckBox.Name = "enableMovingRadCheckBox";
+            this.enableMovingRadCheckBox.Size = new System.Drawing.Size(95, 16);
+            this.enableMovingRadCheckBox.TabIndex = 2;
+            this.enableMovingRadCheckBox.Text = "Enable Moving";
+            this.enableMovingRadCheckBox.ThemeName = "Vista";
+            this.enableMovingRadCheckBox.ToggleStateChanged += new Telerik.WinControls.UI.StateChangedEventHandler(this.enableMovingRadCheckBox_ToggleStateChanged);
+            // 
             // applyMeanFilterRadCheckBox
             // 
             this.applyMeanFilterRadCheckBox.Location = new System.Drawing.Point(12, 47);
             this.applyMeanFilterRadCheckBox.Name = "applyMeanFilterRadCheckBox";
-            this.applyMeanFilterRadCheckBox.Size = new System.Drawing.Size(195, 16);
+            this.applyMeanFilterRadCheckBox.Size = new System.Drawing.Size(104, 16);
             this.applyMeanFilterRadCheckBox.TabIndex = 4;
-            this.applyMeanFilterRadCheckBox.Text = "Apply mean filter on webcam video";
+            this.applyMeanFilterRadCheckBox.Text = "Apply mean filter";
             this.applyMeanFilterRadCheckBox.ThemeName = "Vista";
             this.applyMeanFilterRadCheckBox.ToggleStateChanged += new Telerik.WinControls.UI.StateChangedEventHandler(this.applyMeanFilterRadCheckBox_ToggleStateChanged);
             // 
@@ -278,7 +291,7 @@
             // 
             // enableClickingRadCheckBox
             // 
-            this.enableClickingRadCheckBox.Location = new System.Drawing.Point(12, 3);
+            this.enableClickingRadCheckBox.Location = new System.Drawing.Point(130, 6);
             this.enableClickingRadCheckBox.Name = "enableClickingRadCheckBox";
             this.enableClickingRadCheckBox.Size = new System.Drawing.Size(98, 16);
             this.enableClickingRadCheckBox.TabIndex = 1;
@@ -451,9 +464,9 @@
             // 
             this.applyMedianFilterRadCheckBox.Location = new System.Drawing.Point(12, 25);
             this.applyMedianFilterRadCheckBox.Name = "applyMedianFilterRadCheckBox";
-            this.applyMedianFilterRadCheckBox.Size = new System.Drawing.Size(204, 16);
+            this.applyMedianFilterRadCheckBox.Size = new System.Drawing.Size(113, 16);
             this.applyMedianFilterRadCheckBox.TabIndex = 3;
-            this.applyMedianFilterRadCheckBox.Text = "Apply median filter on webcam video";
+            this.applyMedianFilterRadCheckBox.Text = "Apply median filter";
             this.applyMedianFilterRadCheckBox.ThemeName = "Vista";
             this.applyMedianFilterRadCheckBox.ToggleStateChanged += new Telerik.WinControls.UI.StateChangedEventHandler(this.applyMedianFilterRadCheckBox_ToggleStateChanged);
             // 
@@ -691,6 +704,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.optionsRadPanel)).EndInit();
             this.optionsRadPanel.ResumeLayout(false);
             this.optionsRadPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.enableMovingRadCheckBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.applyMeanFilterRadCheckBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.deltaPositionRadTextBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.deltaPositionRadLabel)).EndInit();
@@ -782,6 +796,7 @@
         private Telerik.WinControls.UI.RadTextBox deltaPositionRadTextBox;
         private Telerik.WinControls.UI.RadLabel deltaPositionRadLabel;
         private Telerik.WinControls.UI.RadCheckBox applyMeanFilterRadCheckBox;
+        private Telerik.WinControls.UI.RadCheckBox enableMovingRadCheckBox;
     }
 }
 

@@ -122,12 +122,12 @@ namespace WebCS.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool isMouseEnabled {
+        public bool isClickingEnabled {
             get {
-                return ((bool)(this["isMouseEnabled"]));
+                return ((bool)(this["isClickingEnabled"]));
             }
             set {
-                this["isMouseEnabled"] = value;
+                this["isClickingEnabled"] = value;
             }
         }
         
@@ -164,6 +164,18 @@ namespace WebCS.Properties {
             }
             set {
                 this["applyMeanFilter"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool isMovingEnabled {
+            get {
+                return ((bool)(this["isMovingEnabled"]));
+            }
+            set {
+                this["isMovingEnabled"] = value;
             }
         }
     }
