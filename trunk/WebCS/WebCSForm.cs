@@ -33,7 +33,8 @@ namespace WebCS
             desktopBoundries = User.Default.desktopAreaBoundriesRectangle;
             areDesktopBounriesVisible = User.Default.areDesktopAreaBoundriesVisible;
             softwareCursor.DesktopArea = desktopBoundries;
-            enableClickingRadCheckBox.Checked = User.Default.isMouseEnabled;
+            enableMovingRadCheckBox.Checked = User.Default.isMovingEnabled;
+            enableClickingRadCheckBox.Checked = User.Default.isClickingEnabled;
             centerLineRadCheckBox.Checked = User.Default.showCenterLine;
             connectCenters = User.Default.showCenterLine;
             proximityClick = User.Default.proximityClick;
@@ -288,7 +289,10 @@ namespace WebCS
                     }
 
                     //when the position of the marker is known, the curson can be moved, otherwise do nothing
-                    softwareCursor.SetNewPosition(firstMarker.Rect, secondMarker.Rect);
+                    if (isMovingEnabled)
+                    {
+                        softwareCursor.SetNewPosition(firstMarker.Rect, secondMarker.Rect);
+                    }
                     if (isClickingEnabled && !secondMarker.Rect.Equals(Marker.wholeDesktopArea) && secondMarker.IsFound)
                     {
                         //You only click when the mouse is enabled and when both markers are found
@@ -547,7 +551,8 @@ namespace WebCS
             User.Default.applyMeanFilter = applyMeanFilter;
             User.Default.desktopAreaBoundriesRectangle = desktopBoundries;
             User.Default.areDesktopAreaBoundriesVisible = areDesktopBounriesVisible;
-            User.Default.isMouseEnabled = isClickingEnabled;
+            User.Default.isMovingEnabled = isMovingEnabled;
+            User.Default.isClickingEnabled = isClickingEnabled;
             User.Default.showCenterLine = connectCenters;
             User.Default.proximityClick = proximityClick;
             User.Default.Save();
@@ -682,5 +687,12 @@ namespace WebCS
         {
             applyMeanFilter = applyMeanFilterRadCheckBox.Checked;
         }
+
+        bool isMovingEnabled;
+        private void enableMovingRadCheckBox_ToggleStateChanged(object sender, StateChangedEventArgs args)
+        {
+            isMovingEnabled = enableMovingRadCheckBox.Checked;
+        }
+
     }
 }
