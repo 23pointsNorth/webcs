@@ -35,13 +35,13 @@ public class Mouse
     public Mouse(Point fisrtCoordinates, Point secondCoordinates, int positionDifference)
     {
         SetNewPosition(fisrtCoordinates, secondCoordinates);
-        this.deltaPosition = positionDifference;
+        deltaPosition = positionDifference;
     }
 
     public void SetNewPosition(Point fisrtCoordinates, Point secondCoordinates)
     {
-        this.mouse = fisrtCoordinates;
-        this.pressure = secondCoordinates;
+        mouse = fisrtCoordinates;
+        pressure = secondCoordinates;
     }
 
     public void SetNewPosition(Rectangle firstMarker, Rectangle secondMarker)
@@ -50,10 +50,10 @@ public class Mouse
             firstMarker.X + firstMarker.Width / 2, firstMarker.Y + firstMarker.Height / 2);
         Point uncheckedPressure = new Point(
             secondMarker.X + secondMarker.Width / 2, secondMarker.Y + secondMarker.Height / 2);
-        this.mouse = new Point(
+        mouse = new Point(
             Math.Min(desktopAreaBoundries.X + desktopAreaBoundries.Width, Math.Max(uncheckedMouse.X, desktopAreaBoundries.X)),
             Math.Min(desktopAreaBoundries.Y + desktopAreaBoundries.Height, Math.Max(uncheckedMouse.Y, desktopAreaBoundries.Y)));
-        this.pressure = new Point(
+        pressure = new Point(
             Math.Min(desktopAreaBoundries.X + desktopAreaBoundries.Width, Math.Max(uncheckedPressure.X, desktopAreaBoundries.X)),
             Math.Min(desktopAreaBoundries.Y + desktopAreaBoundries.Height, Math.Max(uncheckedPressure.Y, desktopAreaBoundries.Y)));
 
@@ -63,8 +63,8 @@ public class Mouse
     public void Click()
     {
         int proximity = (int)Math.Sqrt(
-                    Math.Pow(Math.Abs(mouse.X - pressure.X), 2) +
-                    Math.Pow(Math.Abs(mouse.Y - pressure.Y), 2));
+            Math.Pow(Math.Abs(mouse.X - pressure.X), 2) +
+            Math.Pow(Math.Abs(mouse.Y - pressure.Y), 2));
 
         if (proximity < deltaPosition)
         {

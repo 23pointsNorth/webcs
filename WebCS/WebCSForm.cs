@@ -83,7 +83,7 @@ namespace WebCS
                 firstMarker = new Marker(
                     User.Default.firstMarkerColorUser,
                     User.Default.firstMarkerRangeUser,
-                    false, Color.Green, false, new Rectangle(
+                    Color.Green, new Rectangle(
                         Constants.IMAGE_WIDTH / 2 - 25,
                         Constants.IMAGE_HEIGHT / 2 - 25, 30, 30),
                     Color.LightGreen);
@@ -91,7 +91,7 @@ namespace WebCS
                 secondMarker = new Marker(
                     User.Default.secondMarkerColorUser,
                     User.Default.secondMarkerRangeUser,
-                    false, Color.Blue, false, new Rectangle(
+                    Color.Blue, new Rectangle(
                         Constants.IMAGE_WIDTH / 2 + 15,
                         Constants.IMAGE_HEIGHT / 2 + 15, 30, 30),
                     Color.LightBlue);
@@ -106,14 +106,14 @@ namespace WebCS
                 firstMarker = new Marker(
                     Marker.emptyColor,
                     20,
-                    false, Color.Green, false, new Rectangle(
+                    Color.Green, new Rectangle(
                         Constants.IMAGE_WIDTH / 2 - 25,
                         Constants.IMAGE_HEIGHT / 2 - 25, 30, 30),
                     Color.LightBlue);
                 secondMarker = new Marker(
                     Marker.emptyColor,
                     20,
-                    false, Color.Blue, false, new Rectangle(
+                    Color.Blue, new Rectangle(
                         Constants.IMAGE_WIDTH / 2 + 15,
                         Constants.IMAGE_HEIGHT / 2 + 15, 30, 30),
                     Color.LightBlue);
@@ -290,7 +290,7 @@ namespace WebCS
                     {
                         softwareCursor.SetNewPosition(firstMarker.Rect, secondMarker.Rect);
                     }
-                    if (isClickingEnabled && !secondMarker.Rect.Equals(Marker.wholeDesktopArea) && secondMarker.IsFound)
+                    if (isClickingEnabled && secondMarker.IsFound)
                     {
                         //You only click when the mouse is enabled and when both markers are found
                         softwareCursor.Click();
@@ -331,10 +331,11 @@ namespace WebCS
                 firstMarker.Rect.X + firstMarker.Rect.Width / 2, firstMarker.Rect.Y + firstMarker.Rect.Height / 2);
                 Point secondCenter = new Point(
                 secondMarker.Rect.X + secondMarker.Rect.Width / 2, secondMarker.Rect.Y + secondMarker.Rect.Height / 2);
+                
                 int diff = (int)Math.Sqrt(
                     Math.Pow(Math.Abs(firstCenter.X - secondCenter.X), 2) +
                     Math.Pow(Math.Abs(firstCenter.Y - secondCenter.Y), 2));
-                Color drawColor = (diff < proximityClick) ? Color.Firebrick : Color.DarkGreen;
+                Color drawColor = (softwareCursor.IsMouseDown) ? Color.Firebrick : Color.DarkGreen;
                 
                 PointF lineCenter = new Point(
                     (firstCenter.X + secondCenter.X) / 2,
