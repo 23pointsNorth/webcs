@@ -276,6 +276,7 @@ namespace WebCS
                 Bitmap leftOversFM = firstMarker.CalculateMarker(new Bitmap(newFrame));
                 Bitmap leftOversSM = secondMarker.CalculateMarker(new Bitmap(newFrame));
 
+                softwareCursor.CalculateNewPosition(firstMarker.Rect, secondMarker.Rect);
                 if (firstMarker.IsFound)
                 {
                     //add rect
@@ -285,10 +286,11 @@ namespace WebCS
                         newFrame = leftOversFM;
                     }
 
-                    //when the position of the marker is known, the curson can be moved, otherwise do nothing
+                    //when the position of the marker is known, 
+                    //the curson can be moved to the pre calc position, otherwise do nothing
                     if (isMovingEnabled)
                     {
-                        softwareCursor.SetNewPosition(firstMarker.Rect, secondMarker.Rect);
+                        softwareCursor.SetNewPosition();
                     }
                     if (isClickingEnabled && secondMarker.IsFound)
                     {
@@ -324,27 +326,19 @@ namespace WebCS
 
             BitmapDraw.Rectangle(newFrame, rectDictionary);
             //drawing a line connecting the centers of both markers
-            if (connectCenters && firstMarker.IsFound && secondMarker.IsFound && 
-                (trackingToggleButton.ToggleState == ToggleState.On))
+            if (connectCenters && firstMarker.IsFound && secondMarker.IsFound && isTrackingEnabled)
             {
-                Point firstCenter = new Point(
-                firstMarker.Rect.X + firstMarker.Rect.Width / 2, firstMarker.Rect.Y + firstMarker.Rect.Height / 2);
-                Point secondCenter = new Point(
-                secondMarker.Rect.X + secondMarker.Rect.Width / 2, secondMarker.Rect.Y + secondMarker.Rect.Height / 2);
-                
-                int diff = (int)Math.Sqrt(
-                    Math.Pow(Math.Abs(firstCenter.X - secondCenter.X), 2) +
-                    Math.Pow(Math.Abs(firstCenter.Y - secondCenter.Y), 2));
                 Color drawColor = (softwareCursor.IsMouseDown) ? Color.Firebrick : Color.DarkGreen;
                 
-                PointF lineCenter = new Point(
-                    (firstCenter.X + secondCenter.X) / 2,
-                    (firstCenter.Y + secondCenter.Y) / 2);
-
+                Point lineCenter = new Point(
+                    (softwareCursor.MousePoint.X + softwareCursor.PressurePoint.X) / 2,
+                    (softwareCursor.MousePoint.Y + softwareCursor.PressurePoint.Y) / 2);
+                
                 using (Graphics g = Graphics.FromImage(newFrame))
                 {
-                    g.DrawLine(new Pen(drawColor, 2), firstCenter, secondCenter);
-                    g.DrawString(diff.ToString(), new Font("Arial", 10), 
+                    g.DrawLine(new Pen(drawColor, 2), 
+                        softwareCursor.MousePoint, softwareCursor.PressurePoint);
+                    g.DrawString(softwareCursor.Proximity.ToString(), new Font("Arial", 10), 
                         new SolidBrush(drawColor), lineCenter);
                 }
             }
@@ -666,6 +660,7 @@ namespace WebCS
                 deltaPositionRadTextBox.Text = delta.ToString();
             }
             softwareCursor.DeltaPosition = delta;
+            softwareCursor.IsMouseDown = false;
             proximityClick = delta;
         }
 

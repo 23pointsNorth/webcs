@@ -7,30 +7,17 @@ public class Mouse
 {
     Point mouse;
     Point pressure;
-    private int deltaPosition;
+    private int deltaPosition; //if less than this click
+    int proximity; //how close they are
     Rectangle desktopAreaBoundries;
     bool isMouseDown = false;
 
-    public bool IsMouseDown
-    {
-        get { return isMouseDown; }
-    }
-    public int DeltaPosition
-    {
-        set { this.deltaPosition = value; }
-    }
-    public Point MousePoint
-    {
-        get { return mouse; }
-    }
-    public Point PressurePoint
-    {
-        get { return pressure; }
-    }
-    public Rectangle DesktopArea
-    {
-        set { this.desktopAreaBoundries = value; }
-    }
+    public bool IsMouseDown { get { return isMouseDown; } set { isMouseDown = value; } }
+    public int DeltaPosition { set { this.deltaPosition = value; } }
+    public Point MousePoint { get { return mouse; } }
+    public Point PressurePoint { get { return pressure; } }
+    public Rectangle DesktopArea { set { this.desktopAreaBoundries = value; } }
+    public int Proximity { get { return proximity; } }
 
     public Mouse(Point fisrtCoordinates, Point secondCoordinates, int positionDifference)
     {
@@ -42,9 +29,21 @@ public class Mouse
     {
         mouse = fisrtCoordinates;
         pressure = secondCoordinates;
+        CalculateProximity();
+        Cursor.Position = newPostionInScreenPixels();
+    }
+
+    public void SetNewPosition()
+    {
+        Cursor.Position = newPostionInScreenPixels();
     }
 
     public void SetNewPosition(Rectangle firstMarker, Rectangle secondMarker)
+    {
+        CalculateNewPosition(firstMarker, secondMarker);
+        Cursor.Position = newPostionInScreenPixels();
+    }
+    public void CalculateNewPosition(Rectangle firstMarker, Rectangle secondMarker)
     {
         Point uncheckedMouse = new Point(
             firstMarker.X + firstMarker.Width / 2, firstMarker.Y + firstMarker.Height / 2);
@@ -56,16 +55,18 @@ public class Mouse
         pressure = new Point(
             Math.Min(desktopAreaBoundries.X + desktopAreaBoundries.Width, Math.Max(uncheckedPressure.X, desktopAreaBoundries.X)),
             Math.Min(desktopAreaBoundries.Y + desktopAreaBoundries.Height, Math.Max(uncheckedPressure.Y, desktopAreaBoundries.Y)));
+        CalculateProximity();
+    }
 
-        Cursor.Position = newPostionInScreenPixels();
+    private void CalculateProximity()
+    {
+        proximity = (int)Math.Sqrt(
+            Math.Pow(Math.Abs(mouse.X - pressure.X), 2) +
+            Math.Pow(Math.Abs(mouse.Y - pressure.Y), 2));
     }
 
     public void Click()
     {
-        int proximity = (int)Math.Sqrt(
-            Math.Pow(Math.Abs(mouse.X - pressure.X), 2) +
-            Math.Pow(Math.Abs(mouse.Y - pressure.Y), 2));
-
         if (proximity < deltaPosition)
         {
             isMouseDown = true;
@@ -80,8 +81,8 @@ public class Mouse
 
     private Point newPostionInScreenPixels()
     {
-        int screenX = (int)(Cursor.Clip.Width * 1.0 / desktopAreaBoundries.Width) * (mouse.X - desktopAreaBoundries.X);
-        int screenY = (int)(Cursor.Clip.Height * 1.0 / desktopAreaBoundries.Height) * (mouse.Y - desktopAreaBoundries.Y);
+        int screenX = (int)((Cursor.Clip.Width * 1.0 / desktopAreaBoundries.Width) * (mouse.X - desktopAreaBoundries.X));
+        int screenY = (int)((Cursor.Clip.Height * 1.0 / desktopAreaBoundries.Height) * (mouse.Y - desktopAreaBoundries.Y));
        
         return new Point(screenX, screenY);
     }
