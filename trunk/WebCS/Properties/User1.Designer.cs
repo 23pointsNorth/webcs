@@ -62,9 +62,9 @@ namespace WebCS.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("20")]
-        public int firstMarkerRangeUser {
+        public short firstMarkerRangeUser {
             get {
-                return ((int)(this["firstMarkerRangeUser"]));
+                return ((short)(this["firstMarkerRangeUser"]));
             }
             set {
                 this["firstMarkerRangeUser"] = value;
@@ -74,9 +74,9 @@ namespace WebCS.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("20")]
-        public int secondMarkerRangeUser {
+        public short secondMarkerRangeUser {
             get {
-                return ((int)(this["secondMarkerRangeUser"]));
+                return ((short)(this["secondMarkerRangeUser"]));
             }
             set {
                 this["secondMarkerRangeUser"] = value;

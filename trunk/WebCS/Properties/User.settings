@@ -11,10 +11,10 @@
     <Setting Name="secondMarkerColorUser" Type="System.Drawing.Color" Scope="User">
       <Value Profile="(Default)">Black</Value>
     </Setting>
-    <Setting Name="firstMarkerRangeUser" Type="System.Int32" Scope="User">
+    <Setting Name="firstMarkerRangeUser" Type="System.Int16" Scope="User">
       <Value Profile="(Default)">20</Value>
     </Setting>
-    <Setting Name="secondMarkerRangeUser" Type="System.Int32" Scope="User">
+    <Setting Name="secondMarkerRangeUser" Type="System.Int16" Scope="User">
       <Value Profile="(Default)">20</Value>
     </Setting>
     <Setting Name="applyMedianFilter" Type="System.Boolean" Scope="User">

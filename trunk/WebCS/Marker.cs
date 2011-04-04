@@ -4,129 +4,127 @@ using AForge.Imaging.Filters;
 using AForge.Imaging;
 using AForge.Math;
 using System.Drawing.Imaging;
-using System.Windows.Forms;
 
-namespace WebCS
+class Marker
 {
-    class Marker
+    Color color;
+    short range;
+    bool isColorChange = false;
+    bool isFound = false;
+    Rectangle rect;
+    Rectangle getColorRect;
+    Color foundMarkerRectC;
+    Color changeColorRectC;
+
+    public static short upperLimit = 255;
+    public static short lowerLimit = 0;
+    public static Color emptyColor = Color.FromArgb(0, 0, 0);
+    public static Rectangle wholeDesktopArea = new Rectangle(0, 0, Constants.IMAGE_WIDTH, Constants.IMAGE_HEIGHT);
+
+    public Color Color { get { return color; } }
+    public short Range { get { return range; } }
+    public bool IsColorChange { get; set; }
+    public bool IsFound { get { return isFound; } }
+    public Rectangle Rect { get { return rect; } }
+    public Rectangle GetColorRect { get { return getColorRect; } }
+    public Color FoundMarkerRectC { get { return foundMarkerRectC; } }
+    public Color ChangeColorRectC { get { return changeColorRectC; } }
+
+    public Marker(Color colorValue, short rangeValue, Color foundMarkerRectColor, Rectangle getColorRectValue, Color changeColorRect)
     {
-        Color color;
-        int range;
-        bool isColorChange = false;
-        bool isFound;
-        Rectangle rect;
-        Rectangle getColorRect;
-        Color foundMarkerRectC;
-        Color changeColorRectC;
+        this.color = colorValue;
+        this.range = rangeValue;
+        this.foundMarkerRectC = foundMarkerRectColor;
+        this.getColorRect = getColorRectValue;
+        this.changeColorRectC = changeColorRect;
+    }
 
-        public static Color emptyColor = Color.FromArgb(0, 0, 0);
+    public void ChangeColor(Bitmap frame)
+    {
+        isColorChange = false;
 
-        public Color Color { get; set; }
-        public int Range { get; set; }
-        public bool IsColorChange { get; set; }
-        public bool IsFound { get; set; }
-        public Rectangle Rect { get; set; }
-        public Rectangle GetColorRect { get; set; }
-        public Color FoundMarkerRectC { get; set; }
-        public Color ChangeColorRectC { get; set; }
-
-        public Marker(Color colorValue, int rangeValue, bool found, Color foundMarkerRectColor ,bool changeColor, Rectangle getColorRectValue, Color changeColorRect)
+        //get rectangle info; crop first pixel - red line
+        Bitmap sample;
+        lock (frame)
         {
-            this.Color = colorValue;
-            this.Range = rangeValue;
-            this.IsFound = found;
-            this.FoundMarkerRectC = foundMarkerRectColor;
-            this.IsColorChange = changeColor;
-            this.GetColorRect = getColorRectValue;
-            this.ChangeColorRectC = changeColorRect;
+            sample = frame.Clone(this.GetColorRect, frame.PixelFormat);
         }
+        new Mean().Apply(sample);
 
-        public void ChangeColor(Bitmap frame)
+        ImageStatistics statistics = new ImageStatistics(sample);
+
+        Histogram histogramRed = statistics.RedWithoutBlack;
+        Histogram histogramGreen = statistics.GreenWithoutBlack;
+        Histogram histogramBlue = statistics.BlueWithoutBlack;
+
+        // get the values
+        int meanRed = (int)histogramRed.Mean;     // mean red value
+        int meanGreen = (int)histogramGreen.Mean;
+        int meanBlue = (int)histogramBlue.Mean;
+
+        this.color = Color.FromArgb(meanRed, meanGreen, meanBlue);
+    }
+
+    public int ChangeRange(string text)
+    {
+        short cRange;
+        try
         {
-            this.IsColorChange = false;
-
-            //get rectangle info; crop first pixel - red line
-            Bitmap sample;
-            lock (frame)
-            {
-                sample = frame.Clone(this.GetColorRect, frame.PixelFormat);
-            }
-            new Mean().Apply(sample);
-
-            ImageStatistics statistics = new ImageStatistics(sample);
-
-            Histogram histogramRed = statistics.RedWithoutBlack;
-            Histogram histogramGreen = statistics.GreenWithoutBlack;
-            Histogram histogramBlue = statistics.BlueWithoutBlack;
-
-            // get the values
-            int meanRed = (int)histogramRed.Mean;     // mean red value
-            int meanGreen = (int)histogramGreen.Mean;
-            int meanBlue = (int)histogramBlue.Mean;
-
-            this.Color = Color.FromArgb(meanRed, meanGreen, meanBlue);
+            cRange = short.Parse(text);
         }
-
-        public int ChangeRange(string text)
+        catch (FormatException)
         {
-            int cRange;
-            try
-            {
-                cRange = int.Parse(text);
-            }
-            catch (FormatException)
-            {
-                cRange = 0;
-            }
-            if (cRange > 255)
-            {
-                cRange = 255;
-            }
-            else if (cRange < 0)
-            {
-                cRange = 0;
-            }
-            this.Range = cRange;
-            return this.Range;
+            cRange = lowerLimit;
         }
-
-
-        public static Rectangle wholeDesktopArea = new Rectangle(0, 0, Constants.IMAGE_WIDTH, Constants.IMAGE_HEIGHT);
-        public Bitmap CalculateMarker(Bitmap frame)
+        catch (OverflowException)
         {
-            this.Rect = wholeDesktopArea;
-            BitmapData ObjectsData = frame.LockBits(
-                    new Rectangle(0, 0, frame.Width, frame.Height),
-                    ImageLockMode.ReadOnly, frame.PixelFormat);
-
-            EuclideanColorFiltering filter = new EuclideanColorFiltering();
-            // set center color and radius
-            filter.CenterColor.Color = this.Color;
-            filter.Radius = (short)this.Range;
-            filter.ApplyInPlace(ObjectsData);
-
-            try
-            {
-                ExtractBiggestBlob biggestBlob = new ExtractBiggestBlob();
-                Size blobSize = biggestBlob.Apply(ObjectsData).Size; // returns a bitmap - need only size
-                if (blobSize.Height < Constants.MIN_BLOB_HEIGHT &&
-                    blobSize.Width < Constants.MIN_BLOB_WIDTH)
-                {
-                    throw new ArgumentException("Blob too small.");
-                }
-                this.Rect = new Rectangle(
-                    new Point(biggestBlob.BlobPosition.X, biggestBlob.BlobPosition.Y),
-                    blobSize);
-                this.IsFound = true;
-            }
-            catch (ArgumentException)
-            {
-                //no blob found. stay on last known position
-                this.IsFound = false;
-            }
-            frame.UnlockBits(ObjectsData);
-
-            return frame;
+            cRange = upperLimit;
         }
+        if (cRange > upperLimit)
+        {
+            cRange = upperLimit;
+        }
+        else if (cRange < lowerLimit)
+        {
+            cRange = lowerLimit;
+        }
+        this.range = cRange;
+        return this.range;
+    }
+
+    public Bitmap CalculateMarker(Bitmap frame)
+    {
+        BitmapData ObjectsData = frame.LockBits(
+                new Rectangle(0, 0, frame.Width, frame.Height),
+                ImageLockMode.ReadOnly, frame.PixelFormat);
+
+        EuclideanColorFiltering filter = new EuclideanColorFiltering();
+        // set center color and radius
+        filter.CenterColor.Color = color;
+        filter.Radius = range;
+        filter.ApplyInPlace(ObjectsData);
+
+        try
+        {
+            ExtractBiggestBlob biggestBlob = new ExtractBiggestBlob();
+            Size blobSize = biggestBlob.Apply(ObjectsData).Size; // returns a bitmap - need only size
+            if (blobSize.Height < Constants.MIN_BLOB_HEIGHT &&
+                blobSize.Width < Constants.MIN_BLOB_WIDTH)
+            {
+                throw new ArgumentException("Blob too small.");
+            }
+            rect = new Rectangle(
+                new Point(biggestBlob.BlobPosition.X, biggestBlob.BlobPosition.Y),
+                blobSize);
+            isFound = true;
+        }
+        catch (ArgumentException)
+        {
+            //no blob found. stay on last known position
+            isFound = false;
+        }
+        frame.UnlockBits(ObjectsData);
+
+        return frame;
     }
 }
