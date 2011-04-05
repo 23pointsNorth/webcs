@@ -120,6 +120,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>User.settings</DependentUpon>
     </Compile>
+    <Compile Include="QueryPerfCounter.cs" />
     <Compile Include="WebCSForm.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -15,16 +15,15 @@ static class BitmapDraw
         return filledBitmap;
     }
 
-    public static Bitmap Rectangle(Bitmap image, Rectangle rect, Pen pen)
+    public static void Rectangle(Bitmap image, Rectangle rect, Pen pen)
     {
         using (Graphics g = Graphics.FromImage(image))
         {
             g.DrawRectangle(pen, rect);
         }
-        return image;
     }
 
-    public static Bitmap Rectangle(Bitmap image, Rectangle[] rect, Pen pen)
+    public static void Rectangle(Bitmap image, Rectangle[] rect, Pen pen)
     {
         using (Graphics g = Graphics.FromImage(image))
         {
@@ -33,10 +32,9 @@ static class BitmapDraw
                 g.DrawRectangle(pen, r);
             }
         }
-        return image;
     }
 
-    public static Bitmap Rectangle(Bitmap image, Rectangle[] rect, Pen[] pen)
+    public static void Rectangle(Bitmap image, Rectangle[] rect, Pen[] pen)
     {
         if (rect.Length == pen.Length)
         {
@@ -48,11 +46,10 @@ static class BitmapDraw
                 }
             }
         }
-        return image;
     }
 
 
-    public static Bitmap Rectangle(Bitmap image, Rectangle[] rect, Color[] color)
+    public static void Rectangle(Bitmap image, Rectangle[] rect, Color[] color)
     {
         if (rect.Length == color.Length)
         {
@@ -64,10 +61,9 @@ static class BitmapDraw
                 }
             }
         }
-        return image;
     }
 
-    public static Bitmap Rectangle(Bitmap image, Dictionary<Rectangle,Color> rectangles)
+    public static void Rectangle(Bitmap image, Dictionary<Rectangle,Color> rectangles)
     {
         using (Graphics g = Graphics.FromImage(image))
         {
@@ -76,7 +72,6 @@ static class BitmapDraw
                 g.DrawRectangle(new Pen(rect.Value, 2), rect.Key);
             }
         }
-        return image;
     }
 
     public static Bitmap Resize(Bitmap toResize, int newWidth, int newHeight)
@@ -100,5 +95,13 @@ static class BitmapDraw
                 new RectangleF(0, 0, 352, 288), strFormat);
         }
         return emptyBitmap;
+    }
+
+    public static void WriteString(Bitmap layer, string text,Color drawColor, Point location)
+    {
+        using (Graphics g = Graphics.FromImage(layer))
+        {
+            g.DrawString(text, new Font("Arial", 10), new SolidBrush(drawColor), location);
+        }
     }
 }

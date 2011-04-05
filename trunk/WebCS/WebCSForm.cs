@@ -12,6 +12,7 @@ using Telerik.WinControls.UI;
 using Telerik.WinControls.Enumerations;
 using WebCS.Properties;
 using System.Collections.Generic;
+using Counter;
 
 namespace WebCS
 {
@@ -238,9 +239,11 @@ namespace WebCS
         Mouse softwareCursor = new Mouse(Cursor.Position, new Point(0, 0), 0);
         bool applyMedianFilter = false;
         bool applyMeanFilter = false;
+        QueryPerfCounter fpsTimer = new QueryPerfCounter();
 
         private void FinalVideoSource_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
+            fpsTimer.Start();
             //When a new frame is recieved, all the alogrithms should be run
             //update image 
             newFrame = (Bitmap)eventArgs.Frame.Clone();
@@ -342,8 +345,13 @@ namespace WebCS
                         new SolidBrush(drawColor), lineCenter);
                 }
             }
+            fpsTimer.Stop();
+            fpsTimer.DurationPerIteration();
             if (showFrames)
             {
+                BitmapDraw.WriteString(newFrame, 
+                    fpsTimer.FPSstring + " " + fpsTimer.DurationInMS.ToString("0.0") + " ms", 
+                    Color.DarkRed, new Point(5, 5));
                 imageContainer.Image = newFrame;    //update image to container
             }
         }
