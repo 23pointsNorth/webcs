@@ -13,6 +13,7 @@ using Telerik.WinControls.Enumerations;
 using WebCS.Properties;
 using System.Collections.Generic;
 using Counter;
+using BitmapProcessing;
 
 namespace WebCS
 {
