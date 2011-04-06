@@ -93,7 +93,7 @@ namespace BitmapProcessing
                 strFormat.LineAlignment = StringAlignment.Center;
                 g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
                 g.DrawString(text, new Font("Arial", 20), Brushes.Black,
-                    new RectangleF(0, 0, Constants.IMAGE_WIDTH, Constants.IMAGE_HEIGHT), strFormat);
+                    new RectangleF(0, 0, layer.Width, layer.Height), strFormat);
             }
             return emptyBitmap;
         }
