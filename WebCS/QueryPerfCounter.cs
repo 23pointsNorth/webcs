@@ -21,8 +21,9 @@ namespace Counter
         private long frequency;
         Decimal multiplier = new Decimal(1.0e9);
 
-        public string FPSstring { get { return fps.ToString("0.00")+" FPS"; } }
+        public string FPSstring { get { return fps.ToString("0.0")+" FPS"; } }
         public double DurationInMS { get { return period/1000000.0; } } //in mseconds
+        public double FPS { get { return fps; } }
 
         public QueryPerfCounter()
         {
