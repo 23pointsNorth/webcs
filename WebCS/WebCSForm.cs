@@ -27,7 +27,8 @@ namespace WebCS
             InitializeComponent();
             this.Size = new Size(
                 Constants.WEBCAM_ONLY_WIDTH, Constants.WEBCAM_ONLY_HEIGHT);
-            DrawOnEmptyFrame("Webcam \nnot selected.");
+            imageContainer.Image = BitmapDraw.WriteString(
+                new Bitmap(Constants.IMAGE_WIDTH, Constants.IMAGE_HEIGHT), "Webcam \nnot selected.");
             avaliableWebcamsDropDownList.Items.Add("Select Webcam");
 
             //loading the saved user settings
@@ -92,7 +93,7 @@ namespace WebCS
                     Color.Green, new Rectangle(
                         Constants.IMAGE_WIDTH / 2 - 25,
                         Constants.IMAGE_HEIGHT / 2 - 25, 30, 30),
-                    Color.LightGreen);
+                    Color.LightGreen, 0, 255);
 
                 secondMarker = new ColorMarker(
                     User.Default.secondMarkerColorUser,
@@ -100,7 +101,7 @@ namespace WebCS
                     Color.Blue, new Rectangle(
                         Constants.IMAGE_WIDTH / 2 + 15,
                         Constants.IMAGE_HEIGHT / 2 + 15, 30, 30),
-                    Color.LightBlue);
+                    Color.LightBlue, 0, 255);
                 firstMarkerRangeRadTextBox.Text = User.Default.firstMarkerRangeUser.ToString();
                 secondMarkerRangeRadTextBox.Text = User.Default.secondMarkerRangeUser.ToString();
                 
@@ -115,14 +116,14 @@ namespace WebCS
                     Color.Green, new Rectangle(
                         Constants.IMAGE_WIDTH / 2 - 25,
                         Constants.IMAGE_HEIGHT / 2 - 25, 30, 30),
-                    Color.LightBlue);
+                    Color.LightBlue, 0, 255);
                 secondMarker = new ColorMarker(
                     ColorMarker.emptyColor,
                     20,
                     Color.Blue, new Rectangle(
                         Constants.IMAGE_WIDTH / 2 + 15,
                         Constants.IMAGE_HEIGHT / 2 + 15, 30, 30),
-                    Color.LightBlue);
+                    Color.LightBlue, 0, 255);
                 firstMarkerRangeRadTextBox.Text = "20";
                 secondMarkerRangeRadTextBox.Text = "20";
 
@@ -131,12 +132,6 @@ namespace WebCS
                 firstMarkerSample.Width, firstMarkerSample.Height, firstMarker.Color);
             secondMarkerSample.Image = BitmapDraw.FilledRectangle(
                 secondMarkerSample.Width, secondMarkerSample.Height, secondMarker.Color);
-        }
-
-        private void DrawOnEmptyFrame(string text)
-        {
-            imageContainer.Image = BitmapDraw.WriteString(
-                new Bitmap(Constants.IMAGE_WIDTH,Constants.IMAGE_HEIGHT),text);
         }
 
         private FilterInfoCollection videoCaptureDevices;
@@ -374,7 +369,8 @@ namespace WebCS
             {
                 timeOut.Enabled = true;
                 timeOut.Start();
-                DrawOnEmptyFrame("Starting...");
+                imageContainer.Image = BitmapDraw.WriteString(
+                new Bitmap(Constants.IMAGE_WIDTH, Constants.IMAGE_HEIGHT), "Starting...");
                 webcamRadToggleButton.Text = "Stop &Webcam";
                 avaliableWebcamsDropDownList.Enabled = false;
                 firstMarkerChangeRadButton.Enabled = true;
@@ -426,12 +422,14 @@ namespace WebCS
             if (avaliableWebcamsDropDownList.SelectedIndex > 0)
             {
                 webcamRadToggleButton.Enabled = true;
-                DrawOnEmptyFrame("Click to \nstart webcam.");
+                imageContainer.Image = BitmapDraw.WriteString(
+                new Bitmap(Constants.IMAGE_WIDTH, Constants.IMAGE_HEIGHT), "Click to \nstart webcam.");
             }
             else
             {
                 webcamRadToggleButton.Enabled = false;
-                DrawOnEmptyFrame("Webcam \nnot selected.");
+                imageContainer.Image = BitmapDraw.WriteString(
+                new Bitmap(Constants.IMAGE_WIDTH, Constants.IMAGE_HEIGHT), "Webcam \nnot selected.");
             }
         }
 
@@ -576,7 +574,8 @@ namespace WebCS
             {
                 webcamRadToggleButton.PerformClick();
                 timeOut.Enabled = false;
-                DrawOnEmptyFrame("Unable to \nload webcam.\nPlease, try again.");
+                imageContainer.Image = BitmapDraw.WriteString(
+                new Bitmap(Constants.IMAGE_WIDTH, Constants.IMAGE_HEIGHT), "Unable to \nload webcam.\nPlease, try again.");
             }
         }
 
@@ -615,12 +614,14 @@ namespace WebCS
         {
             if (noFramesRadRadioButton.IsChecked)
             {
-                DrawOnEmptyFrame("No Frames\nmode.");
+                imageContainer.Image = BitmapDraw.WriteString(
+                new Bitmap(Constants.IMAGE_WIDTH, Constants.IMAGE_HEIGHT), "No Frames\nmode.");
                 showFrames = false;
             }
             else
             {
-                DrawOnEmptyFrame("Webcam \nnot selected.");
+                imageContainer.Image = BitmapDraw.WriteString(
+                new Bitmap(Constants.IMAGE_WIDTH, Constants.IMAGE_HEIGHT), "Webcam \nnot selected.");
                 showFrames = true;
             }
         }
