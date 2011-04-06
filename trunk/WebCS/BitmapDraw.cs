@@ -3,7 +3,7 @@ using System.Drawing;
 
 namespace BitmapProcessing
 {
-    static class BitmapDraw
+    public static class BitmapDraw
     {
         public static Bitmap FilledRectangle(int width, int height, Color fillColour)
         {

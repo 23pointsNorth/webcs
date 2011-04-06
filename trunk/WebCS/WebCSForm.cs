@@ -15,6 +15,8 @@ using System.Collections.Generic;
 using Counter;
 using BitmapProcessing;
 using AForge;
+using Marker;
+using CursorMovement;
 
 namespace WebCS
 {
@@ -42,6 +44,7 @@ namespace WebCS
             connectCenters = User.Default.showCenterLine;
             proximityClick = User.Default.proximityClick;
             softwareCursor.DeltaPosition = proximityClick;
+            deltaPositionRadTextBox.Text = proximityClick.ToString();
 
             LoadAvaliableWebcams();
             LoadMarkers();
@@ -49,8 +52,8 @@ namespace WebCS
             CheckEnabledTracking();
         }
 
-        Marker firstMarker;
-        Marker secondMarker;
+        ColorMarker firstMarker;
+        ColorMarker secondMarker;
 
         RegistryKey regKeyApp = Registry.CurrentUser.OpenSubKey(
             "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
@@ -83,7 +86,7 @@ namespace WebCS
         {
             try
             {
-                firstMarker = new Marker(
+                firstMarker = new ColorMarker(
                     User.Default.firstMarkerColorUser,
                     User.Default.firstMarkerRangeUser,
                     Color.Green, new Rectangle(
@@ -91,7 +94,7 @@ namespace WebCS
                         Constants.IMAGE_HEIGHT / 2 - 25, 30, 30),
                     Color.LightGreen);
 
-                secondMarker = new Marker(
+                secondMarker = new ColorMarker(
                     User.Default.secondMarkerColorUser,
                     User.Default.secondMarkerRangeUser,
                     Color.Blue, new Rectangle(
@@ -106,15 +109,15 @@ namespace WebCS
             catch
             {
                 //default 
-                firstMarker = new Marker(
-                    Marker.emptyColor,
+                firstMarker = new ColorMarker(
+                    ColorMarker.emptyColor,
                     20,
                     Color.Green, new Rectangle(
                         Constants.IMAGE_WIDTH / 2 - 25,
                         Constants.IMAGE_HEIGHT / 2 - 25, 30, 30),
                     Color.LightBlue);
-                secondMarker = new Marker(
-                    Marker.emptyColor,
+                secondMarker = new ColorMarker(
+                    ColorMarker.emptyColor,
                     20,
                     Color.Blue, new Rectangle(
                         Constants.IMAGE_WIDTH / 2 + 15,
@@ -531,8 +534,8 @@ namespace WebCS
         private void CheckEnabledTracking()
         {
             this.trackingToggleButton.Enabled = (
-                !firstMarker.Color.Equals(Marker.emptyColor) &&
-                !secondMarker.Color.Equals(Marker.emptyColor) &&
+                !firstMarker.Color.Equals(ColorMarker.emptyColor) &&
+                !secondMarker.Color.Equals(ColorMarker.emptyColor) &&
                 isVideoRunning);
         }
         private void saveOptionsRadButton_Click(object sender, EventArgs e)
