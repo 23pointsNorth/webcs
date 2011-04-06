@@ -1,5 +1,5 @@
 ﻿
-public static class Constants
+static class Constants
 {
     public const int IMAGE_WIDTH = 352;
     public const int IMAGE_HEIGHT = 288;
