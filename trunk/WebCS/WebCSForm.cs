@@ -355,10 +355,24 @@ namespace WebCS
             fpsTimer.DurationPerIteration();
             if (showFrames)
             {
-                BitmapDraw.WriteString(newFrame, 
-                    fpsTimer.FPSstring + " " + fpsTimer.DurationInMS.ToString("0.0") + " ms", 
-                    Color.DarkRed, new Point(5, 5));
+                DrawFrameRate();
                 imageContainer.Image = newFrame;    //update image to container
+            }
+        }
+
+        private void DrawFrameRate()
+        {
+            if (fpsTimer.FPS < maxFrameRate)
+            {
+                BitmapDraw.WriteString(newFrame,
+                    fpsTimer.FPSstring + " " + fpsTimer.DurationInMS.ToString("0.0") + " ms",
+                    Color.DarkRed, new Point(5, 5));
+            }
+            else
+            {
+                BitmapDraw.WriteString(newFrame,
+                    maxFrameRate.ToString("0.0") + " FPS " + fpsTimer.DurationInMS.ToString("0.0") + " ms",
+                    Color.DarkRed, new Point(5, 5));
             }
         }
 
@@ -368,6 +382,7 @@ namespace WebCS
             systemTrayIcon.Dispose();
         }
 
+        double maxFrameRate = 72;
         bool isVideoRunning = false;
         private void WebcamRadToggleButton_ToggleStateChanged(object sender, StateChangedEventArgs args)
         {
@@ -379,21 +394,25 @@ namespace WebCS
                 new Bitmap(Constants.IMAGE_WIDTH, Constants.IMAGE_HEIGHT), "Starting...");
                 webcamRadToggleButton.Text = "Stop &Webcam";
                 avaliableWebcamsDropDownList.Enabled = false;
+                webcamOptionsRadButton.Enabled = true;
                 firstMarkerChangeRadButton.Enabled = true;
                 secondMarkerChangeRadButton.Enabled = true;
 
                 try
                 {
+                    int index = avaliableWebcamsDropDownList.SelectedIndex;
+                    //-1 because [0] in avaliableWebcams = "Select Webcam"
                     //stat selected webcam
                     finalVideoSource = new VideoCaptureDevice(
-                        videoCaptureDevices[avaliableWebcamsDropDownList.SelectedIndex - 1].MonikerString);
-                    //-1 because [0] in avaliableWebcams = "Select Webcam"
+                        videoCaptureDevices[index-1].MonikerString);
                     finalVideoSource.NewFrame += new NewFrameEventHandler(
                         FinalVideoSource_NewFrame);
                     finalVideoSource.DesiredFrameSize = new Size(
                         Constants.DESIRED_FRAME_WIDTH, Constants.DESIRED_FRAME_HEIGHT);
                     finalVideoSource.DesiredFrameRate = Constants.DESIRED_FRAME_RATE;
                     finalVideoSource.Start();
+
+                    //finalVideoSource.DisplayPropertyPage(new IntPtr());
                 }
                 finally
                 {
@@ -414,6 +433,7 @@ namespace WebCS
 
                 firstMarkerChangeRadButton.Enabled = false;
                 secondMarkerChangeRadButton.Enabled = false;
+                webcamOptionsRadButton.Enabled = false;
 
                 markersList[ColorMarker.Index.Primary].IsColorChange = false;
                 markersList[ColorMarker.Index.Secondary].IsColorChange = false;
@@ -705,6 +725,16 @@ namespace WebCS
         {
             isMovingEnabled = enableMovingRadCheckBox.Checked;
         }
+
+        private void webcamOptionsRadButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                finalVideoSource.DisplayPropertyPage(new IntPtr());
+            }
+            catch { }
+        }
+
 
     }
 }

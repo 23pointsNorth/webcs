@@ -38,6 +38,7 @@
             this.webcamRadToggleButton = new Telerik.WinControls.UI.RadToggleButton();
             this.avaliableWebcamsDropDownList = new Telerik.WinControls.UI.RadDropDownList();
             this.optionsRadPanel = new Telerik.WinControls.UI.RadPanel();
+            this.webcamOptionsRadButton = new Telerik.WinControls.UI.RadButton();
             this.enableMovingRadCheckBox = new Telerik.WinControls.UI.RadCheckBox();
             this.applyMeanFilterRadCheckBox = new Telerik.WinControls.UI.RadCheckBox();
             this.deltaPositionRadTextBox = new Telerik.WinControls.UI.RadTextBox();
@@ -90,6 +91,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.avaliableWebcamsDropDownList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.optionsRadPanel)).BeginInit();
             this.optionsRadPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.webcamOptionsRadButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.enableMovingRadCheckBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.applyMeanFilterRadCheckBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.deltaPositionRadTextBox)).BeginInit();
@@ -216,6 +218,7 @@
             // 
             // optionsRadPanel
             // 
+            this.optionsRadPanel.Controls.Add(this.webcamOptionsRadButton);
             this.optionsRadPanel.Controls.Add(this.enableMovingRadCheckBox);
             this.optionsRadPanel.Controls.Add(this.applyMeanFilterRadCheckBox);
             this.optionsRadPanel.Controls.Add(this.deltaPositionRadTextBox);
@@ -236,6 +239,17 @@
             this.optionsRadPanel.TabIndex = 2;
             this.optionsRadPanel.ThemeName = "Vista";
             this.optionsRadPanel.Visible = false;
+            // 
+            // webcamOptionsRadButton
+            // 
+            this.webcamOptionsRadButton.Enabled = false;
+            this.webcamOptionsRadButton.Location = new System.Drawing.Point(247, 306);
+            this.webcamOptionsRadButton.Name = "webcamOptionsRadButton";
+            this.webcamOptionsRadButton.Size = new System.Drawing.Size(105, 25);
+            this.webcamOptionsRadButton.TabIndex = 17;
+            this.webcamOptionsRadButton.Text = "Webcam Options";
+            this.webcamOptionsRadButton.ThemeName = "Vista";
+            this.webcamOptionsRadButton.Click += new System.EventHandler(this.webcamOptionsRadButton_Click);
             // 
             // enableMovingRadCheckBox
             // 
@@ -301,9 +315,9 @@
             // 
             // saveOptionsRadButton
             // 
-            this.saveOptionsRadButton.Location = new System.Drawing.Point(227, 306);
+            this.saveOptionsRadButton.Location = new System.Drawing.Point(133, 306);
             this.saveOptionsRadButton.Name = "saveOptionsRadButton";
-            this.saveOptionsRadButton.Size = new System.Drawing.Size(125, 25);
+            this.saveOptionsRadButton.Size = new System.Drawing.Size(105, 25);
             this.saveOptionsRadButton.TabIndex = 16;
             this.saveOptionsRadButton.Text = "&Save Options";
             this.saveOptionsRadButton.ThemeName = "Vista";
@@ -495,7 +509,7 @@
             // 
             this.SelectDesktopAreaButton.Location = new System.Drawing.Point(12, 306);
             this.SelectDesktopAreaButton.Name = "SelectDesktopAreaButton";
-            this.SelectDesktopAreaButton.Size = new System.Drawing.Size(150, 25);
+            this.SelectDesktopAreaButton.Size = new System.Drawing.Size(115, 25);
             this.SelectDesktopAreaButton.TabIndex = 15;
             this.SelectDesktopAreaButton.Text = "Select &Desktop Area";
             this.SelectDesktopAreaButton.ThemeName = "Vista";
@@ -704,6 +718,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.optionsRadPanel)).EndInit();
             this.optionsRadPanel.ResumeLayout(false);
             this.optionsRadPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.webcamOptionsRadButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.enableMovingRadCheckBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.applyMeanFilterRadCheckBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.deltaPositionRadTextBox)).EndInit();
@@ -797,6 +812,7 @@
         private Telerik.WinControls.UI.RadLabel deltaPositionRadLabel;
         private Telerik.WinControls.UI.RadCheckBox applyMeanFilterRadCheckBox;
         private Telerik.WinControls.UI.RadCheckBox enableMovingRadCheckBox;
+        private Telerik.WinControls.UI.RadButton webcamOptionsRadButton;
     }
 }
 
