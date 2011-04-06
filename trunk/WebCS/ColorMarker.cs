@@ -19,11 +19,10 @@ namespace Marker
         Color foundMarkerRectC;
         Color changeColorRectC;
 
-        public static short upperLimit = 255;
-        public static short lowerLimit = 0;
+        private short lowerLimit = 0;
+        private short upperLimit = 255;
         public static Color emptyColor = Color.FromArgb(0, 0, 0);
-        public static Rectangle wholeDesktopArea = new Rectangle(0, 0, Constants.IMAGE_WIDTH, Constants.IMAGE_HEIGHT);
-
+        
         public Color Color { get { return color; } }
         public short Range { get { return range; } }
         public bool IsColorChange { get; set; }
@@ -33,20 +32,22 @@ namespace Marker
         public Color FoundMarkerRectC { get { return foundMarkerRectC; } }
         public Color ChangeColorRectC { get { return changeColorRectC; } }
 
-        public ColorMarker(Color colorValue, short rangeValue, Color foundMarkerRectColor, Rectangle getColorRectValue, Color changeColorRect)
+        public ColorMarker(Color colorValue, short rangeValue, Color foundMarkerRectColor, Rectangle getColorRectValue, Color changeColorRect, short lowerLimitValue, short upperLimitValue)
         {
             this.color = colorValue;
             this.range = rangeValue;
             this.foundMarkerRectC = foundMarkerRectColor;
             this.getColorRect = getColorRectValue;
             this.changeColorRectC = changeColorRect;
+            this.lowerLimit = lowerLimitValue;
+            this.upperLimit = upperLimitValue;
         }
 
         public void ChangeColor(Bitmap frame)
         {
             isColorChange = false;
 
-            //get rectangle info; crop first pixel - red line
+            //get rectangle info; 
             Bitmap sample;
             lock (frame)
             {
