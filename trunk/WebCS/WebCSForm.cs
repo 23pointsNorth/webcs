@@ -14,6 +14,7 @@ using WebCS.Properties;
 using System.Collections.Generic;
 using Counter;
 using BitmapProcessing;
+using AForge;
 
 namespace WebCS
 {

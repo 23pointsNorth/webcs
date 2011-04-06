@@ -4,6 +4,7 @@ using AForge.Imaging.Filters;
 using AForge.Imaging;
 using AForge.Math;
 using System.Drawing.Imaging;
+using AForge;
 
 class Marker
 {
@@ -98,10 +99,16 @@ class Marker
                 new Rectangle(0, 0, frame.Width, frame.Height),
                 ImageLockMode.ReadOnly, frame.PixelFormat);
 
-        EuclideanColorFiltering filter = new EuclideanColorFiltering();
-        // set center color and radius
-        filter.CenterColor.Color = color;
-        filter.Radius = range;
+        //EuclideanColorFiltering filter = new EuclideanColorFiltering();
+        //// set center color and radius
+        //filter.CenterColor.Color = color;
+        //filter.Radius = range;
+        //filter.ApplyInPlace(ObjectsData);
+        ColorFiltering filter = new ColorFiltering();
+        //set range with (min,max) value
+        filter.Blue = new IntRange(color.B - range, color.B + range);
+        filter.Red = new IntRange(color.R - range, color.R + range);
+        filter.Green = new IntRange(color.G - range, color.G + range);
         filter.ApplyInPlace(ObjectsData);
 
         try
