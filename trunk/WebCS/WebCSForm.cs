@@ -281,18 +281,20 @@ namespace WebCS
             if (isTrackingEnabled)
             {
                 List<Bitmap> leftOvers = new List<Bitmap>();
-                ////make sure both methods contain starting bitmap
+                ////make sure all methods contain starting bitmap
                 for (int m = 0; m < markersList.Count; m++)
                 {
                     leftOvers.Add(markersList[m].CalculateMarker(new Bitmap(newFrame)));
+                    if (markersList[m].IsFound)
+                    {
+                        rectDictionary.Add(markersList[m].Rect,
+                            markersList[m].FoundMarkerRectC);
+                    }
                 }
-                //leftOvers.Add(markersList[ColorMarker.Index.Primary].CalculateMarker(new Bitmap(newFrame)));
-                //leftOvers.Add(markersList[ColorMarker.Index.Secondary].CalculateMarker(new Bitmap(newFrame)));
+                
                 softwareCursor.CalculateNewPosition(markersList[ColorMarker.Index.Primary].Rect, markersList[ColorMarker.Index.Secondary].Rect);
                 if (markersList[ColorMarker.Index.Primary].IsFound)
                 {
-                    rectDictionary.Add(markersList[ColorMarker.Index.Primary].Rect,
-                        markersList[ColorMarker.Index.Primary].FoundMarkerRectC);
                     if (firstMarkerLoadRadRadioButton.IsChecked)
                     {
                         newFrame = leftOvers[ColorMarker.Index.Primary];
@@ -309,15 +311,10 @@ namespace WebCS
                         softwareCursor.Click();
                     }
                 }
-                if (markersList[ColorMarker.Index.Secondary].IsFound)
+                if (markersList[ColorMarker.Index.Secondary].IsFound && 
+                    secondMarkerLoadRadRadioButton.IsChecked)
                 {
-                    if (secondMarkerLoadRadRadioButton.IsChecked)
-                    {
-                        newFrame = leftOvers[ColorMarker.Index.Secondary];
-                    }
-                    //add rect
-                    rectDictionary.Add(markersList[ColorMarker.Index.Secondary].Rect,
-                        markersList[ColorMarker.Index.Secondary].FoundMarkerRectC);
+                    newFrame = leftOvers[ColorMarker.Index.Secondary];
                 }
             }
             //under-the-hood options
