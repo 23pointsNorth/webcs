@@ -8,7 +8,7 @@ using AForge.Math;
 
 namespace Marker
 {
-    class ColorMarker
+    class ColorMarker : MarkerBase
     {
         Color color;
         short range;
@@ -25,7 +25,7 @@ namespace Marker
             public _index(ushort p, ushort s) { this.Primary = p; this.Secondary = s; }
         }
 
-        public static _index Index = new _index(0, 1);
+        public static _index IndexMarker = new _index(0, 1);
 
         private short lowerLimit = 0;
         private short upperLimit = 255;
@@ -104,17 +104,12 @@ namespace Marker
             return this.range;
         }
 
-        public Bitmap CalculateMarker(Bitmap frame)
+        override public void CalculateMarker(Bitmap frame)
         {
             BitmapData ObjectsData = frame.LockBits(
                     new Rectangle(0, 0, frame.Width, frame.Height),
                     ImageLockMode.ReadOnly, frame.PixelFormat);
 
-            //EuclideanColorFiltering filter = new EuclideanColorFiltering();
-            //// set center color and radius
-            //filter.CenterColor.Color = color;
-            //filter.Radius = range;
-            //filter.ApplyInPlace(ObjectsData);
             ColorFiltering filter = new ColorFiltering();
             //set range with (min,max) value
             filter.Blue = new IntRange(color.B - range, color.B + range);
@@ -142,8 +137,7 @@ namespace Marker
                 isFound = false;
             }
             frame.UnlockBits(ObjectsData);
-
-            return frame;
+            leftOvers[markerNumber] = frame;
         }
     }
 }
