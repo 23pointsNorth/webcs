@@ -81,6 +81,7 @@
             this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vistaTheme = new Telerik.WinControls.Themes.VistaTheme();
             this.timeOut = new System.Windows.Forms.Timer(this.components);
+            this.useThreadPoolRadCheckBox = new Telerik.WinControls.UI.RadCheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.trackingToggleButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.exitRadButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.optionsToggleButton)).BeginInit();
@@ -126,6 +127,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.secondMarkerChangeRadButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.secondMarkerRangeRadLabel)).BeginInit();
             this.iconContextMenuStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.useThreadPoolRadCheckBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
             // 
@@ -218,6 +220,7 @@
             // 
             // optionsRadPanel
             // 
+            this.optionsRadPanel.Controls.Add(this.useThreadPoolRadCheckBox);
             this.optionsRadPanel.Controls.Add(this.webcamOptionsRadButton);
             this.optionsRadPanel.Controls.Add(this.enableMovingRadCheckBox);
             this.optionsRadPanel.Controls.Add(this.applyMeanFilterRadCheckBox);
@@ -263,10 +266,10 @@
             // 
             // applyMeanFilterRadCheckBox
             // 
-            this.applyMeanFilterRadCheckBox.Location = new System.Drawing.Point(12, 47);
+            this.applyMeanFilterRadCheckBox.Location = new System.Drawing.Point(12, 28);
             this.applyMeanFilterRadCheckBox.Name = "applyMeanFilterRadCheckBox";
             this.applyMeanFilterRadCheckBox.Size = new System.Drawing.Size(104, 16);
-            this.applyMeanFilterRadCheckBox.TabIndex = 4;
+            this.applyMeanFilterRadCheckBox.TabIndex = 3;
             this.applyMeanFilterRadCheckBox.Text = "Apply mean filter";
             this.applyMeanFilterRadCheckBox.ThemeName = "Vista";
             this.applyMeanFilterRadCheckBox.ToggleStateChanged += new Telerik.WinControls.UI.StateChangedEventHandler(this.applyMeanFilterRadCheckBox_ToggleStateChanged);
@@ -297,7 +300,7 @@
             this.centerLineRadCheckBox.Location = new System.Drawing.Point(12, 69);
             this.centerLineRadCheckBox.Name = "centerLineRadCheckBox";
             this.centerLineRadCheckBox.Size = new System.Drawing.Size(162, 16);
-            this.centerLineRadCheckBox.TabIndex = 4;
+            this.centerLineRadCheckBox.TabIndex = 5;
             this.centerLineRadCheckBox.Text = "Show center connecting line";
             this.centerLineRadCheckBox.ThemeName = "Vista";
             this.centerLineRadCheckBox.ToggleState = Telerik.WinControls.Enumerations.ToggleState.On;
@@ -476,10 +479,10 @@
             // 
             // applyMedianFilterRadCheckBox
             // 
-            this.applyMedianFilterRadCheckBox.Location = new System.Drawing.Point(12, 25);
+            this.applyMedianFilterRadCheckBox.Location = new System.Drawing.Point(130, 28);
             this.applyMedianFilterRadCheckBox.Name = "applyMedianFilterRadCheckBox";
             this.applyMedianFilterRadCheckBox.Size = new System.Drawing.Size(113, 16);
-            this.applyMedianFilterRadCheckBox.TabIndex = 3;
+            this.applyMedianFilterRadCheckBox.TabIndex = 4;
             this.applyMedianFilterRadCheckBox.Text = "Apply median filter";
             this.applyMedianFilterRadCheckBox.ThemeName = "Vista";
             this.applyMedianFilterRadCheckBox.ToggleStateChanged += new Telerik.WinControls.UI.StateChangedEventHandler(this.applyMedianFilterRadCheckBox_ToggleStateChanged);
@@ -686,6 +689,17 @@
             this.timeOut.Interval = 15000;
             this.timeOut.Tick += new System.EventHandler(this.timeOut_Tick);
             // 
+            // useThreadPoolRadCheckBox
+            // 
+            this.useThreadPoolRadCheckBox.Location = new System.Drawing.Point(12, 50);
+            this.useThreadPoolRadCheckBox.Name = "useThreadPoolRadCheckBox";
+            this.useThreadPoolRadCheckBox.Size = new System.Drawing.Size(150, 16);
+            this.useThreadPoolRadCheckBox.TabIndex = 5;
+            this.useThreadPoolRadCheckBox.Text = "Use threaded calculations";
+            this.useThreadPoolRadCheckBox.ThemeName = "Vista";
+            this.useThreadPoolRadCheckBox.ToggleState = Telerik.WinControls.Enumerations.ToggleState.On;
+            this.useThreadPoolRadCheckBox.ToggleStateChanged += new Telerik.WinControls.UI.StateChangedEventHandler(this.useThreadPoolRadCheckBox_ToggleStateChanged);
+            // 
             // WebCSForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -755,6 +769,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.secondMarkerChangeRadButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.secondMarkerRangeRadLabel)).EndInit();
             this.iconContextMenuStrip.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.useThreadPoolRadCheckBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
 
@@ -813,6 +828,7 @@
         private Telerik.WinControls.UI.RadCheckBox applyMeanFilterRadCheckBox;
         private Telerik.WinControls.UI.RadCheckBox enableMovingRadCheckBox;
         private Telerik.WinControls.UI.RadButton webcamOptionsRadButton;
+        private Telerik.WinControls.UI.RadCheckBox useThreadPoolRadCheckBox;
     }
 }
 

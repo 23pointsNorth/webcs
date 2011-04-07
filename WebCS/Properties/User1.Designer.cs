@@ -178,5 +178,17 @@ namespace WebCS.Properties {
                 this["isMovingEnabled"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool useThreadPool {
+            get {
+                return ((bool)(this["useThreadPool"]));
+            }
+            set {
+                this["useThreadPool"] = value;
+            }
+        }
     }
 }
