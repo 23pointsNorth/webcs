@@ -47,6 +47,7 @@ namespace WebCS
             proximityClick = User.Default.proximityClick;
             softwareCursor.DeltaPosition = proximityClick;
             deltaPositionRadTextBox.Text = proximityClick.ToString();
+            useThreadPool = User.Default.useThreadPool;
 
             LoadAvaliableWebcams();
             LoadMarkers();
@@ -107,6 +108,14 @@ namespace WebCS
                     Color.LightBlue, 0, 255);
                 firstMarkerRangeRadTextBox.Text = User.Default.firstMarkerRangeUser.ToString();
                 secondMarkerRangeRadTextBox.Text = User.Default.secondMarkerRangeUser.ToString();
+                markersList.Add(firstMarker);
+                markersList.Add(secondMarker);
+                ColorMarker.IndexMarker = new ColorMarker._index((ushort)markersList.IndexOf(firstMarker), (ushort)markersList.IndexOf(secondMarker));
+            
+            }
+            catch (OverflowException e)
+            {
+                userRadLabel.Text = e.Message;
             }
             catch
             {
@@ -127,16 +136,15 @@ namespace WebCS
                     Color.LightBlue, 0, 255);
                 firstMarkerRangeRadTextBox.Text = "20";
                 secondMarkerRangeRadTextBox.Text = "20";
+                markersList.Add(firstMarker);
+                markersList.Add(secondMarker);
+                ColorMarker.IndexMarker = new ColorMarker._index((ushort)markersList.IndexOf(firstMarker), (ushort)markersList.IndexOf(secondMarker));
             }
 
-            markersList.Add(firstMarker);
-            markersList.Add(secondMarker);
-
-            ColorMarker.IndexMarker = new ColorMarker._index((ushort)markersList.IndexOf(firstMarker), (ushort)markersList.IndexOf(secondMarker));
             firstMarkerSample.Image = BitmapDraw.FilledRectangle(
-                firstMarkerSample.Width, firstMarkerSample.Height, firstMarker.Color);
+                firstMarkerSample.Width, firstMarkerSample.Height, markersList[ColorMarker.IndexMarker.Primary].Color);
             secondMarkerSample.Image = BitmapDraw.FilledRectangle(
-                secondMarkerSample.Width, secondMarkerSample.Height, secondMarker.Color);
+                secondMarkerSample.Width, secondMarkerSample.Height, markersList[ColorMarker.IndexMarker.Secondary].Color);
         }
 
         private FilterInfoCollection videoCaptureDevices;
@@ -280,16 +288,25 @@ namespace WebCS
             Dictionary<Rectangle, Color> rectDictionary = new Dictionary<Rectangle, Color>();
             if (isTrackingEnabled)
             {
-                //make sure all methods contain starting bitmap
-                for (int m = 0; m < markersList.Count; m++)
+                if (useThreadPool)
                 {
-                    //Add next line if Threaded Calculation is enabled(remove normal);
-                    markersList[m].ThreadCalculateMarker(new Bitmap(newFrame));
-                    //markersList[m].CalculateMarker(new Bitmap(newFrame));
+                    //with threadpool
+                    //make sure all methods contain starting bitmap
+                    for (int m = 0; m < markersList.Count; m++)
+                    {
+                        markersList[m].ThreadCalculateMarker(new Bitmap(newFrame));
+                    }
+                    WaitHandle.WaitAll(ColorMarker.doneEvents.ToArray());
                 }
+                else
+                {
+                    //without threadpool
+                    for (int m = 0; m < markersList.Count; m++)
+                    {
+                        markersList[m].CalculateMarker(new Bitmap(newFrame));
+                    }
 
-                //Add next line if Threaded Calculation is enabled;
-                WaitHandle.WaitAll(ColorMarker.doneEvents.ToArray());
+                }
 
                 for (int m = 0; m < markersList.Count; m++)
                 {
@@ -394,6 +411,7 @@ namespace WebCS
         bool isVideoRunning = false;
         private void WebcamRadToggleButton_ToggleStateChanged(object sender, StateChangedEventArgs args)
         {
+            int index = 0;
             if (args.ToggleState == ToggleState.On)
             {
                 timeOut.Enabled = true;
@@ -408,7 +426,7 @@ namespace WebCS
 
                 try
                 {
-                    int index = avaliableWebcamsDropDownList.SelectedIndex;
+                    index = avaliableWebcamsDropDownList.SelectedIndex;
                     //-1 because [0] in avaliableWebcams = "Select Webcam"
                     //stat selected webcam
                     finalVideoSource = new VideoCaptureDevice(
@@ -585,6 +603,7 @@ namespace WebCS
             User.Default.isClickingEnabled = isClickingEnabled;
             User.Default.showCenterLine = connectCenters;
             User.Default.proximityClick = proximityClick;
+            User.Default.useThreadPool = useThreadPool;
             User.Default.Save();
         }
         private void cancelFirstMarkerRadButton_Click(object sender, EventArgs e)
@@ -741,6 +760,12 @@ namespace WebCS
                 finalVideoSource.DisplayPropertyPage(new IntPtr());
             }
             catch { }
+        }
+
+        bool useThreadPool = true;
+        private void useThreadPoolRadCheckBox_ToggleStateChanged(object sender, StateChangedEventArgs args)
+        {
+            useThreadPool = useThreadPoolRadCheckBox.Checked;
         }
 
 

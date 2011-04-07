@@ -40,7 +40,7 @@ namespace Marker
         public Color FoundMarkerRectC { get { return foundMarkerRectC; } }
         public Color ChangeColorRectC { get { return changeColorRectC; } }
 
-        public ColorMarker(Color colorValue, short rangeValue, Color foundMarkerRectColor, Rectangle getColorRectValue, Color changeColorRect, short lowerLimitValue, short upperLimitValue)
+        public ColorMarker(Color colorValue, short rangeValue, Color foundMarkerRectColor, Rectangle getColorRectValue, Color changeColorRect, short lowerLimitValue, short upperLimitValue) : base()
         {
             this.color = colorValue;
             this.range = rangeValue;
