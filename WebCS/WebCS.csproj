@@ -113,6 +113,7 @@
     <Compile Include="Constants.cs">
     </Compile>
     <Compile Include="ColorMarker.cs" />
+    <Compile Include="MarkerBase.cs" />
     <Compile Include="Mouse.cs">
     </Compile>
     <Compile Include="Properties\User1.Designer.cs">
