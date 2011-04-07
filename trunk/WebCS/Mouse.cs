@@ -23,7 +23,9 @@ namespace CursorMovement
 
         public Mouse(Point fisrtCoordinates, Point secondCoordinates, int positionDifference)
         {
-            SetNewPosition(fisrtCoordinates, secondCoordinates);
+            mouse = fisrtCoordinates;
+            pressure = secondCoordinates;
+            CalculateProximity();
             deltaPosition = positionDifference;
         }
 
