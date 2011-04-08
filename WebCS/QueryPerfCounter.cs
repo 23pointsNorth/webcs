@@ -22,7 +22,7 @@ namespace Counter
         Decimal multiplier = new Decimal(1.0e9);
         private bool isRunning = false;
 
-        public string FPSstring { get { return fps.ToString("0.0")+" FPS"; } }
+        public string FPSstring { get { return fps.ToString("00.0")+" FPS"; } }
         public double DurationInMS { get { return period/1000000.0; } } //in mseconds
         public double FPS { get { return fps; } }
         public bool IsRunning { get { return isRunning; } }
