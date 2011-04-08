@@ -20,10 +20,12 @@ namespace Counter
         private long stop;
         private long frequency;
         Decimal multiplier = new Decimal(1.0e9);
+        private bool isRunning = false;
 
         public string FPSstring { get { return fps.ToString("0.0")+" FPS"; } }
         public double DurationInMS { get { return period/1000000.0; } } //in mseconds
         public double FPS { get { return fps; } }
+        public bool IsRunning { get { return isRunning; } }
 
         public QueryPerfCounter()
         {
@@ -37,11 +39,13 @@ namespace Counter
         public void Start()
         {
             QueryPerformanceCounter(out start);
+            isRunning = true;
         }
 
         public void Stop()
         {
             QueryPerformanceCounter(out stop);
+            isRunning = false;
         }
 
         public double Duration(int iterations)
