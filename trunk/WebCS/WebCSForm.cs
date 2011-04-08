@@ -253,10 +253,11 @@ namespace WebCS
         bool applyMedianFilter = false;
         bool applyMeanFilter = false;
         QueryPerfCounter fpsTimer = new QueryPerfCounter();
+        QueryPerfCounter durationTimer = new QueryPerfCounter();
 
         private void FinalVideoSource_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
-            fpsTimer.Start();
+            durationTimer.Start();
             //When a new frame is recieved, all the alogrithms should be run
             //update image 
             newFrame = (Bitmap)eventArgs.Frame.Clone();
@@ -376,8 +377,19 @@ namespace WebCS
                         new SolidBrush(drawColor), lineCenter);
                 }
             }
-            fpsTimer.Stop();
-            fpsTimer.DurationPerIteration();
+            if (fpsTimer.IsRunning)
+            {
+                fpsTimer.Stop();
+                fpsTimer.DurationPerIteration();
+                fpsTimer.Start();
+            }
+            else
+            {
+                fpsTimer.Start();
+            }
+
+            durationTimer.Stop();
+            durationTimer.DurationPerIteration(); 
             if (showFrames)
             {
                 DrawFrameRate();
@@ -390,14 +402,14 @@ namespace WebCS
             if (fpsTimer.FPS < maxFrameRate)
             {
                 BitmapDraw.WriteString(newFrame,
-                    fpsTimer.FPSstring + " " + fpsTimer.DurationInMS.ToString("0.0") + " ms",
-                    Color.DarkRed, new Point(5, 5));
+                    fpsTimer.FPSstring + " " + durationTimer.DurationInMS.ToString("0.0") + " ms",
+                    Color.DarkRed, new Point(3, 3));
             }
             else
             {
                 BitmapDraw.WriteString(newFrame,
                     maxFrameRate.ToString("0.0") + " FPS " + fpsTimer.DurationInMS.ToString("0.0") + " ms",
-                    Color.DarkRed, new Point(5, 5));
+                    Color.DarkRed, new Point(3, 3));
             }
         }
 
