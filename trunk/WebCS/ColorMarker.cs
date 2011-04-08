@@ -33,7 +33,7 @@ namespace Marker
         
         public Color Color { get { return color; } }
         public short Range { get { return range; } }
-        public bool IsColorChange { get; set; }
+        public bool IsColorChange { get { return isColorChange; } set { isColorChange = value; } }
         public bool IsFound { get { return isFound; } }
         public Rectangle Rect { get { return rect; } }
         public Rectangle GetColorRect { get { return getColorRect; } }

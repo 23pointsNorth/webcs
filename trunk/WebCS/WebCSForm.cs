@@ -402,13 +402,13 @@ namespace WebCS
             if (fpsTimer.FPS < maxFrameRate)
             {
                 BitmapDraw.WriteString(newFrame,
-                    fpsTimer.FPSstring + " " + durationTimer.DurationInMS.ToString("0.0") + " ms",
+                    fpsTimer.FPSstring + " " + durationTimer.DurationInMS.ToString("00.0") + " ms",
                     Color.DarkRed, new Point(3, 3));
             }
             else
             {
                 BitmapDraw.WriteString(newFrame,
-                    maxFrameRate.ToString("0.0") + " FPS " + fpsTimer.DurationInMS.ToString("0.0") + " ms",
+                    maxFrameRate.ToString("00.0") + " FPS " + fpsTimer.DurationInMS.ToString("00.0") + " ms",
                     Color.DarkRed, new Point(3, 3));
             }
         }
