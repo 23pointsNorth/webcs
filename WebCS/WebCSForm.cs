@@ -1,23 +1,20 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Threading;
 using System.Windows.Forms;
-using AForge.Imaging;
 using AForge.Imaging.Filters;
-using AForge.Math;
 using AForge.Video;
 using AForge.Video.DirectShow;
-using Microsoft.Win32;
-using Telerik.WinControls.UI;
-using Telerik.WinControls.Enumerations;
-using WebCS.Properties;
-using System.Collections.Generic;
-using Counter;
 using BitmapProcessing;
-using AForge;
-using Marker;
+using Counter;
 using CursorMovement;
-using System.Threading;
+using Marker;
+using Microsoft.Win32;
+using Telerik.WinControls.Enumerations;
+using Telerik.WinControls.UI;
+using WebCS.Properties;
 
 namespace WebCS
 {
@@ -771,7 +768,7 @@ namespace WebCS
             {
                 finalVideoSource.DisplayPropertyPage(new IntPtr());
             }
-            catch { }
+            catch { webcamOptionsRadButton.Enabled = false; } // disable the button if unavaliable
         }
 
         bool useThreadPool = true;
