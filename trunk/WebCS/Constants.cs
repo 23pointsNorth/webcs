@@ -13,7 +13,4 @@ static class Constants
 
     public const int OPTIONS_ADDED_WIDTH = 740;
     public const int OPTIONS_ADDED_HEIGHT = 388;
-
-    public const int MIN_BLOB_HEIGHT = 10;
-    public const int MIN_BLOB_WIDTH = 10;
 }
