@@ -29,7 +29,16 @@ namespace WebCS
                 new Bitmap(Constants.IMAGE_WIDTH, Constants.IMAGE_HEIGHT), "Webcam \nnot selected.");
             avaliableWebcamsDropDownList.Items.Add("Select Webcam");
 
-            //loading the saved user settings
+            LoadUserSettings();
+            LoadAvaliableWebcams();
+            LoadMarkers();
+            LoadAtStartup();
+            CheckEnabledTracking();
+        }
+
+        private void LoadUserSettings()
+        {
+            //loading saved user settings
             applyMedianFilterRadCheckBox.Checked = User.Default.applyMedianFilter;
             applyMedianFilter = applyMedianFilterRadCheckBox.Checked;
             applyMeanFilterRadCheckBox.Checked = User.Default.applyMeanFilter;
@@ -45,11 +54,6 @@ namespace WebCS
             softwareCursor.DeltaPosition = proximityClick;
             deltaPositionRadTextBox.Text = proximityClick.ToString();
             useThreadPool = User.Default.useThreadPool;
-
-            LoadAvaliableWebcams();
-            LoadMarkers();
-            LoadAtStartup();
-            CheckEnabledTracking();
         }
 
 
@@ -89,6 +93,7 @@ namespace WebCS
             try
             {
                 firstMarker = new ColorMarker(
+                    "Primary Marker",
                     User.Default.firstMarkerColorUser,
                     User.Default.firstMarkerRangeUser,
                     Color.Green, new Rectangle(
@@ -97,13 +102,14 @@ namespace WebCS
                     Color.LightGreen, 0, 255);
 
                 secondMarker = new ColorMarker(
+                    "Secondary Marker",
                     User.Default.secondMarkerColorUser,
                     User.Default.secondMarkerRangeUser,
                     Color.Blue, new Rectangle(
                         Constants.IMAGE_WIDTH / 2 + 15,
                         Constants.IMAGE_HEIGHT / 2 + 15, 30, 30),
                     Color.LightBlue, 0, 255);
-                firstMarkerRangeRadTextBox.Text = User.Default.firstMarkerRangeUser.ToString();
+                //firstMarkerRangeRadTextBox.Text = User.Default.firstMarkerRangeUser.ToString();
                 secondMarkerRangeRadTextBox.Text = User.Default.secondMarkerRangeUser.ToString();
                 markersList.Add(firstMarker);
                 markersList.Add(secondMarker);
@@ -118,6 +124,7 @@ namespace WebCS
             {
                 //default 
                 firstMarker = new ColorMarker(
+                    "Primary Marker",
                     ColorMarker.emptyColor,
                     20,
                     Color.Green, new Rectangle(
@@ -125,21 +132,22 @@ namespace WebCS
                         Constants.IMAGE_HEIGHT / 2 - 25, 30, 30),
                     Color.LightBlue, 0, 255);
                 secondMarker = new ColorMarker(
+                    "Secondary Marker",
                     ColorMarker.emptyColor,
                     20,
                     Color.Blue, new Rectangle(
                         Constants.IMAGE_WIDTH / 2 + 15,
                         Constants.IMAGE_HEIGHT / 2 + 15, 30, 30),
                     Color.LightBlue, 0, 255);
-                firstMarkerRangeRadTextBox.Text = "20";
+                //firstMarkerRangeRadTextBox.Text = "20";
                 secondMarkerRangeRadTextBox.Text = "20";
                 markersList.Add(firstMarker);
                 markersList.Add(secondMarker);
                 ColorMarker.IndexMarker = new ColorMarker._index((ushort)markersList.IndexOf(firstMarker), (ushort)markersList.IndexOf(secondMarker));
             }
 
-            firstMarkerSample.Image = BitmapDraw.FilledRectangle(
-                firstMarkerSample.Width, firstMarkerSample.Height, markersList[ColorMarker.IndexMarker.Primary].Color);
+            //firstMarkerSample.Image = BitmapDraw.FilledRectangle(
+            //    firstMarkerSample.Width, firstMarkerSample.Height, markersList[ColorMarker.IndexMarker.Primary].Color);
             secondMarkerSample.Image = BitmapDraw.FilledRectangle(
                 secondMarkerSample.Width, secondMarkerSample.Height, markersList[ColorMarker.IndexMarker.Secondary].Color);
         }
@@ -246,6 +254,7 @@ namespace WebCS
         }
 
         Bitmap newFrame;
+        Bitmap frame;
         Mouse softwareCursor = new Mouse(Cursor.Position, Cursor.Position, 0);
         bool applyMedianFilter = false;
         bool applyMeanFilter = false;
@@ -282,6 +291,7 @@ namespace WebCS
                 filters.Apply(objectsData);
                 newFrame.UnlockBits(objectsData);
             }
+            frame = new Bitmap(newFrame);
 
             Dictionary<Rectangle, Color> rectDictionary = new Dictionary<Rectangle, Color>();
             if (isTrackingEnabled)
@@ -430,7 +440,7 @@ namespace WebCS
                 webcamRadToggleButton.Text = "Stop &Webcam";
                 avaliableWebcamsDropDownList.Enabled = false;
                 webcamOptionsRadButton.Enabled = true;
-                firstMarkerChangeRadButton.Enabled = true;
+                //firstMarkerChangeRadButton.Enabled = true;
                 secondMarkerChangeRadButton.Enabled = true;
 
                 try
@@ -466,7 +476,7 @@ namespace WebCS
                 avaliableWebcamsDropDownList.Enabled = true;
                 avaliableWebcamsDropDownList_SelectedIndexChanged(null, null);
 
-                firstMarkerChangeRadButton.Enabled = false;
+                //firstMarkerChangeRadButton.Enabled = false;
                 secondMarkerChangeRadButton.Enabled = false;
                 webcamOptionsRadButton.Enabled = false;
 
@@ -510,14 +520,14 @@ namespace WebCS
 
                         markersList[ColorMarker.IndexMarker.Primary].IsColorChange = false;
                         markersList[ColorMarker.IndexMarker.Primary].ChangeColor(newFrame);
-                        firstMarkerSample.Image = BitmapDraw.FilledRectangle(
-                            firstMarkerSample.Width, 
-                            firstMarkerSample.Height,
-                            markersList[ColorMarker.IndexMarker.Primary].Color);
+                        //firstMarkerSample.Image = BitmapDraw.FilledRectangle(
+                        //    firstMarkerSample.Width, 
+                        //    firstMarkerSample.Height,
+                        //    markersList[ColorMarker.IndexMarker.Primary].Color);
                     }
                     catch
                     {
-                        firstMarkerChangeRadButton.PerformClick();
+                        //firstMarkerChangeRadButton.PerformClick();
                     }
                 }
             }
@@ -698,8 +708,8 @@ namespace WebCS
         {
             if (markersList.Count > 0)
             {
-                markersList[ColorMarker.IndexMarker.Primary].ChangeRange(firstMarkerRangeRadTextBox.Text);
-                firstMarkerRangeRadTextBox.Text = markersList[ColorMarker.IndexMarker.Primary].Range.ToString();
+                //markersList[ColorMarker.IndexMarker.Primary].ChangeRange(firstMarkerRangeRadTextBox.Text);
+                //firstMarkerRangeRadTextBox.Text = markersList[ColorMarker.IndexMarker.Primary].Range.ToString();
             }
         }
         private void secondMarkerRangeRadTextBox_TextChanged(object sender, EventArgs e)
@@ -776,6 +786,17 @@ namespace WebCS
         {
             useThreadPool = useThreadPoolRadCheckBox.Checked;
         }
+
+        private void ColorMarkerRadMenuItem_Click(object sender, EventArgs e)
+        {
+            AddMarkerForm addNewMarker = new AddMarkerForm(frame, ref markersList);
+            addNewMarker.Show();
+        }
+
+
+
+ 
+
 
 
     }

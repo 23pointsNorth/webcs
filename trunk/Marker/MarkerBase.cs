@@ -17,11 +17,12 @@ namespace Marker
             set { if (value > 0) maxNumberOfMarkers = value; }
         }
 
-        public MarkerBase()
+        public MarkerBase(string name)
         {
             if (nextMarkerNumber < maxNumberOfMarkers)
             {
                 this.markerNumber = nextMarkerNumber;
+                markerName = name;
                 nextMarkerNumber++;
                 UpdateMarkers();
             }
@@ -34,8 +35,11 @@ namespace Marker
 
         }
 
+        protected string markerName;
         protected int markerNumber = 0;
         protected static int nextMarkerNumber = 0;
+
+        public static int NextMarkerNumber { get { return nextMarkerNumber; } }
 
         // Wrapper method for use with thread pool.
         public void ThreadPoolCallback(object threadContext)
