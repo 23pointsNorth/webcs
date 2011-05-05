@@ -105,7 +105,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddMarkerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddMarkerForm.Designer.cs">
+      <DependentUpon>AddMarkerForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Constants.cs">
+    </Compile>
+    <Compile Include="EditMarkerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditMarkerForm.Designer.cs">
+      <DependentUpon>EditMarkerForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\User1.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -120,6 +132,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="AddMarkerForm.resx">
+      <DependentUpon>AddMarkerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditMarkerForm.resx">
+      <DependentUpon>EditMarkerForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WebCSForm.resx">
       <DependentUpon>WebCSForm.cs</DependentUpon>
     </EmbeddedResource>
