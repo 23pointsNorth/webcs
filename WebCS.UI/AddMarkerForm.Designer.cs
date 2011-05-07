@@ -28,19 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.vistaTheme = new Telerik.WinControls.Themes.VistaTheme();
             this.frameImageContainer = new System.Windows.Forms.PictureBox();
             this.closeRadButton = new Telerik.WinControls.UI.RadButton();
-            this.markerTypeContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.colorMarkerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.radMenuItem1 = new Telerik.WinControls.UI.RadDropDownMenu();
             this.radMenuButtonItem1 = new Telerik.WinControls.UI.RadDropDownMenu();
             this.extractRadButton = new Telerik.WinControls.UI.RadButton();
             this.userHelpRadLabel = new Telerik.WinControls.UI.RadLabel();
             ((System.ComponentModel.ISupportInitialize)(this.frameImageContainer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.closeRadButton)).BeginInit();
-            this.markerTypeContextMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.radMenuItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radMenuButtonItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.extractRadButton)).BeginInit();
@@ -69,20 +65,6 @@
             this.closeRadButton.Text = "Close";
             this.closeRadButton.ThemeName = "Vista";
             this.closeRadButton.Click += new System.EventHandler(this.closeRadButton_Click);
-            // 
-            // markerTypeContextMenuStrip
-            // 
-            this.markerTypeContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.colorMarkerToolStripMenuItem});
-            this.markerTypeContextMenuStrip.Name = "iconContextMenuStrip";
-            this.markerTypeContextMenuStrip.ShowImageMargin = false;
-            this.markerTypeContextMenuStrip.Size = new System.Drawing.Size(122, 26);
-            // 
-            // colorMarkerToolStripMenuItem
-            // 
-            this.colorMarkerToolStripMenuItem.Name = "colorMarkerToolStripMenuItem";
-            this.colorMarkerToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
-            this.colorMarkerToolStripMenuItem.Text = "Color Marker";
             // 
             // radMenuItem1
             // 
@@ -184,7 +166,6 @@
             this.ThemeName = "Vista";
             ((System.ComponentModel.ISupportInitialize)(this.frameImageContainer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.closeRadButton)).EndInit();
-            this.markerTypeContextMenuStrip.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.radMenuItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radMenuButtonItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.extractRadButton)).EndInit();
@@ -200,8 +181,6 @@
         private Telerik.WinControls.Themes.VistaTheme vistaTheme;
         private System.Windows.Forms.PictureBox frameImageContainer;
         private Telerik.WinControls.UI.RadButton closeRadButton;
-        private System.Windows.Forms.ContextMenuStrip markerTypeContextMenuStrip;
-        private System.Windows.Forms.ToolStripMenuItem colorMarkerToolStripMenuItem;
         private Telerik.WinControls.UI.RadDropDownMenu radMenuItem1;
         private Telerik.WinControls.UI.RadDropDownMenu radMenuButtonItem1;
         private Telerik.WinControls.UI.RadButton extractRadButton;

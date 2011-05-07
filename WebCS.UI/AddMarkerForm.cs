@@ -34,7 +34,14 @@ namespace WebCS
             frameImageContainer.Image = frame;
 
             colorMarkerList = markerList;
-            clrMarker = new ColorMarker("Color Marker " + MarkerBase.NextMarkerNumber.ToString());
+            int addedPriority = 0;
+            do
+            {
+                clrMarker = new ColorMarker(
+                    "Color Marker " + (MarkerBase.NextMarkerNumber + addedPriority).ToString(),
+                    MarkerBase.NextMarkerNumber);
+                addedPriority++;
+            } while (clrMarker == null);
             
         }
 
@@ -47,15 +54,18 @@ namespace WebCS
 
         private void closeRadButton_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            this.Close();
         }
 
         private void extractRadButton_Click(object sender, EventArgs e)
         {
             if (markerType == type.color)
             {
+                //create clrMarker stuff such as color;
+                clrMarker.ChangeColor(originalFrame, markerRectangle);
                 colorMarkerList.Add(clrMarker);
-                EditMarkerForm editMarker = new EditMarkerForm(ref colorMarkerList);
+                EditMarkerForm editMarker = new EditMarkerForm(
+                    ref colorMarkerList, colorMarkerList.IndexOf(clrMarker));
                 editMarker.Show();
             }
 
@@ -71,17 +81,20 @@ namespace WebCS
             mouseDown = true;
         }
 
+        Rectangle markerRectangle;
+
         private void frameImageContainer_MouseMove(object sender, MouseEventArgs e)
         {
             if (mouseDown)
             {
                 frameImageContainer.Image = new Bitmap(originalFrame);
-                BitmapDraw.Rectangle(
-                    (Bitmap)frameImageContainer.Image,
-                    new Rectangle(
+                markerRectangle = new Rectangle(
                         upperLeftCorner.X, upperLeftCorner.Y,
                         Math.Abs(upperLeftCorner.X - e.X),
-                        Math.Abs(upperLeftCorner.Y - e.Y)),
+                        Math.Abs(upperLeftCorner.Y - e.Y));
+                BitmapDraw.Rectangle(
+                    (Bitmap)frameImageContainer.Image,
+                    markerRectangle,
                     new Pen(Color.Red)
                 );
             }
@@ -91,9 +104,10 @@ namespace WebCS
         {
             mouseDown = false;
             extractRadButton.Enabled = true;
-            //create a rectangle for the marker to call needed stuff.
+            markerRectangle = new Rectangle(
+                upperLeftCorner.X, upperLeftCorner.Y,
+                Math.Abs(upperLeftCorner.X - e.X),
+                Math.Abs(upperLeftCorner.Y - e.Y));
         }
-
-
     }
 }

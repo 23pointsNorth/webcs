@@ -38,6 +38,7 @@
             this.webcamRadToggleButton = new Telerik.WinControls.UI.RadToggleButton();
             this.avaliableWebcamsDropDownList = new Telerik.WinControls.UI.RadDropDownList();
             this.optionsRadPanel = new Telerik.WinControls.UI.RadPanel();
+            this.markerRadListControl = new Telerik.WinControls.UI.RadListControl();
             this.addMarkerRadDropDownButton = new Telerik.WinControls.UI.RadDropDownButton();
             this.ColorMarkerRadMenuItem = new Telerik.WinControls.UI.RadMenuItem();
             this.editMarkerRadButton = new Telerik.WinControls.UI.RadButton();
@@ -88,6 +89,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.avaliableWebcamsDropDownList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.optionsRadPanel)).BeginInit();
             this.optionsRadPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.markerRadListControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.addMarkerRadDropDownButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.editMarkerRadButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.useThreadPoolRadCheckBox)).BeginInit();
@@ -210,6 +212,7 @@
             // 
             // optionsRadPanel
             // 
+            this.optionsRadPanel.Controls.Add(this.markerRadListControl);
             this.optionsRadPanel.Controls.Add(this.addMarkerRadDropDownButton);
             this.optionsRadPanel.Controls.Add(this.editMarkerRadButton);
             this.optionsRadPanel.Controls.Add(this.useThreadPoolRadCheckBox);
@@ -234,11 +237,22 @@
             this.optionsRadPanel.ThemeName = "Vista";
             this.optionsRadPanel.Visible = false;
             // 
+            // markerRadListControl
+            // 
+            this.markerRadListControl.CaseSensitiveSort = true;
+            this.markerRadListControl.Location = new System.Drawing.Point(12, 91);
+            this.markerRadListControl.Name = "markerRadListControl";
+            this.markerRadListControl.Size = new System.Drawing.Size(150, 68);
+            this.markerRadListControl.TabIndex = 27;
+            this.markerRadListControl.Text = "markerRadListControl";
+            this.markerRadListControl.ThemeName = "Vista";
+            // 
             // addMarkerRadDropDownButton
             // 
             this.addMarkerRadDropDownButton.AllowDrop = true;
             this.addMarkerRadDropDownButton.ArrowDirection = Telerik.WinControls.ArrowDirection.Right;
             this.addMarkerRadDropDownButton.DropDownDirection = Telerik.WinControls.UI.RadDirection.Right;
+            this.addMarkerRadDropDownButton.Enabled = false;
             this.addMarkerRadDropDownButton.Items.AddRange(new Telerik.WinControls.RadItem[] {
             this.ColorMarkerRadMenuItem});
             this.addMarkerRadDropDownButton.Location = new System.Drawing.Point(198, 91);
@@ -251,7 +265,7 @@
             // ColorMarkerRadMenuItem
             // 
             this.ColorMarkerRadMenuItem.Name = "ColorMarkerRadMenuItem";
-            this.ColorMarkerRadMenuItem.Text = "Color";
+            this.ColorMarkerRadMenuItem.Text = "Color Marker";
             this.ColorMarkerRadMenuItem.Click += new System.EventHandler(this.ColorMarkerRadMenuItem_Click);
             // 
             // editMarkerRadButton
@@ -262,6 +276,7 @@
             this.editMarkerRadButton.TabIndex = 18;
             this.editMarkerRadButton.Text = "Edit Marker";
             this.editMarkerRadButton.ThemeName = "Vista";
+            this.editMarkerRadButton.Click += new System.EventHandler(this.editMarkerRadButton_Click);
             // 
             // useThreadPoolRadCheckBox
             // 
@@ -662,6 +677,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.optionsRadPanel)).EndInit();
             this.optionsRadPanel.ResumeLayout(false);
             this.optionsRadPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.markerRadListControl)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.addMarkerRadDropDownButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.editMarkerRadButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.useThreadPoolRadCheckBox)).EndInit();
@@ -748,6 +764,7 @@
         private Telerik.WinControls.UI.RadButton editMarkerRadButton;
         private Telerik.WinControls.UI.RadDropDownButton addMarkerRadDropDownButton;
         private Telerik.WinControls.UI.RadMenuItem ColorMarkerRadMenuItem;
+        private Telerik.WinControls.UI.RadListControl markerRadListControl;
     }
 }
 

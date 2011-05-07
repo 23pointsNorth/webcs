@@ -93,7 +93,7 @@ namespace WebCS
             try
             {
                 firstMarker = new ColorMarker(
-                    "Primary Marker",
+                    "Primary Marker", 1,
                     User.Default.firstMarkerColorUser,
                     User.Default.firstMarkerRangeUser,
                     Color.Green, new Rectangle(
@@ -102,13 +102,14 @@ namespace WebCS
                     Color.LightGreen, 0, 255);
 
                 secondMarker = new ColorMarker(
-                    "Secondary Marker",
+                    "Secondary Marker", 2,
                     User.Default.secondMarkerColorUser,
                     User.Default.secondMarkerRangeUser,
                     Color.Blue, new Rectangle(
                         Constants.IMAGE_WIDTH / 2 + 15,
                         Constants.IMAGE_HEIGHT / 2 + 15, 30, 30),
                     Color.LightBlue, 0, 255);
+
                 //firstMarkerRangeRadTextBox.Text = User.Default.firstMarkerRangeUser.ToString();
                 secondMarkerRangeRadTextBox.Text = User.Default.secondMarkerRangeUser.ToString();
                 markersList.Add(firstMarker);
@@ -124,7 +125,7 @@ namespace WebCS
             {
                 //default 
                 firstMarker = new ColorMarker(
-                    "Primary Marker",
+                    "Primary Marker", 1,
                     ColorMarker.emptyColor,
                     20,
                     Color.Green, new Rectangle(
@@ -132,7 +133,7 @@ namespace WebCS
                         Constants.IMAGE_HEIGHT / 2 - 25, 30, 30),
                     Color.LightBlue, 0, 255);
                 secondMarker = new ColorMarker(
-                    "Secondary Marker",
+                    "Secondary Marker", 2,
                     ColorMarker.emptyColor,
                     20,
                     Color.Blue, new Rectangle(
@@ -145,6 +146,8 @@ namespace WebCS
                 markersList.Add(secondMarker);
                 ColorMarker.IndexMarker = new ColorMarker._index((ushort)markersList.IndexOf(firstMarker), (ushort)markersList.IndexOf(secondMarker));
             }
+
+            UpdateMarkersList();
 
             //firstMarkerSample.Image = BitmapDraw.FilledRectangle(
             //    firstMarkerSample.Width, firstMarkerSample.Height, markersList[ColorMarker.IndexMarker.Primary].Color);
@@ -440,6 +443,7 @@ namespace WebCS
                 webcamRadToggleButton.Text = "Stop &Webcam";
                 avaliableWebcamsDropDownList.Enabled = false;
                 webcamOptionsRadButton.Enabled = true;
+                addMarkerRadDropDownButton.Enabled = true;
                 //firstMarkerChangeRadButton.Enabled = true;
                 secondMarkerChangeRadButton.Enabled = true;
 
@@ -477,6 +481,7 @@ namespace WebCS
                 avaliableWebcamsDropDownList_SelectedIndexChanged(null, null);
 
                 //firstMarkerChangeRadButton.Enabled = false;
+                addMarkerRadDropDownButton.Enabled = false;
                 secondMarkerChangeRadButton.Enabled = false;
                 webcamOptionsRadButton.Enabled = false;
 
@@ -793,11 +798,23 @@ namespace WebCS
             addNewMarker.Show();
         }
 
+        private void editMarkerRadButton_Click(object sender, EventArgs e)
+        {
+            int index = markerRadListControl.SelectedIndex;
+            if (index >= 0)
+            {
+                EditMarkerForm editMarker = new EditMarkerForm(ref markersList, index);
+                editMarker.Show();
+            }
+        }
 
-
- 
-
-
-
+        public void UpdateMarkersList()
+        {
+            markerRadListControl.Items.Clear();
+            foreach (var marker in markersList)
+            {
+                markerRadListControl.Items.Add(marker.Name + " " + marker.Priority.ToString());
+            }
+        }
     }
 }
