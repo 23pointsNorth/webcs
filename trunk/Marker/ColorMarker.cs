@@ -18,7 +18,6 @@ namespace Marker
         Rectangle getColorRect;
         Color foundMarkerRectC;
         Color changeColorRectC;
-        int priority;
 
         const int MIN_BLOB_HEIGHT = 10;
         const int MIN_BLOB_WIDTH = 10;
@@ -43,9 +42,8 @@ namespace Marker
         public Rectangle GetColorRect { get { return getColorRect; } }
         public Color FoundMarkerRectC { get { return foundMarkerRectC; } }
         public Color ChangeColorRectC { get { return changeColorRectC; } }
-        public int Priority { get; set; }
 
-        public ColorMarker(string name, Color colorValue, short rangeValue, Color foundMarkerRectColor, Rectangle getColorRectValue, Color changeColorRect, short lowerLimitValue, short upperLimitValue) : base(name)
+        public ColorMarker(string name,int priority ,Color colorValue, short rangeValue, Color foundMarkerRectColor, Rectangle getColorRectValue, Color changeColorRect, short lowerLimitValue, short upperLimitValue) : base(name, priority)
         {
             this.color = colorValue;
             this.range = rangeValue;
@@ -56,12 +54,17 @@ namespace Marker
             this.upperLimit = upperLimitValue;
         }
 
-        public ColorMarker(string name) : base(name)
+        public ColorMarker(string name, int priority) : base(name, priority)
         {
 
         }
 
         public void ChangeColor(Bitmap frame)
+        {
+            ChangeColor(frame, this.getColorRect);
+        }
+
+        public void ChangeColor(Bitmap frame, Rectangle rect)
         {
             isColorChange = false;
 
@@ -69,7 +72,7 @@ namespace Marker
             Bitmap sample;
             lock (frame)
             {
-                sample = frame.Clone(this.GetColorRect, frame.PixelFormat);
+                sample = frame.Clone(rect, frame.PixelFormat);
             }
             new Mean().Apply(sample);
 

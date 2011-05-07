@@ -10,6 +10,7 @@ namespace Marker
     {
         public static List<ManualResetEvent> doneEvents;
         public static List<Bitmap> leftOvers;
+        public static List<int> takenPriorities = new List<int>();
         private static int maxNumberOfMarkers = 25;
         public static int MaxNumberOfMarkers
         {
@@ -17,10 +18,19 @@ namespace Marker
             set { if (value > 0) maxNumberOfMarkers = value; }
         }
 
-        public MarkerBase(string name)
+        public MarkerBase(string name, int markerPriority)
         {
             if (nextMarkerNumber < maxNumberOfMarkers)
             {
+                if (!takenPriorities.Contains(priority))
+                {
+                    priority = markerPriority;
+                    takenPriorities.Add(priority);
+                }
+                else
+                {
+                    throw new ArgumentException("Priority already taken.");
+                }
                 this.markerNumber = nextMarkerNumber;
                 markerName = name;
                 nextMarkerNumber++;
@@ -35,11 +45,25 @@ namespace Marker
 
         }
 
+        public void ChangeName(string newName)
+        {
+            markerName = newName;
+        }
+
         protected string markerName;
         protected int markerNumber = 0;
         protected static int nextMarkerNumber = 0;
+        protected int priority;
 
         public static int NextMarkerNumber { get { return nextMarkerNumber; } }
+        public string Name { get { return markerName; } }
+        public int Priority { get { return priority; } }
+
+        public void ChangePriority(int newPriority)
+        {
+            takenPriorities.Remove(priority);
+            takenPriorities.Add(newPriority);
+        }
 
         // Wrapper method for use with thread pool.
         public void ThreadPoolCallback(object threadContext)
