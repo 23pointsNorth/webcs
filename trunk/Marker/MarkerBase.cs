@@ -61,8 +61,9 @@ namespace Marker
 
         public void ChangePriority(int newPriority)
         {
-            takenPriorities.Remove(priority);
+            takenPriorities.Remove(this.priority);
             takenPriorities.Add(newPriority);
+            priority = newPriority;
         }
 
         // Wrapper method for use with thread pool.

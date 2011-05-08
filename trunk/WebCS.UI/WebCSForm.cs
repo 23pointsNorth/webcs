@@ -794,7 +794,7 @@ namespace WebCS
 
         private void ColorMarkerRadMenuItem_Click(object sender, EventArgs e)
         {
-            AddMarkerForm addNewMarker = new AddMarkerForm(frame, ref markersList);
+            AddMarkerForm addNewMarker = new AddMarkerForm(this, frame, ref markersList);
             addNewMarker.Show();
         }
 
@@ -803,7 +803,7 @@ namespace WebCS
             int index = markerRadListControl.SelectedIndex;
             if (index >= 0)
             {
-                EditMarkerForm editMarker = new EditMarkerForm(ref markersList, index);
+                EditMarkerForm editMarker = new EditMarkerForm(this, ref markersList, index);
                 editMarker.Show();
             }
         }

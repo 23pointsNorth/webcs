@@ -16,13 +16,15 @@ namespace WebCS
     {
         List<ColorMarker> markers = new List<ColorMarker>();
         int index;
+        WebCSForm parentForm;
+
         const int SAMPLE_WIDTH = 75;
         const int SAMPLE_HEIGHT = 75;
 
-        public EditMarkerForm(ref List<ColorMarker> markerList, int markerIndex)
+        public EditMarkerForm(WebCSForm mainForm, ref List<ColorMarker> markerList, int markerIndex)
         {
             InitializeComponent();
-
+            parentForm = mainForm;
             markers = markerList;
             index = markerIndex;
             LoadMarkerInfo();
@@ -48,16 +50,25 @@ namespace WebCS
             markers[index].ChangeRange(markerRangeRadTextBox.Text);
             int currentPriority = int.Parse(markerPriorityRadTextBox.Text);
             int finalPriority = currentPriority;
-            while (MarkerBase.takenPriorities.Contains(currentPriority))
+            MessageBox.Show(currentPriority.ToString());
+            MessageBox.Show("Initial " + markers[index].Priority.ToString());
+            while (markers[index].Priority != finalPriority && MarkerBase.takenPriorities.Contains(currentPriority))
             {
                 currentPriority++;
             }
-            if (currentPriority != finalPriority)
+            if (currentPriority != finalPriority && currentPriority != markers[index].Priority)
             {
-                MessageBox.Show("Priority already exists. Suggested: " + currentPriority.ToString());
+                MessageBox.Show(markers[index].Priority.ToString());
+                MessageBox.Show("Priority already exists. Suggested: " + currentPriority.ToString(), "Priority Change");
+                foreach (var p in MarkerBase.takenPriorities)
+                {
+                    MessageBox.Show(p.ToString());
+                }
                 return;
             }
-            ((MarkerBase)markers[index]).ChangePriority(currentPriority);
+            markers[index].ChangePriority(currentPriority);
+            MessageBox.Show("Last " + markers[index].Priority.ToString());
+            parentForm.UpdateMarkersList();
             //WebCS.WebCSForm.
             //call update function from man window 
             CloseRadButton.PerformClick();

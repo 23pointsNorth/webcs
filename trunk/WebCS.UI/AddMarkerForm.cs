@@ -16,8 +16,9 @@ namespace WebCS
     {
         ColorMarker clrMarker;
         List<ColorMarker> colorMarkerList = new List<ColorMarker>();
-
+        WebCSForm parentForm;
         Bitmap originalFrame;
+
         enum type
         {
             color,
@@ -26,9 +27,10 @@ namespace WebCS
 
         type markerType;
 
-        public AddMarkerForm(Bitmap frame, ref List<ColorMarker> markerList)
+        public AddMarkerForm(WebCSForm mainForm, Bitmap frame, ref List<ColorMarker> markerList)
         {
             InitializeComponent();
+            parentForm = mainForm;
             markerType = type.color;
             originalFrame = new Bitmap(frame);
             frameImageContainer.Image = frame;
@@ -65,7 +67,7 @@ namespace WebCS
                 clrMarker.ChangeColor(originalFrame, markerRectangle);
                 colorMarkerList.Add(clrMarker);
                 EditMarkerForm editMarker = new EditMarkerForm(
-                    ref colorMarkerList, colorMarkerList.IndexOf(clrMarker));
+                    parentForm, ref colorMarkerList, colorMarkerList.IndexOf(clrMarker));
                 editMarker.Show();
             }
 
