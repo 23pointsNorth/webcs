@@ -156,7 +156,7 @@ namespace WebCS
         }
 
         private FilterInfoCollection videoCaptureDevices;
-        public VideoCaptureDevice finalVideoSource;
+        public VideoCaptureDevice finalVideoSource = new VideoCaptureDevice();
 
         private void LoadAvaliableWebcams()
         {
@@ -430,7 +430,7 @@ namespace WebCS
         }
 
         double maxFrameRate = 72;
-        bool isVideoRunning = false;
+        public bool isVideoRunning = false;
         private void WebcamRadToggleButton_ToggleStateChanged(object sender, StateChangedEventArgs args)
         {
             int index = 0;
@@ -814,6 +814,21 @@ namespace WebCS
             foreach (var marker in markersList)
             {
                 markerRadListControl.Items.Add(marker.Name + " " + marker.Priority.ToString());
+            }
+        }
+
+        public Bitmap ReturnFrame()
+        {
+            return frame;
+        }
+
+        private void deleteMarkerRadButton_Click(object sender, EventArgs e)
+        {
+            int index = markerRadListControl.SelectedIndex;
+            if (index >= 0)
+            {
+                markersList.Remove(markersList[index]);
+                UpdateMarkersList();
             }
         }
     }

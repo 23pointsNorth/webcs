@@ -21,7 +21,8 @@ namespace WebCS
 
         enum type
         {
-            color,
+            newColor,
+            editColor,
             feature
         };
 
@@ -31,7 +32,7 @@ namespace WebCS
         {
             InitializeComponent();
             parentForm = mainForm;
-            markerType = type.color;
+            markerType = type.newColor;
             originalFrame = new Bitmap(frame);
             frameImageContainer.Image = frame;
 
@@ -45,6 +46,17 @@ namespace WebCS
                 addedPriority++;
             } while (clrMarker == null);
             
+        }
+
+        ColorMarker changeMarker;
+        public AddMarkerForm(WebCSForm mainForm, Bitmap frame, ref ColorMarker marker)
+        {
+            InitializeComponent();
+            parentForm = mainForm;
+            markerType = type.editColor;
+            originalFrame = new Bitmap(frame);
+            frameImageContainer.Image = frame;
+            changeMarker = marker;
         }
 
         //public AddMarkerForm(Bitmap frame, ref FeatureMarker marker, string name)
@@ -61,13 +73,20 @@ namespace WebCS
 
         private void extractRadButton_Click(object sender, EventArgs e)
         {
-            if (markerType == type.color)
+            if (markerType == type.newColor)
             {
                 //create clrMarker stuff such as color;
                 clrMarker.ChangeColor(originalFrame, markerRectangle);
                 colorMarkerList.Add(clrMarker);
                 EditMarkerForm editMarker = new EditMarkerForm(
                     parentForm, ref colorMarkerList, colorMarkerList.IndexOf(clrMarker));
+                editMarker.Show();
+            }
+            else if (markerType == type.editColor)
+            {
+                changeMarker.ChangeColor(originalFrame, markerRectangle);
+                EditMarkerForm editMarker = new EditMarkerForm(
+                    parentForm, ref colorMarkerList, colorMarkerList.IndexOf(changeMarker));
                 editMarker.Show();
             }
 

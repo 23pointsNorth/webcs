@@ -79,6 +79,7 @@
             this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vistaTheme = new Telerik.WinControls.Themes.VistaTheme();
             this.timeOut = new System.Windows.Forms.Timer(this.components);
+            this.deleteMarkerRadButton = new Telerik.WinControls.UI.RadButton();
             ((System.ComponentModel.ISupportInitialize)(this.trackingToggleButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.exitRadButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.optionsToggleButton)).BeginInit();
@@ -120,6 +121,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.secondMarkerChangeRadButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.secondMarkerRangeRadLabel)).BeginInit();
             this.iconContextMenuStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.deleteMarkerRadButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
             // 
@@ -212,6 +214,7 @@
             // 
             // optionsRadPanel
             // 
+            this.optionsRadPanel.Controls.Add(this.deleteMarkerRadButton);
             this.optionsRadPanel.Controls.Add(this.markerRadListControl);
             this.optionsRadPanel.Controls.Add(this.addMarkerRadDropDownButton);
             this.optionsRadPanel.Controls.Add(this.editMarkerRadButton);
@@ -645,6 +648,16 @@
             this.timeOut.Interval = 15000;
             this.timeOut.Tick += new System.EventHandler(this.timeOut_Tick);
             // 
+            // deleteMarkerRadButton
+            // 
+            this.deleteMarkerRadButton.Location = new System.Drawing.Point(198, 153);
+            this.deleteMarkerRadButton.Name = "deleteMarkerRadButton";
+            this.deleteMarkerRadButton.Size = new System.Drawing.Size(100, 25);
+            this.deleteMarkerRadButton.TabIndex = 19;
+            this.deleteMarkerRadButton.Text = "Delete Marker";
+            this.deleteMarkerRadButton.ThemeName = "Vista";
+            this.deleteMarkerRadButton.Click += new System.EventHandler(this.deleteMarkerRadButton_Click);
+            // 
             // WebCSForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -709,6 +722,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.secondMarkerChangeRadButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.secondMarkerRangeRadLabel)).EndInit();
             this.iconContextMenuStrip.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.deleteMarkerRadButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
 
@@ -765,6 +779,7 @@
         private Telerik.WinControls.UI.RadDropDownButton addMarkerRadDropDownButton;
         private Telerik.WinControls.UI.RadMenuItem ColorMarkerRadMenuItem;
         private Telerik.WinControls.UI.RadListControl markerRadListControl;
+        private Telerik.WinControls.UI.RadButton deleteMarkerRadButton;
     }
 }
 
