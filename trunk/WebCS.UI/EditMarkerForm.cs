@@ -25,6 +25,8 @@ namespace WebCS
         {
             InitializeComponent();
             parentForm = mainForm;
+            if (parentForm.isVideoRunning) { changeColorRadButton.Enabled = true; }
+            else { changeColorRadButton.Enabled = false; }
             markers = markerList;
             index = markerIndex;
             LoadMarkerInfo();
@@ -50,27 +52,17 @@ namespace WebCS
             markers[index].ChangeRange(markerRangeRadTextBox.Text);
             int currentPriority = int.Parse(markerPriorityRadTextBox.Text);
             int finalPriority = currentPriority;
-            MessageBox.Show(currentPriority.ToString());
-            MessageBox.Show("Initial " + markers[index].Priority.ToString());
             while (markers[index].Priority != finalPriority && MarkerBase.takenPriorities.Contains(currentPriority))
             {
                 currentPriority++;
             }
             if (currentPriority != finalPriority && currentPriority != markers[index].Priority)
             {
-                MessageBox.Show(markers[index].Priority.ToString());
                 MessageBox.Show("Priority already exists. Suggested: " + currentPriority.ToString(), "Priority Change");
-                foreach (var p in MarkerBase.takenPriorities)
-                {
-                    MessageBox.Show(p.ToString());
-                }
                 return;
             }
             markers[index].ChangePriority(currentPriority);
-            MessageBox.Show("Last " + markers[index].Priority.ToString());
             parentForm.UpdateMarkersList();
-            //WebCS.WebCSForm.
-            //call update function from man window 
             CloseRadButton.PerformClick();
         }
 
@@ -85,6 +77,13 @@ namespace WebCS
                 markerNameRadTextBox.Text.Remove(markerNameRadTextBox.Text.Length - 1);
             }
         }
+
+        private void changeColorRadButton_Click(object sender, EventArgs e)
+        {
+            AddMarkerForm changeColorForm = new AddMarkerForm(parentForm, parentForm.ReturnFrame(), ref markers);
+            changeColorForm.Show();
+        }
+
 
         //public EditMarkerForm(ref List<FeatureMarker> markerList, int index)
         //{
