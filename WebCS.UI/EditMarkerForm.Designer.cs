@@ -65,9 +65,9 @@
             // 
             // markerNameRadTextBox
             // 
-            this.markerNameRadTextBox.Location = new System.Drawing.Point(137, 10);
+            this.markerNameRadTextBox.Location = new System.Drawing.Point(133, 10);
             this.markerNameRadTextBox.Name = "markerNameRadTextBox";
-            this.markerNameRadTextBox.Size = new System.Drawing.Size(83, 20);
+            this.markerNameRadTextBox.Size = new System.Drawing.Size(96, 20);
             this.markerNameRadTextBox.TabIndex = 1;
             this.markerNameRadTextBox.TabStop = false;
             this.markerNameRadTextBox.Text = "ColorMarker";
@@ -84,7 +84,7 @@
             // 
             // markerRangeRadTextBox
             // 
-            this.markerRangeRadTextBox.Location = new System.Drawing.Point(188, 36);
+            this.markerRangeRadTextBox.Location = new System.Drawing.Point(197, 36);
             this.markerRangeRadTextBox.Name = "markerRangeRadTextBox";
             this.markerRangeRadTextBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.markerRangeRadTextBox.Size = new System.Drawing.Size(32, 20);
@@ -117,11 +117,12 @@
             // 
             // markerPriorityRadTextBox
             // 
-            this.markerPriorityRadTextBox.Location = new System.Drawing.Point(188, 60);
+            this.markerPriorityRadTextBox.Location = new System.Drawing.Point(197, 60);
             this.markerPriorityRadTextBox.Name = "markerPriorityRadTextBox";
             this.markerPriorityRadTextBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.markerPriorityRadTextBox.Size = new System.Drawing.Size(32, 20);
             this.markerPriorityRadTextBox.TabIndex = 15;
+            this.markerPriorityRadTextBox.TabStop = false;
             this.markerPriorityRadTextBox.Text = "1";
             this.markerPriorityRadTextBox.ThemeName = "Vista";
             this.markerPriorityRadTextBox.TextChanged += new System.EventHandler(this.markerPriorityRadTextBox_TextChanged);
@@ -155,7 +156,7 @@
             // 
             // CloseRadButton
             // 
-            this.CloseRadButton.Location = new System.Drawing.Point(138, 123);
+            this.CloseRadButton.Location = new System.Drawing.Point(147, 124);
             this.CloseRadButton.Name = "CloseRadButton";
             this.CloseRadButton.Size = new System.Drawing.Size(82, 25);
             this.CloseRadButton.TabIndex = 18;
@@ -167,7 +168,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(225, 154);
+            this.ClientSize = new System.Drawing.Size(239, 154);
             this.Controls.Add(this.CloseRadButton);
             this.Controls.Add(this.saveRadButton);
             this.Controls.Add(this.radCheckBox1);
