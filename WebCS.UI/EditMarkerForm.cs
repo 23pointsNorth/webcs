@@ -30,6 +30,7 @@ namespace WebCS
             markers = markerList;
             index = markerIndex;
             LoadMarkerInfo();
+            //trackingRadColorDialog.Container.
         }
 
         private void LoadMarkerInfo()
@@ -58,12 +59,12 @@ namespace WebCS
             }
             if (currentPriority != finalPriority && currentPriority != markers[index].Priority)
             {
-                MessageBox.Show("Priority already exists. Suggested: " + currentPriority.ToString(), "Priority Change");
+                MessageBox.Show("Priority already exists. Suggested: " + currentPriority.ToString(), "Priority change error");
                 return;
             }
             markers[index].ChangePriority(currentPriority);
             parentForm.UpdateMarkersList();
-            CloseRadButton.PerformClick();
+            closeRadButton.PerformClick();
         }
 
         private void markerPriorityRadTextBox_TextChanged(object sender, EventArgs e)
@@ -80,7 +81,12 @@ namespace WebCS
 
         private void changeColorRadButton_Click(object sender, EventArgs e)
         {
-            AddMarkerForm changeColorForm = new AddMarkerForm(parentForm, parentForm.ReturnFrame(), ref markers);
+            if (trackingRadColorDialog.ShowDialog() == DialogResult.OK)
+            {
+                MessageBox.Show(trackingRadColorDialog.ColorDialogForm.SelectedColor.ToString());
+            }
+            saveRadButton.PerformClick();
+            AddMarkerForm changeColorForm = new AddMarkerForm(parentForm, parentForm.ReturnFrame(), ref markers, index);
             changeColorForm.Show();
         }
 

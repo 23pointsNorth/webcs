@@ -825,8 +825,9 @@ namespace WebCS
         private void deleteMarkerRadButton_Click(object sender, EventArgs e)
         {
             int index = markerRadListControl.SelectedIndex;
-            if (index >= 0)
+            if (index >= 0 && markerRadListControl.Items.Count > 1)
             {
+                markersList[index].RemoveMarker();
                 markersList.Remove(markersList[index]);
                 UpdateMarkersList();
             }
