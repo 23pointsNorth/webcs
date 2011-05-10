@@ -38,25 +38,25 @@ namespace WebCS
 
             colorMarkerList = markerList;
             int addedPriority = 0;
-            do
+            while (MarkerBase.takenPriorities.Contains(MarkerBase.NextMarkerNumber + addedPriority))
             {
-                clrMarker = new ColorMarker(
-                    "Color Marker " + (MarkerBase.NextMarkerNumber + addedPriority).ToString(),
-                    MarkerBase.NextMarkerNumber);
                 addedPriority++;
-            } while (clrMarker == null);
-            
+            }
+            clrMarker = new ColorMarker(
+                "Color Marker " + (MarkerBase.NextMarkerNumber + addedPriority).ToString(),
+                MarkerBase.NextMarkerNumber + addedPriority);
         }
 
         ColorMarker changeMarker;
-        public AddMarkerForm(WebCSForm mainForm, Bitmap frame, ref ColorMarker marker)
+        public AddMarkerForm(WebCSForm mainForm, Bitmap frame, ref List<ColorMarker> markerList, int markerIndex)
         {
             InitializeComponent();
             parentForm = mainForm;
             markerType = type.editColor;
             originalFrame = new Bitmap(frame);
             frameImageContainer.Image = frame;
-            changeMarker = marker;
+            colorMarkerList = markerList;
+            changeMarker = markerList[markerIndex];
         }
 
         //public AddMarkerForm(Bitmap frame, ref FeatureMarker marker, string name)
@@ -68,6 +68,7 @@ namespace WebCS
 
         private void closeRadButton_Click(object sender, EventArgs e)
         {
+            clrMarker.RemoveMarker();
             this.Close();
         }
 
@@ -90,7 +91,7 @@ namespace WebCS
                 editMarker.Show();
             }
 
-            closeRadButton.PerformClick();
+            this.Close();
         }
 
         Point upperLeftCorner;

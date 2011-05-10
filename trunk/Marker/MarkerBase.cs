@@ -59,12 +59,22 @@ namespace Marker
         public string Name { get { return markerName; } }
         public int Priority { get { return priority; } }
 
+        public void RemoveMarker()
+        {
+            nextMarkerNumber--; //will duplicate numbers but will keep marker count < max marker count
+            takenPriorities.Remove(priority);
+        }
         public void ChangePriority(int newPriority)
         {
             takenPriorities.Remove(this.priority);
             takenPriorities.Add(newPriority);
             priority = newPriority;
         }
+        //public void SetPriority(int newPriority)
+        //{
+        //    takenPriorities.Add(newPriority);
+        //    priority = newPriority;
+        //}
 
         // Wrapper method for use with thread pool.
         public void ThreadPoolCallback(object threadContext)

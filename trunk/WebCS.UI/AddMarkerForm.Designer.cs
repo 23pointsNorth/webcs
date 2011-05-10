@@ -58,6 +58,7 @@
             // 
             // closeRadButton
             // 
+            this.closeRadButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.closeRadButton.Location = new System.Drawing.Point(98, 306);
             this.closeRadButton.Name = "closeRadButton";
             this.closeRadButton.Size = new System.Drawing.Size(80, 25);
@@ -149,19 +150,23 @@
             // 
             // AddMarkerForm
             // 
+            this.AcceptButton = this.extractRadButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.closeRadButton;
             this.ClientSize = new System.Drawing.Size(379, 334);
             this.Controls.Add(this.extractRadButton);
             this.Controls.Add(this.frameImageContainer);
             this.Controls.Add(this.userHelpRadLabel);
             this.Controls.Add(this.closeRadButton);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "AddMarkerForm";
             // 
             // 
             // 
             this.RootElement.ApplyShapeToControl = true;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Add Marker";
             this.ThemeName = "Vista";
             ((System.ComponentModel.ISupportInitialize)(this.frameImageContainer)).EndInit();
