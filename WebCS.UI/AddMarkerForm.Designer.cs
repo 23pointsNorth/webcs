@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddMarkerForm));
             this.vistaTheme = new Telerik.WinControls.Themes.VistaTheme();
             this.frameImageContainer = new System.Windows.Forms.PictureBox();
             this.closeRadButton = new Telerik.WinControls.UI.RadButton();
@@ -160,6 +161,7 @@
             this.Controls.Add(this.userHelpRadLabel);
             this.Controls.Add(this.closeRadButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "AddMarkerForm";
             // 
@@ -167,7 +169,7 @@
             // 
             this.RootElement.ApplyShapeToControl = true;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Add Marker";
+            this.Text = "Exctract Color";
             this.ThemeName = "Vista";
             ((System.ComponentModel.ISupportInitialize)(this.frameImageContainer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.closeRadButton)).EndInit();

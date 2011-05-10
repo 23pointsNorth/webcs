@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using Telerik.WinControls.UI;
 using Marker;
 using BitmapProcessing;
+using WebCS.Utilities;
 
 namespace WebCS
 {
@@ -18,19 +19,27 @@ namespace WebCS
         int index;
         WebCSForm parentForm;
 
-        const int SAMPLE_WIDTH = 75;
-        const int SAMPLE_HEIGHT = 75;
-
         public EditMarkerForm(WebCSForm mainForm, ref List<ColorMarker> markerList, int markerIndex)
         {
             InitializeComponent();
             parentForm = mainForm;
-            if (parentForm.isVideoRunning) { changeColorRadButton.Enabled = true; }
-            else { changeColorRadButton.Enabled = false; }
+            EnablingOfEditButton();
             markers = markerList;
             index = markerIndex;
             LoadMarkerInfo();
             //trackingRadColorDialog.Container.
+        }
+
+        public void EnablingOfEditButton()
+        {
+            if (parentForm.IsVideoRunning && !parentForm.IsTrackingEnabled) 
+            { 
+                changeColorRadButton.Enabled = true; 
+            }
+            else 
+            { 
+                changeColorRadButton.Enabled = false; 
+            }
         }
 
         private void LoadMarkerInfo()
@@ -39,7 +48,11 @@ namespace WebCS
             markerRangeRadTextBox.Text = markers[index].Range.ToString();
             markerPriorityRadTextBox.Text = markers[index].Priority.ToString();
             samplePictureBox.Image = BitmapDraw.FilledRectangle(
-                SAMPLE_WIDTH, SAMPLE_HEIGHT, markers[index].Color);
+                samplePictureBox.Width, samplePictureBox.Height, markers[index].Color);
+            //markers[index].FoundMarkerRectC = ColorExtention.RandomColor();
+            outliningColorPictureBox.Image = BitmapDraw.FilledRectangle(
+                outliningColorPictureBox.Width,outliningColorPictureBox.Height,
+                markers[index].FoundMarkerRectC);
         }
 
         private void CloseRadButton_Click(object sender, EventArgs e)
@@ -53,13 +66,16 @@ namespace WebCS
             markers[index].ChangeRange(markerRangeRadTextBox.Text);
             int currentPriority = int.Parse(markerPriorityRadTextBox.Text);
             int finalPriority = currentPriority;
-            while (markers[index].Priority != finalPriority && MarkerBase.takenPriorities.Contains(currentPriority))
+            while (markers[index].Priority != finalPriority && 
+                MarkerBase.takenPriorities.Contains(currentPriority))
             {
                 currentPriority++;
             }
             if (currentPriority != finalPriority && currentPriority != markers[index].Priority)
             {
-                MessageBox.Show("Priority already exists. Suggested: " + currentPriority.ToString(), "Priority change error");
+                MessageBox.Show(
+                    "Priority already exists. Suggested: " + currentPriority.ToString(), 
+                    "Priority change error");
                 return;
             }
             markers[index].ChangePriority(currentPriority);
@@ -81,13 +97,37 @@ namespace WebCS
 
         private void changeColorRadButton_Click(object sender, EventArgs e)
         {
+            saveRadButton.PerformClick();
+            AddMarkerForm changeColorForm = new AddMarkerForm(
+                parentForm, parentForm.ReturnFrame(), ref markers, index);
+            changeColorForm.Show();
+        }
+
+        private void outliningColorPictureBox_Click(object sender, EventArgs e)
+        {
+            trackingRadColorDialog.ColorDialogForm.SelectedColor =
+                markers[index].FoundMarkerRectC;
             if (trackingRadColorDialog.ShowDialog() == DialogResult.OK)
             {
-                MessageBox.Show(trackingRadColorDialog.ColorDialogForm.SelectedColor.ToString());
+                markers[index].FoundMarkerRectC = 
+                    trackingRadColorDialog.ColorDialogForm.SelectedColor;
             }
-            saveRadButton.PerformClick();
-            AddMarkerForm changeColorForm = new AddMarkerForm(parentForm, parentForm.ReturnFrame(), ref markers, index);
-            changeColorForm.Show();
+            outliningColorPictureBox.Image = BitmapDraw.FilledRectangle(
+                outliningColorPictureBox.Width, outliningColorPictureBox.Height,
+                markers[index].FoundMarkerRectC);
+        }
+
+        private void samplePictureBox_Click(object sender, EventArgs e)
+        {
+            trackingRadColorDialog.ColorDialogForm.SelectedColor =
+                markers[index].Color;
+            if (trackingRadColorDialog.ShowDialog() == DialogResult.OK)
+            {
+                markers[index].ChangeColor( 
+                    trackingRadColorDialog.ColorDialogForm.SelectedColor);
+            }
+            samplePictureBox.Image = BitmapDraw.FilledRectangle(
+                samplePictureBox.Width, samplePictureBox.Height, markers[index].Color);
         }
 
 

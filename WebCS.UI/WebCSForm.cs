@@ -111,7 +111,7 @@ namespace WebCS
                     Color.LightBlue, 0, 255);
 
                 //firstMarkerRangeRadTextBox.Text = User.Default.firstMarkerRangeUser.ToString();
-                secondMarkerRangeRadTextBox.Text = User.Default.secondMarkerRangeUser.ToString();
+                //secondMarkerRangeRadTextBox.Text = User.Default.secondMarkerRangeUser.ToString();
                 markersList.Add(firstMarker);
                 markersList.Add(secondMarker);
                 ColorMarker.IndexMarker = new ColorMarker._index((ushort)markersList.IndexOf(firstMarker), (ushort)markersList.IndexOf(secondMarker));
@@ -141,7 +141,7 @@ namespace WebCS
                         Constants.IMAGE_HEIGHT / 2 + 15, 30, 30),
                     Color.LightBlue, 0, 255);
                 //firstMarkerRangeRadTextBox.Text = "20";
-                secondMarkerRangeRadTextBox.Text = "20";
+                //secondMarkerRangeRadTextBox.Text = "20";
                 markersList.Add(firstMarker);
                 markersList.Add(secondMarker);
                 ColorMarker.IndexMarker = new ColorMarker._index((ushort)markersList.IndexOf(firstMarker), (ushort)markersList.IndexOf(secondMarker));
@@ -151,8 +151,8 @@ namespace WebCS
 
             //firstMarkerSample.Image = BitmapDraw.FilledRectangle(
             //    firstMarkerSample.Width, firstMarkerSample.Height, markersList[ColorMarker.IndexMarker.Primary].Color);
-            secondMarkerSample.Image = BitmapDraw.FilledRectangle(
-                secondMarkerSample.Width, secondMarkerSample.Height, markersList[ColorMarker.IndexMarker.Secondary].Color);
+            //secondMarkerSample.Image = BitmapDraw.FilledRectangle(
+            //    secondMarkerSample.Width, secondMarkerSample.Height, markersList[ColorMarker.IndexMarker.Secondary].Color);
         }
 
         private FilterInfoCollection videoCaptureDevices;
@@ -228,17 +228,20 @@ namespace WebCS
         }
 
         bool isTrackingEnabled = false;
+        public bool IsTrackingEnabled { get { return isTrackingEnabled; } }
         private void trackingToggleButton_ToggleStateChanged(object sender, StateChangedEventArgs args)
         {
             if (args.ToggleState == ToggleState.On)
             {
                 trackingToggleButton.Text = "Disable &Tracking";
                 isTrackingEnabled = true;
+                addMarkerRadDropDownButton.Enabled = false;
             }
             else
             {
                 trackingToggleButton.Text = "Enable &Tracking";
                 isTrackingEnabled = false;
+                addMarkerRadDropDownButton.Enabled = true;
             }
         }
 
@@ -430,7 +433,8 @@ namespace WebCS
         }
 
         double maxFrameRate = 72;
-        public bool isVideoRunning = false;
+        bool isVideoRunning = false;
+        public bool IsVideoRunning { get { return isVideoRunning; } }
         private void WebcamRadToggleButton_ToggleStateChanged(object sender, StateChangedEventArgs args)
         {
             int index = 0;
@@ -445,7 +449,7 @@ namespace WebCS
                 webcamOptionsRadButton.Enabled = true;
                 addMarkerRadDropDownButton.Enabled = true;
                 //firstMarkerChangeRadButton.Enabled = true;
-                secondMarkerChangeRadButton.Enabled = true;
+                //secondMarkerChangeRadButton.Enabled = true;
 
                 try
                 {
@@ -482,7 +486,7 @@ namespace WebCS
 
                 //firstMarkerChangeRadButton.Enabled = false;
                 addMarkerRadDropDownButton.Enabled = false;
-                secondMarkerChangeRadButton.Enabled = false;
+                //secondMarkerChangeRadButton.Enabled = false;
                 webcamOptionsRadButton.Enabled = false;
 
                 markersList[ColorMarker.IndexMarker.Primary].IsColorChange = false;
@@ -554,14 +558,14 @@ namespace WebCS
                     {
                         markersList[ColorMarker.IndexMarker.Secondary].IsColorChange = false;
                         markersList[ColorMarker.IndexMarker.Secondary].ChangeColor(newFrame);
-                        secondMarkerSample.Image = BitmapDraw.FilledRectangle(
-                            secondMarkerSample.Width, 
-                            secondMarkerSample.Height,
-                            markersList[ColorMarker.IndexMarker.Secondary].Color);
+                        //secondMarkerSample.Image = BitmapDraw.FilledRectangle(
+                        //    secondMarkerSample.Width, 
+                        //    secondMarkerSample.Height,
+                        //    markersList[ColorMarker.IndexMarker.Secondary].Color);
                     }
                     catch
                     {
-                        secondMarkerChangeRadButton.PerformClick();
+                        //secondMarkerChangeRadButton.PerformClick();
                     }
                 }
             }
@@ -721,8 +725,8 @@ namespace WebCS
         {
             if (markersList.Count > 0)
             {
-                markersList[ColorMarker.IndexMarker.Secondary].ChangeRange(secondMarkerRangeRadTextBox.Text);
-                secondMarkerRangeRadTextBox.Text = markersList[ColorMarker.IndexMarker.Secondary].Range.ToString();
+                //markersList[ColorMarker.IndexMarker.Secondary].ChangeRange(secondMarkerRangeRadTextBox.Text);
+                //secondMarkerRangeRadTextBox.Text = markersList[ColorMarker.IndexMarker.Secondary].Range.ToString();
             }
         }
 
@@ -832,5 +836,6 @@ namespace WebCS
                 UpdateMarkersList();
             }
         }
+
     }
 }
