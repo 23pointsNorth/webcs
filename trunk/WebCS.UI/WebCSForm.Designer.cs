@@ -38,9 +38,11 @@
             this.webcamRadToggleButton = new Telerik.WinControls.UI.RadToggleButton();
             this.avaliableWebcamsDropDownList = new Telerik.WinControls.UI.RadDropDownList();
             this.optionsRadPanel = new Telerik.WinControls.UI.RadPanel();
+            this.markerRadGroupBox = new Telerik.WinControls.UI.RadGroupBox();
+            this.deleteMarkerRadButton = new Telerik.WinControls.UI.RadButton();
             this.markerRadListControl = new Telerik.WinControls.UI.RadListControl();
             this.addMarkerRadDropDownButton = new Telerik.WinControls.UI.RadDropDownButton();
-            this.ColorMarkerRadMenuItem = new Telerik.WinControls.UI.RadMenuItem();
+            this.colorMarkerRadMenuItem = new Telerik.WinControls.UI.RadMenuItem();
             this.editMarkerRadButton = new Telerik.WinControls.UI.RadButton();
             this.useThreadPoolRadCheckBox = new Telerik.WinControls.UI.RadCheckBox();
             this.webcamOptionsRadButton = new Telerik.WinControls.UI.RadButton();
@@ -60,13 +62,6 @@
             this.userRadLabel = new Telerik.WinControls.UI.RadLabel();
             this.startupRadCheckBox = new Telerik.WinControls.UI.RadCheckBox();
             this.SelectDesktopAreaButton = new Telerik.WinControls.UI.RadButton();
-            this.SecondMarkerRadGroupBox = new Telerik.WinControls.UI.RadGroupBox();
-            this.secondMarkerSample = new System.Windows.Forms.PictureBox();
-            this.cancelSecondMarkerRadButton = new Telerik.WinControls.UI.RadButton();
-            this.secondMarkerRangeRadTextBox = new Telerik.WinControls.UI.RadTextBox();
-            this.secondMarkerColorLabel = new Telerik.WinControls.UI.RadLabel();
-            this.secondMarkerChangeRadButton = new Telerik.WinControls.UI.RadButton();
-            this.secondMarkerRangeRadLabel = new Telerik.WinControls.UI.RadLabel();
             this.systemTrayIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.iconContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.trackingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -79,7 +74,6 @@
             this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vistaTheme = new Telerik.WinControls.Themes.VistaTheme();
             this.timeOut = new System.Windows.Forms.Timer(this.components);
-            this.deleteMarkerRadButton = new Telerik.WinControls.UI.RadButton();
             ((System.ComponentModel.ISupportInitialize)(this.trackingToggleButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.exitRadButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.optionsToggleButton)).BeginInit();
@@ -90,6 +84,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.avaliableWebcamsDropDownList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.optionsRadPanel)).BeginInit();
             this.optionsRadPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.markerRadGroupBox)).BeginInit();
+            this.markerRadGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.deleteMarkerRadButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.markerRadListControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.addMarkerRadDropDownButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.editMarkerRadButton)).BeginInit();
@@ -112,16 +109,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.userRadLabel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.startupRadCheckBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SelectDesktopAreaButton)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.SecondMarkerRadGroupBox)).BeginInit();
-            this.SecondMarkerRadGroupBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.secondMarkerSample)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cancelSecondMarkerRadButton)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.secondMarkerRangeRadTextBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.secondMarkerColorLabel)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.secondMarkerChangeRadButton)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.secondMarkerRangeRadLabel)).BeginInit();
             this.iconContextMenuStrip.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.deleteMarkerRadButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
             // 
@@ -214,10 +202,7 @@
             // 
             // optionsRadPanel
             // 
-            this.optionsRadPanel.Controls.Add(this.deleteMarkerRadButton);
-            this.optionsRadPanel.Controls.Add(this.markerRadListControl);
-            this.optionsRadPanel.Controls.Add(this.addMarkerRadDropDownButton);
-            this.optionsRadPanel.Controls.Add(this.editMarkerRadButton);
+            this.optionsRadPanel.Controls.Add(this.markerRadGroupBox);
             this.optionsRadPanel.Controls.Add(this.useThreadPoolRadCheckBox);
             this.optionsRadPanel.Controls.Add(this.webcamOptionsRadButton);
             this.optionsRadPanel.Controls.Add(this.enableMovingRadCheckBox);
@@ -232,7 +217,6 @@
             this.optionsRadPanel.Controls.Add(this.userRadLabel);
             this.optionsRadPanel.Controls.Add(this.startupRadCheckBox);
             this.optionsRadPanel.Controls.Add(this.SelectDesktopAreaButton);
-            this.optionsRadPanel.Controls.Add(this.SecondMarkerRadGroupBox);
             this.optionsRadPanel.Location = new System.Drawing.Point(369, 3);
             this.optionsRadPanel.Name = "optionsRadPanel";
             this.optionsRadPanel.Size = new System.Drawing.Size(362, 356);
@@ -240,13 +224,47 @@
             this.optionsRadPanel.ThemeName = "Vista";
             this.optionsRadPanel.Visible = false;
             // 
+            // markerRadGroupBox
+            // 
+            this.markerRadGroupBox.Controls.Add(this.deleteMarkerRadButton);
+            this.markerRadGroupBox.Controls.Add(this.markerRadListControl);
+            this.markerRadGroupBox.Controls.Add(this.addMarkerRadDropDownButton);
+            this.markerRadGroupBox.Controls.Add(this.editMarkerRadButton);
+            this.markerRadGroupBox.FooterImageIndex = -1;
+            this.markerRadGroupBox.FooterImageKey = "";
+            this.markerRadGroupBox.HeaderImageIndex = -1;
+            this.markerRadGroupBox.HeaderImageKey = "";
+            this.markerRadGroupBox.HeaderMargin = new System.Windows.Forms.Padding(0);
+            this.markerRadGroupBox.HeaderText = "Marker Options";
+            this.markerRadGroupBox.Location = new System.Drawing.Point(12, 91);
+            this.markerRadGroupBox.Name = "markerRadGroupBox";
+            this.markerRadGroupBox.Padding = new System.Windows.Forms.Padding(10, 20, 10, 10);
+            // 
+            // 
+            // 
+            this.markerRadGroupBox.RootElement.Padding = new System.Windows.Forms.Padding(10, 20, 10, 10);
+            this.markerRadGroupBox.Size = new System.Drawing.Size(340, 117);
+            this.markerRadGroupBox.TabIndex = 28;
+            this.markerRadGroupBox.Text = "Marker Options";
+            this.markerRadGroupBox.ThemeName = "Vista";
+            // 
+            // deleteMarkerRadButton
+            // 
+            this.deleteMarkerRadButton.Location = new System.Drawing.Point(227, 85);
+            this.deleteMarkerRadButton.Name = "deleteMarkerRadButton";
+            this.deleteMarkerRadButton.Size = new System.Drawing.Size(100, 25);
+            this.deleteMarkerRadButton.TabIndex = 29;
+            this.deleteMarkerRadButton.Text = "Delete Marker";
+            this.deleteMarkerRadButton.ThemeName = "Vista";
+            this.deleteMarkerRadButton.Click += new System.EventHandler(this.deleteMarkerRadButton_Click);
+            // 
             // markerRadListControl
             // 
             this.markerRadListControl.CaseSensitiveSort = true;
-            this.markerRadListControl.Location = new System.Drawing.Point(12, 91);
+            this.markerRadListControl.Location = new System.Drawing.Point(13, 23);
             this.markerRadListControl.Name = "markerRadListControl";
-            this.markerRadListControl.Size = new System.Drawing.Size(150, 68);
-            this.markerRadListControl.TabIndex = 27;
+            this.markerRadListControl.Size = new System.Drawing.Size(170, 87);
+            this.markerRadListControl.TabIndex = 31;
             this.markerRadListControl.Text = "markerRadListControl";
             this.markerRadListControl.ThemeName = "Vista";
             // 
@@ -257,26 +275,26 @@
             this.addMarkerRadDropDownButton.DropDownDirection = Telerik.WinControls.UI.RadDirection.Right;
             this.addMarkerRadDropDownButton.Enabled = false;
             this.addMarkerRadDropDownButton.Items.AddRange(new Telerik.WinControls.RadItem[] {
-            this.ColorMarkerRadMenuItem});
-            this.addMarkerRadDropDownButton.Location = new System.Drawing.Point(198, 91);
+            this.colorMarkerRadMenuItem});
+            this.addMarkerRadDropDownButton.Location = new System.Drawing.Point(227, 23);
             this.addMarkerRadDropDownButton.Name = "addMarkerRadDropDownButton";
             this.addMarkerRadDropDownButton.Size = new System.Drawing.Size(100, 25);
-            this.addMarkerRadDropDownButton.TabIndex = 26;
+            this.addMarkerRadDropDownButton.TabIndex = 30;
             this.addMarkerRadDropDownButton.Text = "Add Marker";
             this.addMarkerRadDropDownButton.ThemeName = "Vista";
             // 
-            // ColorMarkerRadMenuItem
+            // colorMarkerRadMenuItem
             // 
-            this.ColorMarkerRadMenuItem.Name = "ColorMarkerRadMenuItem";
-            this.ColorMarkerRadMenuItem.Text = "Color Marker";
-            this.ColorMarkerRadMenuItem.Click += new System.EventHandler(this.ColorMarkerRadMenuItem_Click);
+            this.colorMarkerRadMenuItem.Name = "colorMarkerRadMenuItem";
+            this.colorMarkerRadMenuItem.Text = "Color Marker";
+            this.colorMarkerRadMenuItem.Click += new System.EventHandler(this.ColorMarkerRadMenuItem_Click);
             // 
             // editMarkerRadButton
             // 
-            this.editMarkerRadButton.Location = new System.Drawing.Point(198, 122);
+            this.editMarkerRadButton.Location = new System.Drawing.Point(227, 54);
             this.editMarkerRadButton.Name = "editMarkerRadButton";
             this.editMarkerRadButton.Size = new System.Drawing.Size(100, 25);
-            this.editMarkerRadButton.TabIndex = 18;
+            this.editMarkerRadButton.TabIndex = 28;
             this.editMarkerRadButton.Text = "Edit Marker";
             this.editMarkerRadButton.ThemeName = "Vista";
             this.editMarkerRadButton.Click += new System.EventHandler(this.editMarkerRadButton_Click);
@@ -477,95 +495,6 @@
             this.SelectDesktopAreaButton.ThemeName = "Vista";
             this.SelectDesktopAreaButton.Click += new System.EventHandler(this.SelectDesktopAreaButton_Click);
             // 
-            // SecondMarkerRadGroupBox
-            // 
-            this.SecondMarkerRadGroupBox.Controls.Add(this.secondMarkerSample);
-            this.SecondMarkerRadGroupBox.Controls.Add(this.cancelSecondMarkerRadButton);
-            this.SecondMarkerRadGroupBox.Controls.Add(this.secondMarkerRangeRadTextBox);
-            this.SecondMarkerRadGroupBox.Controls.Add(this.secondMarkerColorLabel);
-            this.SecondMarkerRadGroupBox.Controls.Add(this.secondMarkerChangeRadButton);
-            this.SecondMarkerRadGroupBox.Controls.Add(this.secondMarkerRangeRadLabel);
-            this.SecondMarkerRadGroupBox.FooterImageIndex = -1;
-            this.SecondMarkerRadGroupBox.FooterImageKey = "";
-            this.SecondMarkerRadGroupBox.HeaderImageIndex = -1;
-            this.SecondMarkerRadGroupBox.HeaderImageKey = "";
-            this.SecondMarkerRadGroupBox.HeaderMargin = new System.Windows.Forms.Padding(0);
-            this.SecondMarkerRadGroupBox.HeaderText = "Secondary Marker";
-            this.SecondMarkerRadGroupBox.Location = new System.Drawing.Point(12, 165);
-            this.SecondMarkerRadGroupBox.Name = "SecondMarkerRadGroupBox";
-            this.SecondMarkerRadGroupBox.Padding = new System.Windows.Forms.Padding(10, 20, 10, 10);
-            // 
-            // 
-            // 
-            this.SecondMarkerRadGroupBox.RootElement.Padding = new System.Windows.Forms.Padding(10, 20, 10, 10);
-            this.SecondMarkerRadGroupBox.Size = new System.Drawing.Size(340, 72);
-            this.SecondMarkerRadGroupBox.TabIndex = 9;
-            this.SecondMarkerRadGroupBox.Text = "Secondary Marker";
-            this.SecondMarkerRadGroupBox.ThemeName = "Vista";
-            // 
-            // secondMarkerSample
-            // 
-            this.secondMarkerSample.Location = new System.Drawing.Point(90, 23);
-            this.secondMarkerSample.Name = "secondMarkerSample";
-            this.secondMarkerSample.Size = new System.Drawing.Size(60, 20);
-            this.secondMarkerSample.TabIndex = 12;
-            this.secondMarkerSample.TabStop = false;
-            // 
-            // cancelSecondMarkerRadButton
-            // 
-            this.cancelSecondMarkerRadButton.Location = new System.Drawing.Point(227, 45);
-            this.cancelSecondMarkerRadButton.Name = "cancelSecondMarkerRadButton";
-            this.cancelSecondMarkerRadButton.Size = new System.Drawing.Size(100, 25);
-            this.cancelSecondMarkerRadButton.TabIndex = 16;
-            this.cancelSecondMarkerRadButton.Text = "&Cancel";
-            this.cancelSecondMarkerRadButton.ThemeName = "Vista";
-            this.cancelSecondMarkerRadButton.Click += new System.EventHandler(this.cancelSecondMarkerRadButton_Click);
-            // 
-            // secondMarkerRangeRadTextBox
-            // 
-            this.secondMarkerRangeRadTextBox.Location = new System.Drawing.Point(118, 45);
-            this.secondMarkerRangeRadTextBox.Name = "secondMarkerRangeRadTextBox";
-            this.secondMarkerRangeRadTextBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.secondMarkerRangeRadTextBox.Size = new System.Drawing.Size(32, 20);
-            this.secondMarkerRangeRadTextBox.TabIndex = 17;
-            this.secondMarkerRangeRadTextBox.TabStop = false;
-            this.secondMarkerRangeRadTextBox.Text = "20";
-            this.secondMarkerRangeRadTextBox.ThemeName = "Vista";
-            this.secondMarkerRangeRadTextBox.TextChanged += new System.EventHandler(this.secondMarkerRangeRadTextBox_TextChanged);
-            // 
-            // secondMarkerColorLabel
-            // 
-            this.secondMarkerColorLabel.Location = new System.Drawing.Point(13, 23);
-            this.secondMarkerColorLabel.Name = "secondMarkerColorLabel";
-            this.secondMarkerColorLabel.Size = new System.Drawing.Size(72, 16);
-            this.secondMarkerColorLabel.TabIndex = 5;
-            this.secondMarkerColorLabel.Text = "Marker Color";
-            this.secondMarkerColorLabel.ThemeName = "ControlDefault";
-            // 
-            // secondMarkerChangeRadButton
-            // 
-            this.secondMarkerChangeRadButton.Enabled = false;
-            this.secondMarkerChangeRadButton.Location = new System.Drawing.Point(227, 16);
-            this.secondMarkerChangeRadButton.Name = "secondMarkerChangeRadButton";
-            // 
-            // 
-            // 
-            this.secondMarkerChangeRadButton.RootElement.Enabled = false;
-            this.secondMarkerChangeRadButton.Size = new System.Drawing.Size(100, 25);
-            this.secondMarkerChangeRadButton.TabIndex = 15;
-            this.secondMarkerChangeRadButton.Text = "Change Color";
-            this.secondMarkerChangeRadButton.ThemeName = "Vista";
-            this.secondMarkerChangeRadButton.Click += new System.EventHandler(this.secondMarkerChangeRadButton_Click);
-            // 
-            // secondMarkerRangeRadLabel
-            // 
-            this.secondMarkerRangeRadLabel.Location = new System.Drawing.Point(13, 47);
-            this.secondMarkerRangeRadLabel.Name = "secondMarkerRangeRadLabel";
-            this.secondMarkerRangeRadLabel.Size = new System.Drawing.Size(78, 16);
-            this.secondMarkerRangeRadLabel.TabIndex = 7;
-            this.secondMarkerRangeRadLabel.Text = "Marker Range";
-            this.secondMarkerRangeRadLabel.ThemeName = "ControlDefault";
-            // 
             // systemTrayIcon
             // 
             this.systemTrayIcon.ContextMenuStrip = this.iconContextMenuStrip;
@@ -648,16 +577,6 @@
             this.timeOut.Interval = 15000;
             this.timeOut.Tick += new System.EventHandler(this.timeOut_Tick);
             // 
-            // deleteMarkerRadButton
-            // 
-            this.deleteMarkerRadButton.Location = new System.Drawing.Point(198, 153);
-            this.deleteMarkerRadButton.Name = "deleteMarkerRadButton";
-            this.deleteMarkerRadButton.Size = new System.Drawing.Size(100, 25);
-            this.deleteMarkerRadButton.TabIndex = 19;
-            this.deleteMarkerRadButton.Text = "Delete Marker";
-            this.deleteMarkerRadButton.ThemeName = "Vista";
-            this.deleteMarkerRadButton.Click += new System.EventHandler(this.deleteMarkerRadButton_Click);
-            // 
             // WebCSForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -690,6 +609,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.optionsRadPanel)).EndInit();
             this.optionsRadPanel.ResumeLayout(false);
             this.optionsRadPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.markerRadGroupBox)).EndInit();
+            this.markerRadGroupBox.ResumeLayout(false);
+            this.markerRadGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.deleteMarkerRadButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.markerRadListControl)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.addMarkerRadDropDownButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.editMarkerRadButton)).EndInit();
@@ -712,17 +635,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.userRadLabel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.startupRadCheckBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.SelectDesktopAreaButton)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.SecondMarkerRadGroupBox)).EndInit();
-            this.SecondMarkerRadGroupBox.ResumeLayout(false);
-            this.SecondMarkerRadGroupBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.secondMarkerSample)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cancelSecondMarkerRadButton)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.secondMarkerRangeRadTextBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.secondMarkerColorLabel)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.secondMarkerChangeRadButton)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.secondMarkerRangeRadLabel)).EndInit();
             this.iconContextMenuStrip.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.deleteMarkerRadButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
 
@@ -735,7 +648,6 @@
         private Telerik.WinControls.UI.RadPanel webcamRadPanel;
         private Telerik.WinControls.UI.RadButton exitRadButton;
         private Telerik.WinControls.UI.RadPanel optionsRadPanel;
-        private Telerik.WinControls.UI.RadGroupBox SecondMarkerRadGroupBox;
         private Telerik.WinControls.UI.RadDropDownList avaliableWebcamsDropDownList;
         private Telerik.WinControls.UI.RadCheckBox startupRadCheckBox;
         private Telerik.WinControls.UI.RadButton SelectDesktopAreaButton;
@@ -749,20 +661,14 @@
         private System.Windows.Forms.ToolStripMenuItem restoreToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem closeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem startStopWebcamToolStripMenuItem;
-        private Telerik.WinControls.UI.RadTextBox secondMarkerRangeRadTextBox;
-        private Telerik.WinControls.UI.RadLabel secondMarkerColorLabel;
-        private Telerik.WinControls.UI.RadButton secondMarkerChangeRadButton;
-        private Telerik.WinControls.UI.RadLabel secondMarkerRangeRadLabel;
         private Telerik.WinControls.UI.RadRadioButton secondMarkerLoadRadRadioButton;
         private Telerik.WinControls.UI.RadGroupBox workingFrameRadGroupBox;
         private Telerik.WinControls.UI.RadRadioButton firstMarkerLoadRadRadioButton;
         private Telerik.WinControls.UI.RadRadioButton noLoadRadRadioButton;
         private Telerik.WinControls.UI.RadButton saveOptionsRadButton;
         private System.Windows.Forms.ToolStripMenuItem saveSettingsToolStripMenuItem;
-        private Telerik.WinControls.UI.RadButton cancelSecondMarkerRadButton;
         private Telerik.WinControls.Themes.VistaTheme vistaTheme;
         private System.Windows.Forms.PictureBox imageContainer;
-        private System.Windows.Forms.PictureBox secondMarkerSample;
         private System.Windows.Forms.ContextMenuStrip webcamsMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem WebcamsToolStripMenuItem;
         private System.Windows.Forms.Timer timeOut;
@@ -775,11 +681,12 @@
         private Telerik.WinControls.UI.RadCheckBox enableMovingRadCheckBox;
         private Telerik.WinControls.UI.RadButton webcamOptionsRadButton;
         private Telerik.WinControls.UI.RadCheckBox useThreadPoolRadCheckBox;
-        private Telerik.WinControls.UI.RadButton editMarkerRadButton;
-        private Telerik.WinControls.UI.RadDropDownButton addMarkerRadDropDownButton;
-        private Telerik.WinControls.UI.RadMenuItem ColorMarkerRadMenuItem;
-        private Telerik.WinControls.UI.RadListControl markerRadListControl;
+        private Telerik.WinControls.UI.RadGroupBox markerRadGroupBox;
         private Telerik.WinControls.UI.RadButton deleteMarkerRadButton;
+        private Telerik.WinControls.UI.RadListControl markerRadListControl;
+        private Telerik.WinControls.UI.RadDropDownButton addMarkerRadDropDownButton;
+        private Telerik.WinControls.UI.RadButton editMarkerRadButton;
+        private Telerik.WinControls.UI.RadMenuItem colorMarkerRadMenuItem;
     }
 }
 

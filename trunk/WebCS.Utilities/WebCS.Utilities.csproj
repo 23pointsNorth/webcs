@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BitmapDraw.cs" />
+    <Compile Include="ColorExtention.cs" />
     <Compile Include="Mouse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryPerfCounter.cs" />

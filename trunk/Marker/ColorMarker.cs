@@ -40,8 +40,12 @@ namespace Marker
         public bool IsFound { get { return isFound; } }
         public Rectangle Rect { get { return rect; } }
         public Rectangle GetColorRect { get { return getColorRect; } }
-        public Color FoundMarkerRectC { get { return foundMarkerRectC; } }
-        public Color ChangeColorRectC { get { return changeColorRectC; } }
+        public Color FoundMarkerRectC
+        {
+            set { foundMarkerRectC = value; }
+            get { return foundMarkerRectC; }
+        }
+       /*unneeded*/ public Color ChangeColorRectC { get { return changeColorRectC; } }
 
         public ColorMarker(string name,int priority ,Color colorValue, short rangeValue, Color foundMarkerRectColor, Rectangle getColorRectValue, Color changeColorRect, short lowerLimitValue, short upperLimitValue) : base(name, priority)
         {
@@ -57,6 +61,11 @@ namespace Marker
         public ColorMarker(string name, int priority) : base(name, priority)
         {
 
+        }
+
+        public void ChangeColor(Color newColor)
+        {
+            color = newColor;
         }
 
         public void ChangeColor(Bitmap frame)

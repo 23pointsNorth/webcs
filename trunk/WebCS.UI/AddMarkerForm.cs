@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using Telerik.WinControls.UI;
 using Marker;
 using BitmapProcessing;
+using WebCS.Utilities;
 
 namespace WebCS
 {
@@ -43,7 +44,7 @@ namespace WebCS
                 addedPriority++;
             }
             clrMarker = new ColorMarker(
-                "Color Marker " + (MarkerBase.NextMarkerNumber + addedPriority).ToString(),
+                "ColorMarker" + (MarkerBase.NextMarkerNumber + addedPriority).ToString(),
                 MarkerBase.NextMarkerNumber + addedPriority);
         }
 
@@ -78,6 +79,7 @@ namespace WebCS
             {
                 //create clrMarker stuff such as color;
                 clrMarker.ChangeColor(originalFrame, markerRectangle);
+                clrMarker.FoundMarkerRectC = ColorExtention.RandomColor();
                 colorMarkerList.Add(clrMarker);
                 EditMarkerForm editMarker = new EditMarkerForm(
                     parentForm, ref colorMarkerList, colorMarkerList.IndexOf(clrMarker));

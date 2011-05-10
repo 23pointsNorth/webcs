@@ -28,30 +28,35 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditMarkerForm));
             this.samplePictureBox = new System.Windows.Forms.PictureBox();
             this.markerNameRadTextBox = new Telerik.WinControls.UI.RadTextBox();
             this.nameRadLabel = new Telerik.WinControls.UI.RadLabel();
             this.markerRangeRadTextBox = new Telerik.WinControls.UI.RadTextBox();
-            this.firstMarkerRangeRadLabel = new Telerik.WinControls.UI.RadLabel();
+            this.rangeRadLabel = new Telerik.WinControls.UI.RadLabel();
             this.markerPriorityRadTextBox = new Telerik.WinControls.UI.RadTextBox();
-            this.radLabel1 = new Telerik.WinControls.UI.RadLabel();
+            this.PriorityRadLabel = new Telerik.WinControls.UI.RadLabel();
             this.workingFrameRadCheckBox = new Telerik.WinControls.UI.RadCheckBox();
             this.saveRadButton = new Telerik.WinControls.UI.RadButton();
             this.vistaTheme = new Telerik.WinControls.Themes.VistaTheme();
             this.closeRadButton = new Telerik.WinControls.UI.RadButton();
             this.changeColorRadButton = new Telerik.WinControls.UI.RadButton();
             this.trackingRadColorDialog = new Telerik.WinControls.RadColorDialog();
+            this.outliningColorRadLabel = new Telerik.WinControls.UI.RadLabel();
+            this.outliningColorPictureBox = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.samplePictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.markerNameRadTextBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nameRadLabel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.markerRangeRadTextBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.firstMarkerRangeRadLabel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rangeRadLabel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.markerPriorityRadTextBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radLabel1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PriorityRadLabel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.workingFrameRadCheckBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.saveRadButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.closeRadButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.changeColorRadButton)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.outliningColorRadLabel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.outliningColorPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
             // 
@@ -64,12 +69,13 @@
             this.samplePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.samplePictureBox.TabIndex = 0;
             this.samplePictureBox.TabStop = false;
+            this.samplePictureBox.Click += new System.EventHandler(this.samplePictureBox_Click);
             // 
             // markerNameRadTextBox
             // 
             this.markerNameRadTextBox.Location = new System.Drawing.Point(133, 10);
             this.markerNameRadTextBox.Name = "markerNameRadTextBox";
-            this.markerNameRadTextBox.Size = new System.Drawing.Size(96, 20);
+            this.markerNameRadTextBox.Size = new System.Drawing.Size(115, 20);
             this.markerNameRadTextBox.TabIndex = 1;
             this.markerNameRadTextBox.TabStop = false;
             this.markerNameRadTextBox.Text = "ColorMarker";
@@ -86,7 +92,7 @@
             // 
             // markerRangeRadTextBox
             // 
-            this.markerRangeRadTextBox.Location = new System.Drawing.Point(197, 36);
+            this.markerRangeRadTextBox.Location = new System.Drawing.Point(133, 36);
             this.markerRangeRadTextBox.Name = "markerRangeRadTextBox";
             this.markerRangeRadTextBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.markerRangeRadTextBox.Size = new System.Drawing.Size(32, 20);
@@ -95,18 +101,18 @@
             this.markerRangeRadTextBox.Text = "20";
             this.markerRangeRadTextBox.ThemeName = "Vista";
             // 
-            // firstMarkerRangeRadLabel
+            // rangeRadLabel
             // 
-            this.firstMarkerRangeRadLabel.Location = new System.Drawing.Point(93, 36);
-            this.firstMarkerRangeRadLabel.Name = "firstMarkerRangeRadLabel";
-            this.firstMarkerRangeRadLabel.Size = new System.Drawing.Size(40, 16);
-            this.firstMarkerRangeRadLabel.TabIndex = 12;
-            this.firstMarkerRangeRadLabel.Text = "Range";
-            this.firstMarkerRangeRadLabel.ThemeName = "ControlDefault";
+            this.rangeRadLabel.Location = new System.Drawing.Point(93, 36);
+            this.rangeRadLabel.Name = "rangeRadLabel";
+            this.rangeRadLabel.Size = new System.Drawing.Size(40, 16);
+            this.rangeRadLabel.TabIndex = 12;
+            this.rangeRadLabel.Text = "Range";
+            this.rangeRadLabel.ThemeName = "ControlDefault";
             // 
             // markerPriorityRadTextBox
             // 
-            this.markerPriorityRadTextBox.Location = new System.Drawing.Point(197, 60);
+            this.markerPriorityRadTextBox.Location = new System.Drawing.Point(133, 60);
             this.markerPriorityRadTextBox.Name = "markerPriorityRadTextBox";
             this.markerPriorityRadTextBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.markerPriorityRadTextBox.Size = new System.Drawing.Size(32, 20);
@@ -116,18 +122,18 @@
             this.markerPriorityRadTextBox.ThemeName = "Vista";
             this.markerPriorityRadTextBox.TextChanged += new System.EventHandler(this.markerPriorityRadTextBox_TextChanged);
             // 
-            // radLabel1
+            // PriorityRadLabel
             // 
-            this.radLabel1.Location = new System.Drawing.Point(93, 60);
-            this.radLabel1.Name = "radLabel1";
-            this.radLabel1.Size = new System.Drawing.Size(42, 16);
-            this.radLabel1.TabIndex = 14;
-            this.radLabel1.Text = "Priority";
-            this.radLabel1.ThemeName = "ControlDefault";
+            this.PriorityRadLabel.Location = new System.Drawing.Point(93, 60);
+            this.PriorityRadLabel.Name = "PriorityRadLabel";
+            this.PriorityRadLabel.Size = new System.Drawing.Size(42, 16);
+            this.PriorityRadLabel.TabIndex = 14;
+            this.PriorityRadLabel.Text = "Priority";
+            this.PriorityRadLabel.ThemeName = "ControlDefault";
             // 
             // workingFrameRadCheckBox
             // 
-            this.workingFrameRadCheckBox.Location = new System.Drawing.Point(100, 93);
+            this.workingFrameRadCheckBox.Location = new System.Drawing.Point(100, 102);
             this.workingFrameRadCheckBox.Name = "workingFrameRadCheckBox";
             this.workingFrameRadCheckBox.Size = new System.Drawing.Size(119, 16);
             this.workingFrameRadCheckBox.TabIndex = 16;
@@ -170,25 +176,46 @@
             this.trackingRadColorDialog.SelectedColor = System.Drawing.Color.Red;
             this.trackingRadColorDialog.SelectedHslColor = Telerik.WinControls.HslColor.FromAhsl(0, 1, 1);
             // 
+            // outliningColorRadLabel
+            // 
+            this.outliningColorRadLabel.Location = new System.Drawing.Point(171, 36);
+            this.outliningColorRadLabel.Name = "outliningColorRadLabel";
+            this.outliningColorRadLabel.Size = new System.Drawing.Size(79, 16);
+            this.outliningColorRadLabel.TabIndex = 19;
+            this.outliningColorRadLabel.Text = "Outlining color";
+            // 
+            // outliningColorPictureBox
+            // 
+            this.outliningColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.outliningColorPictureBox.Location = new System.Drawing.Point(171, 60);
+            this.outliningColorPictureBox.Name = "outliningColorPictureBox";
+            this.outliningColorPictureBox.Size = new System.Drawing.Size(77, 20);
+            this.outliningColorPictureBox.TabIndex = 20;
+            this.outliningColorPictureBox.TabStop = false;
+            this.outliningColorPictureBox.Click += new System.EventHandler(this.outliningColorPictureBox_Click);
+            // 
             // EditMarkerForm
             // 
             this.AcceptButton = this.saveRadButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.closeRadButton;
-            this.ClientSize = new System.Drawing.Size(239, 154);
+            this.ClientSize = new System.Drawing.Size(253, 154);
+            this.Controls.Add(this.outliningColorPictureBox);
+            this.Controls.Add(this.outliningColorRadLabel);
             this.Controls.Add(this.changeColorRadButton);
             this.Controls.Add(this.closeRadButton);
             this.Controls.Add(this.saveRadButton);
             this.Controls.Add(this.workingFrameRadCheckBox);
             this.Controls.Add(this.markerPriorityRadTextBox);
-            this.Controls.Add(this.radLabel1);
+            this.Controls.Add(this.PriorityRadLabel);
             this.Controls.Add(this.markerRangeRadTextBox);
-            this.Controls.Add(this.firstMarkerRangeRadLabel);
+            this.Controls.Add(this.rangeRadLabel);
             this.Controls.Add(this.nameRadLabel);
             this.Controls.Add(this.markerNameRadTextBox);
             this.Controls.Add(this.samplePictureBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "EditMarkerForm";
             // 
@@ -202,13 +229,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.markerNameRadTextBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nameRadLabel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.markerRangeRadTextBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.firstMarkerRangeRadLabel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rangeRadLabel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.markerPriorityRadTextBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radLabel1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PriorityRadLabel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.workingFrameRadCheckBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.saveRadButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.closeRadButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.changeColorRadButton)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.outliningColorRadLabel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.outliningColorPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -221,8 +250,8 @@
         private Telerik.WinControls.UI.RadTextBox markerNameRadTextBox;
         private Telerik.WinControls.UI.RadLabel nameRadLabel;
         private Telerik.WinControls.UI.RadTextBox markerRangeRadTextBox;
-        private Telerik.WinControls.UI.RadLabel firstMarkerRangeRadLabel;
-        private Telerik.WinControls.UI.RadLabel radLabel1;
+        private Telerik.WinControls.UI.RadLabel rangeRadLabel;
+        private Telerik.WinControls.UI.RadLabel PriorityRadLabel;
         private Telerik.WinControls.UI.RadTextBox markerPriorityRadTextBox;
         private Telerik.WinControls.UI.RadCheckBox workingFrameRadCheckBox;
         private Telerik.WinControls.UI.RadButton saveRadButton;
@@ -230,5 +259,7 @@
         private Telerik.WinControls.UI.RadButton closeRadButton;
         private Telerik.WinControls.UI.RadButton changeColorRadButton;
         private Telerik.WinControls.RadColorDialog trackingRadColorDialog;
+        private Telerik.WinControls.UI.RadLabel outliningColorRadLabel;
+        private System.Windows.Forms.PictureBox outliningColorPictureBox;
     }
 }
