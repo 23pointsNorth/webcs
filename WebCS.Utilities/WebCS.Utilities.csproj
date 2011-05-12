@@ -49,9 +49,17 @@
   <ItemGroup>
     <Compile Include="BitmapDraw.cs" />
     <Compile Include="ColorExtention.cs" />
+    <Compile Include="MarkerSettings.cs" />
     <Compile Include="Mouse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryPerfCounter.cs" />
+    <Compile Include="SettingsBase.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Marker\Marker.csproj">
+      <Project>{7D52AF35-C940-4885-B6D3-44C0E442EABC}</Project>
+      <Name>Marker</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -15,6 +15,8 @@ using Microsoft.Win32;
 using Telerik.WinControls.Enumerations;
 using Telerik.WinControls.UI;
 using WebCS.Properties;
+using WebCS.Utilities;
+using System.IO;
 
 namespace WebCS
 {
@@ -29,11 +31,24 @@ namespace WebCS
                 new Bitmap(Constants.IMAGE_WIDTH, Constants.IMAGE_HEIGHT), "Webcam \nnot selected.");
             avaliableWebcamsDropDownList.Items.Add("Select Webcam");
 
+            InitializeSettings();
             LoadUserSettings();
             LoadAvaliableWebcams();
             LoadMarkers();
             LoadAtStartup();
             CheckEnabledTracking();
+        }
+
+        MarkerSettings settings = new MarkerSettings();
+
+        private void InitializeSettings()
+        {
+            string path = Path.Combine(Environment.CurrentDirectory, "Settings");
+            // Create folder if it doesn't already exist
+            if (!Directory.Exists(path))
+                Directory.CreateDirectory(path);
+
+            settings.SettingsPath = Path.Combine(path, "MarkerSettings.xml");
         }
 
         private void LoadUserSettings()
@@ -88,6 +103,9 @@ namespace WebCS
         }
         private void LoadMarkers()
         {
+            settings.Load();
+            markersList = settings.markersList;
+
             ColorMarker firstMarker;
             ColorMarker secondMarker;
             try
@@ -633,6 +651,9 @@ namespace WebCS
             User.Default.proximityClick = proximityClick;
             User.Default.useThreadPool = useThreadPool;
             User.Default.Save();
+
+            settings.markersList = markersList;
+            settings.Save();
         }
         private void cancelFirstMarkerRadButton_Click(object sender, EventArgs e)
         {

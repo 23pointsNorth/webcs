@@ -35,7 +35,7 @@
             this.markerRangeRadTextBox = new Telerik.WinControls.UI.RadTextBox();
             this.rangeRadLabel = new Telerik.WinControls.UI.RadLabel();
             this.markerPriorityRadTextBox = new Telerik.WinControls.UI.RadTextBox();
-            this.PriorityRadLabel = new Telerik.WinControls.UI.RadLabel();
+            this.priorityRadLabel = new Telerik.WinControls.UI.RadLabel();
             this.workingFrameRadCheckBox = new Telerik.WinControls.UI.RadCheckBox();
             this.saveRadButton = new Telerik.WinControls.UI.RadButton();
             this.vistaTheme = new Telerik.WinControls.Themes.VistaTheme();
@@ -50,7 +50,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.markerRangeRadTextBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rangeRadLabel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.markerPriorityRadTextBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PriorityRadLabel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.priorityRadLabel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.workingFrameRadCheckBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.saveRadButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.closeRadButton)).BeginInit();
@@ -122,14 +122,14 @@
             this.markerPriorityRadTextBox.ThemeName = "Vista";
             this.markerPriorityRadTextBox.TextChanged += new System.EventHandler(this.markerPriorityRadTextBox_TextChanged);
             // 
-            // PriorityRadLabel
+            // priorityRadLabel
             // 
-            this.PriorityRadLabel.Location = new System.Drawing.Point(93, 60);
-            this.PriorityRadLabel.Name = "PriorityRadLabel";
-            this.PriorityRadLabel.Size = new System.Drawing.Size(42, 16);
-            this.PriorityRadLabel.TabIndex = 14;
-            this.PriorityRadLabel.Text = "Priority";
-            this.PriorityRadLabel.ThemeName = "ControlDefault";
+            this.priorityRadLabel.Location = new System.Drawing.Point(93, 60);
+            this.priorityRadLabel.Name = "priorityRadLabel";
+            this.priorityRadLabel.Size = new System.Drawing.Size(42, 16);
+            this.priorityRadLabel.TabIndex = 14;
+            this.priorityRadLabel.Text = "Priority";
+            this.priorityRadLabel.ThemeName = "ControlDefault";
             // 
             // workingFrameRadCheckBox
             // 
@@ -208,7 +208,7 @@
             this.Controls.Add(this.saveRadButton);
             this.Controls.Add(this.workingFrameRadCheckBox);
             this.Controls.Add(this.markerPriorityRadTextBox);
-            this.Controls.Add(this.PriorityRadLabel);
+            this.Controls.Add(this.priorityRadLabel);
             this.Controls.Add(this.markerRangeRadTextBox);
             this.Controls.Add(this.rangeRadLabel);
             this.Controls.Add(this.nameRadLabel);
@@ -231,7 +231,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.markerRangeRadTextBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rangeRadLabel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.markerPriorityRadTextBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PriorityRadLabel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.priorityRadLabel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.workingFrameRadCheckBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.saveRadButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.closeRadButton)).EndInit();
@@ -251,7 +251,7 @@
         private Telerik.WinControls.UI.RadLabel nameRadLabel;
         private Telerik.WinControls.UI.RadTextBox markerRangeRadTextBox;
         private Telerik.WinControls.UI.RadLabel rangeRadLabel;
-        private Telerik.WinControls.UI.RadLabel PriorityRadLabel;
+        private Telerik.WinControls.UI.RadLabel priorityRadLabel;
         private Telerik.WinControls.UI.RadTextBox markerPriorityRadTextBox;
         private Telerik.WinControls.UI.RadCheckBox workingFrameRadCheckBox;
         private Telerik.WinControls.UI.RadButton saveRadButton;
