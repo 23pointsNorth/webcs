@@ -384,7 +384,7 @@
             // 
             // saveOptionsRadButton
             // 
-            this.saveOptionsRadButton.Location = new System.Drawing.Point(133, 306);
+            this.saveOptionsRadButton.Location = new System.Drawing.Point(12, 214);
             this.saveOptionsRadButton.Name = "saveOptionsRadButton";
             this.saveOptionsRadButton.Size = new System.Drawing.Size(105, 25);
             this.saveOptionsRadButton.TabIndex = 23;

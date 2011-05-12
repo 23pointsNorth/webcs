@@ -9,6 +9,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Marker", "Marker\Marker.csproj", "{7D52AF35-C940-4885-B6D3-44C0E442EABC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebCS.Utilities", "WebCS.Utilities\WebCS.Utilities.csproj", "{A2EA5A08-2A3A-4557-936C-54551D47CD64}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7D52AF35-C940-4885-B6D3-44C0E442EABC} = {7D52AF35-C940-4885-B6D3-44C0E442EABC}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

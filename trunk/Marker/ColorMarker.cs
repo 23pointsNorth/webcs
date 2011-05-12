@@ -63,6 +63,16 @@ namespace Marker
 
         }
 
+        public static bool TryParse(string fullStringInfo, out ColorMarker convertedMarker)
+        {
+            bool isSuccessful = false;
+            convertedMarker = new ColorMarker("ColorMarker", int.MaxValue);
+            throw new NotImplementedException();
+            //remove brackets;
+            //split string by the ";" if not correct number - > throw an exception
+            //for each string -> put it in the correct property
+            return isSuccessful;
+        }
         public void ChangeColor(Color newColor)
         {
             color = newColor;
@@ -160,6 +170,19 @@ namespace Marker
             }
             frame.UnlockBits(ObjectsData);
             leftOvers[markerNumber] = frame;
+        }
+
+        public override string ToString()
+        {
+            return
+                @"{" + this.markerName + ";" + this.priority.ToString() + ";" +
+                "(" + this.color.R.ToString() + "," + this.color.B.ToString() + "," + 
+                this.color.G.ToString() + ")" + ";" + this.range.ToString() + ";" +
+                "(" + this.foundMarkerRectC.R.ToString() + "," + 
+                this.foundMarkerRectC.B.ToString() + "," + 
+                this.foundMarkerRectC.G.ToString() + ")" + ";" + 
+                this.lowerLimit.ToString() + ";" +
+                this.upperLimit.ToString() + "}";
         }
     }
 }
