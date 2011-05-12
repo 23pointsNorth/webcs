@@ -5,6 +5,7 @@ using System.Text;
 using System.Security.Cryptography;
 using System.Xml;
 using Marker;
+using System.IO;
 
 namespace WebCS.Utilities
 {
@@ -125,16 +126,13 @@ namespace WebCS.Utilities
         }
 
         /// <summary>
-        /// Writes a MarkerList
+        /// Writes a ColorMarker
         /// </summary>
         /// <param name="key"></param>
         /// <param name="value"></param>
-        public void Write(string key, List<ColorMarker> value)
+        public void Write(string key, ColorMarker value)
         {
-            foreach (var marker in value)
-            {
-                WriteNodeValue(key, marker);
-            }
+            WriteNodeValue(key, value);
         }
 
         /// <summary>
@@ -167,7 +165,18 @@ namespace WebCS.Utilities
         /// <param name="filename"></param>
         public void Load(string filename)
         {
-            _doc.Load(filename);
+            try
+            {
+                _doc.Load(filename);
+            }
+            catch (FileNotFoundException)
+            {
+                _doc = new XmlDocument();
+                // Initialize settings document
+                _doc.AppendChild(_doc.CreateNode(XmlNodeType.XmlDeclaration, null, null));
+                _doc.AppendChild(_doc.CreateElement("Settings"));
+                _doc.Save(filename);
+            }
         }
 
         /// <summary>

@@ -37,54 +37,6 @@ namespace WebCS.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Black")]
-        public global::System.Drawing.Color firstMarkerColorUser {
-            get {
-                return ((global::System.Drawing.Color)(this["firstMarkerColorUser"]));
-            }
-            set {
-                this["firstMarkerColorUser"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Black")]
-        public global::System.Drawing.Color secondMarkerColorUser {
-            get {
-                return ((global::System.Drawing.Color)(this["secondMarkerColorUser"]));
-            }
-            set {
-                this["secondMarkerColorUser"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("20")]
-        public short firstMarkerRangeUser {
-            get {
-                return ((short)(this["firstMarkerRangeUser"]));
-            }
-            set {
-                this["firstMarkerRangeUser"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("20")]
-        public short secondMarkerRangeUser {
-            get {
-                return ((short)(this["secondMarkerRangeUser"]));
-            }
-            set {
-                this["secondMarkerRangeUser"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool applyMedianFilter {
             get {

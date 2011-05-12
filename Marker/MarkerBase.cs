@@ -18,11 +18,13 @@ namespace Marker
             set { if (value > 0) maxNumberOfMarkers = value; }
         }
 
+        public MarkerBase() { }
+
         public MarkerBase(string name, int markerPriority)
         {
             if (nextMarkerNumber < maxNumberOfMarkers)
             {
-                if (!takenPriorities.Contains(priority))
+                if (!takenPriorities.Contains(markerPriority))
                 {
                     priority = markerPriority;
                     takenPriorities.Add(priority);

@@ -12,12 +12,9 @@ namespace Marker
     {
         Color color;
         short range;
-        bool isColorChange = false;
         bool isFound = false;
         Rectangle rect;
-        Rectangle getColorRect;
         Color foundMarkerRectC;
-        Color changeColorRectC;
 
         const int MIN_BLOB_HEIGHT = 10;
         const int MIN_BLOB_WIDTH = 10;
@@ -36,24 +33,19 @@ namespace Marker
         
         public Color Color { get { return color; } }
         public short Range { get { return range; } }
-        public bool IsColorChange { get { return isColorChange; } set { isColorChange = value; } }
         public bool IsFound { get { return isFound; } }
         public Rectangle Rect { get { return rect; } }
-        public Rectangle GetColorRect { get { return getColorRect; } }
         public Color FoundMarkerRectC
         {
             set { foundMarkerRectC = value; }
             get { return foundMarkerRectC; }
         }
-       /*unneeded*/ public Color ChangeColorRectC { get { return changeColorRectC; } }
 
-        public ColorMarker(string name,int priority ,Color colorValue, short rangeValue, Color foundMarkerRectColor, Rectangle getColorRectValue, Color changeColorRect, short lowerLimitValue, short upperLimitValue) : base(name, priority)
+        public ColorMarker(string name,int priority ,Color colorValue, short rangeValue, Color foundMarkerRectColor, short lowerLimitValue, short upperLimitValue) : base(name, priority)
         {
             this.color = colorValue;
             this.range = rangeValue;
             this.foundMarkerRectC = foundMarkerRectColor;
-            this.getColorRect = getColorRectValue;
-            this.changeColorRectC = changeColorRect;
             this.lowerLimit = lowerLimitValue;
             this.upperLimit = upperLimitValue;
         }
@@ -62,15 +54,44 @@ namespace Marker
         {
 
         }
+        public ColorMarker() { }
 
         public static bool TryParse(string fullStringInfo, out ColorMarker convertedMarker)
         {
+            int numberOfParameters = 7;
             bool isSuccessful = false;
-            convertedMarker = new ColorMarker("ColorMarker", int.MaxValue);
-            throw new NotImplementedException();
-            //remove brackets;
-            //split string by the ";" if not correct number - > throw an exception
-            //for each string -> put it in the correct property
+            convertedMarker = new ColorMarker();
+            if (fullStringInfo == null) { 
+                //throw new ArgumentException("Parsed string is null");
+                return isSuccessful;
+            }
+            try
+            {
+                if ((!fullStringInfo.StartsWith("{")) || (!fullStringInfo.EndsWith("}"))) 
+                { 
+                    throw new FormatException("No {} brackets were found."); 
+                }
+                string stringInfo = fullStringInfo.Substring(1, fullStringInfo.Length - 2);
+                string[] parameters = stringInfo.Split(';');
+                if (parameters.Length != numberOfParameters)
+                {
+                    throw new FormatException("Not all parameters found."); 
+                }
+                string newMarkerName = parameters[0];
+                int newMarkerPriority = int.Parse(parameters[1]);
+                convertedMarker = new ColorMarker(newMarkerName, newMarkerPriority);
+                convertedMarker.color = Color.FromArgb(int.Parse(parameters[2]));
+                convertedMarker.range = short.Parse(parameters[3]);
+                convertedMarker.foundMarkerRectC = Color.FromArgb(int.Parse(parameters[4]));
+                convertedMarker.lowerLimit = short.Parse(parameters[5]);
+                convertedMarker.upperLimit = short.Parse(parameters[6]);
+                //add other params
+                isSuccessful = true;
+            }
+            catch (FormatException)
+            {
+                return isSuccessful;
+            }
             return isSuccessful;
         }
         public void ChangeColor(Color newColor)
@@ -78,15 +99,8 @@ namespace Marker
             color = newColor;
         }
 
-        public void ChangeColor(Bitmap frame)
-        {
-            ChangeColor(frame, this.getColorRect);
-        }
-
         public void ChangeColor(Bitmap frame, Rectangle rect)
         {
-            isColorChange = false;
-
             //get rectangle info; 
             Bitmap sample;
             lock (frame)
@@ -176,11 +190,8 @@ namespace Marker
         {
             return
                 @"{" + this.markerName + ";" + this.priority.ToString() + ";" +
-                "(" + this.color.R.ToString() + "," + this.color.B.ToString() + "," + 
-                this.color.G.ToString() + ")" + ";" + this.range.ToString() + ";" +
-                "(" + this.foundMarkerRectC.R.ToString() + "," + 
-                this.foundMarkerRectC.B.ToString() + "," + 
-                this.foundMarkerRectC.G.ToString() + ")" + ";" + 
+                this.color.ToArgb().ToString()+ ";" + this.range.ToString() + ";" +
+                this.foundMarkerRectC.ToArgb().ToString()+ ";" + 
                 this.lowerLimit.ToString() + ";" +
                 this.upperLimit.ToString() + "}";
         }
