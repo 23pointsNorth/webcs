@@ -16,14 +16,19 @@ namespace WebCS.Utilities
             int count = reader.Read("MarkerCount", 0);
             for (int i = 0; i < count; i++)
             {
-                markersList.Add(reader.Read("Marker", new ColorMarker("EmptyMarker", int.MaxValue)));
+                markersList.Add(reader.Read(
+                    "Marker" + i.ToString(), new ColorMarker()));
             }
         }
 
         public override void WriteSettings(UserSettingsWriter writer)
         {
-            writer.Write("MarkerCout", markersList.Count);
-            writer.Write("Marker",markersList);
+            writer.Write("MarkerCount", markersList.Count);
+            for (int i = 0; i < markersList.Count; i++)
+            {
+                writer.Write("Marker" + i.ToString(), markersList[i]);
+            }
+
         }
     }
 }

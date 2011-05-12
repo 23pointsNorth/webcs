@@ -5,18 +5,6 @@
     <Setting Name="loadWebcamName" Type="System.String" Scope="User">
       <Value Profile="(Default)">Select Webcam</Value>
     </Setting>
-    <Setting Name="firstMarkerColorUser" Type="System.Drawing.Color" Scope="User">
-      <Value Profile="(Default)">Black</Value>
-    </Setting>
-    <Setting Name="secondMarkerColorUser" Type="System.Drawing.Color" Scope="User">
-      <Value Profile="(Default)">Black</Value>
-    </Setting>
-    <Setting Name="firstMarkerRangeUser" Type="System.Int16" Scope="User">
-      <Value Profile="(Default)">20</Value>
-    </Setting>
-    <Setting Name="secondMarkerRangeUser" Type="System.Int16" Scope="User">
-      <Value Profile="(Default)">20</Value>
-    </Setting>
     <Setting Name="applyMedianFilter" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>

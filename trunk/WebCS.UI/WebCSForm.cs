@@ -39,7 +39,7 @@ namespace WebCS
             CheckEnabledTracking();
         }
 
-        MarkerSettings settings = new MarkerSettings();
+        MarkerSettings settings;
 
         private void InitializeSettings()
         {
@@ -47,8 +47,9 @@ namespace WebCS
             // Create folder if it doesn't already exist
             if (!Directory.Exists(path))
                 Directory.CreateDirectory(path);
-
+            settings = new MarkerSettings();
             settings.SettingsPath = Path.Combine(path, "MarkerSettings.xml");
+            //settings.Save();
         }
 
         private void LoadUserSettings()
@@ -105,72 +106,8 @@ namespace WebCS
         {
             settings.Load();
             markersList = settings.markersList;
-
-            ColorMarker firstMarker;
-            ColorMarker secondMarker;
-            try
-            {
-                firstMarker = new ColorMarker(
-                    "Primary Marker", 1,
-                    User.Default.firstMarkerColorUser,
-                    User.Default.firstMarkerRangeUser,
-                    Color.Green, new Rectangle(
-                        Constants.IMAGE_WIDTH / 2 - 25,
-                        Constants.IMAGE_HEIGHT / 2 - 25, 30, 30),
-                    Color.LightGreen, 0, 255);
-
-                secondMarker = new ColorMarker(
-                    "Secondary Marker", 2,
-                    User.Default.secondMarkerColorUser,
-                    User.Default.secondMarkerRangeUser,
-                    Color.Blue, new Rectangle(
-                        Constants.IMAGE_WIDTH / 2 + 15,
-                        Constants.IMAGE_HEIGHT / 2 + 15, 30, 30),
-                    Color.LightBlue, 0, 255);
-
-                //firstMarkerRangeRadTextBox.Text = User.Default.firstMarkerRangeUser.ToString();
-                //secondMarkerRangeRadTextBox.Text = User.Default.secondMarkerRangeUser.ToString();
-                markersList.Add(firstMarker);
-                markersList.Add(secondMarker);
-                ColorMarker.IndexMarker = new ColorMarker._index((ushort)markersList.IndexOf(firstMarker), (ushort)markersList.IndexOf(secondMarker));
-            
-            }
-            catch (OverflowException e)
-            {
-                userRadLabel.Text = e.Message;
-            }
-            catch
-            {
-                //default 
-                firstMarker = new ColorMarker(
-                    "Primary Marker", 1,
-                    ColorMarker.emptyColor,
-                    20,
-                    Color.Green, new Rectangle(
-                        Constants.IMAGE_WIDTH / 2 - 25,
-                        Constants.IMAGE_HEIGHT / 2 - 25, 30, 30),
-                    Color.LightBlue, 0, 255);
-                secondMarker = new ColorMarker(
-                    "Secondary Marker", 2,
-                    ColorMarker.emptyColor,
-                    20,
-                    Color.Blue, new Rectangle(
-                        Constants.IMAGE_WIDTH / 2 + 15,
-                        Constants.IMAGE_HEIGHT / 2 + 15, 30, 30),
-                    Color.LightBlue, 0, 255);
-                //firstMarkerRangeRadTextBox.Text = "20";
-                //secondMarkerRangeRadTextBox.Text = "20";
-                markersList.Add(firstMarker);
-                markersList.Add(secondMarker);
-                ColorMarker.IndexMarker = new ColorMarker._index((ushort)markersList.IndexOf(firstMarker), (ushort)markersList.IndexOf(secondMarker));
-            }
-
+            ColorMarker.IndexMarker = new ColorMarker._index(0, 1);
             UpdateMarkersList();
-
-            //firstMarkerSample.Image = BitmapDraw.FilledRectangle(
-            //    firstMarkerSample.Width, firstMarkerSample.Height, markersList[ColorMarker.IndexMarker.Primary].Color);
-            //secondMarkerSample.Image = BitmapDraw.FilledRectangle(
-            //    secondMarkerSample.Width, secondMarkerSample.Height, markersList[ColorMarker.IndexMarker.Secondary].Color);
         }
 
         private FilterInfoCollection videoCaptureDevices;
@@ -328,6 +265,7 @@ namespace WebCS
                     {
                         markersList[m].ThreadCalculateMarker(new Bitmap(newFrame));
                     }
+                    //@Importnat if any instance of ColorMarker is not used, then [delay] until all are checked - nextMarkerNumber 
                     WaitHandle.WaitAll(ColorMarker.doneEvents.ToArray());
                 }
                 else
@@ -337,7 +275,6 @@ namespace WebCS
                     {
                         markersList[m].CalculateMarker(new Bitmap(newFrame));
                     }
-
                 }
 
                 for (int m = 0; m < markersList.Count; m++)
@@ -374,16 +311,6 @@ namespace WebCS
                     newFrame = MarkerBase.leftOvers[ColorMarker.IndexMarker.Secondary];
                 }
             }
-            //under-the-hood options
-            if (markersList[ColorMarker.IndexMarker.Primary].IsColorChange)
-            {
-                rectDictionary.Add(markersList[ColorMarker.IndexMarker.Primary].GetColorRect, markersList[ColorMarker.IndexMarker.Primary].ChangeColorRectC);
-            }
-
-            if (markersList[ColorMarker.IndexMarker.Secondary].IsColorChange)
-            {
-                rectDictionary.Add(markersList[ColorMarker.IndexMarker.Secondary].GetColorRect, markersList[ColorMarker.IndexMarker.Secondary].ChangeColorRectC);
-            }
 
             if (areDesktopBounriesVisible)
             {
@@ -391,21 +318,24 @@ namespace WebCS
             }
 
             BitmapDraw.Rectangle(newFrame, rectDictionary);
-            //drawing a line connecting the centers of both markers
-            if (connectCenters && markersList[ColorMarker.IndexMarker.Primary].IsFound && markersList[ColorMarker.IndexMarker.Secondary].IsFound && isTrackingEnabled)
+            if (markersList.Count >= 2)
             {
-                Color drawColor = (softwareCursor.IsMouseDown) ? Color.Firebrick : Color.DarkGreen;
-                
-                Point lineCenter = new Point(
-                    (softwareCursor.MousePoint.X + softwareCursor.PressurePoint.X) / 2,
-                    (softwareCursor.MousePoint.Y + softwareCursor.PressurePoint.Y) / 2);
-                
-                using (Graphics g = Graphics.FromImage(newFrame))
+                //drawing a line connecting the centers of both markers
+                if (connectCenters && markersList[ColorMarker.IndexMarker.Primary].IsFound && markersList[ColorMarker.IndexMarker.Secondary].IsFound && isTrackingEnabled)
                 {
-                    g.DrawLine(new Pen(drawColor, 2), 
-                        softwareCursor.MousePoint, softwareCursor.PressurePoint);
-                    g.DrawString(softwareCursor.Proximity.ToString(), new Font("Arial", 10), 
-                        new SolidBrush(drawColor), lineCenter);
+                    Color drawColor = (softwareCursor.IsMouseDown) ? Color.Firebrick : Color.DarkGreen;
+
+                    Point lineCenter = new Point(
+                        (softwareCursor.MousePoint.X + softwareCursor.PressurePoint.X) / 2,
+                        (softwareCursor.MousePoint.Y + softwareCursor.PressurePoint.Y) / 2);
+
+                    using (Graphics g = Graphics.FromImage(newFrame))
+                    {
+                        g.DrawLine(new Pen(drawColor, 2),
+                            softwareCursor.MousePoint, softwareCursor.PressurePoint);
+                        g.DrawString(softwareCursor.Proximity.ToString(), new Font("Arial", 10),
+                            new SolidBrush(drawColor), lineCenter);
+                    }
                 }
             }
             if (fpsTimer.IsRunning)
@@ -466,8 +396,6 @@ namespace WebCS
                 avaliableWebcamsDropDownList.Enabled = false;
                 webcamOptionsRadButton.Enabled = true;
                 addMarkerRadDropDownButton.Enabled = true;
-                //firstMarkerChangeRadButton.Enabled = true;
-                //secondMarkerChangeRadButton.Enabled = true;
 
                 try
                 {
@@ -482,8 +410,6 @@ namespace WebCS
                         Constants.DESIRED_FRAME_WIDTH, Constants.DESIRED_FRAME_HEIGHT);
                     finalVideoSource.DesiredFrameRate = Constants.DESIRED_FRAME_RATE;
                     finalVideoSource.Start();
-
-                    //finalVideoSource.DisplayPropertyPage(new IntPtr());
                 }
                 finally
                 {
@@ -502,13 +428,8 @@ namespace WebCS
                 avaliableWebcamsDropDownList.Enabled = true;
                 avaliableWebcamsDropDownList_SelectedIndexChanged(null, null);
 
-                //firstMarkerChangeRadButton.Enabled = false;
                 addMarkerRadDropDownButton.Enabled = false;
-                //secondMarkerChangeRadButton.Enabled = false;
                 webcamOptionsRadButton.Enabled = false;
-
-                markersList[ColorMarker.IndexMarker.Primary].IsColorChange = false;
-                markersList[ColorMarker.IndexMarker.Secondary].IsColorChange = false;
 
                 timeOut.Stop();
                 timeOut.Enabled = false;
@@ -529,66 +450,6 @@ namespace WebCS
                 imageContainer.Image = BitmapDraw.WriteString(
                 new Bitmap(Constants.IMAGE_WIDTH, Constants.IMAGE_HEIGHT), "Webcam \nnot selected.");
             }
-        }
-
-        private void firstMarkerChangeRadButton_Click(object sender, EventArgs e)
-        {
-            if (!markersList[ColorMarker.IndexMarker.Primary].IsColorChange)
-            {
-                noLoadRadRadioButton.IsChecked = true;
-                markersList[ColorMarker.IndexMarker.Primary].IsColorChange = true;
-            }
-            else
-            {
-                if (finalVideoSource.FramesReceived > 0) // if not running - no frame - no color
-                {
-                    try
-                    {
-
-                        markersList[ColorMarker.IndexMarker.Primary].IsColorChange = false;
-                        markersList[ColorMarker.IndexMarker.Primary].ChangeColor(newFrame);
-                        //firstMarkerSample.Image = BitmapDraw.FilledRectangle(
-                        //    firstMarkerSample.Width, 
-                        //    firstMarkerSample.Height,
-                        //    markersList[ColorMarker.IndexMarker.Primary].Color);
-                    }
-                    catch
-                    {
-                        //firstMarkerChangeRadButton.PerformClick();
-                    }
-                }
-            }
-
-            CheckEnabledTracking();
-        }
-        private void secondMarkerChangeRadButton_Click(object sender, EventArgs e)
-        {
-            if (!markersList[ColorMarker.IndexMarker.Secondary].IsColorChange)
-            {
-                noLoadRadRadioButton.IsChecked = true;
-                markersList[ColorMarker.IndexMarker.Secondary].IsColorChange = true;
-            }
-            else
-            {
-                if (finalVideoSource.FramesReceived > 0)
-                {
-                    try
-                    {
-                        markersList[ColorMarker.IndexMarker.Secondary].IsColorChange = false;
-                        markersList[ColorMarker.IndexMarker.Secondary].ChangeColor(newFrame);
-                        //secondMarkerSample.Image = BitmapDraw.FilledRectangle(
-                        //    secondMarkerSample.Width, 
-                        //    secondMarkerSample.Height,
-                        //    markersList[ColorMarker.IndexMarker.Secondary].Color);
-                    }
-                    catch
-                    {
-                        //secondMarkerChangeRadButton.PerformClick();
-                    }
-                }
-            }
-
-            CheckEnabledTracking();
         }
         private void systemTrayIcon_MouseDoubleClick(object sender, MouseEventArgs e)
         {
@@ -629,18 +490,18 @@ namespace WebCS
         }
         private void CheckEnabledTracking()
         {
-            this.trackingToggleButton.Enabled = (
-                !markersList[ColorMarker.IndexMarker.Primary].Color.Equals(ColorMarker.emptyColor) &&
-                !markersList[ColorMarker.IndexMarker.Secondary].Color.Equals(ColorMarker.emptyColor) &&
-                isVideoRunning);
+            bool state = false;
+            if (markersList.Count >= 2)
+            {
+                state = (!markersList[ColorMarker.IndexMarker.Primary].Color.Equals(ColorMarker.emptyColor) &&
+                    !markersList[ColorMarker.IndexMarker.Secondary].Color.Equals(ColorMarker.emptyColor) &&
+                    isVideoRunning);
+            }
+            this.trackingToggleButton.Enabled = state;
         }
         private void saveOptionsRadButton_Click(object sender, EventArgs e)
         {
             User.Default.loadWebcamName = avaliableWebcamsDropDownList.SelectedText;
-            User.Default.firstMarkerColorUser = markersList[ColorMarker.IndexMarker.Primary].Color;
-            User.Default.firstMarkerRangeUser = markersList[ColorMarker.IndexMarker.Primary].Range;
-            User.Default.secondMarkerColorUser = markersList[ColorMarker.IndexMarker.Secondary].Color;
-            User.Default.secondMarkerRangeUser = markersList[ColorMarker.IndexMarker.Secondary].Range;
             User.Default.applyMedianFilter = applyMedianFilter;
             User.Default.applyMeanFilter = applyMeanFilter;
             User.Default.desktopAreaBoundriesRectangle = desktopBoundries;
@@ -654,14 +515,6 @@ namespace WebCS
 
             settings.markersList = markersList;
             settings.Save();
-        }
-        private void cancelFirstMarkerRadButton_Click(object sender, EventArgs e)
-        {
-            markersList[ColorMarker.IndexMarker.Primary].IsColorChange = false;
-        }
-        private void cancelSecondMarkerRadButton_Click(object sender, EventArgs e)
-        {
-            markersList[ColorMarker.IndexMarker.Secondary].IsColorChange = false;
         }
         private void webcamsMenuStrip_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
@@ -732,23 +585,6 @@ namespace WebCS
         private void enableClickingRadCheckBox_ToggleStateChanged(object sender, StateChangedEventArgs args)
         {
             isClickingEnabled = enableClickingRadCheckBox.Checked;
-        }
-
-        private void firstMarkerRangeRadTextBox_TextChanged(object sender, EventArgs e)
-        {
-            if (markersList.Count > 0)
-            {
-                //markersList[ColorMarker.IndexMarker.Primary].ChangeRange(firstMarkerRangeRadTextBox.Text);
-                //firstMarkerRangeRadTextBox.Text = markersList[ColorMarker.IndexMarker.Primary].Range.ToString();
-            }
-        }
-        private void secondMarkerRangeRadTextBox_TextChanged(object sender, EventArgs e)
-        {
-            if (markersList.Count > 0)
-            {
-                //markersList[ColorMarker.IndexMarker.Secondary].ChangeRange(secondMarkerRangeRadTextBox.Text);
-                //secondMarkerRangeRadTextBox.Text = markersList[ColorMarker.IndexMarker.Secondary].Range.ToString();
-            }
         }
 
         bool connectCenters;
@@ -840,6 +676,7 @@ namespace WebCS
             {
                 markerRadListControl.Items.Add(marker.Name + " " + marker.Priority.ToString());
             }
+            CheckEnabledTracking();
         }
 
         public Bitmap ReturnFrame()
