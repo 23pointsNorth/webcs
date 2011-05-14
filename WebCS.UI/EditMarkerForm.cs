@@ -52,20 +52,6 @@ namespace WebCS
             outliningColorPictureBox.Image = BitmapDraw.FilledRectangle(
                 outliningColorPictureBox.Width,outliningColorPictureBox.Height,
                 markers[index].FoundMarkerRectC);
-
-            noneRadRadioButton.IsChecked = false;
-            if (ColorMarker.IndexMarker.Primary == index) primaryRadRadioButton.IsChecked = true;
-            else
-            {
-                primaryRadRadioButton.IsChecked = false;
-                if (ColorMarker.IndexMarker.Secondary == index) secondaryRadRadioButton.IsChecked = true;
-                else
-                {
-                    secondaryRadRadioButton.IsChecked = false;
-                    noneRadRadioButton.IsChecked = true;
-                }
-            }
-
         }
 
         private void CloseRadButton_Click(object sender, EventArgs e)
@@ -142,7 +128,6 @@ namespace WebCS
             samplePictureBox.Image = BitmapDraw.FilledRectangle(
                 samplePictureBox.Width, samplePictureBox.Height, markers[index].Color);
         }
-
 
         //public EditMarkerForm(ref List<FeatureMarker> markerList, int index)
         //{
