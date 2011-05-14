@@ -19,14 +19,6 @@ namespace Marker
         const int MIN_BLOB_HEIGHT = 10;
         const int MIN_BLOB_WIDTH = 10;
 
-        public struct _index{
-            public ushort Primary;
-            public ushort Secondary;
-            public _index(ushort p, ushort s) { this.Primary = p; this.Secondary = s; }
-        }
-
-        public static _index IndexMarker = new _index(0, 1);
-
         private short lowerLimit = 0;
         private short upperLimit = 255;
         public static Color emptyColor = Color.FromArgb(0, 0, 0);

@@ -105,7 +105,6 @@ namespace WebCS
         {
             settings.Load();
             markersList = settings.markersList;
-            ColorMarker.IndexMarker = new ColorMarker._index(0, 1);
             UpdateMarkersList();
         }
 
@@ -285,12 +284,12 @@ namespace WebCS
                     }
                 }
 
-                softwareCursor.CalculateNewPosition(markersList[ColorMarker.IndexMarker.Primary].Rect, markersList[ColorMarker.IndexMarker.Secondary].Rect);
-                if (markersList[ColorMarker.IndexMarker.Primary].IsFound)
+                softwareCursor.CalculateNewPosition(markersList[MarkerBase.takenPriorities[0]].Rect, markersList[MarkerBase.takenPriorities[1]].Rect);
+                if (markersList[MarkerBase.takenPriorities[0]].IsFound)
                 {
                     if (firstMarkerLoadRadRadioButton.IsChecked)
                     {
-                        newFrame = MarkerBase.leftOvers[ColorMarker.IndexMarker.Primary];
+                        newFrame = MarkerBase.leftOvers[MarkerBase.takenPriorities[0]];
                     }
                     //when the position of the marker is known, 
                     //the curson can be moved to the pre calc position, otherwise do nothing
@@ -298,16 +297,16 @@ namespace WebCS
                     {
                         softwareCursor.SetNewPosition();
                     }
-                    if (isClickingEnabled && markersList[ColorMarker.IndexMarker.Secondary].IsFound)
+                    if (isClickingEnabled && markersList[MarkerBase.takenPriorities[1]].IsFound)
                     {
                         //You only click when the mouse is enabled and when both markers are found
                         softwareCursor.Click();
                     }
                 }
-                if (markersList[ColorMarker.IndexMarker.Secondary].IsFound && 
+                if (markersList[MarkerBase.takenPriorities[1]].IsFound && 
                     secondMarkerLoadRadRadioButton.IsChecked)
                 {
-                    newFrame = MarkerBase.leftOvers[ColorMarker.IndexMarker.Secondary];
+                    newFrame = MarkerBase.leftOvers[MarkerBase.takenPriorities[1]];
                 }
             }
 
@@ -320,7 +319,7 @@ namespace WebCS
             if (markersList.Count >= 2)
             {
                 //drawing a line connecting the centers of both markers
-                if (connectCenters && markersList[ColorMarker.IndexMarker.Primary].IsFound && markersList[ColorMarker.IndexMarker.Secondary].IsFound && isTrackingEnabled)
+                if (connectCenters && markersList[MarkerBase.takenPriorities[0]].IsFound && markersList[MarkerBase.takenPriorities[1]].IsFound && isTrackingEnabled)
                 {
                     Color drawColor = (softwareCursor.IsMouseDown) ? Color.Firebrick : Color.DarkGreen;
 
@@ -492,8 +491,8 @@ namespace WebCS
             bool state = false;
             if (markersList.Count >= 2)
             {
-                state = (!markersList[ColorMarker.IndexMarker.Primary].Color.Equals(ColorMarker.emptyColor) &&
-                    !markersList[ColorMarker.IndexMarker.Secondary].Color.Equals(ColorMarker.emptyColor) &&
+                state = (!markersList[MarkerBase.takenPriorities[0]].Color.Equals(ColorMarker.emptyColor) &&
+                    !markersList[MarkerBase.takenPriorities[1]].Color.Equals(ColorMarker.emptyColor) &&
                     isVideoRunning);
             }
             this.trackingToggleButton.Enabled = state;
@@ -675,6 +674,7 @@ namespace WebCS
             {
                 markerRadListControl.Items.Add(marker.Name + " " + marker.Priority.ToString());
             }
+            MarkerBase.takenPriorities.Sort();
             CheckEnabledTracking();
         }
 
