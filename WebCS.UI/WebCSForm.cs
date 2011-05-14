@@ -49,7 +49,6 @@ namespace WebCS
                 Directory.CreateDirectory(path);
             settings = new MarkerSettings();
             settings.SettingsPath = Path.Combine(path, "MarkerSettings.xml");
-            //settings.Save();
         }
 
         private void LoadUserSettings()
