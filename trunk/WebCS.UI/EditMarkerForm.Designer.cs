@@ -44,6 +44,9 @@
             this.trackingRadColorDialog = new Telerik.WinControls.RadColorDialog();
             this.outliningColorRadLabel = new Telerik.WinControls.UI.RadLabel();
             this.outliningColorPictureBox = new System.Windows.Forms.PictureBox();
+            this.primaryRadRadioButton = new Telerik.WinControls.UI.RadRadioButton();
+            this.secondaryRadRadioButton = new Telerik.WinControls.UI.RadRadioButton();
+            this.noneRadRadioButton = new Telerik.WinControls.UI.RadRadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.samplePictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.markerNameRadTextBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nameRadLabel)).BeginInit();
@@ -57,6 +60,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.changeColorRadButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.outliningColorRadLabel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.outliningColorPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.primaryRadRadioButton)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.secondaryRadRadioButton)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.noneRadRadioButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
             // 
@@ -133,7 +139,7 @@
             // 
             // workingFrameRadCheckBox
             // 
-            this.workingFrameRadCheckBox.Location = new System.Drawing.Point(100, 102);
+            this.workingFrameRadCheckBox.Location = new System.Drawing.Point(100, 82);
             this.workingFrameRadCheckBox.Name = "workingFrameRadCheckBox";
             this.workingFrameRadCheckBox.Size = new System.Drawing.Size(119, 16);
             this.workingFrameRadCheckBox.TabIndex = 16;
@@ -153,7 +159,7 @@
             // closeRadButton
             // 
             this.closeRadButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.closeRadButton.Location = new System.Drawing.Point(147, 124);
+            this.closeRadButton.Location = new System.Drawing.Point(166, 124);
             this.closeRadButton.Name = "closeRadButton";
             this.closeRadButton.Size = new System.Drawing.Size(82, 25);
             this.closeRadButton.TabIndex = 18;
@@ -194,6 +200,34 @@
             this.outliningColorPictureBox.TabStop = false;
             this.outliningColorPictureBox.Click += new System.EventHandler(this.outliningColorPictureBox_Click);
             // 
+            // primaryRadRadioButton
+            // 
+            this.primaryRadRadioButton.Location = new System.Drawing.Point(100, 97);
+            this.primaryRadRadioButton.Name = "primaryRadRadioButton";
+            this.primaryRadRadioButton.Size = new System.Drawing.Size(57, 21);
+            this.primaryRadRadioButton.TabIndex = 21;
+            this.primaryRadRadioButton.Text = "Primary";
+            this.primaryRadRadioButton.ThemeName = "Vista";
+            // 
+            // secondaryRadRadioButton
+            // 
+            this.secondaryRadRadioButton.Location = new System.Drawing.Point(166, 97);
+            this.secondaryRadRadioButton.Name = "secondaryRadRadioButton";
+            this.secondaryRadRadioButton.Size = new System.Drawing.Size(77, 21);
+            this.secondaryRadRadioButton.TabIndex = 22;
+            this.secondaryRadRadioButton.Text = "Secondary";
+            this.secondaryRadRadioButton.ThemeName = "Vista";
+            // 
+            // noneRadRadioButton
+            // 
+            this.noneRadRadioButton.Location = new System.Drawing.Point(100, 124);
+            this.noneRadRadioButton.Name = "noneRadRadioButton";
+            this.noneRadRadioButton.Size = new System.Drawing.Size(57, 18);
+            this.noneRadRadioButton.TabIndex = 23;
+            this.noneRadRadioButton.Text = "None";
+            this.noneRadRadioButton.ThemeName = "Vista";
+            this.noneRadRadioButton.ToggleState = Telerik.WinControls.Enumerations.ToggleState.On;
+            // 
             // EditMarkerForm
             // 
             this.AcceptButton = this.saveRadButton;
@@ -201,6 +235,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.closeRadButton;
             this.ClientSize = new System.Drawing.Size(253, 154);
+            this.Controls.Add(this.noneRadRadioButton);
+            this.Controls.Add(this.secondaryRadRadioButton);
+            this.Controls.Add(this.primaryRadRadioButton);
             this.Controls.Add(this.outliningColorPictureBox);
             this.Controls.Add(this.outliningColorRadLabel);
             this.Controls.Add(this.changeColorRadButton);
@@ -238,6 +275,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.changeColorRadButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.outliningColorRadLabel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.outliningColorPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.primaryRadRadioButton)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.secondaryRadRadioButton)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.noneRadRadioButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -261,5 +301,8 @@
         private Telerik.WinControls.RadColorDialog trackingRadColorDialog;
         private Telerik.WinControls.UI.RadLabel outliningColorRadLabel;
         private System.Windows.Forms.PictureBox outliningColorPictureBox;
+        private Telerik.WinControls.UI.RadRadioButton primaryRadRadioButton;
+        private Telerik.WinControls.UI.RadRadioButton secondaryRadRadioButton;
+        private Telerik.WinControls.UI.RadRadioButton noneRadRadioButton;
     }
 }

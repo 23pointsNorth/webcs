@@ -77,7 +77,6 @@ namespace WebCS
         {
             if (markerType == type.newColor)
             {
-                //create clrMarker stuff such as color;
                 clrMarker.ChangeColor(originalFrame, markerRectangle);
                 clrMarker.FoundMarkerRectC = ColorExtention.RandomColor();
                 colorMarkerList.Add(clrMarker);

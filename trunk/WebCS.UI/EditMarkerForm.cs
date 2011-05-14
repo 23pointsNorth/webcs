@@ -27,7 +27,6 @@ namespace WebCS
             markers = markerList;
             index = markerIndex;
             LoadMarkerInfo();
-            //trackingRadColorDialog.Container.
         }
 
         public void EnablingOfEditButton()
@@ -53,6 +52,20 @@ namespace WebCS
             outliningColorPictureBox.Image = BitmapDraw.FilledRectangle(
                 outliningColorPictureBox.Width,outliningColorPictureBox.Height,
                 markers[index].FoundMarkerRectC);
+
+            noneRadRadioButton.IsChecked = false;
+            if (ColorMarker.IndexMarker.Primary == index) primaryRadRadioButton.IsChecked = true;
+            else
+            {
+                primaryRadRadioButton.IsChecked = false;
+                if (ColorMarker.IndexMarker.Secondary == index) secondaryRadRadioButton.IsChecked = true;
+                else
+                {
+                    secondaryRadRadioButton.IsChecked = false;
+                    noneRadRadioButton.IsChecked = true;
+                }
+            }
+
         }
 
         private void CloseRadButton_Click(object sender, EventArgs e)
