@@ -53,8 +53,8 @@
             this.frameImageContainer.Size = new System.Drawing.Size(352, 288);
             this.frameImageContainer.TabIndex = 5;
             this.frameImageContainer.TabStop = false;
-            this.frameImageContainer.MouseMove += new System.Windows.Forms.MouseEventHandler(this.frameImageContainer_MouseMove);
             this.frameImageContainer.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frameImageContainer_MouseDown);
+            this.frameImageContainer.MouseMove += new System.Windows.Forms.MouseEventHandler(this.frameImageContainer_MouseMove);
             this.frameImageContainer.MouseUp += new System.Windows.Forms.MouseEventHandler(this.frameImageContainer_MouseUp);
             // 
             // closeRadButton
@@ -94,7 +94,6 @@
             // 
             this.radMenuItem1.RootElement.StretchHorizontally = false;
             this.radMenuItem1.RootElement.StretchVertically = false;
-            this.radMenuItem1.Size = new System.Drawing.Size(0, 0);
             this.radMenuItem1.TabIndex = 0;
             this.radMenuItem1.VerticalAlignmentCorrectionMode = Telerik.WinControls.UI.AlignmentCorrectionMode.SnapToOuterEdges;
             this.radMenuItem1.Visible = false;
@@ -125,7 +124,6 @@
             // 
             this.radMenuButtonItem1.RootElement.StretchHorizontally = false;
             this.radMenuButtonItem1.RootElement.StretchVertically = false;
-            this.radMenuButtonItem1.Size = new System.Drawing.Size(0, 0);
             this.radMenuButtonItem1.TabIndex = 0;
             this.radMenuButtonItem1.VerticalAlignmentCorrectionMode = Telerik.WinControls.UI.AlignmentCorrectionMode.SnapToOuterEdges;
             this.radMenuButtonItem1.Visible = false;
@@ -135,6 +133,10 @@
             this.extractRadButton.Enabled = false;
             this.extractRadButton.Location = new System.Drawing.Point(12, 306);
             this.extractRadButton.Name = "extractRadButton";
+            // 
+            // 
+            // 
+            this.extractRadButton.RootElement.Enabled = false;
             this.extractRadButton.Size = new System.Drawing.Size(80, 25);
             this.extractRadButton.TabIndex = 9;
             this.extractRadButton.Text = "Extract";

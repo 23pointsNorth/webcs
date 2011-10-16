@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual C# Express 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebCS.UI", "WebCS.UI\WebCS.UI.csproj", "{C6D7C809-A928-4003-BC23-66828D1CCC34}"
 	ProjectSection(ProjectDependencies) = postProject
 		{7D52AF35-C940-4885-B6D3-44C0E442EABC} = {7D52AF35-C940-4885-B6D3-44C0E442EABC}
